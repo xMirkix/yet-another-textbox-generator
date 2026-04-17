@@ -219,7 +219,7 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-439</y>
+             <y>0</y>
              <width>984</width>
              <height>1696</height>
             </rect>
@@ -2815,6 +2815,13 @@
                   </layout>
                  </item>
                  <item>
+                  <widget class="Line" name="line_25">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_55">
                    <item>
                     <widget class="QLabel" name="characters_edit_style_label">
@@ -2838,13 +2845,6 @@
                     </widget>
                    </item>
                   </layout>
-                 </item>
-                 <item>
-                  <widget class="Line" name="line_25">
-                   <property name="orientation">
-                    <enum>Qt::Orientation::Horizontal</enum>
-                   </property>
-                  </widget>
                  </item>
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_50">
@@ -2982,7 +2982,7 @@
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>-34</y>
+                    <y>0</y>
                     <width>958</width>
                     <height>218</height>
                    </rect>
