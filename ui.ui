@@ -91,7 +91,7 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="label_43">
+         <widget class="QLabel" name="logo">
           <property name="text">
            <string/>
           </property>
@@ -132,7 +132,7 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_59">
+           <widget class="QPushButton" name="open_file">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -219,7 +219,7 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-439</y>
              <width>984</width>
              <height>1696</height>
             </rect>
@@ -238,14 +238,14 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_3">
                      <item>
-                      <widget class="QLabel" name="label">
+                      <widget class="QLabel" name="border_style_label">
                        <property name="text">
                         <string>Border Style</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="comboBox">
+                      <widget class="QComboBox" name="border_style_selector">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                          <horstretch>0</horstretch>
@@ -280,7 +280,7 @@
                       </spacer>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_33">
+                      <widget class="QLabel" name="border_style_preview">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                          <horstretch>0</horstretch>
@@ -338,17 +338,17 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_4">
                      <item>
-                      <widget class="QLabel" name="label_2">
+                      <widget class="QLabel" name="border_color_label">
                        <property name="text">
                         <string>Border Color</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="comboBox_2"/>
+                      <widget class="QComboBox" name="border_color_selector"/>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_32">
+                      <widget class="QLabel" name="border_color_preview">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                          <horstretch>0</horstretch>
@@ -412,14 +412,14 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_10">
                      <item>
-                      <widget class="QLabel" name="label_6">
+                      <widget class="QLabel" name="universe_label">
                        <property name="text">
                         <string>Universe</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="comboBox_3"/>
+                      <widget class="QComboBox" name="universe_selector"/>
                      </item>
                      <item>
                       <spacer name="horizontalSpacer_12">
@@ -438,7 +438,7 @@
                       </spacer>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_34">
+                      <widget class="QLabel" name="universe_preview">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                          <horstretch>0</horstretch>
@@ -496,14 +496,14 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_13">
                      <item>
-                      <widget class="QLabel" name="label_8">
+                      <widget class="QLabel" name="character_label">
                        <property name="text">
                         <string>Character</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="comboBox_6"/>
+                      <widget class="QComboBox" name="character_selector"/>
                      </item>
                      <item>
                       <spacer name="horizontalSpacer_14">
@@ -522,7 +522,7 @@
                       </spacer>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_35">
+                      <widget class="QLabel" name="character_preview">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                          <horstretch>0</horstretch>
@@ -580,14 +580,14 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_15">
                      <item>
-                      <widget class="QLabel" name="label_9">
+                      <widget class="QLabel" name="expression_label">
                        <property name="text">
                         <string>Expression</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="comboBox_7"/>
+                      <widget class="QComboBox" name="expression_selector"/>
                      </item>
                      <item>
                       <spacer name="horizontalSpacer_16">
@@ -606,7 +606,7 @@
                       </spacer>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_36">
+                      <widget class="QLabel" name="expression_preview">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                          <horstretch>0</horstretch>
@@ -664,17 +664,17 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_11">
                      <item>
-                      <widget class="QLabel" name="label_7">
+                      <widget class="QLabel" name="expression_color_label">
                        <property name="text">
                         <string>Expression Color</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="comboBox_5"/>
+                      <widget class="QComboBox" name="expression_color_selector"/>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_37">
+                      <widget class="QLabel" name="expression_color_preview">
                        <property name="sizePolicy">
                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                          <horstretch>0</horstretch>
@@ -738,14 +738,14 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_16">
                      <item>
-                      <widget class="QLabel" name="label_10">
+                      <widget class="QLabel" name="font_label">
                        <property name="text">
                         <string>Font</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="comboBox_15"/>
+                      <widget class="QComboBox" name="font_selector"/>
                      </item>
                      <item>
                       <spacer name="horizontalSpacer_18">
@@ -775,14 +775,14 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_17">
                      <item>
-                      <widget class="QLabel" name="label_11">
+                      <widget class="QLabel" name="asterisk_label">
                        <property name="text">
                         <string>Asterisk</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QCheckBox" name="checkBox_2">
+                      <widget class="QCheckBox" name="asterisk_checkbox">
                        <property name="text">
                         <string/>
                        </property>
@@ -796,20 +796,20 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_18">
                      <item>
-                      <widget class="QLabel" name="label_12">
+                      <widget class="QLabel" name="asterisk_color">
                        <property name="text">
                         <string>Asterisk Color</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="comboBox_9"/>
+                      <widget class="QComboBox" name="asterisk_color_selector_1"/>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="comboBox_4"/>
+                      <widget class="QComboBox" name="asterisk_color_selector_2"/>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="comboBox_8"/>
+                      <widget class="QComboBox" name="asterisk_color_selector_3"/>
                      </item>
                      <item>
                       <spacer name="horizontalSpacer_19">
@@ -832,14 +832,14 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_52">
                      <item>
-                      <widget class="QLabel" name="label_38">
+                      <widget class="QLabel" name="asterisk_color_values">
                        <property name="text">
                         <string>Values</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_39">
+                      <widget class="QLabel" name="asterisk_color_preview_1">
                        <property name="minimumSize">
                         <size>
                          <width>90</width>
@@ -858,7 +858,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_40">
+                      <widget class="QLabel" name="asterisk_color_preview_2">
                        <property name="minimumSize">
                         <size>
                          <width>90</width>
@@ -877,7 +877,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QLabel" name="label_41">
+                      <widget class="QLabel" name="asterisk_color_preview_3">
                        <property name="minimumSize">
                         <size>
                          <width>90</width>
@@ -923,14 +923,14 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_19">
                      <item>
-                      <widget class="QLabel" name="label_13">
+                      <widget class="QLabel" name="text_style_label">
                        <property name="text">
                         <string>Text Style</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QRadioButton" name="radioButton_6">
+                      <widget class="QRadioButton" name="text_style_regular_option">
                        <property name="text">
                         <string>Regular</string>
                        </property>
@@ -940,7 +940,7 @@
                       </widget>
                      </item>
                      <item>
-                      <widget class="QRadioButton" name="radioButton_7">
+                      <widget class="QRadioButton" name="text_style_dark_world_option">
                        <property name="text">
                         <string>Dark World</string>
                        </property>
@@ -951,14 +951,14 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_21">
                      <item>
-                      <widget class="QLabel" name="label_14">
+                      <widget class="QLabel" name="text_transform_label">
                        <property name="text">
                         <string>Text Transform</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QComboBox" name="comboBox_10"/>
+                      <widget class="QComboBox" name="text_transform_selector"/>
                      </item>
                      <item>
                       <spacer name="horizontalSpacer_21">
@@ -994,7 +994,7 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_6">
                      <item>
-                      <widget class="QLabel" name="label_3">
+                      <widget class="QLabel" name="format_label">
                        <property name="text">
                         <string>Format</string>
                        </property>
@@ -1004,7 +1004,7 @@
                       <widget class="QWidget" name="widget" native="true">
                        <layout class="QHBoxLayout" name="horizontalLayout_22">
                         <item>
-                         <widget class="QRadioButton" name="radioButton">
+                         <widget class="QRadioButton" name="format_png_option">
                           <property name="text">
                            <string>PNG</string>
                           </property>
@@ -1014,7 +1014,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QRadioButton" name="radioButton_2">
+                         <widget class="QRadioButton" name="format_gif_option">
                           <property name="text">
                            <string>GIF</string>
                           </property>
@@ -1035,14 +1035,14 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_9">
                      <item>
-                      <widget class="QLabel" name="label_5">
+                      <widget class="QLabel" name="margin_label">
                        <property name="text">
                         <string>Margin</string>
                        </property>
                       </widget>
                      </item>
                      <item>
-                      <widget class="QCheckBox" name="checkBox">
+                      <widget class="QCheckBox" name="margin_checkbox">
                        <property name="text">
                         <string/>
                        </property>
@@ -1063,7 +1063,7 @@
                    <item>
                     <layout class="QHBoxLayout" name="horizontalLayout_7">
                      <item>
-                      <widget class="QLabel" name="label_4">
+                      <widget class="QLabel" name="size_label">
                        <property name="text">
                         <string>Size</string>
                        </property>
@@ -1073,14 +1073,14 @@
                       <widget class="QWidget" name="widget_2" native="true">
                        <layout class="QHBoxLayout" name="horizontalLayout_14">
                         <item>
-                         <widget class="QRadioButton" name="radioButton_5">
+                         <widget class="QRadioButton" name="size_small_option">
                           <property name="text">
                            <string>Small</string>
                           </property>
                          </widget>
                         </item>
                         <item>
-                         <widget class="QRadioButton" name="radioButton_4">
+                         <widget class="QRadioButton" name="size_medium_option">
                           <property name="text">
                            <string>Medium</string>
                           </property>
@@ -1090,9 +1090,9 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QRadioButton" name="radioButton_3">
+                         <widget class="QRadioButton" name="size_big_option">
                           <property name="text">
-                           <string>Large</string>
+                           <string>Big</string>
                           </property>
                          </widget>
                         </item>
@@ -1109,7 +1109,7 @@
              </layout>
             </item>
             <item>
-             <widget class="QGroupBox" name="groupBox">
+             <widget class="QGroupBox" name="input_preview">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>1</horstretch>
@@ -1127,7 +1127,7 @@
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_6">
                <item>
-                <widget class="QLabel" name="label_27">
+                <widget class="QLabel" name="input_label">
                  <property name="text">
                   <string>Input</string>
                  </property>
@@ -1136,7 +1136,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_45">
                  <item>
-                  <widget class="QTextEdit" name="textEdit">
+                  <widget class="QTextEdit" name="input">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -1186,14 +1186,14 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="label_28">
+                <widget class="QLabel" name="output_label">
                  <property name="text">
                   <string>Output</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="label_42">
+                <widget class="QLabel" name="output">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                    <horstretch>0</horstretch>
@@ -1230,7 +1230,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_51">
                  <item>
-                  <widget class="QPushButton" name="pushButton">
+                  <widget class="QPushButton" name="download">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                      <horstretch>0</horstretch>
@@ -1271,7 +1271,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="1" column="0">
-         <widget class="QGroupBox" name="groupBox_3">
+         <widget class="QGroupBox" name="existing">
           <property name="title">
            <string>Existing</string>
           </property>
@@ -1281,17 +1281,17 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout">
                <item>
-                <widget class="QLabel" name="label_17">
+                <widget class="QLabel" name="universe_filter_label">
                  <property name="text">
                   <string>Filter by name</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_2"/>
+                <widget class="QLineEdit" name="universe_filter_input"/>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_56">
+                <widget class="QPushButton" name="universe_filter_button">
                  <property name="text">
                   <string>Filter</string>
                  </property>
@@ -1311,7 +1311,7 @@
                <property name="widgetResizable">
                 <bool>true</bool>
                </property>
-               <widget class="QWidget" name="scrollAreaWidgetContents">
+               <widget class="QWidget" name="universe_grid">
                 <property name="geometry">
                  <rect>
                   <x>0</x>
@@ -1961,7 +1961,7 @@
                   </widget>
                  </item>
                  <item row="0" column="0">
-                  <widget class="QGroupBox" name="groupBox_8">
+                  <widget class="QGroupBox" name="universe_test1">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                      <horstretch>0</horstretch>
@@ -1985,7 +1985,7 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_24">
                     <item>
-                     <widget class="QLabel" name="label_29">
+                     <widget class="QLabel" name="universe_test1_preview_image">
                       <property name="sizePolicy">
                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
@@ -2018,7 +2018,7 @@
                     <item>
                      <layout class="QHBoxLayout" name="horizontalLayout_27">
                       <item>
-                       <widget class="QPushButton" name="pushButton_8">
+                       <widget class="QPushButton" name="universe_test1_left">
                         <property name="text">
                          <string/>
                         </property>
@@ -2029,7 +2029,7 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QPushButton" name="pushButton_9">
+                       <widget class="QPushButton" name="universe_test1_right">
                         <property name="text">
                          <string/>
                         </property>
@@ -2040,7 +2040,7 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QPushButton" name="pushButton_10">
+                       <widget class="QPushButton" name="universe_test1_edit">
                         <property name="text">
                          <string>Edit</string>
                         </property>
@@ -2051,7 +2051,7 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QPushButton" name="pushButton_11">
+                       <widget class="QPushButton" name="universe_test1_delete">
                         <property name="text">
                          <string>Delete</string>
                         </property>
@@ -2290,7 +2290,7 @@
         <item row="0" column="0">
          <layout class="QHBoxLayout" name="horizontalLayout_53">
           <item>
-           <widget class="QGroupBox" name="groupBox_2">
+           <widget class="QGroupBox" name="create_universe">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
               <horstretch>0</horstretch>
@@ -2312,7 +2312,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_23">
                  <item>
-                  <widget class="QLabel" name="label_15">
+                  <widget class="QLabel" name="universe_create_name_label">
                    <property name="text">
                     <string>Name</string>
                    </property>
@@ -2332,7 +2332,7 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit"/>
+                  <widget class="QLineEdit" name="universe_create_name_input"/>
                  </item>
                 </layout>
                </item>
@@ -2346,21 +2346,21 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_24">
                  <item>
-                  <widget class="QLabel" name="label_16">
+                  <widget class="QLabel" name="universe_create_preview_label">
                    <property name="text">
                     <string>Preview image (optional)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_2">
+                  <widget class="QPushButton" name="universe_create_image_button">
                    <property name="text">
                     <string>Select image</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="label_57">
+                  <widget class="QLabel" name="universe_create_image_preview">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -2404,7 +2404,7 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_57">
                <item>
-                <widget class="QPushButton" name="pushButton_3">
+                <widget class="QPushButton" name="universe_create_confirm_button">
                  <property name="text">
                   <string>Create</string>
                  </property>
@@ -2416,7 +2416,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_20">
+           <widget class="QGroupBox" name="edit_universe">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
               <horstretch>0</horstretch>
@@ -2442,7 +2442,7 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_61">
                <item>
-                <widget class="QLabel" name="label_55">
+                <widget class="QLabel" name="universe_edit_name_label">
                  <property name="text">
                   <string>Name</string>
                  </property>
@@ -2462,7 +2462,7 @@
                 </spacer>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_7"/>
+                <widget class="QLineEdit" name="universe_edit_name_input"/>
                </item>
               </layout>
              </item>
@@ -2476,14 +2476,14 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_62">
                <item>
-                <widget class="QLabel" name="label_56">
+                <widget class="QLabel" name="universe_edit_preview_label">
                  <property name="text">
                   <string>Preview image</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_53">
+                <widget class="QPushButton" name="universe_edit_image_button">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -2508,7 +2508,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="label_58">
+                <widget class="QLabel" name="universe_edit_image_preview">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                    <horstretch>0</horstretch>
@@ -2544,7 +2544,7 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_63">
                <item>
-                <widget class="QPushButton" name="pushButton_52">
+                <widget class="QPushButton" name="universe_edit_confirm_button">
                  <property name="text">
                   <string>Save</string>
                  </property>
@@ -2569,7 +2569,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_58">
             <item>
-             <widget class="QGroupBox" name="groupBox_4">
+             <widget class="QGroupBox" name="create_character">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -2591,7 +2591,7 @@
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_26">
                    <item>
-                    <widget class="QLabel" name="label_18">
+                    <widget class="QLabel" name="characters_create_name_label">
                      <property name="text">
                       <string>Name</string>
                      </property>
@@ -2611,21 +2611,21 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_3"/>
+                    <widget class="QLineEdit" name="characters_create_name_input"/>
                    </item>
                   </layout>
                  </item>
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_32">
                    <item>
-                    <widget class="QLabel" name="label_21">
+                    <widget class="QLabel" name="characters_create_universe_label">
                      <property name="text">
                       <string>Universe</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="comboBox_11"/>
+                    <widget class="QComboBox" name="characters_create_universe_selector"/>
                    </item>
                   </layout>
                  </item>
@@ -2639,14 +2639,14 @@
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_46">
                    <item>
-                    <widget class="QLabel" name="label_30">
+                    <widget class="QLabel" name="characters_create_style_label">
                      <property name="text">
                       <string>Default Style</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QRadioButton" name="radioButton_8">
+                    <widget class="QRadioButton" name="characters_create_style_regular_option">
                      <property name="text">
                       <string>Regular</string>
                      </property>
@@ -2656,7 +2656,7 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QRadioButton" name="radioButton_9">
+                    <widget class="QRadioButton" name="characters_create_style_dark_world_option">
                      <property name="text">
                       <string>Dark World</string>
                      </property>
@@ -2667,14 +2667,14 @@
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_47">
                    <item>
-                    <widget class="QLabel" name="label_31">
+                    <widget class="QLabel" name="characters_create_transform_label">
                      <property name="text">
                       <string>Default Text Transform</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="comboBox_14"/>
+                    <widget class="QComboBox" name="characters_create_transform_selector"/>
                    </item>
                   </layout>
                  </item>
@@ -2688,21 +2688,21 @@
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_28">
                    <item>
-                    <widget class="QLabel" name="label_19">
+                    <widget class="QLabel" name="characters_create_preview_label">
                      <property name="text">
                       <string>Preview image (optional)</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="pushButton_4">
+                    <widget class="QPushButton" name="characters_create_image_button">
                      <property name="text">
                       <string>Select image</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="label_59">
+                    <widget class="QLabel" name="characters_create_image_preview">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -2744,7 +2744,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_5">
+                <widget class="QPushButton" name="characters_create_confirm_button">
                  <property name="text">
                   <string>Create</string>
                  </property>
@@ -2754,7 +2754,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QGroupBox" name="groupBox_21">
+             <widget class="QGroupBox" name="edit_character">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -2776,7 +2776,7 @@
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_2">
                    <item>
-                    <widget class="QLabel" name="label_60">
+                    <widget class="QLabel" name="characters_edit_name_label">
                      <property name="text">
                       <string>Name</string>
                      </property>
@@ -2796,42 +2796,42 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="lineEdit_8"/>
+                    <widget class="QLineEdit" name="characters_edit_name_input"/>
                    </item>
                   </layout>
                  </item>
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_49">
                    <item>
-                    <widget class="QLabel" name="label_61">
+                    <widget class="QLabel" name="characters_edit_universe_label">
                      <property name="text">
                       <string>Universe</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="comboBox_16"/>
+                    <widget class="QComboBox" name="characters_edit_universe_selector"/>
                    </item>
                   </layout>
                  </item>
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_55">
                    <item>
-                    <widget class="QLabel" name="label_65">
+                    <widget class="QLabel" name="characters_edit_style_label">
                      <property name="text">
                       <string>Default Style</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QRadioButton" name="radioButton_10">
+                    <widget class="QRadioButton" name="characters_edit_style_regular_option">
                      <property name="text">
                       <string>Regular</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QRadioButton" name="radioButton_11">
+                    <widget class="QRadioButton" name="characters_edit_style_dark_world_option">
                      <property name="text">
                       <string>Dark World</string>
                      </property>
@@ -2849,14 +2849,14 @@
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_50">
                    <item>
-                    <widget class="QLabel" name="label_62">
+                    <widget class="QLabel" name="characters_edit_transform_label">
                      <property name="text">
                       <string>Default Text Transform</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="comboBox_17"/>
+                    <widget class="QComboBox" name="characters_edit_transform_selector"/>
                    </item>
                   </layout>
                  </item>
@@ -2870,21 +2870,21 @@
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_54">
                    <item>
-                    <widget class="QLabel" name="label_63">
+                    <widget class="QLabel" name="characters_edit_preview_label">
                      <property name="text">
                       <string>Preview image (optional)</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="pushButton_54">
+                    <widget class="QPushButton" name="characters_edit_image_button">
                      <property name="text">
                       <string>Select image</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="label_64">
+                    <widget class="QLabel" name="characters_edit_image_preview">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -2926,7 +2926,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_55">
+                <widget class="QPushButton" name="characters_edit_confirm_button">
                  <property name="text">
                   <string>Save</string>
                  </property>
@@ -2948,17 +2948,17 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_25">
                  <item>
-                  <widget class="QLabel" name="label_20">
+                  <widget class="QLabel" name="characters_filter_label">
                    <property name="text">
                     <string>Filter by name</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_4"/>
+                  <widget class="QLineEdit" name="characters_filter_input"/>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_57">
+                  <widget class="QPushButton" name="characters_filter_button">
                    <property name="text">
                     <string>Filter</string>
                    </property>
@@ -2978,18 +2978,18 @@
                  <property name="widgetResizable">
                   <bool>true</bool>
                  </property>
-                 <widget class="QWidget" name="scrollAreaWidgetContents_4">
+                 <widget class="QWidget" name="characters_grid">
                   <property name="geometry">
                    <rect>
                     <x>0</x>
-                    <y>0</y>
+                    <y>-34</y>
                     <width>958</width>
                     <height>218</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout">
                    <item row="0" column="0">
-                    <widget class="QGroupBox" name="groupBox_17">
+                    <widget class="QGroupBox" name="characters_test1">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -3013,7 +3013,7 @@
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_31">
                       <item>
-                       <widget class="QLabel" name="label_52">
+                       <widget class="QLabel" name="characters_test1_preview_image">
                         <property name="sizePolicy">
                          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                           <horstretch>0</horstretch>
@@ -3046,7 +3046,7 @@
                       <item>
                        <layout class="QHBoxLayout" name="horizontalLayout_43">
                         <item>
-                         <widget class="QPushButton" name="pushButton_44">
+                         <widget class="QPushButton" name="characters_test1_left">
                           <property name="text">
                            <string/>
                           </property>
@@ -3057,7 +3057,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="pushButton_45">
+                         <widget class="QPushButton" name="characters_test1_right">
                           <property name="text">
                            <string/>
                           </property>
@@ -3068,7 +3068,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="pushButton_46">
+                         <widget class="QPushButton" name="characters_test1_edit">
                           <property name="text">
                            <string>Edit</string>
                           </property>
@@ -3079,7 +3079,7 @@
                          </widget>
                         </item>
                         <item>
-                         <widget class="QPushButton" name="pushButton_47">
+                         <widget class="QPushButton" name="characters_test1_delete">
                           <property name="text">
                            <string>Delete</string>
                           </property>
@@ -3321,7 +3321,7 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_59">
           <item>
-           <widget class="QGroupBox" name="groupBox_6">
+           <widget class="QGroupBox" name="create_expression">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3343,7 +3343,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_34">
                  <item>
-                  <widget class="QLabel" name="label_23">
+                  <widget class="QLabel" name="expressions_create_name_label">
                    <property name="text">
                     <string>Name</string>
                    </property>
@@ -3363,35 +3363,35 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_6"/>
+                  <widget class="QLineEdit" name="expressions_create_name_input"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_35">
                  <item>
-                  <widget class="QLabel" name="label_24">
+                  <widget class="QLabel" name="expressions_create_universe_label">
                    <property name="text">
                     <string>Universe</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_12"/>
+                  <widget class="QComboBox" name="expressions_create_universe_selector"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_36">
                  <item>
-                  <widget class="QLabel" name="label_25">
+                  <widget class="QLabel" name="expressions_create_character_label">
                    <property name="text">
                     <string>Character</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_13"/>
+                  <widget class="QComboBox" name="expressions_create_character_selector"/>
                  </item>
                 </layout>
                </item>
@@ -3405,21 +3405,21 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_37">
                  <item>
-                  <widget class="QLabel" name="label_26">
+                  <widget class="QLabel" name="expressions_create_preview_label">
                    <property name="text">
                     <string>Image (required)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_7">
+                  <widget class="QPushButton" name="expressions_create_image_button">
                    <property name="text">
                     <string>Select image</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="label_70">
+                  <widget class="QLabel" name="expressions_create_image_preview">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -3459,7 +3459,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_6">
+                <widget class="QPushButton" name="expressions_create_confirm_button">
                  <property name="text">
                   <string>Create</string>
                  </property>
@@ -3471,7 +3471,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="groupBox_22">
+           <widget class="QGroupBox" name="edit_expression">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -3493,7 +3493,7 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_64">
                  <item>
-                  <widget class="QLabel" name="label_66">
+                  <widget class="QLabel" name="expressions_edit_name_label">
                    <property name="text">
                     <string>Name</string>
                    </property>
@@ -3513,35 +3513,35 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_9"/>
+                  <widget class="QLineEdit" name="expressions_edit_name_input"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_65">
                  <item>
-                  <widget class="QLabel" name="label_67">
+                  <widget class="QLabel" name="expressions_edit_universe_label">
                    <property name="text">
                     <string>Universe</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_18"/>
+                  <widget class="QComboBox" name="expressions_edit_universe_selector"/>
                  </item>
                 </layout>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_66">
                  <item>
-                  <widget class="QLabel" name="label_68">
+                  <widget class="QLabel" name="expressions_edit_character_label">
                    <property name="text">
                     <string>Character</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="comboBox_19"/>
+                  <widget class="QComboBox" name="expressions_edit_character_selector"/>
                  </item>
                 </layout>
                </item>
@@ -3555,21 +3555,21 @@
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_67">
                  <item>
-                  <widget class="QLabel" name="label_69">
+                  <widget class="QLabel" name="expressions_edit_preview_label">
                    <property name="text">
                     <string>Image</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_64">
+                  <widget class="QPushButton" name="expressions_edit_image_button">
                    <property name="text">
                     <string>Select image</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QLabel" name="label_71">
+                  <widget class="QLabel" name="expressions_edit_image_preview">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
@@ -3609,7 +3609,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_65">
+                <widget class="QPushButton" name="expressions_edit_confirm_button">
                  <property name="text">
                   <string>Save</string>
                  </property>
@@ -3633,17 +3633,17 @@
              <item>
               <layout class="QHBoxLayout" name="horizontalLayout_33">
                <item>
-                <widget class="QLabel" name="label_22">
+                <widget class="QLabel" name="expressions_filter_label">
                  <property name="text">
                   <string>Filter by name</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_5"/>
+                <widget class="QLineEdit" name="expressions_filter_input"/>
                </item>
                <item>
-                <widget class="QPushButton" name="pushButton_58">
+                <widget class="QPushButton" name="expressions_filter_button">
                  <property name="text">
                   <string>Filter</string>
                  </property>
@@ -3663,7 +3663,7 @@
                <property name="widgetResizable">
                 <bool>true</bool>
                </property>
-               <widget class="QWidget" name="scrollAreaWidgetContents_5">
+               <widget class="QWidget" name="expressions_grid">
                 <property name="geometry">
                  <rect>
                   <x>0</x>
