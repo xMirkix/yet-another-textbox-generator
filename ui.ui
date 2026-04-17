@@ -27,8 +27,8 @@
    <enum>Qt::ToolButtonStyle::ToolButtonIconOnly</enum>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_34">
-    <item>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
      <widget class="QTabWidget" name="tabs">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -219,7 +219,7 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-1100</y>
+             <y>0</y>
              <width>984</width>
              <height>1696</height>
             </rect>
@@ -1134,30 +1134,56 @@
                 </widget>
                </item>
                <item>
-                <widget class="QTextEdit" name="textEdit">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="placeholderText">
-                  <string>Write your text here.</string>
-                 </property>
-                </widget>
+                <layout class="QHBoxLayout" name="horizontalLayout_45">
+                 <item>
+                  <widget class="QTextEdit" name="textEdit">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>500</width>
+                     <height>75</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>400</width>
+                     <height>75</height>
+                    </size>
+                   </property>
+                   <property name="placeholderText">
+                    <string>Write your text here.</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
                <item>
-                <spacer name="horizontalSpacer">
+                <spacer name="verticalSpacer_5">
                  <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Policy::Fixed</enum>
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>20</width>
                    <height>40</height>
                   </size>
                  </property>
                 </spacer>
+               </item>
+               <item>
+                <widget class="Line" name="line_8">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                </widget>
                </item>
                <item>
                 <widget class="QLabel" name="label_28">
@@ -1195,17 +1221,11 @@
                 </widget>
                </item>
                <item>
-                <spacer name="horizontalSpacer_2">
+                <widget class="Line" name="line_10">
                  <property name="orientation">
                   <enum>Qt::Orientation::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>40</height>
-                  </size>
-                 </property>
-                </spacer>
+                </widget>
                </item>
                <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_51">
@@ -1250,122 +1270,6 @@
         <string>Universes</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="0" column="0">
-         <widget class="QGroupBox" name="groupBox_2">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="minimumSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="title">
-           <string>Create a new Universe</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_11">
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_7">
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_23">
-               <item>
-                <widget class="QLabel" name="label_15">
-                 <property name="text">
-                  <string>Name</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_4">
-                 <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEdit"/>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="Line" name="line_12">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_24">
-               <item>
-                <widget class="QLabel" name="label_16">
-                 <property name="text">
-                  <string>Preview image (optional)</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_2">
-                 <property name="text">
-                  <string>Select image</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QGraphicsView" name="graphicsView_8">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>100</height>
-                  </size>
-                 </property>
-                 <property name="sizeIncrement">
-                  <size>
-                   <width>0</width>
-                   <height>0</height>
-                  </size>
-                 </property>
-                 <property name="lineWidth">
-                  <number>1</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="Line" name="line_13">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_3">
-               <property name="text">
-                <string>Create</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </item>
-          </layout>
-         </widget>
-        </item>
         <item row="1" column="0">
          <widget class="QGroupBox" name="groupBox_3">
           <property name="title">
@@ -1445,18 +1349,33 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_9">
                     <item>
-                     <widget class="QGraphicsView" name="graphicsView_11">
+                     <widget class="QLabel" name="label_45">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>100</height>
+                       </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>100</width>
                         <height>100</height>
                        </size>
+                      </property>
+                      <property name="autoFillBackground">
+                       <bool>true</bool>
+                      </property>
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignmentFlag::AlignCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -1468,7 +1387,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+                         <iconset>
+                          <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1478,7 +1398,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoNext"/>
+                         <iconset>
+                          <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1488,7 +1409,8 @@
                          <string>Edit</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+                         <iconset>
+                          <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1498,7 +1420,8 @@
                          <string>Delete</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+                         <iconset>
+                          <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1532,18 +1455,33 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_23">
                     <item>
-                     <widget class="QGraphicsView" name="graphicsView_12">
+                     <widget class="QLabel" name="label_44">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>100</height>
+                       </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>100</width>
                         <height>100</height>
                        </size>
+                      </property>
+                      <property name="autoFillBackground">
+                       <bool>true</bool>
+                      </property>
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignmentFlag::AlignCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -1555,7 +1493,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+                         <iconset>
+                          <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1565,7 +1504,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoNext"/>
+                         <iconset>
+                          <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1575,7 +1515,8 @@
                          <string>Edit</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+                         <iconset>
+                          <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1585,7 +1526,8 @@
                          <string>Delete</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+                         <iconset>
+                          <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1619,18 +1561,33 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_28">
                     <item>
-                     <widget class="QGraphicsView" name="graphicsView_17">
+                     <widget class="QLabel" name="label_49">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>100</height>
+                       </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>100</width>
                         <height>100</height>
                        </size>
+                      </property>
+                      <property name="autoFillBackground">
+                       <bool>true</bool>
+                      </property>
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignmentFlag::AlignCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -1642,7 +1599,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+                         <iconset>
+                          <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1652,7 +1610,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoNext"/>
+                         <iconset>
+                          <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1662,7 +1621,8 @@
                          <string>Edit</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+                         <iconset>
+                          <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1672,7 +1632,8 @@
                          <string>Delete</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+                         <iconset>
+                          <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1706,18 +1667,33 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_29">
                     <item>
-                     <widget class="QGraphicsView" name="graphicsView_18">
+                     <widget class="QLabel" name="label_50">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>100</height>
+                       </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>100</width>
                         <height>100</height>
                        </size>
+                      </property>
+                      <property name="autoFillBackground">
+                       <bool>true</bool>
+                      </property>
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignmentFlag::AlignCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -1729,7 +1705,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+                         <iconset>
+                          <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1739,7 +1716,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoNext"/>
+                         <iconset>
+                          <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1749,7 +1727,8 @@
                          <string>Edit</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+                         <iconset>
+                          <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1759,7 +1738,8 @@
                          <string>Delete</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+                         <iconset>
+                          <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1793,18 +1773,33 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_25">
                     <item>
-                     <widget class="QGraphicsView" name="graphicsView_14">
+                     <widget class="QLabel" name="label_46">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>100</height>
+                       </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>100</width>
                         <height>100</height>
                        </size>
+                      </property>
+                      <property name="autoFillBackground">
+                       <bool>true</bool>
+                      </property>
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignmentFlag::AlignCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -1816,7 +1811,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+                         <iconset>
+                          <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1826,7 +1822,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoNext"/>
+                         <iconset>
+                          <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1836,7 +1833,8 @@
                          <string>Edit</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+                         <iconset>
+                          <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1846,7 +1844,8 @@
                          <string>Delete</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+                         <iconset>
+                          <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1880,18 +1879,33 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_27">
                     <item>
-                     <widget class="QGraphicsView" name="graphicsView_16">
+                     <widget class="QLabel" name="label_48">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>100</height>
+                       </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>100</width>
                         <height>100</height>
                        </size>
+                      </property>
+                      <property name="autoFillBackground">
+                       <bool>true</bool>
+                      </property>
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignmentFlag::AlignCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -1903,7 +1917,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+                         <iconset>
+                          <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1913,7 +1928,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoNext"/>
+                         <iconset>
+                          <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1923,7 +1939,8 @@
                          <string>Edit</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+                         <iconset>
+                          <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1933,7 +1950,8 @@
                          <string>Delete</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+                         <iconset>
+                          <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -1967,18 +1985,33 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_24">
                     <item>
-                     <widget class="QGraphicsView" name="graphicsView_13">
+                     <widget class="QLabel" name="label_29">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>100</height>
+                       </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>100</width>
                         <height>100</height>
                        </size>
+                      </property>
+                      <property name="autoFillBackground">
+                       <bool>true</bool>
+                      </property>
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignmentFlag::AlignCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -1990,7 +2023,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+                         <iconset>
+                          <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2000,7 +2034,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoNext"/>
+                         <iconset>
+                          <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2010,7 +2045,8 @@
                          <string>Edit</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+                         <iconset>
+                          <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2020,7 +2056,8 @@
                          <string>Delete</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+                         <iconset>
+                          <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2054,18 +2091,33 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_30">
                     <item>
-                     <widget class="QGraphicsView" name="graphicsView_19">
+                     <widget class="QLabel" name="label_51">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>100</height>
+                       </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>100</width>
                         <height>100</height>
                        </size>
+                      </property>
+                      <property name="autoFillBackground">
+                       <bool>true</bool>
+                      </property>
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignmentFlag::AlignCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -2077,7 +2129,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+                         <iconset>
+                          <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2087,7 +2140,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoNext"/>
+                         <iconset>
+                          <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2097,7 +2151,8 @@
                          <string>Edit</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+                         <iconset>
+                          <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2107,7 +2162,8 @@
                          <string>Delete</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+                         <iconset>
+                          <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2141,18 +2197,33 @@
                    </property>
                    <layout class="QVBoxLayout" name="verticalLayout_26">
                     <item>
-                     <widget class="QGraphicsView" name="graphicsView_15">
+                     <widget class="QLabel" name="label_47">
                       <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                         <horstretch>0</horstretch>
                         <verstretch>0</verstretch>
                        </sizepolicy>
+                      </property>
+                      <property name="minimumSize">
+                       <size>
+                        <width>100</width>
+                        <height>100</height>
+                       </size>
                       </property>
                       <property name="maximumSize">
                        <size>
                         <width>100</width>
                         <height>100</height>
                        </size>
+                      </property>
+                      <property name="autoFillBackground">
+                       <bool>true</bool>
+                      </property>
+                      <property name="text">
+                       <string>TextLabel</string>
+                      </property>
+                      <property name="alignment">
+                       <set>Qt::AlignmentFlag::AlignCenter</set>
                       </property>
                      </widget>
                     </item>
@@ -2164,7 +2235,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+                         <iconset>
+                          <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2174,7 +2246,8 @@
                          <string/>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::GoNext"/>
+                         <iconset>
+                          <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2184,7 +2257,8 @@
                          <string>Edit</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+                         <iconset>
+                          <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2194,7 +2268,8 @@
                          <string>Delete</string>
                         </property>
                         <property name="icon">
-                         <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+                         <iconset>
+                          <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
                         </property>
                        </widget>
                       </item>
@@ -2212,40 +2287,39 @@
           </layout>
          </widget>
         </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="characters">
-       <attribute name="title">
-        <string>Characters</string>
-       </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_8">
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayout_13">
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_53">
           <item>
-           <widget class="QGroupBox" name="groupBox_4">
+           <widget class="QGroupBox" name="groupBox_2">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="title">
-             <string>Create a new Character</string>
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
             </property>
-            <layout class="QVBoxLayout" name="verticalLayout_16">
+            <property name="title">
+             <string>Create a new Universe</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_11">
              <item>
-              <layout class="QVBoxLayout" name="verticalLayout_15">
+              <layout class="QVBoxLayout" name="verticalLayout_7">
                <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_26">
+                <layout class="QHBoxLayout" name="horizontalLayout_23">
                  <item>
-                  <widget class="QLabel" name="label_18">
+                  <widget class="QLabel" name="label_15">
                    <property name="text">
                     <string>Name</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <spacer name="horizontalSpacer_5">
+                  <spacer name="horizontalSpacer_4">
                    <property name="orientation">
                     <enum>Qt::Orientation::Horizontal</enum>
                    </property>
@@ -2258,109 +2332,61 @@
                   </spacer>
                  </item>
                  <item>
-                  <widget class="QLineEdit" name="lineEdit_3"/>
+                  <widget class="QLineEdit" name="lineEdit"/>
                  </item>
                 </layout>
                </item>
                <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_32">
-                 <item>
-                  <widget class="QLabel" name="label_21">
-                   <property name="text">
-                    <string>Universe</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="comboBox_11"/>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="Line" name="line_20">
+                <widget class="Line" name="line_12">
                  <property name="orientation">
                   <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                 </widget>
                </item>
                <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_46">
+                <layout class="QHBoxLayout" name="horizontalLayout_24">
                  <item>
-                  <widget class="QLabel" name="label_30">
-                   <property name="text">
-                    <string>Default Style</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioButton_8">
-                   <property name="text">
-                    <string>Regular</string>
-                   </property>
-                   <property name="checked">
-                    <bool>true</bool>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QRadioButton" name="radioButton_9">
-                   <property name="text">
-                    <string>Dark World</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_47">
-                 <item>
-                  <widget class="QLabel" name="label_31">
-                   <property name="text">
-                    <string>Default Text Transform</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="comboBox_14"/>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <widget class="Line" name="line_14">
-                 <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_28">
-                 <item>
-                  <widget class="QLabel" name="label_19">
+                  <widget class="QLabel" name="label_16">
                    <property name="text">
                     <string>Preview image (optional)</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QPushButton" name="pushButton_4">
+                  <widget class="QPushButton" name="pushButton_2">
                    <property name="text">
                     <string>Select image</string>
                    </property>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QGraphicsView" name="graphicsView_9">
+                  <widget class="QLabel" name="label_57">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>100</height>
+                    </size>
                    </property>
                    <property name="maximumSize">
                     <size>
                      <width>100</width>
                      <height>100</height>
                     </size>
+                   </property>
+                   <property name="autoFillBackground">
+                    <bool>true</bool>
+                   </property>
+                   <property name="text">
+                    <string>Nothing...</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignmentFlag::AlignCenter</set>
                    </property>
                   </widget>
                  </item>
@@ -2369,21 +2395,547 @@
               </layout>
              </item>
              <item>
-              <widget class="Line" name="line_15">
+              <widget class="Line" name="line_13">
                <property name="orientation">
                 <enum>Qt::Orientation::Horizontal</enum>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="pushButton_5">
-               <property name="text">
-                <string>Create</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_57">
+               <item>
+                <widget class="QPushButton" name="pushButton_3">
+                 <property name="text">
+                  <string>Create</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
             </layout>
            </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_20">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>354</width>
+              <height>184</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>354</width>
+              <height>226</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Edit</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_33">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_61">
+               <item>
+                <widget class="QLabel" name="label_55">
+                 <property name="text">
+                  <string>Name</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="lineEdit_7"/>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="Line" name="line_21">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_62">
+               <item>
+                <widget class="QLabel" name="label_56">
+                 <property name="text">
+                  <string>Preview image</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_53">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>109</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>109</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Select image</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_58">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="minimumSize">
+                  <size>
+                   <width>100</width>
+                   <height>100</height>
+                  </size>
+                 </property>
+                 <property name="autoFillBackground">
+                  <bool>true</bool>
+                 </property>
+                 <property name="text">
+                  <string>Nothing...</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="Line" name="line_22">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_63">
+               <item>
+                <widget class="QPushButton" name="pushButton_52">
+                 <property name="text">
+                  <string>Save</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="characters">
+       <attribute name="title">
+        <string>Characters</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_13">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_58">
+            <item>
+             <widget class="QGroupBox" name="groupBox_4">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>354</width>
+                <height>335</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Create a new Character</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_16">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_15">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_26">
+                   <item>
+                    <widget class="QLabel" name="label_18">
+                     <property name="text">
+                      <string>Name</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_5">
+                     <property name="orientation">
+                      <enum>Qt::Orientation::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="lineEdit_3"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_32">
+                   <item>
+                    <widget class="QLabel" name="label_21">
+                     <property name="text">
+                      <string>Universe</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="comboBox_11"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="Line" name="line_20">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_46">
+                   <item>
+                    <widget class="QLabel" name="label_30">
+                     <property name="text">
+                      <string>Default Style</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QRadioButton" name="radioButton_8">
+                     <property name="text">
+                      <string>Regular</string>
+                     </property>
+                     <property name="checked">
+                      <bool>true</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QRadioButton" name="radioButton_9">
+                     <property name="text">
+                      <string>Dark World</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_47">
+                   <item>
+                    <widget class="QLabel" name="label_31">
+                     <property name="text">
+                      <string>Default Text Transform</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="comboBox_14"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="Line" name="line_14">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_28">
+                   <item>
+                    <widget class="QLabel" name="label_19">
+                     <property name="text">
+                      <string>Preview image (optional)</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="pushButton_4">
+                     <property name="text">
+                      <string>Select image</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label_59">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>100</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>100</height>
+                      </size>
+                     </property>
+                     <property name="autoFillBackground">
+                      <bool>true</bool>
+                     </property>
+                     <property name="text">
+                      <string>Nothing...</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignmentFlag::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="Line" name="line_15">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_5">
+                 <property name="text">
+                  <string>Create</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_21">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>354</width>
+                <height>335</height>
+               </size>
+              </property>
+              <property name="title">
+               <string>Edit</string>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_34">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_39">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_2">
+                   <item>
+                    <widget class="QLabel" name="label_60">
+                     <property name="text">
+                      <string>Name</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_2">
+                     <property name="orientation">
+                      <enum>Qt::Orientation::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="lineEdit_8"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_49">
+                   <item>
+                    <widget class="QLabel" name="label_61">
+                     <property name="text">
+                      <string>Universe</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="comboBox_16"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_55">
+                   <item>
+                    <widget class="QLabel" name="label_65">
+                     <property name="text">
+                      <string>Default Style</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QRadioButton" name="radioButton_10">
+                     <property name="text">
+                      <string>Regular</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QRadioButton" name="radioButton_11">
+                     <property name="text">
+                      <string>Dark World</string>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="Line" name="line_25">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_50">
+                   <item>
+                    <widget class="QLabel" name="label_62">
+                     <property name="text">
+                      <string>Default Text Transform</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="comboBox_17"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <widget class="Line" name="line_24">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_54">
+                   <item>
+                    <widget class="QLabel" name="label_63">
+                     <property name="text">
+                      <string>Preview image (optional)</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="pushButton_54">
+                     <property name="text">
+                      <string>Select image</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="label_64">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>100</width>
+                       <height>100</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>100</width>
+                       <height>100</height>
+                      </size>
+                     </property>
+                     <property name="autoFillBackground">
+                      <bool>true</bool>
+                     </property>
+                     <property name="text">
+                      <string>Nothing...</string>
+                     </property>
+                     <property name="alignment">
+                      <set>Qt::AlignmentFlag::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="Line" name="line_23">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_55">
+                 <property name="text">
+                  <string>Save</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QGroupBox" name="groupBox_5">
@@ -2432,110 +2984,64 @@
                     <x>0</x>
                     <y>0</y>
                     <width>958</width>
-                    <height>424</height>
+                    <height>218</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout">
-                   <item row="1" column="0">
-                    <widget class="QGroupBox" name="groupBox_19">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>300</width>
-                       <height>200</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>300</width>
-                       <height>200</height>
-                      </size>
-                     </property>
-                     <property name="title">
-                      <string>GroupBox</string>
-                     </property>
-                     <layout class="QVBoxLayout" name="verticalLayout_33">
-                      <item>
-                       <widget class="QGraphicsView" name="graphicsView_22"/>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_45">
-                        <item>
-                         <widget class="QPushButton" name="pushButton_52">
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="pushButton_53">
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::GoNext"/>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="pushButton_54">
-                          <property name="text">
-                           <string>Edit</string>
-                          </property>
-                          <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="pushButton_55">
-                          <property name="text">
-                           <string>Delete</string>
-                          </property>
-                          <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::EditDelete"/>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </widget>
-                   </item>
                    <item row="0" column="0">
                     <widget class="QGroupBox" name="groupBox_17">
                      <property name="sizePolicy">
-                      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>300</width>
+                       <width>250</width>
                        <height>200</height>
                       </size>
                      </property>
                      <property name="maximumSize">
                       <size>
-                       <width>300</width>
+                       <width>250</width>
                        <height>200</height>
                       </size>
                      </property>
                      <property name="title">
-                      <string>GroupBox</string>
+                      <string>Test1</string>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_31">
                       <item>
-                       <widget class="QGraphicsView" name="graphicsView_20"/>
+                       <widget class="QLabel" name="label_52">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>100</width>
+                          <height>100</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>100</width>
+                          <height>100</height>
+                         </size>
+                        </property>
+                        <property name="autoFillBackground">
+                         <bool>true</bool>
+                        </property>
+                        <property name="text">
+                         <string>TextLabel</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignmentFlag::AlignCenter</set>
+                        </property>
+                       </widget>
                       </item>
                       <item>
                        <layout class="QHBoxLayout" name="horizontalLayout_43">
@@ -2545,7 +3051,8 @@
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+                           <iconset>
+                            <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
                           </property>
                          </widget>
                         </item>
@@ -2555,7 +3062,8 @@
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::GoNext"/>
+                           <iconset>
+                            <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
                           </property>
                          </widget>
                         </item>
@@ -2565,7 +3073,8 @@
                            <string>Edit</string>
                           </property>
                           <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+                           <iconset>
+                            <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
                           </property>
                          </widget>
                         </item>
@@ -2575,7 +3084,8 @@
                            <string>Delete</string>
                           </property>
                           <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+                           <iconset>
+                            <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
                           </property>
                          </widget>
                         </item>
@@ -2594,22 +3104,50 @@
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>300</width>
+                       <width>250</width>
                        <height>200</height>
                       </size>
                      </property>
                      <property name="maximumSize">
                       <size>
-                       <width>300</width>
+                       <width>250</width>
                        <height>200</height>
                       </size>
                      </property>
                      <property name="title">
-                      <string>GroupBox</string>
+                      <string>Test2</string>
                      </property>
                      <layout class="QVBoxLayout" name="verticalLayout_32">
                       <item>
-                       <widget class="QGraphicsView" name="graphicsView_21"/>
+                       <widget class="QLabel" name="label_53">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>100</width>
+                          <height>100</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>100</width>
+                          <height>100</height>
+                         </size>
+                        </property>
+                        <property name="autoFillBackground">
+                         <bool>true</bool>
+                        </property>
+                        <property name="text">
+                         <string>TextLabel</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignmentFlag::AlignCenter</set>
+                        </property>
+                       </widget>
                       </item>
                       <item>
                        <layout class="QHBoxLayout" name="horizontalLayout_44">
@@ -2619,7 +3157,8 @@
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::GoPrevious"/>
+                           <iconset>
+                            <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
                           </property>
                          </widget>
                         </item>
@@ -2629,7 +3168,8 @@
                            <string/>
                           </property>
                           <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::GoNext"/>
+                           <iconset>
+                            <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
                           </property>
                          </widget>
                         </item>
@@ -2639,7 +3179,8 @@
                            <string>Edit</string>
                           </property>
                           <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::DocumentProperties"/>
+                           <iconset>
+                            <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
                           </property>
                          </widget>
                         </item>
@@ -2649,7 +3190,108 @@
                            <string>Delete</string>
                           </property>
                           <property name="icon">
-                           <iconset theme="QIcon::ThemeIcon::EditDelete"/>
+                           <iconset>
+                            <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item row="0" column="2">
+                    <widget class="QGroupBox" name="groupBox_23">
+                     <property name="minimumSize">
+                      <size>
+                       <width>250</width>
+                       <height>200</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>250</width>
+                       <height>200</height>
+                      </size>
+                     </property>
+                     <property name="title">
+                      <string>Test3</string>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_38">
+                      <item>
+                       <widget class="QLabel" name="label_54">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>100</width>
+                          <height>100</height>
+                         </size>
+                        </property>
+                        <property name="maximumSize">
+                         <size>
+                          <width>100</width>
+                          <height>100</height>
+                         </size>
+                        </property>
+                        <property name="autoFillBackground">
+                         <bool>true</bool>
+                        </property>
+                        <property name="text">
+                         <string>TextLabel</string>
+                        </property>
+                        <property name="alignment">
+                         <set>Qt::AlignmentFlag::AlignCenter</set>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_60">
+                        <item>
+                         <widget class="QPushButton" name="pushButton_60">
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>arrow-left.png</normaloff>arrow-left.png</iconset>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="pushButton_61">
+                          <property name="text">
+                           <string/>
+                          </property>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>primary-line-line-arrow-end.png</normaloff>primary-line-line-arrow-end.png</iconset>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="pushButton_62">
+                          <property name="text">
+                           <string>Edit</string>
+                          </property>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>mono-editor.png</normaloff>mono-editor.png</iconset>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QPushButton" name="pushButton_63">
+                          <property name="text">
+                           <string>Delete</string>
+                          </property>
+                          <property name="icon">
+                           <iconset>
+                            <normaloff>trash_correct_resolution.png</normaloff>trash_correct_resolution.png</iconset>
                           </property>
                          </widget>
                         </item>
@@ -2677,133 +3319,308 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_18">
         <item>
-         <widget class="QGroupBox" name="groupBox_6">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="title">
-           <string>Create a new expression</string>
-          </property>
-          <layout class="QVBoxLayout" name="verticalLayout_20">
-           <item>
-            <layout class="QVBoxLayout" name="verticalLayout_19">
+         <layout class="QHBoxLayout" name="horizontalLayout_59">
+          <item>
+           <widget class="QGroupBox" name="groupBox_6">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>354</width>
+              <height>294</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Create a new expression</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_20">
              <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_34">
+              <layout class="QVBoxLayout" name="verticalLayout_19">
                <item>
-                <widget class="QLabel" name="label_23">
-                 <property name="text">
-                  <string>Name</string>
-                 </property>
-                </widget>
+                <layout class="QHBoxLayout" name="horizontalLayout_34">
+                 <item>
+                  <widget class="QLabel" name="label_23">
+                   <property name="text">
+                    <string>Name</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_6"/>
+                 </item>
+                </layout>
                </item>
                <item>
-                <spacer name="horizontalSpacer_6">
+                <layout class="QHBoxLayout" name="horizontalLayout_35">
+                 <item>
+                  <widget class="QLabel" name="label_24">
+                   <property name="text">
+                    <string>Universe</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBox_12"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_36">
+                 <item>
+                  <widget class="QLabel" name="label_25">
+                   <property name="text">
+                    <string>Character</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBox_13"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="Line" name="line_16">
                  <property name="orientation">
                   <enum>Qt::Orientation::Horizontal</enum>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
+                </widget>
                </item>
                <item>
-                <widget class="QLineEdit" name="lineEdit_6"/>
+                <layout class="QHBoxLayout" name="horizontalLayout_37">
+                 <item>
+                  <widget class="QLabel" name="label_26">
+                   <property name="text">
+                    <string>Image (required)</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_7">
+                   <property name="text">
+                    <string>Select image</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_70">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="autoFillBackground">
+                    <bool>true</bool>
+                   </property>
+                   <property name="text">
+                    <string>Nothing...</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignmentFlag::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_35">
                <item>
-                <widget class="QLabel" name="label_24">
-                 <property name="text">
-                  <string>Universe</string>
+                <widget class="Line" name="line_17">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="comboBox_12"/>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_36">
-               <item>
-                <widget class="QLabel" name="label_25">
+                <widget class="QPushButton" name="pushButton_6">
                  <property name="text">
-                  <string>Character</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QComboBox" name="comboBox_13"/>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="Line" name="line_16">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_37">
-               <item>
-                <widget class="QLabel" name="label_26">
-                 <property name="text">
-                  <string>Image (required)</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QPushButton" name="pushButton_7">
-                 <property name="text">
-                  <string>Select image</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QGraphicsView" name="graphicsView_10">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="maximumSize">
-                  <size>
-                   <width>100</width>
-                   <height>100</height>
-                  </size>
+                  <string>Create</string>
                  </property>
                 </widget>
                </item>
               </layout>
-             </item>
-             <item>
-              <widget class="Line" name="line_17">
-               <property name="orientation">
-                <enum>Qt::Orientation::Horizontal</enum>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="pushButton_6">
-               <property name="text">
-                <string>Create</string>
-               </property>
-              </widget>
              </item>
             </layout>
-           </item>
-          </layout>
-         </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_22">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>354</width>
+              <height>294</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Edit</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_40">
+             <item>
+              <layout class="QVBoxLayout" name="verticalLayout_41">
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_64">
+                 <item>
+                  <widget class="QLabel" name="label_66">
+                   <property name="text">
+                    <string>Name</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_22">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEdit_9"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_65">
+                 <item>
+                  <widget class="QLabel" name="label_67">
+                   <property name="text">
+                    <string>Universe</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBox_18"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_66">
+                 <item>
+                  <widget class="QLabel" name="label_68">
+                   <property name="text">
+                    <string>Character</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBox_19"/>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="Line" name="line_26">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_67">
+                 <item>
+                  <widget class="QLabel" name="label_69">
+                   <property name="text">
+                    <string>Image</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButton_64">
+                   <property name="text">
+                    <string>Select image</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_71">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="minimumSize">
+                    <size>
+                     <width>100</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>100</height>
+                    </size>
+                   </property>
+                   <property name="autoFillBackground">
+                    <bool>true</bool>
+                   </property>
+                   <property name="text">
+                    <string>Nothing...</string>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignmentFlag::AlignCenter</set>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <widget class="Line" name="line_27">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="pushButton_65">
+                 <property name="text">
+                  <string>Save</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="QGroupBox" name="groupBox_7">
@@ -2852,9 +3669,10 @@
                   <x>0</x>
                   <y>0</y>
                   <width>972</width>
-                  <height>213</height>
+                  <height>211</height>
                  </rect>
                 </property>
+                <layout class="QGridLayout" name="gridLayout_5"/>
                </widget>
               </widget>
              </item>
