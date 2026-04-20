@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS BorderStyles (
 CREATE TABLE IF NOT EXISTS Colors (
     color_id INTEGER PRIMARY KEY AUTOINCREMENT,
     color_name TEXT,
-    r INTEGER,
-    g INTEGER,
-    b INTEGER
+    r INTEGER CHECK (r >= 0 AND r <= 255),
+    g INTEGER CHECK (r >= 0 AND r <= 255),
+    b INTEGER CHECK (r >= 0 AND r <= 255)
 );
 
 CREATE TABLE IF NOT EXISTS Fonts (
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Fonts (
     font_value TEXT --base64
 );
 
-CREATE TABLE IF NOT EXISTS Transform (
+CREATE TABLE IF NOT EXISTS Transforms (
     transform_id   INTEGER PRIMARY KEY AUTOINCREMENT,
-    transform_name TEXT CHECK (transform_name IN ('none', 'uppercase', 'lowercase', 'capitalize'))
+    transform_name TEXT CHECK (transform_name IN ('no changes', 'UPPERCASE', 'lowercase', 'Capitalize'))
 )

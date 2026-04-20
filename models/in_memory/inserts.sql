@@ -1,5 +1,6 @@
 INSERT INTO Colors (color_name, r, g, b)
-VALUES ('Red', 255, 0, 0),
+VALUES ('White', 255, 255, 255),
+       ('Red', 255, 0, 0),
        ('Orange', 255, 128, 0),
        ('Yellow', 255, 255, 0),
        ('Lime', 128, 255, 0),
@@ -11,15 +12,14 @@ VALUES ('Red', 255, 0, 0),
        ('Purple', 128, 0, 255),
        ('Pink', 255, 0, 255),
        ('Hot pink', 255, 0, 128),
-       ('White', 255, 255, 255),
        ('Gray', 128, 128, 128),
        ('Black', 0, 0, 0);
 
-INSERT INTO Transform (transform_name)
-VALUES ('none'),
-       ('uppercase'),
+INSERT INTO Transforms (transform_name)
+VALUES ('no changes'),
+       ('UPPERCASE'),
        ('lowercase'),
-       ('capitalize');
+       ('Capitalize');
 
 INSERT INTO BorderStyles (border_name, image)
 VALUES ('Original Box',
