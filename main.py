@@ -1,28 +1,22 @@
-# This is a sample Python script.
-from PySide6.QtCore import QFile
 from PySide6.QtWidgets import QApplication, QMainWindow
-from PySide6.QtUiTools import QUiLoader
 
-# Press Umschalt+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from logic.services.init_population_service import InitPopulationService
+from logic.services.ui_connection_service import UiConnectionService
+from ui.generated_ui import Ui_MainWindow
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Strg+8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
     app = QApplication([])
 
-    ui_file = QFile("ui.ui")
-    ui_file.open(QFile.ReadOnly)
+    window = QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(window) # Define UI from generated file
 
-    loader = QUiLoader()
-    window = loader.load(ui_file)
+    p = InitPopulationService()
+    p.init_populate(ui) # Initialize/Populate UI with data from Files (e.g. Colors)
+
+    code_connection = UiConnectionService()
+    code_connection.connect(ui) # Connect UI to Logic Code, Respond to input
+
+
     window.show()
-
     app.exec()
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/

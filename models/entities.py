@@ -1,14 +1,14 @@
 class Universe:
     universe_id: int
-    name: str
-    preview_image: bytes | None
+    universe_name: str
+    preview_image: str | None #base64
     order_position: int
 
-    def __init__(self, universe_id: int, name: str, preview_image: bytes, order_position: int):
+    def __init__(self, universe_id: int, universe_name: str, preview_image: str, order_position: int):
         self.universe_id = universe_id
         self.preview_image = preview_image
-        if name is not None:
-            self.name = name
+        if universe_name is not None:
+            self.universe_name = universe_name
         else:
             raise ValueError('Name must be provided')
         if order_position is not None and order_position > 0:
@@ -18,21 +18,21 @@ class Universe:
 
 class Character:
     character_id: int
-    name: str
+    character_name: str
     universe_id: int
     default_style: int
     default_text_transform: int
-    preview_image: bytes | None
+    preview_image: str | None
     order_position: int
 
-    def __init__(self, character_id: int, name: str, universe_id: int, default_style: int, default_text_transform: int, preview_image: bytes, order_position: int):
+    def __init__(self, character_id: int, character_name: str, universe_id: int, default_style: int, default_text_transform: int, preview_image: str, order_position: int):
         self.character_id = character_id
         self.universe_id = universe_id
         self.default_style = default_style
         self.default_text_transform = default_text_transform
         self.preview_image = preview_image
-        if name is not None:
-            self.name = name
+        if character_name is not None:
+            self.character_name = character_name
         else:
             raise ValueError('Name must be provided')
         if order_position is not None and order_position > 0:
@@ -42,13 +42,13 @@ class Character:
 
 class Expression:
     expression_id: int
-    name: str
+    expression_name: str
     universe_id: int
     character_id: int
-    image: bytes
+    image: str
     order_position: int
 
-    def __init__(self, expression_id: int, name: str, universe_id: int, character_id: int, image: bytes, order_position: int):
+    def __init__(self, expression_id: int, expression_name: str, universe_id: int, character_id: int, image: str, order_position: int):
         self.expression_id = expression_id
         self.universe_id = universe_id
         self.character_id = character_id
@@ -56,8 +56,8 @@ class Expression:
             self.image = image
         else:
             raise ValueError('Image must be provided')
-        if name is not None:
-            self.name = name
+        if expression_name is not None:
+            self.expression_name = expression_name
         else:
             raise ValueError('Name must be provided')
         if order_position is not None and order_position > 0:
