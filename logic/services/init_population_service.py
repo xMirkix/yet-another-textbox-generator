@@ -1,11 +1,12 @@
+from PySide6.QtWidgets import QComboBox, QLabel
 from ui.generated_ui import Ui_MainWindow
 import sqlite3
 from pathlib import Path
 import PySide6.QtGui
 
 DB_PATH = Path(__file__).parent.parent.parent / 'models' / 'in_memory' / 'static_data.sqlite3'
-IMAGE_PATH = Path(__file__).parent.parent.parent / 'undertale_preview.png'
-COLOR_IMAGE_PATH = Path(__file__).parent.parent.parent / 'white_preview.png'
+IMAGE_PATH = Path(__file__).parent.parent.parent / 'assets' / 'previews' / 'undertale_preview.png'
+COLOR_IMAGE_PATH = Path(__file__).parent.parent.parent / 'assets' / 'previews' / 'white_preview.png'
 
 
 class InitPopulationService:
@@ -23,68 +24,30 @@ class InitPopulationService:
         self.hide_expressions_edit(ui)  # Hide edit block
 
     def populate_border_settings(self, ui: Ui_MainWindow):
-
-        styles = self.connection.execute("""
-                                         SELECT *
-                                         FROM BorderStyles;
-                                         """).fetchall()
-
-        for row in styles:
-            ui.border_style_selector.addItem(row[1])
-
-        ui.border_style_preview.setPixmap(PySide6.QtGui.QPixmap(str(IMAGE_PATH)))
-
-        colors = self.connection.execute("""
-                                         SELECT *
-                                         FROM Colors;
-                                         """).fetchall()
-
-        for row in colors:
-            ui.border_color_selector.addItem(row[1])
-
-        ui.border_color_preview.setPixmap(PySide6.QtGui.QPixmap(str(COLOR_IMAGE_PATH)))
+        self.query_db_and_set_ui("BorderStyles", [ui.border_style_selector], [ui.border_style_preview], IMAGE_PATH)
+        self.query_db_and_set_ui("Colors", [ui.border_color_selector], [ui.border_color_preview], COLOR_IMAGE_PATH)
 
     def populate_sprite_settings(self, ui: Ui_MainWindow):
-
-        colors = self.connection.execute("""
-                                         SELECT *
-                                         FROM Colors;
-                                         """)
-
-        for row in colors:
-            ui.expression_color_selector.addItem(row[1])
-
-        ui.expression_color_preview.setPixmap(PySide6.QtGui.QPixmap(str(COLOR_IMAGE_PATH)))
+        self.query_db_and_set_ui("Colors", [ui.expression_color_selector], [ui.expression_color_preview], COLOR_IMAGE_PATH)
 
     def populate_font_settings(self, ui: Ui_MainWindow):
-        fonts = self.connection.execute("""
-                                        SELECT *
-                                        FROM Fonts;
-                                        """).fetchall()
+        self.query_db_and_set_ui("Fonts", [ui.font_selector], [], IMAGE_PATH)
+        self.query_db_and_set_ui("Colors", [ui.asterisk_color_selector_1, ui.asterisk_color_selector_2, ui.asterisk_color_selector_3],
+                                 [ui.asterisk_color_preview_1, ui.asterisk_color_preview_2, ui.asterisk_color_preview_3],
+                                 COLOR_IMAGE_PATH)
+        self.query_db_and_set_ui("Transforms", [ui.text_transform_selector], [], IMAGE_PATH)
 
-        for row in fonts:
-            ui.font_selector.addItem(row[1])
-
-        colors = self.connection.execute("""
-                                         SELECT *
-                                         FROM Colors;
-                                         """).fetchall()
-
-        for row in colors:
-            ui.asterisk_color_selector_1.addItem(row[1])
-            ui.asterisk_color_selector_2.addItem(row[1])
-            ui.asterisk_color_selector_3.addItem(row[1])
-
-        ui.asterisk_color_preview_1.setPixmap(PySide6.QtGui.QPixmap(str(COLOR_IMAGE_PATH)))
-        ui.asterisk_color_preview_2.setPixmap(PySide6.QtGui.QPixmap(str(COLOR_IMAGE_PATH)))
-        ui.asterisk_color_preview_3.setPixmap(PySide6.QtGui.QPixmap(str(COLOR_IMAGE_PATH)))
-
-        transforms = self.connection.execute("""
-        SELECT * FROM Transforms;
+    def query_db_and_set_ui(self, table_name: str, elements: list[QComboBox], pixmaps: list[QLabel], image_path: Path):
+        rows = self.connection.execute(f"""
+            SELECT * FROM {table_name}
         """).fetchall()
 
-        for row in transforms:
-            ui.text_transform_selector.addItem(row[1])
+        for row in rows:
+            for element in elements:
+                element.addItem(row[1])
+
+        for pixmap in pixmaps:
+            pixmap.setPixmap(PySide6.QtGui.QPixmap(str(image_path)))
 
     def hide_universes_edit(self, ui: Ui_MainWindow):
         ui.edit_universe.hide()

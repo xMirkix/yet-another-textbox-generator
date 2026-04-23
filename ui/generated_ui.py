@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiabgclh.ui'
+## Form generated from reading UI file 'uixNYMLR.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -856,7 +856,7 @@ class Ui_MainWindow(object):
         self.pushButton_18 = QPushButton(self.groupBox_10)
         self.pushButton_18.setObjectName(u"pushButton_18")
         icon1 = QIcon()
-        icon1.addFile(u"arrow-left.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon1.addFile(u"icons/arrow-left.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButton_18.setIcon(icon1)
 
         self.horizontalLayout_30.addWidget(self.pushButton_18)
@@ -864,7 +864,7 @@ class Ui_MainWindow(object):
         self.pushButton_16 = QPushButton(self.groupBox_10)
         self.pushButton_16.setObjectName(u"pushButton_16")
         icon2 = QIcon()
-        icon2.addFile(u"primary-line-line-arrow-end.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon2.addFile(u"icons/primary-line-line-arrow-end.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButton_16.setIcon(icon2)
 
         self.horizontalLayout_30.addWidget(self.pushButton_16)
@@ -872,7 +872,7 @@ class Ui_MainWindow(object):
         self.pushButton_17 = QPushButton(self.groupBox_10)
         self.pushButton_17.setObjectName(u"pushButton_17")
         icon3 = QIcon()
-        icon3.addFile(u"mono-editor.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon3.addFile(u"icons/mono-editor.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButton_17.setIcon(icon3)
 
         self.horizontalLayout_30.addWidget(self.pushButton_17)
@@ -880,7 +880,7 @@ class Ui_MainWindow(object):
         self.pushButton_19 = QPushButton(self.groupBox_10)
         self.pushButton_19.setObjectName(u"pushButton_19")
         icon4 = QIcon()
-        icon4.addFile(u"trash_correct_resolution.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
+        icon4.addFile(u"icons/trash_correct_resolution.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
         self.pushButton_19.setIcon(icon4)
 
         self.horizontalLayout_30.addWidget(self.pushButton_19)
@@ -2272,7 +2272,6 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.menubar.addAction(self.menuFile.menuAction())
-        self.menuFile.addAction(self.actionNew_File)
         self.menuFile.addAction(self.actionSave)
         self.menuFile.addAction(self.actionOpen_2)
         self.menuFile.addSeparator()

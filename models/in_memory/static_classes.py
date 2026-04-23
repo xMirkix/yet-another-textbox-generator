@@ -1,20 +1,23 @@
 class BorderStyle:
     border_id: int
     border_name: str
-    image: str #base64
-    order_position: int
+    preview_file_name: str
+    source_image_file_name: str
 
-    def __init__(self, border_id: int, border_name: str, order_position: int, image: str):
+    def __init__(self, border_id: int, border_name: str, source_image_file_name: str, preview_file_name: str):
         self.border_id = border_id
         if border_name is not None:
             self.border_name = border_name
         else:
             raise ValueError('Name must be provided')
-        if order_position is not None and order_position > 0:
-            self.order_position = order_position
+        if preview_file_name is not None:
+            self.preview_file_name = preview_file_name
         else:
-            raise ValueError('Order position must be provided and not negative')
-        self.image = image
+            raise ValueError('Image path must be provided')
+        if source_image_file_name is not None:
+            self.source_image_file_name = source_image_file_name
+        else:
+            raise ValueError('Source image path must be provided')
 
 class Color:
     color_id: int
@@ -33,18 +36,13 @@ class Color:
 class TextFont:
     font_id: int
     font_name: str
-    font_value: str
 
-    def __init__(self, font_id: int, font_name: str, font_value: str):
+    def __init__(self, font_id: int, font_name: str):
         self.font_id = font_id
         if font_name is not None:
             self.font_name = font_name
         else:
             raise ValueError('Name must be provided')
-        if font_value is not None:
-            self.font_value = font_value
-        else:
-            raise ValueError('Value must be provided')
 
 class TextTransform:
     transform_id: int

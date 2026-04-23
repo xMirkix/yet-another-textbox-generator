@@ -1,15 +1,17 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
 
 from logic.services.init_population_service import InitPopulationService
-from logic.services.ui_connection_service import UiConnectionService
+from logic.services.connection.ui_connection_service import UiConnectionService
+from main_window_overrides import MainWindow
 from ui.generated_ui import Ui_MainWindow
 
 if __name__ == '__main__':
     app = QApplication([])
 
-    window = QMainWindow()
+    window = MainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(window) # Define UI from generated file
+    window.ui = ui
 
     p = InitPopulationService()
     p.init_populate(ui) # Initialize/Populate UI with data from Files (e.g. Colors)
