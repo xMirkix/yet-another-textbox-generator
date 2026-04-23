@@ -22,8 +22,10 @@ class MainWindow(QMainWindow):
                 QMessageBox.StandardButton.Cancel
             )
             if reply == QMessageBox.StandardButton.Save:
-                save_file(self.ui)
-                QApplication.quit()
+                if save_file():
+                    QApplication.quit()
+                else:
+                    event.ignore()
             elif reply == QMessageBox.StandardButton.Discard:
                 QApplication.quit()
             elif reply == QMessageBox.StandardButton.Cancel:

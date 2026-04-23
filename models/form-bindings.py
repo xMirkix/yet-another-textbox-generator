@@ -36,3 +36,9 @@ class ExportSettings:
     export_format: str
     margin: bool
     size: str
+
+class InputSettings:
+    input_prompt: str
+
+    def __init__(self, input_prompt: str):
+        self.input_prompt = input_prompt

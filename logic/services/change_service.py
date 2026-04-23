@@ -6,6 +6,10 @@ class Changes:
         cls._changed = False
 
     @classmethod
+    def reset(cls):
+        cls._changed = False
+
+    @classmethod
     def change(cls):
         cls._changed = True
 

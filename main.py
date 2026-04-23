@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
 
 from logic.services.init_population_service import InitPopulationService
-from logic.services.connection.ui_connection_service import UiConnectionService
+from logic.services.connection.ui_connection_service import connect_ui
 from main_window_overrides import MainWindow
 from ui.generated_ui import Ui_MainWindow
 
@@ -16,8 +16,7 @@ if __name__ == '__main__':
     p = InitPopulationService()
     p.init_populate(ui) # Initialize/Populate UI with data from Files (e.g. Colors)
 
-    code_connection = UiConnectionService()
-    code_connection.connect(ui) # Connect UI to Logic Code, Respond to input
+    connect_ui(ui) # Connect UI to Logic Code, Respond to input
 
 
     window.show()
