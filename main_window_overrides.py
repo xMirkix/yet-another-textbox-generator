@@ -2,8 +2,8 @@ from PySide6.QtWidgets import QMainWindow, QApplication
 from PySide6.QtGui import QCloseEvent
 from PySide6.QtWidgets import QMessageBox
 
+from logic.connection.welcome import save_file
 from logic.services.change_service import Changes
-from logic.services.connection.welcome import save_file
 
 
 class MainWindow(QMainWindow):

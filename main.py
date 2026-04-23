@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
 
 from logic.services.init_population_service import InitPopulationService
-from logic.services.connection.ui_connection_service import connect_ui
+from logic.services.ui_connection_service import connect_ui
 from main_window_overrides import MainWindow
 from ui.generated_ui import Ui_MainWindow
 
