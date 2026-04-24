@@ -1,6 +1,9 @@
+from pathlib import Path
+
 from PySide6.QtWidgets import QApplication, QMessageBox
 
 from logic.services.change_service import Changes
+from logic.services.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QFileDialog
 
@@ -46,6 +49,7 @@ def open_file_impl() -> bool:
         )
         if path:  # File got selected
             Changes.reset()
+            db = DBDynamicConnection(Path("...") / "dynamic_data.sqlite3") # TODO change to path
             print(path)  # TODO Load File
             return True
         return False

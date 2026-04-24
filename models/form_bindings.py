@@ -1,8 +1,15 @@
+from ui.generated_ui import Ui_MainWindow
+
+
 class BorderSettings:
     style: int
     color: int
 
     def __init__(self, style: int, color: int):
+        self.style = style
+        self.color = color
+
+    def update(self, ui: Ui_MainWindow, style: int, color: int):
         self.style = style
         self.color = color
 

@@ -19,11 +19,4 @@ class Wrapper:
 
 
 def connect_generator(ui: Ui_MainWindow):
-    form = Wrapper(
-        input_prompt="",
-        border_settings=BorderSettings(1, 1), #UT, White
-        sprite_settings=SpriteSettings(-1, -1, -1, 1), # Nothing set, only color
-        font_settings=FontSettings(1, True, [1,1,1], "Regular", 1), # Has asterisk, white colors and Regular with no transform
-        export_settings=ExportSettings("PNG", True, "Medium") # PNG with medium size and margin
-    )
     pass
