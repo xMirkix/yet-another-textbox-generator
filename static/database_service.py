@@ -4,7 +4,7 @@ from pathlib import Path
 
 class DBStaticConnection:
 
-    DB_PATH = Path(__file__).parent.parent.parent / 'models' / 'in_memory' / 'static_data.sqlite3'
+    DB_PATH = Path(__file__).parent.parent / 'startup' / 'in_memory' / 'static_data.sqlite3'
     connection = sqlite3.connect(DB_PATH)
     cursor = connection.cursor()
 

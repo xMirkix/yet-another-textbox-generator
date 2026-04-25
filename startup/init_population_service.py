@@ -4,9 +4,9 @@ import sqlite3
 from pathlib import Path
 import PySide6.QtGui
 
-DB_PATH = Path(__file__).parent.parent.parent / 'models' / 'in_memory' / 'static_data.sqlite3'
-IMAGE_PATH = Path(__file__).parent.parent.parent / 'assets' / 'previews' / 'undertale_preview.png'
-COLOR_IMAGE_PATH = Path(__file__).parent.parent.parent / 'assets' / 'previews' / 'white_preview.png'
+DB_PATH = Path(__file__).parent / 'in_memory' / 'static_data.sqlite3'
+IMAGE_PATH = Path(__file__).parent.parent / 'assets' / 'previews' / 'undertale_preview.png'
+COLOR_IMAGE_PATH = Path(__file__).parent.parent / 'assets' / 'previews' / 'white_preview.png'
 
 
 class InitPopulationService:

@@ -2,8 +2,8 @@ from pathlib import Path
 
 from PySide6.QtWidgets import QApplication, QMessageBox
 
-from logic.services.change_service import Changes
-from logic.services.database_service import DBDynamicConnection
+from static.change_service import Changes
+from static.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QFileDialog
 
