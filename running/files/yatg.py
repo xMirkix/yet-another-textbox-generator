@@ -1,6 +1,8 @@
 from models.entities import Universe, Character, Expression
+from static.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
 
+connection = DBDynamicConnection()
 
 def get_all_universes(ui: Ui_MainWindow) -> list[Universe]:
     pass
