@@ -5,7 +5,7 @@
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\micha\UT-Textboxen\yet-another-textbox-generator\models\in_memory\static_data.sqlite3</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\micha\UT-Textboxen\yet-another-textbox-generator\startup\in_memory\static_data.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

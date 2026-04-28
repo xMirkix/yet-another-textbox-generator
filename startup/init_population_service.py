@@ -1,10 +1,11 @@
 from PySide6.QtWidgets import QComboBox, QLabel
+
+from static.database_service import DBStaticConnection
 from ui.generated_ui import Ui_MainWindow
-import sqlite3
+from PySide6.QtGui import QFontDatabase
 from pathlib import Path
 import PySide6.QtGui
 
-DB_PATH = Path(__file__).parent / 'in_memory' / 'static_data.sqlite3'
 IMAGE_PATH = Path(__file__).parent.parent / 'assets' / 'previews' / 'undertale_preview.png'
 COLOR_IMAGE_PATH = Path(__file__).parent.parent / 'assets' / 'previews' / 'white_preview.png'
 
@@ -12,16 +13,13 @@ COLOR_IMAGE_PATH = Path(__file__).parent.parent / 'assets' / 'previews' / 'white
 class InitPopulationService:
 
     def __init__(self):
-        self.connection = sqlite3.connect(DB_PATH)
-        self.cursor = self.connection.cursor()
+        self.connection = DBStaticConnection()
 
     def init_populate(self, ui: Ui_MainWindow):
         self.populate_border_settings(ui)  # Original/Deltarune/... and Color
         self.populate_sprite_settings(ui)  # Color
         self.populate_font_settings(ui)  # Determination Mono/Comic Sans/..., Asterisk Colors, Uppercase/Lowercase/...
-        self.hide_universes_edit(ui)  # Hide edit block
-        self.hide_characters_edit(ui)  # Hide edit block
-        self.hide_expressions_edit(ui)  # Hide edit block
+        self.hide_edits(ui)  # Hide edit blocks
 
     def populate_border_settings(self, ui: Ui_MainWindow):
         self.query_db_and_set_ui("BorderStyles", [ui.border_style_selector], [ui.border_style_preview], IMAGE_PATH)
@@ -31,16 +29,14 @@ class InitPopulationService:
         self.query_db_and_set_ui("Colors", [ui.expression_color_selector], [ui.expression_color_preview], COLOR_IMAGE_PATH)
 
     def populate_font_settings(self, ui: Ui_MainWindow):
-        self.query_db_and_set_ui("Fonts", [ui.font_selector], [], IMAGE_PATH)
+        self.check_with_system_fonts("Fonts", [ui.font_selector])
         self.query_db_and_set_ui("Colors", [ui.asterisk_color_selector_1, ui.asterisk_color_selector_2, ui.asterisk_color_selector_3],
                                  [ui.asterisk_color_preview_1, ui.asterisk_color_preview_2, ui.asterisk_color_preview_3],
                                  COLOR_IMAGE_PATH)
-        self.query_db_and_set_ui("Transforms", [ui.text_transform_selector], [], IMAGE_PATH)
+        self.query_db_and_set_ui("Transforms", [ui.text_transform_selector], [], None)
 
-    def query_db_and_set_ui(self, table_name: str, elements: list[QComboBox], pixmaps: list[QLabel], image_path: Path):
-        rows = self.connection.execute(f"""
-            SELECT * FROM {table_name}
-        """).fetchall()
+    def query_db_and_set_ui(self, table_name: str, elements: list[QComboBox], pixmaps: list[QLabel], image_path: Path | None):
+        rows = self.connection.select_table(table_name)
 
         for row in rows:
             for element in elements:
@@ -49,11 +45,18 @@ class InitPopulationService:
         for pixmap in pixmaps:
             pixmap.setPixmap(PySide6.QtGui.QPixmap(str(image_path)))
 
-    def hide_universes_edit(self, ui: Ui_MainWindow):
+    def check_with_system_fonts(self, table_name: str, elements: list[QComboBox]):
+        rows = self.connection.select_table(table_name)
+
+        for row in rows:
+            if self.is_font_installed(row[1]):
+                for element in elements:
+                    element.addItem(row[1])
+
+    def is_font_installed(self, font_name: str) -> bool:
+        return font_name in QFontDatabase.families()
+
+    def hide_edits(self, ui: Ui_MainWindow):
         ui.edit_universe.hide()
-
-    def hide_characters_edit(self, ui: Ui_MainWindow):
         ui.edit_character.hide()
-
-    def hide_expressions_edit(self, ui: Ui_MainWindow):
         ui.edit_expression.hide()

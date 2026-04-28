@@ -27,5 +27,5 @@ VALUES ('Original Box','undertale_preview', 'Original Box'),
 
 INSERT INTO Fonts (font_name)
 VALUES ('Determination Mono'),
-       ('Comic Sans'),
+       ('Comic Sans MS'),
        ('Papyrus');

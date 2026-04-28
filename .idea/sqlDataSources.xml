@@ -9,8 +9,8 @@
           <option name="dbmsName" value="SQLITE" />
           <option name="urls">
             <array>
-              <option value="file://$PROJECT_DIR$/models/in_memory/schema.sql" />
-              <option value="file://$PROJECT_DIR$/models/in_memory/inserts.sql" />
+              <option value="file://$PROJECT_DIR$/startup/in_memory/inserts.sql" />
+              <option value="file://$PROJECT_DIR$/startup/in_memory/schema.sql" />
             </array>
           </option>
           <option name="outLayout" value="File per object by schema.groovy" />
