@@ -1,13 +1,13 @@
+import shutil
 from pathlib import Path
 
 from PySide6.QtWidgets import QApplication, QMessageBox
 
 from static.change_service import Changes
-from static.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QFileDialog
 
-
+BASE_DIR = Path(__file__).parent
 
 def connect_welcome(ui: Ui_MainWindow):
     ui.actionSave.triggered.connect(save_file)
@@ -16,15 +16,7 @@ def connect_welcome(ui: Ui_MainWindow):
     ui.actionQuit.triggered.connect(quit_app)
 
 def save_file() -> bool:
-    path, _ = QFileDialog.getSaveFileName(
-        caption="Save File",
-        filter="YATG Files (*.yatg)"
-    )
-    if path:
-        Changes.saved()
-        print(path)  # TODO Write file
-        return True
-    return False
+    return manage_file(caption="Save File", filter_name="YATG Files (*.yatg)", isOpening=False)
 
 def open_file() -> bool:
     if Changes.get_state():
@@ -43,16 +35,22 @@ def open_file() -> bool:
         return open_file_impl()
 
 def open_file_impl() -> bool:
-        path, _ = QFileDialog.getOpenFileName(
-            caption="Open File",
-            filter="YATG Files (*.yatg)"
-        )
-        if path:  # File got selected
-            Changes.reset()
-            db = DBDynamicConnection(Path("...") / "dynamic_data.sqlite3") # TODO change to path
-            print(path)  # TODO Load File
-            return True
-        return False
+    return manage_file(caption="Open File", filter_name="YATG Files (*.yatg)", isOpening=True)
+
+def manage_file(caption: str, filter_name: str, isOpening: bool) -> bool:
+    path, _ = QFileDialog.getOpenFileName(
+        caption=caption,
+        filter=filter_name
+    )
+    if path:  # File got selected
+        Changes.reset()
+        db_path = BASE_DIR / "assets" / "temp_dynamic_data" / "temp_data.sqlite3"
+        if isOpening:
+            shutil.copyfile(path, db_path) # Override cache file with selected
+        else:
+            shutil.copyfile(db_path, path) # Override file from path with cache
+        return True
+    return False
 
 def quit_app():
     QApplication.quit()
