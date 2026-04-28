@@ -1,3 +1,4 @@
+from running.connection import universes, characters, expressions, generator
 from running.connection.characters import connect_characters
 from running.connection.expressions import connect_expressions
 from running.connection.generator import connect_generator
@@ -11,3 +12,19 @@ def connect_ui(ui: Ui_MainWindow):
     connect_universes(ui)
     connect_characters(ui)
     connect_expressions(ui)
+    ui.tabs.currentChanged.connect(lambda index: on_tab_changed(ui, index))
+
+def on_tab_changed(ui: Ui_MainWindow, index: int):
+    tab_name = ui.tabs.tabText(index)
+    if tab_name == "Generator":
+        print("Generator")
+        generator.init()
+    elif tab_name == "Universes":
+        print("Universe")
+        universes.init()
+    elif tab_name == "Characters":
+        print("Characters")
+        characters.init()
+    elif tab_name == "Expressions":
+        print("Expressions")
+        expressions.init()

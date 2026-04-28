@@ -20,3 +20,6 @@ class Wrapper:
 
 def connect_generator(ui: Ui_MainWindow):
     pass
+
+def init():
+    pass
