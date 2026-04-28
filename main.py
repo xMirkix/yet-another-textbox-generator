@@ -1,5 +1,5 @@
 from PySide6.QtWidgets import QApplication, QMainWindow
-
+from pathlib import Path
 
 from main_window_overrides import MainWindow
 from models.app_memory import Memory
@@ -8,6 +8,9 @@ from running.ui_connection_service import connect_ui
 from startup.init_population_service import InitPopulationService
 from ui.generated_ui import Ui_MainWindow
 
+BASE_DIR = Path(__file__).parent
+db_path = BASE_DIR / "assets" / "temp_dynamic_data" / "temp_data.sqlite3"
+
 if __name__ == '__main__':
     app = QApplication([])
 
@@ -15,6 +18,9 @@ if __name__ == '__main__':
     ui = Ui_MainWindow()
     ui.setupUi(window) # Define UI from generated file
     window.ui = ui
+
+    db_path.unlink(missing_ok=True) # Delete possible existing file from unexpected exit
+    db_path.touch() # Create cache file
 
     # Initialize Memory
     memory = Memory(input_prompt="",
