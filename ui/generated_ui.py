@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uixNYMLR.ui'
+## Form generated from reading UI file 'uiEfelmQ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -117,6 +117,17 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_36.addLayout(self.horizontalLayout_48)
 
+        self.verticalSpacer_7 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.verticalLayout_36.addItem(self.verticalSpacer_7)
+
+        self.kofi = QLabel(self.welcome)
+        self.kofi.setObjectName(u"kofi")
+        self.kofi.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.kofi.setOpenExternalLinks(True)
+
+        self.verticalLayout_36.addWidget(self.kofi)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
         self.verticalLayout_36.addItem(self.verticalSpacer)
@@ -143,7 +154,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 561, 1400))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 984, 1400))
         self.verticalLayout_35 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_35.setObjectName(u"verticalLayout_35")
         self.verticalLayout = QVBoxLayout()
@@ -828,7 +839,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.universe_grid = QWidget()
         self.universe_grid.setObjectName(u"universe_grid")
-        self.universe_grid.setGeometry(QRect(0, 0, 780, 630))
+        self.universe_grid.setGeometry(QRect(0, 0, 960, 630))
         self.gridLayout_2 = QGridLayout(self.universe_grid)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout_2.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
@@ -1808,7 +1819,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.characters_grid = QWidget()
         self.characters_grid.setObjectName(u"characters_grid")
-        self.characters_grid.setGeometry(QRect(0, 0, 780, 218))
+        self.characters_grid.setGeometry(QRect(0, 0, 970, 269))
         self.gridLayout = QGridLayout(self.characters_grid)
         self.gridLayout.setObjectName(u"gridLayout")
         self.characters_test1 = QGroupBox(self.characters_grid)
@@ -2243,7 +2254,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.expressions_grid = QWidget()
         self.expressions_grid.setObjectName(u"expressions_grid")
-        self.expressions_grid.setGeometry(QRect(0, 0, 96, 26))
+        self.expressions_grid.setGeometry(QRect(0, 0, 972, 312))
         self.gridLayout_5 = QGridLayout(self.expressions_grid)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.scrollArea_3.setWidget(self.expressions_grid)
@@ -2331,6 +2342,7 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(shortcut)
         self.logo.setText("")
         self.open_file.setText(QCoreApplication.translate("MainWindow", u"Open File", None))
+        self.kofi.setText(QCoreApplication.translate("MainWindow", u"<a href='https://ko-fi.com/mirki__'>Support me on Kofi</a>", None))
         self.tabs.setTabText(self.tabs.indexOf(self.welcome), QCoreApplication.translate("MainWindow", u"Welcome", None))
         self.bordersettings.setTitle(QCoreApplication.translate("MainWindow", u"Border Settings", None))
         self.border_style_label.setText(QCoreApplication.translate("MainWindow", u"Border Style", None))

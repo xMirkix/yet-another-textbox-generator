@@ -1,6 +1,8 @@
 import sqlite3
 from pathlib import Path
 
+from models.entities import Character, Universe, Expression
+
 
 class DBStaticConnection:
 
@@ -42,14 +44,22 @@ class DBDynamicConnection:
             raise RuntimeError("DBDynamicConnection was not initialized.")
         return cls._instance
 
-    def saved(self):
-        self._changed = False
+    def select_table(self, table_name: str):
+        return self.connection.execute(f"""
+            SELECT * FROM {table_name}
+        """).fetchall()
 
-    def reset(self):
-        self._changed = False
+    def select_all_universes(self) -> list[Universe]:
+        return self.connection.execute(f"""
+                SELECT * FROM Universes
+        """).fetchall()
 
-    def change(self):
-        self._changed = True
+    def select_all_characters_from_universe(self, universe_id: int) -> list[Character]:
+        return self.connection.execute(f"""
+                SELECT * FROM Characters c WHERE c.universe_id = {universe_id}
+                                       """).fetchall()
 
-    def get_state(self) -> bool:
-        return self._changed
+    def select_all_expressions_from_character(self, universe_id: int, character_id: int) -> list[Expression]:
+        return self.connection.execute(f"""
+                    SELECT * FROM Expressions e WHERE e.universe_id = {universe_id} AND e.character_id = {character_id}
+                                       """).fetchall()
