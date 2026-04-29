@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QApplication, QMainWindow
 from pathlib import Path
 
 from main_window_overrides import MainWindow
-from models.app_memory import Memory
+from static.app_memory import Memory
 from models.form_bindings import BorderSettings, SpriteSettings, FontSettings, ExportSettings
 from running.ui_connection_service import connect_ui
 from startup.init_population_service import InitPopulationService
