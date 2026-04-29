@@ -1,7 +1,6 @@
 from PySide6.QtWidgets import QMainWindow, QApplication
 from PySide6.QtGui import QCloseEvent
 from PySide6.QtWidgets import QMessageBox
-from pathlib import Path
 
 from running.connection.welcome import save_file
 from static.change_service import Changes

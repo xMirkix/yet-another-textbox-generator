@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:sqlite:C:\Users\micha\UT-Textboxen\yet-another-textbox-generator\startup\in_memory\static_data.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="temp_data" uuid="a24e5eae-ef1d-4a4e-afa3-c994e6aa9c6c">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/assets/temp_dynamic_data/temp_data.sqlite3</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
