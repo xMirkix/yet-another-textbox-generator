@@ -1,6 +1,6 @@
 from PySide6.QtWidgets import QComboBox, QLabel
 
-from static.database_service import DBStaticConnection
+from static.database_service import DBStaticConnection, DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtGui import QFontDatabase
 from pathlib import Path
@@ -10,16 +10,19 @@ IMAGE_PATH = Path(__file__).parent.parent / 'assets' / 'previews' / 'undertale_p
 COLOR_IMAGE_PATH = Path(__file__).parent.parent / 'assets' / 'previews' / 'white_preview.png'
 
 
+
 class InitPopulationService:
 
     def __init__(self):
         self.connection = DBStaticConnection()
+        self.dynamic_connection = DBDynamicConnection()
 
     def init_populate(self, ui: Ui_MainWindow):
         self.populate_border_settings(ui)  # Original/Deltarune/... and Color
         self.populate_sprite_settings(ui)  # Color
         self.populate_font_settings(ui)  # Determination Mono/Comic Sans/..., Asterisk Colors, Uppercase/Lowercase/...
         self.hide_edits(ui)  # Hide edit blocks
+        self.create_temporary_data_tables()
 
     def populate_border_settings(self, ui: Ui_MainWindow):
         self.query_db_and_set_ui("BorderStyles", [ui.border_style_selector], [ui.border_style_preview], IMAGE_PATH)
@@ -60,3 +63,6 @@ class InitPopulationService:
         ui.edit_universe.hide()
         ui.edit_character.hide()
         ui.edit_expression.hide()
+
+    def create_temporary_data_tables(self):
+        self.dynamic_connection.create_all_tables()

@@ -5,9 +5,7 @@ from pathlib import Path
 
 from running.connection.welcome import save_file
 from static.change_service import Changes
-
-BASE_DIR = Path(__file__).parent
-db_path = BASE_DIR / "assets" / "temp_dynamic_data" / "temp_data.sqlite3"
+from static.database_service import DBDynamicConnection
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -26,15 +24,27 @@ class MainWindow(QMainWindow):
             )
             if reply == QMessageBox.StandardButton.Save:
                 if save_file():
+                    db = DBDynamicConnection.get_instance()
+                    db.connection.close()
+
+                    db_path = DBDynamicConnection.db_path
                     db_path.unlink(missing_ok=True)
                     QApplication.quit()
                 else:
                     event.ignore()
             elif reply == QMessageBox.StandardButton.Discard:
+                db = DBDynamicConnection.get_instance()
+                db.connection.close()
+
+                db_path = DBDynamicConnection.db_path
                 db_path.unlink(missing_ok=True)
                 QApplication.quit()
             elif reply == QMessageBox.StandardButton.Cancel:
                 event.ignore()
         else:
+            db = DBDynamicConnection.get_instance()
+            db.connection.close()
+
+            db_path = DBDynamicConnection.db_path
             db_path.unlink(missing_ok=True)
             event.accept()

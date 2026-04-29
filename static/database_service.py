@@ -22,7 +22,8 @@ class DBStaticConnection:
 class DBDynamicConnection:
     _instance: DBDynamicConnection | None = None
     _initialized: bool = False
-    db_path = Path(__file__).parent.parent / 'assets' / 'temp_dynamic_data' / 'temp_data.sqlite3'
+    BASE_DIR = Path(__file__).parent.parent / 'assets' / 'temp_dynamic_data'
+    db_path = BASE_DIR / 'temp_data.sqlite3'
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
@@ -34,6 +35,7 @@ class DBDynamicConnection:
             return
 
         self.connection = sqlite3.connect(self.db_path)
+        self.connection.execute("PRAGMA foreign_keys = ON")
         self.cursor = self.connection.cursor()
         self._changed = False
         DBDynamicConnection._initialized = True
@@ -63,3 +65,7 @@ class DBDynamicConnection:
         return self.connection.execute(f"""
                     SELECT * FROM Expressions e WHERE e.universe_id = {universe_id} AND e.character_id = {character_id}
                                        """).fetchall()
+
+    def create_all_tables(self):
+        sql = (self.BASE_DIR / 'schema.sql').read_text(encoding='utf-8')
+        return self.connection.executescript(sql)
