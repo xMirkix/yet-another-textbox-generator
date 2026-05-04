@@ -7,18 +7,29 @@ from static.change_service import Changes
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QFileDialog
 
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).parent.parent.parent
 
 def connect_welcome(ui: Ui_MainWindow):
     ui.actionSave.triggered.connect(save_file)
-    ui.actionOpen_2.triggered.connect(open_file)
-    ui.open_file.clicked.connect(open_file)
+    ui.actionOpen_2.triggered.connect(lambda: open_file(ui=ui))
+    ui.open_file.clicked.connect(lambda: open_file(ui=ui))
     ui.actionQuit.triggered.connect(quit_app)
 
 def save_file() -> bool:
-    return manage_file(caption="Save File", filter_name="YATG Files (*.yatg)", isOpening=False)
+    path, _ = QFileDialog.getSaveFileName(
+        caption="Save File",
+        filter="YATG Files (*.yatg)"
+    )
+    if path:  # File got selected
+        Changes.reset()
+        if not path.endswith(".yatg"):
+            path += ".yatg"
+        db_path = BASE_DIR / "assets" / "temp_dynamic_data" / "temp_data.sqlite3"
+        shutil.copyfile(db_path, path)  # Override file from path with cache
+        return True
+    return False
 
-def open_file() -> bool:
+def open_file(ui: Ui_MainWindow) -> bool:
     if Changes.get_state():
         reply = QMessageBox.question(
             QApplication.activeWindow(),
@@ -27,17 +38,11 @@ def open_file() -> bool:
             QMessageBox.StandardButton.Yes |
             QMessageBox.StandardButton.Cancel
         )
-        if reply == QMessageBox.StandardButton.Yes:
-            return open_file_impl()
-        else:
+        if reply == QMessageBox.StandardButton.Cancel:
             return False
-    else:
-        return open_file_impl()
+    return manage_file(ui=ui, caption="Open File", filter_name="YATG Files (*.yatg)")
 
-def open_file_impl() -> bool:
-    return manage_file(caption="Open File", filter_name="YATG Files (*.yatg)", isOpening=True)
-
-def manage_file(caption: str, filter_name: str, isOpening: bool) -> bool:
+def manage_file(ui: Ui_MainWindow, caption: str, filter_name: str) -> bool:
     path, _ = QFileDialog.getOpenFileName(
         caption=caption,
         filter=filter_name
@@ -45,10 +50,8 @@ def manage_file(caption: str, filter_name: str, isOpening: bool) -> bool:
     if path:  # File got selected
         Changes.reset()
         db_path = BASE_DIR / "assets" / "temp_dynamic_data" / "temp_data.sqlite3"
-        if isOpening:
-            shutil.copyfile(path, db_path) # Override cache file with selected
-        else:
-            shutil.copyfile(db_path, path) # Override file from path with cache
+        shutil.copyfile(path, db_path) # Override cache file with selected
+        ui.tabs.setCurrentIndex(0)
         return True
     return False
 
