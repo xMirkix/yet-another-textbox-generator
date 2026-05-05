@@ -1,12 +1,12 @@
 import sqlite3
-from pathlib import Path
+from configs.paths import DYNAMIC_DB, DYNAMIC_SCHEMA, STATIC_DB
 
 from models.entities import Character, Universe, Expression
 
 
 class DBStaticConnection:
 
-    DB_PATH = Path(__file__).parent.parent / 'startup' / 'in_memory' / 'static_data.sqlite3'
+    DB_PATH = STATIC_DB
     connection = sqlite3.connect(DB_PATH)
     cursor = connection.cursor()
 
@@ -22,8 +22,7 @@ class DBStaticConnection:
 class DBDynamicConnection:
     _instance: DBDynamicConnection | None = None
     _initialized: bool = False
-    BASE_DIR = Path(__file__).parent.parent / 'assets' / 'temp_dynamic_data'
-    db_path = BASE_DIR / 'temp_data.sqlite3'
+    db_path = DYNAMIC_DB
 
     def __new__(cls, *args, **kwargs):
         if cls._instance is None:
@@ -46,26 +45,32 @@ class DBDynamicConnection:
             raise RuntimeError("DBDynamicConnection was not initialized.")
         return cls._instance
 
+    def create_all_tables(self):
+        sql = DYNAMIC_SCHEMA.read_text(encoding='utf-8')
+        return self.connection.executescript(sql)
+
     def select_table(self, table_name: str):
         return self.connection.execute(f"""
             SELECT * FROM {table_name}
         """).fetchall()
 
     def select_all_universes(self) -> list[Universe]:
-        return self.connection.execute(f"""
-                SELECT * FROM Universes
-        """).fetchall()
+        rows = self.connection.execute("SELECT * FROM Universes").fetchall()
+        return [Universe(*row) for row in rows]
 
     def select_all_characters_from_universe(self, universe_id: int) -> list[Character]:
-        return self.connection.execute(f"""
-                SELECT * FROM Characters c WHERE c.universe_id = {universe_id}
-                                       """).fetchall()
+        rows = self.connection.execute(
+            "SELECT * FROM Characters WHERE universe_id = ?", (universe_id,)
+        ).fetchall()
+        return [Character(*row) for row in rows]
 
-    def select_all_expressions_from_character(self, universe_id: int, character_id: int) -> list[Expression]:
-        return self.connection.execute(f"""
-                    SELECT * FROM Expressions e WHERE e.universe_id = {universe_id} AND e.character_id = {character_id}
-                                       """).fetchall()
+    def select_all_expressions_from_character(self, character_id: int) -> list[Expression]:
+        rows = self.connection.execute(
+            "SELECT * FROM Expressions WHERE character_id = ?",
+            (character_id,)
+        ).fetchall()
+        return [Expression(*row) for row in rows]
 
-    def create_all_tables(self):
-        sql = (self.BASE_DIR / 'schema.sql').read_text(encoding='utf-8')
-        return self.connection.executescript(sql)
+    def stud_insert_universe(self, universe_name: str, preview_image: str, order_position: int):
+        return self.connection.execute("INSERT INTO Universes (universe_name, preview_image, order_position) VALUES (?, ?,?)",
+                                       (universe_name, preview_image, order_position))

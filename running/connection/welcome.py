@@ -1,13 +1,13 @@
 import shutil
-from pathlib import Path
 
 from PySide6.QtWidgets import QApplication, QMessageBox
 
 from static.change_service import Changes
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QFileDialog
+from configs.paths import DYNAMIC_DB
 
-BASE_DIR = Path(__file__).parent.parent.parent
+db_path = DYNAMIC_DB
 
 def connect_welcome(ui: Ui_MainWindow):
     ui.actionSave.triggered.connect(save_file)
@@ -24,7 +24,6 @@ def save_file() -> bool:
         Changes.reset()
         if not path.endswith(".yatg"):
             path += ".yatg"
-        db_path = BASE_DIR / "assets" / "temp_dynamic_data" / "temp_data.sqlite3"
         shutil.copyfile(db_path, path)  # Override file from path with cache
         return True
     return False
@@ -49,7 +48,6 @@ def manage_file(ui: Ui_MainWindow, caption: str, filter_name: str) -> bool:
     )
     if path:  # File got selected
         Changes.reset()
-        db_path = BASE_DIR / "assets" / "temp_dynamic_data" / "temp_data.sqlite3"
         shutil.copyfile(path, db_path) # Override cache file with selected
         ui.tabs.setCurrentIndex(0)
         return True

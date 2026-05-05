@@ -3,11 +3,11 @@ from PySide6.QtWidgets import QComboBox, QLabel
 from static.database_service import DBStaticConnection, DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtGui import QFontDatabase
-from pathlib import Path
 import PySide6.QtGui
+from configs.paths import UNDERTALE_PREVIEW, WHITE_PREVIEW
 
-IMAGE_PATH = Path(__file__).parent.parent / 'assets' / 'previews' / 'undertale_preview.png'
-COLOR_IMAGE_PATH = Path(__file__).parent.parent / 'assets' / 'previews' / 'white_preview.png'
+IMAGE_PATH = UNDERTALE_PREVIEW
+COLOR_IMAGE_PATH = WHITE_PREVIEW
 
 
 
