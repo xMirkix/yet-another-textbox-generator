@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Expressions (
     expression_id INTEGER PRIMARY KEY AUTOINCREMENT,
     expression_name TEXT NOT NULL,
     character_id INTEGER,
-    image TEXT NOT NULL, --base64
+    preview_image TEXT NOT NULL, --base64
     order_position INTEGER CHECK (order_position > 0),
     FOREIGN KEY (character_id) REFERENCES Characters (character_id)
         ON DELETE CASCADE

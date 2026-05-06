@@ -54,8 +54,22 @@ def get_db():
 
 """
 1. hide edit like initial
-2. clear filter
+2. Load universes into grid
+3. clear filter
 """
 def on_tab_change(ui: Ui_MainWindow):
     ui.edit_universe.hide()
+    clear_grid(ui.universe_grid)
+    for u in get_db().select_all_universes():
+        insert_tile(ui.universe_grid, u)
     ui.universe_filter_input.clear()
+
+def clear_grid(widget):
+    layout = widget.layout()
+    if layout is None:
+        return
+    while layout.count():
+        item = layout.takeAt(0)
+        w = item.widget()
+        if w:
+            w.deleteLater()

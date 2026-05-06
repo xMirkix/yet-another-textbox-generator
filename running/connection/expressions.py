@@ -20,7 +20,7 @@ def on_tab_change(ui: Ui_MainWindow):
     universes_list = get_db().select_all_universes()
     universes_list.sort(key=lambda universe: universe.order_position)
     for u in universes_list: # Get universes
-        ui.characters_create_universe_selector.addItem(u.universe_name)
+        ui.expressions_create_universe_selector.addItem(u.universe_name)
 
     ui.expressions_filter_input.clear()
 

@@ -37,11 +37,11 @@ class Expression:
     expression_name: str
     universe_id: int
     character_id: int
-    image: str
+    preview_image: str
     order_position: int
 
     def __post_init__(self):
-        if self.image is None:
+        if self.preview_image is None:
             raise ValueError('Image must be provided')
 
         if self.expression_name is None:
