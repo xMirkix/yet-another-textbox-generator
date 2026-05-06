@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uisTvnMX.ui'
+## Form generated from reading UI file 'uivpnFcb.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1070, 842)
+        MainWindow.resize(1080, 842)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -154,7 +154,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 986, 1413))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, -659, 996, 1413))
         self.verticalLayout_35 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_35.setObjectName(u"verticalLayout_35")
         self.verticalLayout = QVBoxLayout()
@@ -725,6 +725,7 @@ class Ui_MainWindow(object):
         self.input.setSizePolicy(sizePolicy6)
         self.input.setMinimumSize(QSize(500, 75))
         self.input.setMaximumSize(QSize(400, 75))
+        self.input.setStyleSheet(u"border: 2px solid white")
 
         self.horizontalLayout_45.addWidget(self.input)
 
@@ -839,7 +840,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.universe_grid = QWidget()
         self.universe_grid.setObjectName(u"universe_grid")
-        self.universe_grid.setGeometry(QRect(0, 0, 974, 430))
+        self.universe_grid.setGeometry(QRect(0, 0, 984, 430))
         self.gridLayout_2 = QGridLayout(self.universe_grid)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout_2.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
@@ -1372,7 +1373,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.characters_grid = QWidget()
         self.characters_grid.setObjectName(u"characters_grid")
-        self.characters_grid.setGeometry(QRect(0, 0, 972, 319))
+        self.characters_grid.setGeometry(QRect(0, 0, 982, 319))
         self.gridLayout = QGridLayout(self.characters_grid)
         self.gridLayout.setObjectName(u"gridLayout")
         self.scrollArea_2.setWidget(self.characters_grid)
@@ -1656,7 +1657,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.expressions_grid = QWidget()
         self.expressions_grid.setObjectName(u"expressions_grid")
-        self.expressions_grid.setGeometry(QRect(0, 0, 974, 362))
+        self.expressions_grid.setGeometry(QRect(0, 0, 984, 362))
         self.gridLayout_5 = QGridLayout(self.expressions_grid)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.scrollArea_3.setWidget(self.expressions_grid)
@@ -1676,7 +1677,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1070, 23))
+        self.menubar.setGeometry(QRect(0, 0, 1080, 23))
         self.menuFile = QMenu(self.menubar)
         self.menuFile.setObjectName(u"menuFile")
         MainWindow.setMenuBar(self.menubar)
