@@ -15,3 +15,9 @@ DYNAMIC_SCHEMA     = TEMP_DATA_DIR / 'schema.sql'
 
 UNDERTALE_PREVIEW  = PREVIEWS_DIR / 'undertale_preview.png'
 WHITE_PREVIEW      = PREVIEWS_DIR / 'white_preview.png'
+
+ICONS_DIR    = ROOT / 'ui' / 'icons'
+ICON_LEFT    = ICONS_DIR / 'arrow-left.png'
+ICON_RIGHT   = ICONS_DIR / 'primary-line-line-arrow-end.png'
+ICON_EDIT    = ICONS_DIR / 'mono-editor.png'
+ICON_DELETE  = ICONS_DIR / 'trash_correct_resolution.png'

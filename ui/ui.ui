@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1066</width>
-    <height>797</height>
+    <width>1070</width>
+    <height>842</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -252,8 +252,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>984</width>
-             <height>1400</height>
+             <width>986</width>
+             <height>1413</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_35">
@@ -1410,968 +1410,14 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>960</width>
-                  <height>630</height>
+                  <width>974</width>
+                  <height>430</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_2">
                  <property name="sizeConstraint">
                   <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
                  </property>
-                 <item row="0" column="2">
-                  <widget class="QGroupBox" name="groupBox_10">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="title">
-                    <string>Test3</string>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_9">
-                    <item>
-                     <widget class="QLabel" name="label_45">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>100</width>
-                        <height>100</height>
-                       </size>
-                      </property>
-                      <property name="autoFillBackground">
-                       <bool>true</bool>
-                      </property>
-                      <property name="text">
-                       <string>Nothing...</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_30">
-                      <item>
-                       <widget class="QPushButton" name="pushButton_18">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_16">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_17">
-                        <property name="text">
-                         <string>Edit</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_19">
-                        <property name="text">
-                         <string>Delete</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <widget class="QGroupBox" name="groupBox_9">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="title">
-                    <string>Test2</string>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_23">
-                    <item>
-                     <widget class="QLabel" name="label_44">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>100</width>
-                        <height>100</height>
-                       </size>
-                      </property>
-                      <property name="autoFillBackground">
-                       <bool>true</bool>
-                      </property>
-                      <property name="text">
-                       <string>Nothing...</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_29">
-                      <item>
-                       <widget class="QPushButton" name="pushButton_12">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_13">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_14">
-                        <property name="text">
-                         <string>Edit</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_15">
-                        <property name="text">
-                         <string>Delete</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="2" column="0">
-                  <widget class="QGroupBox" name="groupBox_14">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="title">
-                    <string>Test7</string>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_28">
-                    <item>
-                     <widget class="QLabel" name="label_49">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>100</width>
-                        <height>100</height>
-                       </size>
-                      </property>
-                      <property name="autoFillBackground">
-                       <bool>true</bool>
-                      </property>
-                      <property name="text">
-                       <string>Nothing...</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_40">
-                      <item>
-                       <widget class="QPushButton" name="pushButton_33">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_35">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_32">
-                        <property name="text">
-                         <string>Edit</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_34">
-                        <property name="text">
-                         <string>Delete</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="2" column="1">
-                  <widget class="QGroupBox" name="groupBox_15">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="title">
-                    <string>Test8</string>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_29">
-                    <item>
-                     <widget class="QLabel" name="label_50">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>100</width>
-                        <height>100</height>
-                       </size>
-                      </property>
-                      <property name="autoFillBackground">
-                       <bool>true</bool>
-                      </property>
-                      <property name="text">
-                       <string>Nothing...</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_41">
-                      <item>
-                       <widget class="QPushButton" name="pushButton_37">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_39">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_36">
-                        <property name="text">
-                         <string>Edit</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_38">
-                        <property name="text">
-                         <string>Delete</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="1" column="0">
-                  <widget class="QGroupBox" name="groupBox_11">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="title">
-                    <string>Test4</string>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_25">
-                    <item>
-                     <widget class="QLabel" name="label_46">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>100</width>
-                        <height>100</height>
-                       </size>
-                      </property>
-                      <property name="autoFillBackground">
-                       <bool>true</bool>
-                      </property>
-                      <property name="text">
-                       <string>Nothing...</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_31">
-                      <item>
-                       <widget class="QPushButton" name="pushButton_22">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_20">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_21">
-                        <property name="text">
-                         <string>Edit</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_23">
-                        <property name="text">
-                         <string>Delete</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="1" column="2">
-                  <widget class="QGroupBox" name="groupBox_13">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="title">
-                    <string>Test6</string>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_27">
-                    <item>
-                     <widget class="QLabel" name="label_48">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>100</width>
-                        <height>100</height>
-                       </size>
-                      </property>
-                      <property name="autoFillBackground">
-                       <bool>true</bool>
-                      </property>
-                      <property name="text">
-                       <string>Nothing...</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_39">
-                      <item>
-                       <widget class="QPushButton" name="pushButton_30">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_28">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_29">
-                        <property name="text">
-                         <string>Edit</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_31">
-                        <property name="text">
-                         <string>Delete</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="0" column="0">
-                  <widget class="QGroupBox" name="universe_test1">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="title">
-                    <string>Test1</string>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_24">
-                    <item>
-                     <widget class="QLabel" name="universe_test1_preview_image">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>100</width>
-                        <height>100</height>
-                       </size>
-                      </property>
-                      <property name="autoFillBackground">
-                       <bool>true</bool>
-                      </property>
-                      <property name="text">
-                       <string>Nothing...</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_27">
-                      <item>
-                       <widget class="QPushButton" name="universe_test1_left">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="universe_test1_right">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="universe_test1_edit">
-                        <property name="text">
-                         <string>Edit</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="universe_test1_delete">
-                        <property name="text">
-                         <string>Delete</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="2" column="2">
-                  <widget class="QGroupBox" name="groupBox_16">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="title">
-                    <string>Test9</string>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_30">
-                    <item>
-                     <widget class="QLabel" name="label_51">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>100</width>
-                        <height>100</height>
-                       </size>
-                      </property>
-                      <property name="autoFillBackground">
-                       <bool>true</bool>
-                      </property>
-                      <property name="text">
-                       <string>Nothing...</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_42">
-                      <item>
-                       <widget class="QPushButton" name="pushButton_41">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_43">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_40">
-                        <property name="text">
-                         <string>Edit</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_42">
-                        <property name="text">
-                         <string>Delete</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
-                 <item row="1" column="1">
-                  <widget class="QGroupBox" name="groupBox_12">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="minimumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="maximumSize">
-                    <size>
-                     <width>250</width>
-                     <height>200</height>
-                    </size>
-                   </property>
-                   <property name="title">
-                    <string>Test5</string>
-                   </property>
-                   <layout class="QVBoxLayout" name="verticalLayout_26">
-                    <item>
-                     <widget class="QLabel" name="label_47">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>0</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>100</width>
-                        <height>100</height>
-                       </size>
-                      </property>
-                      <property name="autoFillBackground">
-                       <bool>true</bool>
-                      </property>
-                      <property name="text">
-                       <string>Nothing...</string>
-                      </property>
-                      <property name="alignment">
-                       <set>Qt::AlignmentFlag::AlignCenter</set>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <layout class="QHBoxLayout" name="horizontalLayout_38">
-                      <item>
-                       <widget class="QPushButton" name="pushButton_26">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_24">
-                        <property name="text">
-                         <string/>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_25">
-                        <property name="text">
-                         <string>Edit</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QPushButton" name="pushButton_27">
-                        <property name="text">
-                         <string>Delete</string>
-                        </property>
-                        <property name="icon">
-                         <iconset>
-                          <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                        </property>
-                       </widget>
-                      </item>
-                     </layout>
-                    </item>
-                   </layout>
-                  </widget>
-                 </item>
                 </layout>
                </widget>
               </widget>
@@ -2393,7 +1439,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>354</width>
+              <width>500</width>
               <height>226</height>
              </size>
             </property>
@@ -2456,6 +1502,13 @@
                   <widget class="QPushButton" name="universe_create_image_button">
                    <property name="text">
                     <string>Select image</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="universe_create_image_remove_button">
+                   <property name="text">
+                    <string>Remove</string>
                    </property>
                   </widget>
                  </item>
@@ -2525,7 +1578,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>354</width>
+              <width>500</width>
               <height>226</height>
              </size>
             </property>
@@ -2608,6 +1661,13 @@
                 </widget>
                </item>
                <item>
+                <widget class="QPushButton" name="universe_edit_image_remove_button">
+                 <property name="text">
+                  <string>Remove</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <widget class="QLabel" name="universe_edit_image_preview">
                  <property name="sizePolicy">
                   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -2684,7 +1744,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>354</width>
+                <width>500</width>
                 <height>335</height>
                </size>
               </property>
@@ -2814,6 +1874,13 @@
                     </widget>
                    </item>
                    <item>
+                    <widget class="QPushButton" name="characters_create_image_remove_button">
+                     <property name="text">
+                      <string>Remove</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
                     <widget class="QLabel" name="characters_create_image_preview">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -2875,7 +1942,7 @@
               </property>
               <property name="minimumSize">
                <size>
-                <width>354</width>
+                <width>500</width>
                 <height>335</height>
                </size>
               </property>
@@ -3002,6 +2069,13 @@
                     </widget>
                    </item>
                    <item>
+                    <widget class="QPushButton" name="characters_edit_image_remove_button">
+                     <property name="text">
+                      <string>Remove</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
                     <widget class="QLabel" name="characters_edit_image_preview">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -3101,324 +2175,11 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>970</width>
-                    <height>269</height>
+                    <width>972</width>
+                    <height>319</height>
                    </rect>
                   </property>
-                  <layout class="QGridLayout" name="gridLayout">
-                   <item row="0" column="0">
-                    <widget class="QGroupBox" name="characters_test1">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>250</width>
-                       <height>200</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>250</width>
-                       <height>200</height>
-                      </size>
-                     </property>
-                     <property name="title">
-                      <string>Test1</string>
-                     </property>
-                     <layout class="QVBoxLayout" name="verticalLayout_31">
-                      <item>
-                       <widget class="QLabel" name="characters_test1_preview_image">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                         <size>
-                          <width>0</width>
-                          <height>0</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>100</width>
-                          <height>100</height>
-                         </size>
-                        </property>
-                        <property name="autoFillBackground">
-                         <bool>true</bool>
-                        </property>
-                        <property name="text">
-                         <string>Nothing...</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignmentFlag::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_43">
-                        <item>
-                         <widget class="QPushButton" name="characters_test1_left">
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="characters_test1_right">
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="characters_test1_edit">
-                          <property name="text">
-                           <string>Edit</string>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="characters_test1_delete">
-                          <property name="text">
-                           <string>Delete</string>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </widget>
-                   </item>
-                   <item row="0" column="1">
-                    <widget class="QGroupBox" name="groupBox_18">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>250</width>
-                       <height>200</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>250</width>
-                       <height>200</height>
-                      </size>
-                     </property>
-                     <property name="title">
-                      <string>Test2</string>
-                     </property>
-                     <layout class="QVBoxLayout" name="verticalLayout_32">
-                      <item>
-                       <widget class="QLabel" name="label_53">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                         <size>
-                          <width>0</width>
-                          <height>0</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>100</width>
-                          <height>100</height>
-                         </size>
-                        </property>
-                        <property name="autoFillBackground">
-                         <bool>true</bool>
-                        </property>
-                        <property name="text">
-                         <string>Nothing...</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignmentFlag::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_44">
-                        <item>
-                         <widget class="QPushButton" name="pushButton_48">
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="pushButton_49">
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="pushButton_50">
-                          <property name="text">
-                           <string>Edit</string>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="pushButton_51">
-                          <property name="text">
-                           <string>Delete</string>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </widget>
-                   </item>
-                   <item row="0" column="2">
-                    <widget class="QGroupBox" name="groupBox_23">
-                     <property name="minimumSize">
-                      <size>
-                       <width>250</width>
-                       <height>200</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>250</width>
-                       <height>200</height>
-                      </size>
-                     </property>
-                     <property name="title">
-                      <string>Test3</string>
-                     </property>
-                     <layout class="QVBoxLayout" name="verticalLayout_38">
-                      <item>
-                       <widget class="QLabel" name="label_54">
-                        <property name="sizePolicy">
-                         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                          <horstretch>0</horstretch>
-                          <verstretch>0</verstretch>
-                         </sizepolicy>
-                        </property>
-                        <property name="minimumSize">
-                         <size>
-                          <width>0</width>
-                          <height>0</height>
-                         </size>
-                        </property>
-                        <property name="maximumSize">
-                         <size>
-                          <width>100</width>
-                          <height>100</height>
-                         </size>
-                        </property>
-                        <property name="autoFillBackground">
-                         <bool>true</bool>
-                        </property>
-                        <property name="text">
-                         <string>Nothing...</string>
-                        </property>
-                        <property name="alignment">
-                         <set>Qt::AlignmentFlag::AlignCenter</set>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <layout class="QHBoxLayout" name="horizontalLayout_60">
-                        <item>
-                         <widget class="QPushButton" name="pushButton_60">
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/arrow-left.png</normaloff>icons/arrow-left.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="pushButton_61">
-                          <property name="text">
-                           <string/>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/primary-line-line-arrow-end.png</normaloff>icons/primary-line-line-arrow-end.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="pushButton_62">
-                          <property name="text">
-                           <string>Edit</string>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/mono-editor.png</normaloff>icons/mono-editor.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                        <item>
-                         <widget class="QPushButton" name="pushButton_63">
-                          <property name="text">
-                           <string>Delete</string>
-                          </property>
-                          <property name="icon">
-                           <iconset>
-                            <normaloff>icons/trash_correct_resolution.png</normaloff>icons/trash_correct_resolution.png</iconset>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </item>
-                     </layout>
-                    </widget>
-                   </item>
-                  </layout>
+                  <layout class="QGridLayout" name="gridLayout"/>
                  </widget>
                 </widget>
                </item>
@@ -3448,7 +2209,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>354</width>
+              <width>500</width>
               <height>294</height>
              </size>
             </property>
@@ -3604,7 +2365,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>354</width>
+              <width>500</width>
               <height>294</height>
              </size>
             </property>
@@ -3798,8 +2559,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>972</width>
-                  <height>312</height>
+                  <width>974</width>
+                  <height>362</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_5"/>
@@ -3822,8 +2583,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1066</width>
-     <height>33</height>
+     <width>1070</width>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

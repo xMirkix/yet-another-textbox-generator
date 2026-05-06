@@ -22,6 +22,7 @@ class InitPopulationService:
         self.populate_sprite_settings(ui)  # Color
         self.populate_font_settings(ui)  # Determination Mono/Comic Sans/..., Asterisk Colors, Uppercase/Lowercase/...
         self.hide_edits(ui)  # Hide edit blocks
+        self.hide_removes(ui)
         self.create_temporary_data_tables()
 
     def populate_border_settings(self, ui: Ui_MainWindow):
@@ -63,6 +64,12 @@ class InitPopulationService:
         ui.edit_universe.hide()
         ui.edit_character.hide()
         ui.edit_expression.hide()
+
+    def hide_removes(self, ui: Ui_MainWindow):
+        ui.universe_create_image_remove_button.hide()
+        ui.universe_edit_image_remove_button.hide()
+        ui.characters_create_image_remove_button.hide()
+        ui.characters_edit_image_remove_button.hide()
 
     def create_temporary_data_tables(self):
         self.dynamic_connection.create_all_tables()

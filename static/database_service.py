@@ -2,6 +2,7 @@ import sqlite3
 from configs.paths import DYNAMIC_DB, DYNAMIC_SCHEMA, STATIC_DB
 
 from models.entities import Character, Universe, Expression
+from static.change_service import Changes
 
 
 class DBStaticConnection:
@@ -45,6 +46,12 @@ class DBDynamicConnection:
             raise RuntimeError("DBDynamicConnection was not initialized.")
         return cls._instance
 
+    def reconnect(self):
+        self.connection.close()
+        self.connection = sqlite3.connect(self.db_path)
+        self.connection.execute("PRAGMA foreign_keys = ON")
+        self.cursor = self.connection.cursor()
+
     def create_all_tables(self):
         sql = DYNAMIC_SCHEMA.read_text(encoding='utf-8')
         return self.connection.executescript(sql)
@@ -57,6 +64,9 @@ class DBDynamicConnection:
     def select_all_universes(self) -> list[Universe]:
         rows = self.connection.execute("SELECT * FROM Universes").fetchall()
         return [Universe(*row) for row in rows]
+
+    def count_universes(self) -> int:
+        return self.connection.execute("SELECT COUNT(*) FROM Universes").fetchone()[0]
 
     def select_all_characters_from_universe(self, universe_id: int) -> list[Character]:
         rows = self.connection.execute(
@@ -71,6 +81,10 @@ class DBDynamicConnection:
         ).fetchall()
         return [Expression(*row) for row in rows]
 
-    def stud_insert_universe(self, universe_name: str, preview_image: str, order_position: int):
-        return self.connection.execute("INSERT INTO Universes (universe_name, preview_image, order_position) VALUES (?, ?,?)",
-                                       (universe_name, preview_image, order_position))
+    def insert_universe(self, universe: Universe):
+        self.connection.execute(
+            "INSERT INTO Universes (universe_name, preview_image, order_position) VALUES (?, ?, ?)",
+            (universe.universe_name, universe.preview_image, universe.order_position)
+        )
+        self.connection.commit()  # <-- das hier
+        Changes.change()

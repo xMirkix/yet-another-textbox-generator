@@ -3,6 +3,7 @@ import shutil
 from PySide6.QtWidgets import QApplication, QMessageBox
 
 from static.change_service import Changes
+from static.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QFileDialog
 from configs.paths import DYNAMIC_DB
@@ -49,6 +50,7 @@ def manage_file(ui: Ui_MainWindow, caption: str, filter_name: str) -> bool:
     if path:  # File got selected
         Changes.reset()
         shutil.copyfile(path, db_path) # Override cache file with selected
+        DBDynamicConnection.get_instance().reconnect()
         ui.tabs.setCurrentIndex(0)
         return True
     return False

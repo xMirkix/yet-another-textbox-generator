@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiEfelmQ.ui'
+## Form generated from reading UI file 'uisTvnMX.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -27,7 +27,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1066, 797)
+        MainWindow.resize(1070, 842)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -154,7 +154,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 984, 1400))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 986, 1413))
         self.verticalLayout_35 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_35.setObjectName(u"verticalLayout_35")
         self.verticalLayout = QVBoxLayout()
@@ -839,477 +839,10 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.universe_grid = QWidget()
         self.universe_grid.setObjectName(u"universe_grid")
-        self.universe_grid.setGeometry(QRect(0, 0, 960, 630))
+        self.universe_grid.setGeometry(QRect(0, 0, 974, 430))
         self.gridLayout_2 = QGridLayout(self.universe_grid)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout_2.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
-        self.groupBox_10 = QGroupBox(self.universe_grid)
-        self.groupBox_10.setObjectName(u"groupBox_10")
-        sizePolicy5.setHeightForWidth(self.groupBox_10.sizePolicy().hasHeightForWidth())
-        self.groupBox_10.setSizePolicy(sizePolicy5)
-        self.groupBox_10.setMinimumSize(QSize(250, 200))
-        self.groupBox_10.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_9 = QVBoxLayout(self.groupBox_10)
-        self.verticalLayout_9.setObjectName(u"verticalLayout_9")
-        self.label_45 = QLabel(self.groupBox_10)
-        self.label_45.setObjectName(u"label_45")
-        sizePolicy5.setHeightForWidth(self.label_45.sizePolicy().hasHeightForWidth())
-        self.label_45.setSizePolicy(sizePolicy5)
-        self.label_45.setMinimumSize(QSize(0, 0))
-        self.label_45.setMaximumSize(QSize(100, 100))
-        self.label_45.setAutoFillBackground(True)
-        self.label_45.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_9.addWidget(self.label_45)
-
-        self.horizontalLayout_30 = QHBoxLayout()
-        self.horizontalLayout_30.setObjectName(u"horizontalLayout_30")
-        self.pushButton_18 = QPushButton(self.groupBox_10)
-        self.pushButton_18.setObjectName(u"pushButton_18")
-        icon1 = QIcon()
-        icon1.addFile(u"icons/arrow-left.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_18.setIcon(icon1)
-
-        self.horizontalLayout_30.addWidget(self.pushButton_18)
-
-        self.pushButton_16 = QPushButton(self.groupBox_10)
-        self.pushButton_16.setObjectName(u"pushButton_16")
-        icon2 = QIcon()
-        icon2.addFile(u"icons/primary-line-line-arrow-end.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_16.setIcon(icon2)
-
-        self.horizontalLayout_30.addWidget(self.pushButton_16)
-
-        self.pushButton_17 = QPushButton(self.groupBox_10)
-        self.pushButton_17.setObjectName(u"pushButton_17")
-        icon3 = QIcon()
-        icon3.addFile(u"icons/mono-editor.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_17.setIcon(icon3)
-
-        self.horizontalLayout_30.addWidget(self.pushButton_17)
-
-        self.pushButton_19 = QPushButton(self.groupBox_10)
-        self.pushButton_19.setObjectName(u"pushButton_19")
-        icon4 = QIcon()
-        icon4.addFile(u"icons/trash_correct_resolution.png", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.pushButton_19.setIcon(icon4)
-
-        self.horizontalLayout_30.addWidget(self.pushButton_19)
-
-
-        self.verticalLayout_9.addLayout(self.horizontalLayout_30)
-
-
-        self.gridLayout_2.addWidget(self.groupBox_10, 0, 2, 1, 1)
-
-        self.groupBox_9 = QGroupBox(self.universe_grid)
-        self.groupBox_9.setObjectName(u"groupBox_9")
-        sizePolicy5.setHeightForWidth(self.groupBox_9.sizePolicy().hasHeightForWidth())
-        self.groupBox_9.setSizePolicy(sizePolicy5)
-        self.groupBox_9.setMinimumSize(QSize(250, 200))
-        self.groupBox_9.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_23 = QVBoxLayout(self.groupBox_9)
-        self.verticalLayout_23.setObjectName(u"verticalLayout_23")
-        self.label_44 = QLabel(self.groupBox_9)
-        self.label_44.setObjectName(u"label_44")
-        sizePolicy5.setHeightForWidth(self.label_44.sizePolicy().hasHeightForWidth())
-        self.label_44.setSizePolicy(sizePolicy5)
-        self.label_44.setMinimumSize(QSize(0, 0))
-        self.label_44.setMaximumSize(QSize(100, 100))
-        self.label_44.setAutoFillBackground(True)
-        self.label_44.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_23.addWidget(self.label_44)
-
-        self.horizontalLayout_29 = QHBoxLayout()
-        self.horizontalLayout_29.setObjectName(u"horizontalLayout_29")
-        self.pushButton_12 = QPushButton(self.groupBox_9)
-        self.pushButton_12.setObjectName(u"pushButton_12")
-        self.pushButton_12.setIcon(icon1)
-
-        self.horizontalLayout_29.addWidget(self.pushButton_12)
-
-        self.pushButton_13 = QPushButton(self.groupBox_9)
-        self.pushButton_13.setObjectName(u"pushButton_13")
-        self.pushButton_13.setIcon(icon2)
-
-        self.horizontalLayout_29.addWidget(self.pushButton_13)
-
-        self.pushButton_14 = QPushButton(self.groupBox_9)
-        self.pushButton_14.setObjectName(u"pushButton_14")
-        self.pushButton_14.setIcon(icon3)
-
-        self.horizontalLayout_29.addWidget(self.pushButton_14)
-
-        self.pushButton_15 = QPushButton(self.groupBox_9)
-        self.pushButton_15.setObjectName(u"pushButton_15")
-        self.pushButton_15.setIcon(icon4)
-
-        self.horizontalLayout_29.addWidget(self.pushButton_15)
-
-
-        self.verticalLayout_23.addLayout(self.horizontalLayout_29)
-
-
-        self.gridLayout_2.addWidget(self.groupBox_9, 0, 1, 1, 1)
-
-        self.groupBox_14 = QGroupBox(self.universe_grid)
-        self.groupBox_14.setObjectName(u"groupBox_14")
-        sizePolicy5.setHeightForWidth(self.groupBox_14.sizePolicy().hasHeightForWidth())
-        self.groupBox_14.setSizePolicy(sizePolicy5)
-        self.groupBox_14.setMinimumSize(QSize(250, 200))
-        self.groupBox_14.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_28 = QVBoxLayout(self.groupBox_14)
-        self.verticalLayout_28.setObjectName(u"verticalLayout_28")
-        self.label_49 = QLabel(self.groupBox_14)
-        self.label_49.setObjectName(u"label_49")
-        sizePolicy5.setHeightForWidth(self.label_49.sizePolicy().hasHeightForWidth())
-        self.label_49.setSizePolicy(sizePolicy5)
-        self.label_49.setMinimumSize(QSize(0, 0))
-        self.label_49.setMaximumSize(QSize(100, 100))
-        self.label_49.setAutoFillBackground(True)
-        self.label_49.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_28.addWidget(self.label_49)
-
-        self.horizontalLayout_40 = QHBoxLayout()
-        self.horizontalLayout_40.setObjectName(u"horizontalLayout_40")
-        self.pushButton_33 = QPushButton(self.groupBox_14)
-        self.pushButton_33.setObjectName(u"pushButton_33")
-        self.pushButton_33.setIcon(icon1)
-
-        self.horizontalLayout_40.addWidget(self.pushButton_33)
-
-        self.pushButton_35 = QPushButton(self.groupBox_14)
-        self.pushButton_35.setObjectName(u"pushButton_35")
-        self.pushButton_35.setIcon(icon2)
-
-        self.horizontalLayout_40.addWidget(self.pushButton_35)
-
-        self.pushButton_32 = QPushButton(self.groupBox_14)
-        self.pushButton_32.setObjectName(u"pushButton_32")
-        self.pushButton_32.setIcon(icon3)
-
-        self.horizontalLayout_40.addWidget(self.pushButton_32)
-
-        self.pushButton_34 = QPushButton(self.groupBox_14)
-        self.pushButton_34.setObjectName(u"pushButton_34")
-        self.pushButton_34.setIcon(icon4)
-
-        self.horizontalLayout_40.addWidget(self.pushButton_34)
-
-
-        self.verticalLayout_28.addLayout(self.horizontalLayout_40)
-
-
-        self.gridLayout_2.addWidget(self.groupBox_14, 2, 0, 1, 1)
-
-        self.groupBox_15 = QGroupBox(self.universe_grid)
-        self.groupBox_15.setObjectName(u"groupBox_15")
-        sizePolicy5.setHeightForWidth(self.groupBox_15.sizePolicy().hasHeightForWidth())
-        self.groupBox_15.setSizePolicy(sizePolicy5)
-        self.groupBox_15.setMinimumSize(QSize(250, 200))
-        self.groupBox_15.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_29 = QVBoxLayout(self.groupBox_15)
-        self.verticalLayout_29.setObjectName(u"verticalLayout_29")
-        self.label_50 = QLabel(self.groupBox_15)
-        self.label_50.setObjectName(u"label_50")
-        sizePolicy5.setHeightForWidth(self.label_50.sizePolicy().hasHeightForWidth())
-        self.label_50.setSizePolicy(sizePolicy5)
-        self.label_50.setMinimumSize(QSize(0, 0))
-        self.label_50.setMaximumSize(QSize(100, 100))
-        self.label_50.setAutoFillBackground(True)
-        self.label_50.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_29.addWidget(self.label_50)
-
-        self.horizontalLayout_41 = QHBoxLayout()
-        self.horizontalLayout_41.setObjectName(u"horizontalLayout_41")
-        self.pushButton_37 = QPushButton(self.groupBox_15)
-        self.pushButton_37.setObjectName(u"pushButton_37")
-        self.pushButton_37.setIcon(icon1)
-
-        self.horizontalLayout_41.addWidget(self.pushButton_37)
-
-        self.pushButton_39 = QPushButton(self.groupBox_15)
-        self.pushButton_39.setObjectName(u"pushButton_39")
-        self.pushButton_39.setIcon(icon2)
-
-        self.horizontalLayout_41.addWidget(self.pushButton_39)
-
-        self.pushButton_36 = QPushButton(self.groupBox_15)
-        self.pushButton_36.setObjectName(u"pushButton_36")
-        self.pushButton_36.setIcon(icon3)
-
-        self.horizontalLayout_41.addWidget(self.pushButton_36)
-
-        self.pushButton_38 = QPushButton(self.groupBox_15)
-        self.pushButton_38.setObjectName(u"pushButton_38")
-        self.pushButton_38.setIcon(icon4)
-
-        self.horizontalLayout_41.addWidget(self.pushButton_38)
-
-
-        self.verticalLayout_29.addLayout(self.horizontalLayout_41)
-
-
-        self.gridLayout_2.addWidget(self.groupBox_15, 2, 1, 1, 1)
-
-        self.groupBox_11 = QGroupBox(self.universe_grid)
-        self.groupBox_11.setObjectName(u"groupBox_11")
-        sizePolicy5.setHeightForWidth(self.groupBox_11.sizePolicy().hasHeightForWidth())
-        self.groupBox_11.setSizePolicy(sizePolicy5)
-        self.groupBox_11.setMinimumSize(QSize(250, 200))
-        self.groupBox_11.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_25 = QVBoxLayout(self.groupBox_11)
-        self.verticalLayout_25.setObjectName(u"verticalLayout_25")
-        self.label_46 = QLabel(self.groupBox_11)
-        self.label_46.setObjectName(u"label_46")
-        sizePolicy5.setHeightForWidth(self.label_46.sizePolicy().hasHeightForWidth())
-        self.label_46.setSizePolicy(sizePolicy5)
-        self.label_46.setMinimumSize(QSize(0, 0))
-        self.label_46.setMaximumSize(QSize(100, 100))
-        self.label_46.setAutoFillBackground(True)
-        self.label_46.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_25.addWidget(self.label_46)
-
-        self.horizontalLayout_31 = QHBoxLayout()
-        self.horizontalLayout_31.setObjectName(u"horizontalLayout_31")
-        self.pushButton_22 = QPushButton(self.groupBox_11)
-        self.pushButton_22.setObjectName(u"pushButton_22")
-        self.pushButton_22.setIcon(icon1)
-
-        self.horizontalLayout_31.addWidget(self.pushButton_22)
-
-        self.pushButton_20 = QPushButton(self.groupBox_11)
-        self.pushButton_20.setObjectName(u"pushButton_20")
-        self.pushButton_20.setIcon(icon2)
-
-        self.horizontalLayout_31.addWidget(self.pushButton_20)
-
-        self.pushButton_21 = QPushButton(self.groupBox_11)
-        self.pushButton_21.setObjectName(u"pushButton_21")
-        self.pushButton_21.setIcon(icon3)
-
-        self.horizontalLayout_31.addWidget(self.pushButton_21)
-
-        self.pushButton_23 = QPushButton(self.groupBox_11)
-        self.pushButton_23.setObjectName(u"pushButton_23")
-        self.pushButton_23.setIcon(icon4)
-
-        self.horizontalLayout_31.addWidget(self.pushButton_23)
-
-
-        self.verticalLayout_25.addLayout(self.horizontalLayout_31)
-
-
-        self.gridLayout_2.addWidget(self.groupBox_11, 1, 0, 1, 1)
-
-        self.groupBox_13 = QGroupBox(self.universe_grid)
-        self.groupBox_13.setObjectName(u"groupBox_13")
-        sizePolicy5.setHeightForWidth(self.groupBox_13.sizePolicy().hasHeightForWidth())
-        self.groupBox_13.setSizePolicy(sizePolicy5)
-        self.groupBox_13.setMinimumSize(QSize(250, 200))
-        self.groupBox_13.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_27 = QVBoxLayout(self.groupBox_13)
-        self.verticalLayout_27.setObjectName(u"verticalLayout_27")
-        self.label_48 = QLabel(self.groupBox_13)
-        self.label_48.setObjectName(u"label_48")
-        sizePolicy5.setHeightForWidth(self.label_48.sizePolicy().hasHeightForWidth())
-        self.label_48.setSizePolicy(sizePolicy5)
-        self.label_48.setMinimumSize(QSize(0, 0))
-        self.label_48.setMaximumSize(QSize(100, 100))
-        self.label_48.setAutoFillBackground(True)
-        self.label_48.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_27.addWidget(self.label_48)
-
-        self.horizontalLayout_39 = QHBoxLayout()
-        self.horizontalLayout_39.setObjectName(u"horizontalLayout_39")
-        self.pushButton_30 = QPushButton(self.groupBox_13)
-        self.pushButton_30.setObjectName(u"pushButton_30")
-        self.pushButton_30.setIcon(icon1)
-
-        self.horizontalLayout_39.addWidget(self.pushButton_30)
-
-        self.pushButton_28 = QPushButton(self.groupBox_13)
-        self.pushButton_28.setObjectName(u"pushButton_28")
-        self.pushButton_28.setIcon(icon2)
-
-        self.horizontalLayout_39.addWidget(self.pushButton_28)
-
-        self.pushButton_29 = QPushButton(self.groupBox_13)
-        self.pushButton_29.setObjectName(u"pushButton_29")
-        self.pushButton_29.setIcon(icon3)
-
-        self.horizontalLayout_39.addWidget(self.pushButton_29)
-
-        self.pushButton_31 = QPushButton(self.groupBox_13)
-        self.pushButton_31.setObjectName(u"pushButton_31")
-        self.pushButton_31.setIcon(icon4)
-
-        self.horizontalLayout_39.addWidget(self.pushButton_31)
-
-
-        self.verticalLayout_27.addLayout(self.horizontalLayout_39)
-
-
-        self.gridLayout_2.addWidget(self.groupBox_13, 1, 2, 1, 1)
-
-        self.universe_test1 = QGroupBox(self.universe_grid)
-        self.universe_test1.setObjectName(u"universe_test1")
-        sizePolicy5.setHeightForWidth(self.universe_test1.sizePolicy().hasHeightForWidth())
-        self.universe_test1.setSizePolicy(sizePolicy5)
-        self.universe_test1.setMinimumSize(QSize(250, 200))
-        self.universe_test1.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_24 = QVBoxLayout(self.universe_test1)
-        self.verticalLayout_24.setObjectName(u"verticalLayout_24")
-        self.universe_test1_preview_image = QLabel(self.universe_test1)
-        self.universe_test1_preview_image.setObjectName(u"universe_test1_preview_image")
-        sizePolicy5.setHeightForWidth(self.universe_test1_preview_image.sizePolicy().hasHeightForWidth())
-        self.universe_test1_preview_image.setSizePolicy(sizePolicy5)
-        self.universe_test1_preview_image.setMinimumSize(QSize(0, 0))
-        self.universe_test1_preview_image.setMaximumSize(QSize(100, 100))
-        self.universe_test1_preview_image.setAutoFillBackground(True)
-        self.universe_test1_preview_image.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_24.addWidget(self.universe_test1_preview_image)
-
-        self.horizontalLayout_27 = QHBoxLayout()
-        self.horizontalLayout_27.setObjectName(u"horizontalLayout_27")
-        self.universe_test1_left = QPushButton(self.universe_test1)
-        self.universe_test1_left.setObjectName(u"universe_test1_left")
-        self.universe_test1_left.setIcon(icon1)
-
-        self.horizontalLayout_27.addWidget(self.universe_test1_left)
-
-        self.universe_test1_right = QPushButton(self.universe_test1)
-        self.universe_test1_right.setObjectName(u"universe_test1_right")
-        self.universe_test1_right.setIcon(icon2)
-
-        self.horizontalLayout_27.addWidget(self.universe_test1_right)
-
-        self.universe_test1_edit = QPushButton(self.universe_test1)
-        self.universe_test1_edit.setObjectName(u"universe_test1_edit")
-        self.universe_test1_edit.setIcon(icon3)
-
-        self.horizontalLayout_27.addWidget(self.universe_test1_edit)
-
-        self.universe_test1_delete = QPushButton(self.universe_test1)
-        self.universe_test1_delete.setObjectName(u"universe_test1_delete")
-        self.universe_test1_delete.setIcon(icon4)
-
-        self.horizontalLayout_27.addWidget(self.universe_test1_delete)
-
-
-        self.verticalLayout_24.addLayout(self.horizontalLayout_27)
-
-
-        self.gridLayout_2.addWidget(self.universe_test1, 0, 0, 1, 1)
-
-        self.groupBox_16 = QGroupBox(self.universe_grid)
-        self.groupBox_16.setObjectName(u"groupBox_16")
-        sizePolicy5.setHeightForWidth(self.groupBox_16.sizePolicy().hasHeightForWidth())
-        self.groupBox_16.setSizePolicy(sizePolicy5)
-        self.groupBox_16.setMinimumSize(QSize(250, 200))
-        self.groupBox_16.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_30 = QVBoxLayout(self.groupBox_16)
-        self.verticalLayout_30.setObjectName(u"verticalLayout_30")
-        self.label_51 = QLabel(self.groupBox_16)
-        self.label_51.setObjectName(u"label_51")
-        sizePolicy5.setHeightForWidth(self.label_51.sizePolicy().hasHeightForWidth())
-        self.label_51.setSizePolicy(sizePolicy5)
-        self.label_51.setMinimumSize(QSize(0, 0))
-        self.label_51.setMaximumSize(QSize(100, 100))
-        self.label_51.setAutoFillBackground(True)
-        self.label_51.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_30.addWidget(self.label_51)
-
-        self.horizontalLayout_42 = QHBoxLayout()
-        self.horizontalLayout_42.setObjectName(u"horizontalLayout_42")
-        self.pushButton_41 = QPushButton(self.groupBox_16)
-        self.pushButton_41.setObjectName(u"pushButton_41")
-        self.pushButton_41.setIcon(icon1)
-
-        self.horizontalLayout_42.addWidget(self.pushButton_41)
-
-        self.pushButton_43 = QPushButton(self.groupBox_16)
-        self.pushButton_43.setObjectName(u"pushButton_43")
-        self.pushButton_43.setIcon(icon2)
-
-        self.horizontalLayout_42.addWidget(self.pushButton_43)
-
-        self.pushButton_40 = QPushButton(self.groupBox_16)
-        self.pushButton_40.setObjectName(u"pushButton_40")
-        self.pushButton_40.setIcon(icon3)
-
-        self.horizontalLayout_42.addWidget(self.pushButton_40)
-
-        self.pushButton_42 = QPushButton(self.groupBox_16)
-        self.pushButton_42.setObjectName(u"pushButton_42")
-        self.pushButton_42.setIcon(icon4)
-
-        self.horizontalLayout_42.addWidget(self.pushButton_42)
-
-
-        self.verticalLayout_30.addLayout(self.horizontalLayout_42)
-
-
-        self.gridLayout_2.addWidget(self.groupBox_16, 2, 2, 1, 1)
-
-        self.groupBox_12 = QGroupBox(self.universe_grid)
-        self.groupBox_12.setObjectName(u"groupBox_12")
-        sizePolicy5.setHeightForWidth(self.groupBox_12.sizePolicy().hasHeightForWidth())
-        self.groupBox_12.setSizePolicy(sizePolicy5)
-        self.groupBox_12.setMinimumSize(QSize(250, 200))
-        self.groupBox_12.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_26 = QVBoxLayout(self.groupBox_12)
-        self.verticalLayout_26.setObjectName(u"verticalLayout_26")
-        self.label_47 = QLabel(self.groupBox_12)
-        self.label_47.setObjectName(u"label_47")
-        sizePolicy5.setHeightForWidth(self.label_47.sizePolicy().hasHeightForWidth())
-        self.label_47.setSizePolicy(sizePolicy5)
-        self.label_47.setMinimumSize(QSize(0, 0))
-        self.label_47.setMaximumSize(QSize(100, 100))
-        self.label_47.setAutoFillBackground(True)
-        self.label_47.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_26.addWidget(self.label_47)
-
-        self.horizontalLayout_38 = QHBoxLayout()
-        self.horizontalLayout_38.setObjectName(u"horizontalLayout_38")
-        self.pushButton_26 = QPushButton(self.groupBox_12)
-        self.pushButton_26.setObjectName(u"pushButton_26")
-        self.pushButton_26.setIcon(icon1)
-
-        self.horizontalLayout_38.addWidget(self.pushButton_26)
-
-        self.pushButton_24 = QPushButton(self.groupBox_12)
-        self.pushButton_24.setObjectName(u"pushButton_24")
-        self.pushButton_24.setIcon(icon2)
-
-        self.horizontalLayout_38.addWidget(self.pushButton_24)
-
-        self.pushButton_25 = QPushButton(self.groupBox_12)
-        self.pushButton_25.setObjectName(u"pushButton_25")
-        self.pushButton_25.setIcon(icon3)
-
-        self.horizontalLayout_38.addWidget(self.pushButton_25)
-
-        self.pushButton_27 = QPushButton(self.groupBox_12)
-        self.pushButton_27.setObjectName(u"pushButton_27")
-        self.pushButton_27.setIcon(icon4)
-
-        self.horizontalLayout_38.addWidget(self.pushButton_27)
-
-
-        self.verticalLayout_26.addLayout(self.horizontalLayout_38)
-
-
-        self.gridLayout_2.addWidget(self.groupBox_12, 1, 1, 1, 1)
-
         self.scrollArea.setWidget(self.universe_grid)
 
         self.verticalLayout_10.addWidget(self.scrollArea)
@@ -1326,7 +859,7 @@ class Ui_MainWindow(object):
         self.create_universe.setObjectName(u"create_universe")
         sizePolicy6.setHeightForWidth(self.create_universe.sizePolicy().hasHeightForWidth())
         self.create_universe.setSizePolicy(sizePolicy6)
-        self.create_universe.setMinimumSize(QSize(354, 226))
+        self.create_universe.setMinimumSize(QSize(500, 226))
         self.create_universe.setMaximumSize(QSize(354, 226))
         self.verticalLayout_11 = QVBoxLayout(self.create_universe)
         self.verticalLayout_11.setObjectName(u"verticalLayout_11")
@@ -1370,6 +903,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_24.addWidget(self.universe_create_image_button)
 
+        self.universe_create_image_remove_button = QPushButton(self.create_universe)
+        self.universe_create_image_remove_button.setObjectName(u"universe_create_image_remove_button")
+
+        self.horizontalLayout_24.addWidget(self.universe_create_image_remove_button)
+
         self.universe_create_image_preview = QLabel(self.create_universe)
         self.universe_create_image_preview.setObjectName(u"universe_create_image_preview")
         sizePolicy5.setHeightForWidth(self.universe_create_image_preview.sizePolicy().hasHeightForWidth())
@@ -1411,7 +949,7 @@ class Ui_MainWindow(object):
         self.edit_universe.setObjectName(u"edit_universe")
         sizePolicy6.setHeightForWidth(self.edit_universe.sizePolicy().hasHeightForWidth())
         self.edit_universe.setSizePolicy(sizePolicy6)
-        self.edit_universe.setMinimumSize(QSize(354, 226))
+        self.edit_universe.setMinimumSize(QSize(500, 226))
         self.edit_universe.setMaximumSize(QSize(354, 226))
         self.verticalLayout_33 = QVBoxLayout(self.edit_universe)
         self.verticalLayout_33.setObjectName(u"verticalLayout_33")
@@ -1456,6 +994,11 @@ class Ui_MainWindow(object):
         self.universe_edit_image_button.setMaximumSize(QSize(109, 16777215))
 
         self.horizontalLayout_62.addWidget(self.universe_edit_image_button)
+
+        self.universe_edit_image_remove_button = QPushButton(self.edit_universe)
+        self.universe_edit_image_remove_button.setObjectName(u"universe_edit_image_remove_button")
+
+        self.horizontalLayout_62.addWidget(self.universe_edit_image_remove_button)
 
         self.universe_edit_image_preview = QLabel(self.edit_universe)
         self.universe_edit_image_preview.setObjectName(u"universe_edit_image_preview")
@@ -1507,7 +1050,7 @@ class Ui_MainWindow(object):
         self.create_character.setObjectName(u"create_character")
         sizePolicy6.setHeightForWidth(self.create_character.sizePolicy().hasHeightForWidth())
         self.create_character.setSizePolicy(sizePolicy6)
-        self.create_character.setMinimumSize(QSize(354, 335))
+        self.create_character.setMinimumSize(QSize(500, 335))
         self.create_character.setMaximumSize(QSize(354, 335))
         self.verticalLayout_16 = QVBoxLayout(self.create_character)
         self.verticalLayout_16.setObjectName(u"verticalLayout_16")
@@ -1609,6 +1152,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_28.addWidget(self.characters_create_image_button)
 
+        self.characters_create_image_remove_button = QPushButton(self.create_character)
+        self.characters_create_image_remove_button.setObjectName(u"characters_create_image_remove_button")
+
+        self.horizontalLayout_28.addWidget(self.characters_create_image_remove_button)
+
         self.characters_create_image_preview = QLabel(self.create_character)
         self.characters_create_image_preview.setObjectName(u"characters_create_image_preview")
         sizePolicy5.setHeightForWidth(self.characters_create_image_preview.sizePolicy().hasHeightForWidth())
@@ -1645,7 +1193,7 @@ class Ui_MainWindow(object):
         self.edit_character.setObjectName(u"edit_character")
         sizePolicy6.setHeightForWidth(self.edit_character.sizePolicy().hasHeightForWidth())
         self.edit_character.setSizePolicy(sizePolicy6)
-        self.edit_character.setMinimumSize(QSize(354, 335))
+        self.edit_character.setMinimumSize(QSize(500, 335))
         self.edit_character.setMaximumSize(QSize(354, 335))
         self.verticalLayout_34 = QVBoxLayout(self.edit_character)
         self.verticalLayout_34.setObjectName(u"verticalLayout_34")
@@ -1746,6 +1294,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_54.addWidget(self.characters_edit_image_button)
 
+        self.characters_edit_image_remove_button = QPushButton(self.edit_character)
+        self.characters_edit_image_remove_button.setObjectName(u"characters_edit_image_remove_button")
+
+        self.horizontalLayout_54.addWidget(self.characters_edit_image_remove_button)
+
         self.characters_edit_image_preview = QLabel(self.edit_character)
         self.characters_edit_image_preview.setObjectName(u"characters_edit_image_preview")
         sizePolicy5.setHeightForWidth(self.characters_edit_image_preview.sizePolicy().hasHeightForWidth())
@@ -1819,160 +1372,9 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.characters_grid = QWidget()
         self.characters_grid.setObjectName(u"characters_grid")
-        self.characters_grid.setGeometry(QRect(0, 0, 970, 269))
+        self.characters_grid.setGeometry(QRect(0, 0, 972, 319))
         self.gridLayout = QGridLayout(self.characters_grid)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.characters_test1 = QGroupBox(self.characters_grid)
-        self.characters_test1.setObjectName(u"characters_test1")
-        sizePolicy6.setHeightForWidth(self.characters_test1.sizePolicy().hasHeightForWidth())
-        self.characters_test1.setSizePolicy(sizePolicy6)
-        self.characters_test1.setMinimumSize(QSize(250, 200))
-        self.characters_test1.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_31 = QVBoxLayout(self.characters_test1)
-        self.verticalLayout_31.setObjectName(u"verticalLayout_31")
-        self.characters_test1_preview_image = QLabel(self.characters_test1)
-        self.characters_test1_preview_image.setObjectName(u"characters_test1_preview_image")
-        sizePolicy5.setHeightForWidth(self.characters_test1_preview_image.sizePolicy().hasHeightForWidth())
-        self.characters_test1_preview_image.setSizePolicy(sizePolicy5)
-        self.characters_test1_preview_image.setMinimumSize(QSize(0, 0))
-        self.characters_test1_preview_image.setMaximumSize(QSize(100, 100))
-        self.characters_test1_preview_image.setAutoFillBackground(True)
-        self.characters_test1_preview_image.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_31.addWidget(self.characters_test1_preview_image)
-
-        self.horizontalLayout_43 = QHBoxLayout()
-        self.horizontalLayout_43.setObjectName(u"horizontalLayout_43")
-        self.characters_test1_left = QPushButton(self.characters_test1)
-        self.characters_test1_left.setObjectName(u"characters_test1_left")
-        self.characters_test1_left.setIcon(icon1)
-
-        self.horizontalLayout_43.addWidget(self.characters_test1_left)
-
-        self.characters_test1_right = QPushButton(self.characters_test1)
-        self.characters_test1_right.setObjectName(u"characters_test1_right")
-        self.characters_test1_right.setIcon(icon2)
-
-        self.horizontalLayout_43.addWidget(self.characters_test1_right)
-
-        self.characters_test1_edit = QPushButton(self.characters_test1)
-        self.characters_test1_edit.setObjectName(u"characters_test1_edit")
-        self.characters_test1_edit.setIcon(icon3)
-
-        self.horizontalLayout_43.addWidget(self.characters_test1_edit)
-
-        self.characters_test1_delete = QPushButton(self.characters_test1)
-        self.characters_test1_delete.setObjectName(u"characters_test1_delete")
-        self.characters_test1_delete.setIcon(icon4)
-
-        self.horizontalLayout_43.addWidget(self.characters_test1_delete)
-
-
-        self.verticalLayout_31.addLayout(self.horizontalLayout_43)
-
-
-        self.gridLayout.addWidget(self.characters_test1, 0, 0, 1, 1)
-
-        self.groupBox_18 = QGroupBox(self.characters_grid)
-        self.groupBox_18.setObjectName(u"groupBox_18")
-        sizePolicy5.setHeightForWidth(self.groupBox_18.sizePolicy().hasHeightForWidth())
-        self.groupBox_18.setSizePolicy(sizePolicy5)
-        self.groupBox_18.setMinimumSize(QSize(250, 200))
-        self.groupBox_18.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_32 = QVBoxLayout(self.groupBox_18)
-        self.verticalLayout_32.setObjectName(u"verticalLayout_32")
-        self.label_53 = QLabel(self.groupBox_18)
-        self.label_53.setObjectName(u"label_53")
-        sizePolicy5.setHeightForWidth(self.label_53.sizePolicy().hasHeightForWidth())
-        self.label_53.setSizePolicy(sizePolicy5)
-        self.label_53.setMinimumSize(QSize(0, 0))
-        self.label_53.setMaximumSize(QSize(100, 100))
-        self.label_53.setAutoFillBackground(True)
-        self.label_53.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_32.addWidget(self.label_53)
-
-        self.horizontalLayout_44 = QHBoxLayout()
-        self.horizontalLayout_44.setObjectName(u"horizontalLayout_44")
-        self.pushButton_48 = QPushButton(self.groupBox_18)
-        self.pushButton_48.setObjectName(u"pushButton_48")
-        self.pushButton_48.setIcon(icon1)
-
-        self.horizontalLayout_44.addWidget(self.pushButton_48)
-
-        self.pushButton_49 = QPushButton(self.groupBox_18)
-        self.pushButton_49.setObjectName(u"pushButton_49")
-        self.pushButton_49.setIcon(icon2)
-
-        self.horizontalLayout_44.addWidget(self.pushButton_49)
-
-        self.pushButton_50 = QPushButton(self.groupBox_18)
-        self.pushButton_50.setObjectName(u"pushButton_50")
-        self.pushButton_50.setIcon(icon3)
-
-        self.horizontalLayout_44.addWidget(self.pushButton_50)
-
-        self.pushButton_51 = QPushButton(self.groupBox_18)
-        self.pushButton_51.setObjectName(u"pushButton_51")
-        self.pushButton_51.setIcon(icon4)
-
-        self.horizontalLayout_44.addWidget(self.pushButton_51)
-
-
-        self.verticalLayout_32.addLayout(self.horizontalLayout_44)
-
-
-        self.gridLayout.addWidget(self.groupBox_18, 0, 1, 1, 1)
-
-        self.groupBox_23 = QGroupBox(self.characters_grid)
-        self.groupBox_23.setObjectName(u"groupBox_23")
-        self.groupBox_23.setMinimumSize(QSize(250, 200))
-        self.groupBox_23.setMaximumSize(QSize(250, 200))
-        self.verticalLayout_38 = QVBoxLayout(self.groupBox_23)
-        self.verticalLayout_38.setObjectName(u"verticalLayout_38")
-        self.label_54 = QLabel(self.groupBox_23)
-        self.label_54.setObjectName(u"label_54")
-        sizePolicy5.setHeightForWidth(self.label_54.sizePolicy().hasHeightForWidth())
-        self.label_54.setSizePolicy(sizePolicy5)
-        self.label_54.setMinimumSize(QSize(0, 0))
-        self.label_54.setMaximumSize(QSize(100, 100))
-        self.label_54.setAutoFillBackground(True)
-        self.label_54.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.verticalLayout_38.addWidget(self.label_54)
-
-        self.horizontalLayout_60 = QHBoxLayout()
-        self.horizontalLayout_60.setObjectName(u"horizontalLayout_60")
-        self.pushButton_60 = QPushButton(self.groupBox_23)
-        self.pushButton_60.setObjectName(u"pushButton_60")
-        self.pushButton_60.setIcon(icon1)
-
-        self.horizontalLayout_60.addWidget(self.pushButton_60)
-
-        self.pushButton_61 = QPushButton(self.groupBox_23)
-        self.pushButton_61.setObjectName(u"pushButton_61")
-        self.pushButton_61.setIcon(icon2)
-
-        self.horizontalLayout_60.addWidget(self.pushButton_61)
-
-        self.pushButton_62 = QPushButton(self.groupBox_23)
-        self.pushButton_62.setObjectName(u"pushButton_62")
-        self.pushButton_62.setIcon(icon3)
-
-        self.horizontalLayout_60.addWidget(self.pushButton_62)
-
-        self.pushButton_63 = QPushButton(self.groupBox_23)
-        self.pushButton_63.setObjectName(u"pushButton_63")
-        self.pushButton_63.setIcon(icon4)
-
-        self.horizontalLayout_60.addWidget(self.pushButton_63)
-
-
-        self.verticalLayout_38.addLayout(self.horizontalLayout_60)
-
-
-        self.gridLayout.addWidget(self.groupBox_23, 0, 2, 1, 1)
-
         self.scrollArea_2.setWidget(self.characters_grid)
 
         self.verticalLayout_14.addWidget(self.scrollArea_2)
@@ -1997,7 +1399,7 @@ class Ui_MainWindow(object):
         self.create_expression.setObjectName(u"create_expression")
         sizePolicy6.setHeightForWidth(self.create_expression.sizePolicy().hasHeightForWidth())
         self.create_expression.setSizePolicy(sizePolicy6)
-        self.create_expression.setMinimumSize(QSize(354, 294))
+        self.create_expression.setMinimumSize(QSize(500, 294))
         self.create_expression.setMaximumSize(QSize(354, 294))
         self.verticalLayout_20 = QVBoxLayout(self.create_expression)
         self.verticalLayout_20.setObjectName(u"verticalLayout_20")
@@ -2107,7 +1509,7 @@ class Ui_MainWindow(object):
         self.edit_expression.setObjectName(u"edit_expression")
         sizePolicy6.setHeightForWidth(self.edit_expression.sizePolicy().hasHeightForWidth())
         self.edit_expression.setSizePolicy(sizePolicy6)
-        self.edit_expression.setMinimumSize(QSize(354, 294))
+        self.edit_expression.setMinimumSize(QSize(500, 294))
         self.edit_expression.setMaximumSize(QSize(354, 294))
         self.verticalLayout_40 = QVBoxLayout(self.edit_expression)
         self.verticalLayout_40.setObjectName(u"verticalLayout_40")
@@ -2254,7 +1656,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.expressions_grid = QWidget()
         self.expressions_grid.setObjectName(u"expressions_grid")
-        self.expressions_grid.setGeometry(QRect(0, 0, 972, 312))
+        self.expressions_grid.setGeometry(QRect(0, 0, 974, 362))
         self.gridLayout_5 = QGridLayout(self.expressions_grid)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.scrollArea_3.setWidget(self.expressions_grid)
@@ -2274,7 +1676,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1066, 33))
+        self.menubar.setGeometry(QRect(0, 0, 1070, 23))
         self.menuFile = QMenu(self.menubar)
         self.menuFile.setObjectName(u"menuFile")
         MainWindow.setMenuBar(self.menubar)
@@ -2391,70 +1793,18 @@ class Ui_MainWindow(object):
         self.existing.setTitle(QCoreApplication.translate("MainWindow", u"Existing", None))
         self.universe_filter_label.setText(QCoreApplication.translate("MainWindow", u"Filter by name", None))
         self.universe_filter_button.setText(QCoreApplication.translate("MainWindow", u"Filter", None))
-        self.groupBox_10.setTitle(QCoreApplication.translate("MainWindow", u"Test3", None))
-        self.label_45.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.pushButton_18.setText("")
-        self.pushButton_16.setText("")
-        self.pushButton_17.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.pushButton_19.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.groupBox_9.setTitle(QCoreApplication.translate("MainWindow", u"Test2", None))
-        self.label_44.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.pushButton_12.setText("")
-        self.pushButton_13.setText("")
-        self.pushButton_14.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.pushButton_15.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.groupBox_14.setTitle(QCoreApplication.translate("MainWindow", u"Test7", None))
-        self.label_49.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.pushButton_33.setText("")
-        self.pushButton_35.setText("")
-        self.pushButton_32.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.pushButton_34.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.groupBox_15.setTitle(QCoreApplication.translate("MainWindow", u"Test8", None))
-        self.label_50.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.pushButton_37.setText("")
-        self.pushButton_39.setText("")
-        self.pushButton_36.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.pushButton_38.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.groupBox_11.setTitle(QCoreApplication.translate("MainWindow", u"Test4", None))
-        self.label_46.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.pushButton_22.setText("")
-        self.pushButton_20.setText("")
-        self.pushButton_21.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.pushButton_23.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.groupBox_13.setTitle(QCoreApplication.translate("MainWindow", u"Test6", None))
-        self.label_48.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.pushButton_30.setText("")
-        self.pushButton_28.setText("")
-        self.pushButton_29.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.pushButton_31.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.universe_test1.setTitle(QCoreApplication.translate("MainWindow", u"Test1", None))
-        self.universe_test1_preview_image.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.universe_test1_left.setText("")
-        self.universe_test1_right.setText("")
-        self.universe_test1_edit.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.universe_test1_delete.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.groupBox_16.setTitle(QCoreApplication.translate("MainWindow", u"Test9", None))
-        self.label_51.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.pushButton_41.setText("")
-        self.pushButton_43.setText("")
-        self.pushButton_40.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.pushButton_42.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.groupBox_12.setTitle(QCoreApplication.translate("MainWindow", u"Test5", None))
-        self.label_47.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.pushButton_26.setText("")
-        self.pushButton_24.setText("")
-        self.pushButton_25.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.pushButton_27.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
         self.create_universe.setTitle(QCoreApplication.translate("MainWindow", u"Create a new Universe", None))
         self.universe_create_name_label.setText(QCoreApplication.translate("MainWindow", u"Name", None))
         self.universe_create_preview_label.setText(QCoreApplication.translate("MainWindow", u"Preview image (optional)", None))
         self.universe_create_image_button.setText(QCoreApplication.translate("MainWindow", u"Select image", None))
+        self.universe_create_image_remove_button.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.universe_create_image_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.universe_create_confirm_button.setText(QCoreApplication.translate("MainWindow", u"Create", None))
         self.edit_universe.setTitle(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.universe_edit_name_label.setText(QCoreApplication.translate("MainWindow", u"Name", None))
         self.universe_edit_preview_label.setText(QCoreApplication.translate("MainWindow", u"Preview image", None))
         self.universe_edit_image_button.setText(QCoreApplication.translate("MainWindow", u"Select image", None))
+        self.universe_edit_image_remove_button.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.universe_edit_image_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.universe_edit_confirm_button.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.tabs.setTabText(self.tabs.indexOf(self.universes), QCoreApplication.translate("MainWindow", u"Universes", None))
@@ -2467,6 +1817,7 @@ class Ui_MainWindow(object):
         self.characters_create_transform_label.setText(QCoreApplication.translate("MainWindow", u"Default Text Transform", None))
         self.characters_create_preview_label.setText(QCoreApplication.translate("MainWindow", u"Preview image (optional)", None))
         self.characters_create_image_button.setText(QCoreApplication.translate("MainWindow", u"Select image", None))
+        self.characters_create_image_remove_button.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.characters_create_image_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.characters_create_confirm_button.setText(QCoreApplication.translate("MainWindow", u"Create", None))
         self.edit_character.setTitle(QCoreApplication.translate("MainWindow", u"Edit", None))
@@ -2478,29 +1829,12 @@ class Ui_MainWindow(object):
         self.characters_edit_transform_label.setText(QCoreApplication.translate("MainWindow", u"Default Text Transform", None))
         self.characters_edit_preview_label.setText(QCoreApplication.translate("MainWindow", u"Preview image (optional)", None))
         self.characters_edit_image_button.setText(QCoreApplication.translate("MainWindow", u"Select image", None))
+        self.characters_edit_image_remove_button.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.characters_edit_image_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.characters_edit_confirm_button.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"Existing", None))
         self.characters_filter_label.setText(QCoreApplication.translate("MainWindow", u"Filter by name", None))
         self.characters_filter_button.setText(QCoreApplication.translate("MainWindow", u"Filter", None))
-        self.characters_test1.setTitle(QCoreApplication.translate("MainWindow", u"Test1", None))
-        self.characters_test1_preview_image.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.characters_test1_left.setText("")
-        self.characters_test1_right.setText("")
-        self.characters_test1_edit.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.characters_test1_delete.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.groupBox_18.setTitle(QCoreApplication.translate("MainWindow", u"Test2", None))
-        self.label_53.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.pushButton_48.setText("")
-        self.pushButton_49.setText("")
-        self.pushButton_50.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.pushButton_51.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
-        self.groupBox_23.setTitle(QCoreApplication.translate("MainWindow", u"Test3", None))
-        self.label_54.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.pushButton_60.setText("")
-        self.pushButton_61.setText("")
-        self.pushButton_62.setText(QCoreApplication.translate("MainWindow", u"Edit", None))
-        self.pushButton_63.setText(QCoreApplication.translate("MainWindow", u"Delete", None))
         self.tabs.setTabText(self.tabs.indexOf(self.characters), QCoreApplication.translate("MainWindow", u"Characters", None))
         self.create_expression.setTitle(QCoreApplication.translate("MainWindow", u"Create a new expression", None))
         self.expressions_create_name_label.setText(QCoreApplication.translate("MainWindow", u"Name", None))
