@@ -4,7 +4,7 @@ from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon, QPixmap
 from configs.paths import ICON_LEFT, ICON_RIGHT, ICON_EDIT, ICON_DELETE
 from models.entities import Universe, Character, Expression
-from static import change_service
+from services import change_service
 
 _ICONS: dict | None = None
 

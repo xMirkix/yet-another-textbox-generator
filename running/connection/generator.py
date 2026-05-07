@@ -1,7 +1,7 @@
 from PySide6.QtGui import QPixmap
 
-from static import change_service
-from static.database_service import DBDynamicConnection
+from services import change_service
+from services.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
 from models.form_bindings import BorderSettings, SpriteSettings, FontSettings, ExportSettings
 from PySide6.QtCore import QByteArray

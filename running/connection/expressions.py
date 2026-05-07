@@ -1,4 +1,4 @@
-from static.database_service import DBDynamicConnection
+from services.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
 
 

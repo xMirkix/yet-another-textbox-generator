@@ -19,6 +19,8 @@ class BorderStyle:
         else:
             raise ValueError('Source image path must be provided')
 
+    def __str__(self): return self.border_name
+
 class Color:
     color_id: int
     color_name: str
@@ -33,6 +35,8 @@ class Color:
         self.g = g
         self.b = b
 
+    def __str__(self): return self.color_name
+
 class TextFont:
     font_id: int
     font_name: str
@@ -43,6 +47,8 @@ class TextFont:
             self.font_name = font_name
         else:
             raise ValueError('Name must be provided')
+
+    def __str__(self): return self.font_name
 
 class TextTransform:
     transform_id: int
@@ -55,3 +61,5 @@ class TextTransform:
             self.transform_name = transform_name
         else:
             raise ValueError('Name must be provided')
+
+    def __str__(self): return self.transform_name

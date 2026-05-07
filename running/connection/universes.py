@@ -1,7 +1,7 @@
 from models.entities import Universe
 from running.connection.tile_service import insert_tile
-from static import change_service
-from static.database_service import DBDynamicConnection
+from services import change_service
+from services.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QFileDialog, QMessageBox
 from PySide6.QtGui import QImage, QPixmap

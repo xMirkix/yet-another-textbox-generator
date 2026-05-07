@@ -2,7 +2,8 @@ import sqlite3
 from configs.paths import DYNAMIC_DB, DYNAMIC_SCHEMA, STATIC_DB
 
 from models.entities import Character, Universe, Expression
-from static.change_service import Changes
+from services.change_service import Changes
+from startup.in_memory.static_classes import Color, BorderStyle, TextFont, TextTransform
 
 
 class DBStaticConnection:
@@ -19,6 +20,22 @@ class DBStaticConnection:
         return self.connection.execute(f"""
             SELECT * FROM {table_name}
         """).fetchall()
+
+    def select_all_colors(self) -> list[Color]:
+        rows = self.connection.execute("SELECT * FROM Colors").fetchall()
+        return [Color(*row) for row in rows]
+
+    def select_all_border_styles(self) -> list[BorderStyle]:
+        rows = self.connection.execute("SELECT * FROM BorderStyles").fetchall()
+        return [BorderStyle(*row) for row in rows]
+
+    def select_all_text_fonts(self) -> list[TextFont]:
+        rows = self.connection.execute("SELECT * FROM Fonts").fetchall()
+        return [TextFont(*row) for row in rows]
+
+    def select_all_text_transforms(self) -> list[TextTransform]:
+        rows = self.connection.execute("SELECT * FROM Transforms").fetchall()
+        return [TextTransform(*row) for row in rows]
 
 class DBDynamicConnection:
     _instance: DBDynamicConnection | None = None

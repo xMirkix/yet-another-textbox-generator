@@ -3,8 +3,8 @@ from PySide6.QtGui import QCloseEvent
 from PySide6.QtWidgets import QMessageBox
 
 from running.connection.welcome import save_file
-from static.change_service import Changes
-from static.database_service import DBDynamicConnection
+from services.change_service import Changes
+from services.database_service import DBDynamicConnection
 
 class MainWindow(QMainWindow):
     def __init__(self):
