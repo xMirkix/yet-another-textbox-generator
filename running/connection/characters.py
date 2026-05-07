@@ -1,8 +1,21 @@
+from PySide6.QtWidgets import QGroupBox
+
+from models.entities import Character
 from services.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
 
 
 def connect_characters(ui: Ui_MainWindow):
+    pass
+
+
+def on_move(ui: Ui_MainWindow, character: Character, direction: int):
+    pass
+
+def on_edit(ui: Ui_MainWindow, character: Character):
+    pass
+
+def on_delete(ui: Ui_MainWindow, character: Character, tile: QGroupBox):
     pass
 
 """

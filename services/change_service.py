@@ -1,7 +1,8 @@
 import base64
 
 from PySide6.QtCore import QBuffer, QByteArray
-from PySide6.QtGui import QPixmap
+from PySide6.QtGui import QPixmap, QImage
+from PySide6.QtWidgets import QFileDialog, QLabel, QPushButton, QMessageBox
 
 
 def pixmap_to_base64(pixmap: QPixmap) -> str:
@@ -17,6 +18,26 @@ def base64_to_pixmap(base64_str: str) -> QPixmap:
     pixmap.loadFromData(byte_array)
     return pixmap
 
+def select_image(preview: QLabel, remove_button: QPushButton):
+    path, _ = QFileDialog.getOpenFileName(
+        caption="Choose Image",
+        filter="PNG Pictures (*.png)"
+    )
+    if not path:
+        return  # Nothing selected
+
+    image = QImage(path)
+    if image.width() > 69 or image.height() > 70:
+        QMessageBox.warning(None, "Invalid Picture", f"Picture size cannot exceed the resolution 69x70 (current: {image.width()}x{image.height()})")
+        return
+
+    preview.setPixmap(QPixmap(image))
+    remove_button.show()
+
+def remove_image(preview: QLabel, remove_button: QPushButton):
+    preview.clear()
+    preview.setText("Nothing...")
+    remove_button.hide()
 
 class Changes:
     _changed = False
