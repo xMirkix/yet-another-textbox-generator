@@ -1,4 +1,5 @@
 import shutil
+from pathlib import Path
 
 from PySide6.QtWidgets import QApplication, QMessageBox
 
@@ -17,10 +18,14 @@ def connect_welcome(ui: Ui_MainWindow):
     ui.actionQuit.triggered.connect(quit_app)
 
 def save_file() -> bool:
-    path, _ = QFileDialog.getSaveFileName(
-        caption="Save File",
-        filter="YATG Files (*.yatg)"
-    )
+    file = Changes.get_current_selected_file()
+    if file is not None:
+        path = file
+    else:
+        path, _ = QFileDialog.getSaveFileName(
+            caption="Save File",
+            filter="YATG Files (*.yatg)"
+        )
     if path:  # File got selected
         Changes.reset()
         if not path.endswith(".yatg"):
@@ -50,8 +55,11 @@ def manage_file(ui: Ui_MainWindow, caption: str, filter_name: str) -> bool:
     if path:  # File got selected
         Changes.reset()
         shutil.copyfile(path, db_path) # Override cache file with selected
-        DBDynamicConnection.get_instance().reconnect()
-        ui.tabs.setCurrentIndex(0)
+        DBDynamicConnection.get_instance().reconnect() # reconnect to database
+        ui.tabs.setCurrentIndex(0) # Switch to welcome Tab
+        window_title = Path(path).name
+        ui.centralwidget.window().setWindowTitle(window_title) # Set window title
+        Changes.set_current_selected_file(path) # Save current file for quick save
         return True
     return False
 

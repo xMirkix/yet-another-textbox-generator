@@ -41,6 +41,7 @@ def remove_image(preview: QLabel, remove_button: QPushButton):
 
 class Changes:
     _changed = False
+    current_selected_file = None
 
     @classmethod
     def saved(cls):
@@ -58,3 +59,10 @@ class Changes:
     def get_state(cls) -> bool:
         return cls._changed
 
+    @classmethod
+    def set_current_selected_file(cls, file_path: str):
+        cls.current_selected_file = file_path
+
+    @classmethod
+    def get_current_selected_file(cls) -> str | None:
+        return cls.current_selected_file
