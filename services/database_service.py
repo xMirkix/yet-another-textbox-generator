@@ -103,5 +103,13 @@ class DBDynamicConnection:
             "INSERT INTO Universes (universe_name, preview_image, order_position) VALUES (?, ?, ?)",
             (universe.universe_name, universe.preview_image, universe.order_position)
         )
-        self.connection.commit()  # <-- das hier
+        self.connection.commit()
+        Changes.change()
+
+    def update_universe(self, universe):
+        self.connection.execute(
+            "UPDATE Universes SET universe_name = ?, preview_image = ? WHERE universe_id = ?",
+            (universe.universe_name, universe.preview_image, universe.universe_id)
+        )
+        self.connection.commit()
         Changes.change()
