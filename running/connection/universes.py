@@ -1,10 +1,13 @@
+from typing import Callable
+
 from models.entities import Universe
 from running.connection.tile_service import insert_tile
 from services import change_service
 from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
-from PySide6.QtWidgets import QMessageBox, QGroupBox
+from PySide6.QtWidgets import QMessageBox, QGroupBox, QLineEdit, QLabel, QPushButton
+
 
 def connect_universes(ui: Ui_MainWindow):
     ui.universe_create_image_button.clicked.connect(lambda: select_image(ui.universe_create_image_preview, ui.universe_create_image_remove_button))
@@ -16,34 +19,44 @@ def connect_universes(ui: Ui_MainWindow):
 
 def create_universe(ui: Ui_MainWindow):
     db = get_db()
-    if not ui.universe_create_name_input.text():
-        QMessageBox.warning(None, "Invalid Name", "Name cannot be empty")
-        return
-
+    universe_name = ui.universe_create_name_input.text()
     pixmap = ui.universe_create_image_preview.pixmap()
-    image_data = change_service.pixmap_to_base64(pixmap) if pixmap else ''
-    universe = Universe(-1, ui.universe_create_name_input.text(), image_data, db.count_universes() + 1)
-    db.insert_universe(universe)
+    order_position = db.count_universes() + 1
+    form_operation(-1, universe_name, pixmap, order_position, db.insert_universe)
 
-    ui.universe_create_name_input.clear()
-    remove_image(ui.universe_create_image_preview, ui.universe_create_image_remove_button)
-    insert_tile(ui, ui.universe_grid, universe)
+    post_operation(
+        ui.universe_create_name_input,
+        ui.universe_create_image_preview,
+        ui.universe_create_image_remove_button,
+        lambda: on_tab_change(ui),
+    )
 
 def edit_universe(ui: Ui_MainWindow):
+    universe_id = ui.universe_edit_confirm_button.property("universe")
+    universe_name = ui.universe_edit_name_input.text()
+    pixmap = ui.universe_edit_image_preview.pixmap()
     db = get_db()
-    if not ui.universe_edit_name_input.text():
+    form_operation(universe_id, universe_name, pixmap, 42, db.update_universe) # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
+
+    post_operation(
+        ui.universe_edit_name_input,
+        ui.universe_edit_image_preview,
+        ui.universe_edit_image_remove_button,
+        lambda: on_tab_change(ui) # For edit to take effect
+    )
+
+def form_operation(universe_id: int, name: str, pixmap, order_position: int, db_function: Callable):
+    if not name:
         QMessageBox.warning(None, "Invalid Name", "Name cannot be empty")
         return
+    pixmap = change_service.pixmap_to_base64(pixmap) if pixmap else ''
+    universe = Universe(universe_id, name, pixmap, order_position)
+    db_function(universe)
 
-    pixmap = ui.universe_edit_image_preview.pixmap()
-    image_data = change_service.pixmap_to_base64(pixmap) if pixmap else ''
-    universe = Universe(ui.universe_edit_confirm_button.property("universe"), ui.universe_edit_name_input.text(), image_data, 42) # Order position is not changed and not considered
-    db.update_universe(universe) # Update
-
-    ui.universe_edit_name_input.clear() # Clear input
-    remove_image(ui.universe_edit_image_preview, ui.universe_edit_image_remove_button)
-
-    on_tab_change(ui) # Edit takes effect
+def post_operation(input_to_clear: QLineEdit, pixmap_to_clear: QLabel, remove_button: QPushButton, post_function: Callable):
+    input_to_clear.clear() # Clear input
+    remove_image(pixmap_to_clear, remove_button)
+    post_function()
 
 def on_move(ui: Ui_MainWindow, universe: Universe, direction: int):
     pass
