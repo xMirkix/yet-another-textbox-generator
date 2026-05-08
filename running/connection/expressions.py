@@ -14,7 +14,7 @@ def on_move(ui: Ui_MainWindow, character: Expression, direction: int):
 def on_edit(ui: Ui_MainWindow, character: Expression):
     pass
 
-def on_delete(character: Expression, tile: QGroupBox):
+def on_delete(ui: Ui_MainWindow, character: Expression, tile: QGroupBox):
     pass
 
 """

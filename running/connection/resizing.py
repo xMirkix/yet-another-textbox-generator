@@ -29,3 +29,6 @@ class GridReflowFilter(QObject):
 
         for i, w in enumerate(widgets):
             layout.addWidget(w, i // cols, i % cols)
+
+    def reflow(self):
+        self._reflow()

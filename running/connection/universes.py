@@ -1,5 +1,7 @@
 from typing import Callable
 
+from PySide6.QtCore import QTimer
+
 from models.entities import Universe
 from running.connection.resizing import GridReflowFilter
 from running.connection.tile_service import insert_tile
@@ -7,11 +9,12 @@ from services import change_service
 from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
-from PySide6.QtWidgets import QMessageBox, QGroupBox, QLineEdit, QLabel, QPushButton
+from PySide6.QtWidgets import QMessageBox, QGroupBox, QLineEdit, QLabel, QPushButton, QApplication
 
 
 def connect_universes(ui: Ui_MainWindow):
     GridReflowFilter(ui.universe_grid)
+    ui.universe_grid.reflow_filter = GridReflowFilter(ui.universe_grid)
     ui.universe_create_image_button.clicked.connect(lambda: select_image(ui.universe_create_image_preview, ui.universe_create_image_remove_button))
     ui.universe_edit_image_button.clicked.connect(lambda: select_image(ui.universe_edit_image_preview, ui.universe_edit_image_remove_button))
     ui.universe_create_image_remove_button.clicked.connect(lambda: remove_image(ui.universe_create_image_preview, ui.universe_create_image_remove_button))
@@ -120,7 +123,7 @@ def on_edit(ui: Ui_MainWindow, universe: Universe):
     ui.universe_edit_confirm_button.setProperty("universe", universe.universe_id)
     ui.edit_universe.show()
 
-def on_delete(universe: Universe, tile: QGroupBox):
+def on_delete(ui: Ui_MainWindow, universe: Universe, tile: QGroupBox):
     reply = QMessageBox.warning(
         None,
         "Warning!",
@@ -128,13 +131,12 @@ def on_delete(universe: Universe, tile: QGroupBox):
         QMessageBox.StandardButton.Yes |
         QMessageBox.StandardButton.Cancel
     )
-    if reply == QMessageBox.StandardButton.Yes:
-        db = get_db()
-        db.delete_universe(universe.universe_id, universe.order_position)
-        tile.deleteLater()
-    else:
+    if reply == QMessageBox.StandardButton.Cancel:
         return
 
+    get_db().delete_universe(universe.universe_id, universe.order_position)
+    tile.deleteLater()
+    QTimer.singleShot(0, ui.universe_grid.reflow_filter.reflow)
 
 def get_db():
     return DBDynamicConnection.get_instance()

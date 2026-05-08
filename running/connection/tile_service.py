@@ -70,7 +70,7 @@ def create_tile(ui: Ui_MainWindow, parent, entity: Entity) -> QGroupBox:
     btn_left.clicked.connect(lambda: on_move(ui, entity, -1))
     btn_right.clicked.connect(lambda: on_move(ui, entity, +1))
     btn_edit.clicked.connect(lambda: on_edit(ui, entity))
-    btn_delete.clicked.connect(lambda: on_delete(entity, tile))
+    btn_delete.clicked.connect(lambda: on_delete(ui, entity, tile))
 
     return tile
 
@@ -108,10 +108,10 @@ def on_edit(ui: Ui_MainWindow, entity: Entity):
     if isinstance(entity, Expression):
         expressions.on_edit(ui, entity)
 
-def on_delete(entity: Entity, tile: QGroupBox):
+def on_delete(ui: Ui_MainWindow,entity: Entity, tile: QGroupBox):
     if isinstance(entity, Universe):
-        universes.on_delete(entity, tile)
+        universes.on_delete(ui, entity, tile)
     if isinstance(entity, Character):
-        characters.on_delete(entity, tile)
+        characters.on_delete(ui, entity, tile)
     if isinstance(entity, Expression):
-        expressions.on_delete(entity, tile)
+        expressions.on_delete(ui, entity, tile)
