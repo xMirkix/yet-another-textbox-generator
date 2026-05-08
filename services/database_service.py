@@ -79,7 +79,13 @@ class DBDynamicConnection:
         """).fetchall()
 
     def select_all_universes(self) -> list[Universe]:
-        rows = self.connection.execute("SELECT * FROM Universes").fetchall()
+        rows = self.connection.execute("SELECT * FROM Universes ORDER BY order_position").fetchall()
+        return [Universe(*row) for row in rows]
+
+    def select_filtered_universes(self, name) -> list[Universe]:
+        rows = self.connection.execute(
+            "SELECT * FROM Universes WHERE universe_name LIKE ? ORDER BY order_position", (f"%{name}%",)
+        ).fetchall()
         return [Universe(*row) for row in rows]
 
     def count_universes(self) -> int:
@@ -98,6 +104,14 @@ class DBDynamicConnection:
         ).fetchall()
         return [Expression(*row) for row in rows]
 
+    def select_universe_by_order_position(self, order_position: int) -> Universe | None:
+        rows = self.connection.execute(
+            "SELECT * FROM Universes WHERE order_position = ?", (order_position,)
+        ).fetchone()
+        if rows is None:
+            return None
+        return Universe(*rows)
+
     def insert_universe(self, universe: Universe):
         self.connection.execute(
             "INSERT INTO Universes (universe_name, preview_image, order_position) VALUES (?, ?, ?)",
@@ -110,6 +124,24 @@ class DBDynamicConnection:
         self.connection.execute(
             "UPDATE Universes SET universe_name = ?, preview_image = ? WHERE universe_id = ?",
             (universe.universe_name, universe.preview_image, universe.universe_id)
+        )
+        self.connection.commit()
+        Changes.change()
+
+    def update_universe_order_position(self, universe_id: int, order_position: int):
+        self.connection.execute(
+            "UPDATE Universes SET order_position = ? WHERE universe_id = ?",
+            (order_position, universe_id)
+        )
+        self.connection.commit()
+        Changes.change()
+
+    def delete_universe(self, universe_id, order_position: int):
+        self.connection.execute(
+            "UPDATE Universes SET order_position = order_position - 1 WHERE order_position > ?", (order_position,)
+        )
+        self.connection.execute(
+            "DELETE FROM Universes WHERE universe_id = ?", (universe_id,)
         )
         self.connection.commit()
         Changes.change()

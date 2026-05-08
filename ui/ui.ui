@@ -251,7 +251,7 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>-659</y>
+             <y>0</y>
              <width>996</width>
              <height>1413</height>
             </rect>
@@ -1387,13 +1387,6 @@
                <item>
                 <widget class="QLineEdit" name="universe_filter_input"/>
                </item>
-               <item>
-                <widget class="QPushButton" name="universe_filter_button">
-                 <property name="text">
-                  <string>Filter</string>
-                 </property>
-                </widget>
-               </item>
               </layout>
              </item>
              <item>
@@ -1413,8 +1406,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
-                  <height>28</height>
+                  <width>984</width>
+                  <height>430</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_2">
@@ -2152,13 +2145,6 @@
                  <item>
                   <widget class="QLineEdit" name="characters_filter_input"/>
                  </item>
-                 <item>
-                  <widget class="QPushButton" name="characters_filter_button">
-                   <property name="text">
-                    <string>Filter</string>
-                   </property>
-                  </widget>
-                 </item>
                 </layout>
                </item>
                <item>
@@ -2178,8 +2164,8 @@
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>98</width>
-                    <height>28</height>
+                    <width>982</width>
+                    <height>319</height>
                    </rect>
                   </property>
                   <layout class="QGridLayout" name="gridLayout"/>
@@ -2536,13 +2522,6 @@
                <item>
                 <widget class="QLineEdit" name="expressions_filter_input"/>
                </item>
-               <item>
-                <widget class="QPushButton" name="expressions_filter_button">
-                 <property name="text">
-                  <string>Filter</string>
-                 </property>
-                </widget>
-               </item>
               </layout>
              </item>
              <item>
@@ -2562,8 +2541,8 @@
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>98</width>
-                  <height>28</height>
+                  <width>984</width>
+                  <height>362</height>
                  </rect>
                 </property>
                 <layout class="QGridLayout" name="gridLayout_5"/>

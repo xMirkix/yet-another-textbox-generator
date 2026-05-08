@@ -1,6 +1,7 @@
 import shutil
 from pathlib import Path
 
+from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QApplication, QMessageBox
 
 from services.change_service import Changes
@@ -12,12 +13,34 @@ from configs.paths import DYNAMIC_DB
 db_path = DYNAMIC_DB
 
 def connect_welcome(ui: Ui_MainWindow):
-    ui.actionSave.triggered.connect(save_file)
+    ui.actionSave.triggered.connect(lambda: save_file(ui=ui))
     ui.actionOpen_2.triggered.connect(lambda: open_file(ui=ui))
     ui.open_file.clicked.connect(lambda: open_file(ui=ui))
     ui.actionQuit.triggered.connect(quit_app)
 
-def save_file() -> bool:
+def save_file(ui: Ui_MainWindow) -> bool:
+    file = Changes.get_current_selected_file()
+    if file is not None:
+        path = file
+    else:
+        path, _ = QFileDialog.getSaveFileName(
+            caption="Save File",
+            filter="YATG Files (*.yatg)"
+        )
+    if path:  # File got selected
+        Changes.reset()
+        if not path.endswith(".yatg"):
+            path += ".yatg"
+        shutil.copyfile(db_path, path)  # Override file from path with cache
+        window = QApplication.activeWindow()
+
+        name = Path(path).name
+        ui.centralwidget.window().setWindowTitle(f"{name} - Saved")
+        QTimer.singleShot(3000, lambda: ui.centralwidget.window().setWindowTitle(name))  # Change back after 3 seconds
+        return True
+    return False
+
+def save_file_without_ui() -> bool:
     file = Changes.get_current_selected_file()
     if file is not None:
         path = file

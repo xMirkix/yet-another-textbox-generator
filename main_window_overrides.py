@@ -2,7 +2,7 @@ from PySide6.QtWidgets import QMainWindow, QApplication
 from PySide6.QtGui import QCloseEvent
 from PySide6.QtWidgets import QMessageBox
 
-from running.connection.welcome import save_file
+from running.connection.welcome import save_file_without_ui
 from services.change_service import Changes
 from services.database_service import DBDynamicConnection
 
@@ -22,7 +22,7 @@ class MainWindow(QMainWindow):
                 QMessageBox.StandardButton.Cancel
             )
             if reply == QMessageBox.StandardButton.Save:
-                if save_file():
+                if save_file_without_ui():
                     db = DBDynamicConnection.get_instance()
                     db.connection.close()
 

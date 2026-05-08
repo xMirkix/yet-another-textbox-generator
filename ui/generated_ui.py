@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uivpnFcb.ui'
+## Form generated from reading UI file 'uiSqeafp.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -154,7 +154,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, -659, 996, 1413))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 996, 1413))
         self.verticalLayout_35 = QVBoxLayout(self.scrollAreaWidgetContents_2)
         self.verticalLayout_35.setObjectName(u"verticalLayout_35")
         self.verticalLayout = QVBoxLayout()
@@ -820,11 +820,6 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.universe_filter_input)
 
-        self.universe_filter_button = QPushButton(self.existing)
-        self.universe_filter_button.setObjectName(u"universe_filter_button")
-
-        self.horizontalLayout.addWidget(self.universe_filter_button)
-
 
         self.verticalLayout_10.addLayout(self.horizontalLayout)
 
@@ -1353,11 +1348,6 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_25.addWidget(self.characters_filter_input)
 
-        self.characters_filter_button = QPushButton(self.groupBox_5)
-        self.characters_filter_button.setObjectName(u"characters_filter_button")
-
-        self.horizontalLayout_25.addWidget(self.characters_filter_button)
-
 
         self.verticalLayout_14.addLayout(self.horizontalLayout_25)
 
@@ -1637,11 +1627,6 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_33.addWidget(self.expressions_filter_input)
 
-        self.expressions_filter_button = QPushButton(self.groupBox_7)
-        self.expressions_filter_button.setObjectName(u"expressions_filter_button")
-
-        self.horizontalLayout_33.addWidget(self.expressions_filter_button)
-
 
         self.verticalLayout_21.addLayout(self.horizontalLayout_33)
 
@@ -1793,7 +1778,6 @@ class Ui_MainWindow(object):
         self.tabs.setTabText(self.tabs.indexOf(self.generator), QCoreApplication.translate("MainWindow", u"Generator", None))
         self.existing.setTitle(QCoreApplication.translate("MainWindow", u"Existing", None))
         self.universe_filter_label.setText(QCoreApplication.translate("MainWindow", u"Filter by name", None))
-        self.universe_filter_button.setText(QCoreApplication.translate("MainWindow", u"Filter", None))
         self.create_universe.setTitle(QCoreApplication.translate("MainWindow", u"Create a new Universe", None))
         self.universe_create_name_label.setText(QCoreApplication.translate("MainWindow", u"Name", None))
         self.universe_create_preview_label.setText(QCoreApplication.translate("MainWindow", u"Preview image (optional)", None))
@@ -1835,7 +1819,6 @@ class Ui_MainWindow(object):
         self.characters_edit_confirm_button.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"Existing", None))
         self.characters_filter_label.setText(QCoreApplication.translate("MainWindow", u"Filter by name", None))
-        self.characters_filter_button.setText(QCoreApplication.translate("MainWindow", u"Filter", None))
         self.tabs.setTabText(self.tabs.indexOf(self.characters), QCoreApplication.translate("MainWindow", u"Characters", None))
         self.create_expression.setTitle(QCoreApplication.translate("MainWindow", u"Create a new expression", None))
         self.expressions_create_name_label.setText(QCoreApplication.translate("MainWindow", u"Name", None))
@@ -1855,7 +1838,6 @@ class Ui_MainWindow(object):
         self.expressions_edit_confirm_button.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("MainWindow", u"Existing", None))
         self.expressions_filter_label.setText(QCoreApplication.translate("MainWindow", u"Filter by name", None))
-        self.expressions_filter_button.setText(QCoreApplication.translate("MainWindow", u"Filter", None))
         self.tabs.setTabText(self.tabs.indexOf(self.expressions), QCoreApplication.translate("MainWindow", u"Expressions", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
     # retranslateUi

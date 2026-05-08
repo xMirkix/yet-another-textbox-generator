@@ -23,14 +23,23 @@ def get_icons() -> dict:
 
 type Entity = Universe | Character | Expression
 
+
+def _get_id(entity: Entity) -> int:
+    if isinstance(entity, Universe): return entity.universe_id
+    if isinstance(entity, Character): return entity.character_id
+    if isinstance(entity, Expression): return entity.expression_id
+    return -1
+
 def create_tile(ui: Ui_MainWindow, parent, entity: Entity) -> QGroupBox:
     tile = QGroupBox(parent)
+    tile.setProperty("entity_id", _get_id(entity))
+    tile.setProperty("entity", entity)
     tile.setMinimumSize(QSize(250, 200))
     tile.setMaximumSize(QSize(250, 200))
     layout = QVBoxLayout(tile)
 
     preview = QLabel(tile)
-    preview.setMinimumSize(QSize(230, 100))  # volle Breite des Tiles
+    preview.setMinimumSize(QSize(230, 100))  # entire with of tile
     preview.setMaximumSize(QSize(230, 100))
     preview.setAlignment(PySide6.QtCore.Qt.AlignmentFlag.AlignCenter)
     if entity.preview_image:
@@ -61,13 +70,14 @@ def create_tile(ui: Ui_MainWindow, parent, entity: Entity) -> QGroupBox:
     btn_left.clicked.connect(lambda: on_move(ui, entity, -1))
     btn_right.clicked.connect(lambda: on_move(ui, entity, +1))
     btn_edit.clicked.connect(lambda: on_edit(ui, entity))
-    btn_delete.clicked.connect(lambda: on_delete(ui, entity, tile))
+    btn_delete.clicked.connect(lambda: on_delete(entity, tile))
 
     return tile
 
 
-def insert_tile(ui: Ui_MainWindow, grid_widget, entity: Entity, cols: int = 3):
+def insert_tile(ui: Ui_MainWindow, grid_widget, entity: Entity, tile_width: int = 250, spacing: int = 10):
     tile = create_tile(ui, grid_widget, entity)
+    cols = max(1, grid_widget.width() // (tile_width + spacing))
     count = grid_widget.layout().count()
     grid_widget.layout().addWidget(tile, count // cols, count % cols)
 
@@ -98,10 +108,10 @@ def on_edit(ui: Ui_MainWindow, entity: Entity):
     if isinstance(entity, Expression):
         expressions.on_edit(ui, entity)
 
-def on_delete(ui: Ui_MainWindow, entity: Entity, tile: QGroupBox):
+def on_delete(entity: Entity, tile: QGroupBox):
     if isinstance(entity, Universe):
-        universes.on_delete(ui, entity, tile)
+        universes.on_delete(entity, tile)
     if isinstance(entity, Character):
-        characters.on_delete(ui, entity, tile)
+        characters.on_delete(entity, tile)
     if isinstance(entity, Expression):
-        expressions.on_delete(ui, entity, tile)
+        expressions.on_delete(entity, tile)
