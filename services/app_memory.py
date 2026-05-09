@@ -1,65 +1,37 @@
-from models.form_bindings import BorderSettings, SpriteSettings, FontSettings, ExportSettings
-from ui.generated_ui import Ui_MainWindow
+from models.entities import Universe, Character, Expression
 
 
 class Memory:
-    _instance: Memory | None = None
-
-    def __new__(cls, *args, **kwargs):
-        if cls._instance is None:
-            cls._instance = super().__new__(cls)
-        return cls._instance
-
-    def __init__(self, input_prompt: str,
-                 border_settings: BorderSettings,
-                 sprite_settings: SpriteSettings,
-                 font_settings: FontSettings,
-                 export_settings: ExportSettings,
-                 ui: Ui_MainWindow):
-        self.input_prompt = input_prompt
-        self.border_settings = border_settings
-        self.sprite_settings = sprite_settings
-        self.font_settings = font_settings
-        self.export_settings = export_settings
-        self.ui = ui
+    selected_universe: Universe | None = None
+    selected_character: Character | None = None
+    selected_expression: Expression | None = None
 
     @classmethod
-    def get_instance(cls) -> Memory:
-        if cls._instance is None:
-            raise RuntimeError("Memory was not initialized.")
-        return cls._instance
+    def reset(cls):
+        cls.selected_universe = None
+        cls.selected_character = None
+        cls.selected_expression = None
 
-    # --- Updater (UI → Memory) ---
+    @classmethod
+    def set_selected_universe(cls, universe: Universe | None):
+        cls.selected_universe = universe
 
-    def update_input(self):
-        self.input_prompt = self.ui.input.toPlainText()
-        # TODO add the generation function here to update output
+    @classmethod
+    def set_selected_character(cls, character: Character | None):
+        cls.selected_character = character
 
-    def update_border_settings(self):
-        self.border_settings.update(self.ui, )
+    @classmethod
+    def set_selected_expression(cls, expression: Expression | None):
+        cls.selected_expression = expression
 
-    def update_sprite_settings(self):
-        self.sprite_settings = SpriteSettings.from_ui(self.ui)
+    @classmethod
+    def get_selected_universe(cls) -> Universe | None:
+        return cls.selected_universe
 
-    def update_font_settings(self):
-        self.font_settings = FontSettings.from_ui(self.ui)
+    @classmethod
+    def get_selected_character(cls) -> Character | None:
+        return cls.selected_character
 
-    def update_export_settings(self):
-        self.export_settings = ExportSettings.from_ui(self.ui)
-
-    # --- Getter ---
-
-    def get_input_prompt(self) -> str:
-        return self.input_prompt
-
-    def get_border_settings(self) -> BorderSettings:
-        return self.border_settings
-
-    def get_sprite_settings(self) -> SpriteSettings:
-        return self.sprite_settings
-
-    def get_font_settings(self) -> FontSettings:
-        return self.font_settings
-
-    def get_export_settings(self) -> ExportSettings:
-        return self.export_settings
+    @classmethod
+    def get_selected_expression(cls) -> Expression | None:
+        return cls.selected_expression

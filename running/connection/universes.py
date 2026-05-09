@@ -4,24 +4,44 @@ from PySide6.QtCore import QTimer
 
 from models.entities import Universe
 from running.connection.resizing import GridReflowFilter
-from running.connection.tile_service import insert_tile
 from services import change_service
+from services.app_memory import Memory
 from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
+from services.tile_service import insert_tile
 from ui.generated_ui import Ui_MainWindow
-from PySide6.QtWidgets import QMessageBox, QGroupBox, QLineEdit, QLabel, QPushButton, QApplication
+from PySide6.QtWidgets import QMessageBox, QGroupBox, QLineEdit, QLabel, QPushButton
 
 
 def connect_universes(ui: Ui_MainWindow):
     GridReflowFilter(ui.universe_grid)
     ui.universe_grid.reflow_filter = GridReflowFilter(ui.universe_grid)
-    ui.universe_create_image_button.clicked.connect(lambda: select_image(ui.universe_create_image_preview, ui.universe_create_image_remove_button))
-    ui.universe_edit_image_button.clicked.connect(lambda: select_image(ui.universe_edit_image_preview, ui.universe_edit_image_remove_button))
-    ui.universe_create_image_remove_button.clicked.connect(lambda: remove_image(ui.universe_create_image_preview, ui.universe_create_image_remove_button))
-    ui.universe_edit_image_remove_button.clicked.connect(lambda: remove_image(ui.universe_edit_image_preview, ui.universe_edit_image_remove_button))
-    ui.universe_create_confirm_button.clicked.connect(lambda: create_universe(ui))
-    ui.universe_edit_confirm_button.clicked.connect(lambda: edit_universe(ui))
-    ui.universe_filter_input.textChanged.connect(lambda text: filter_universe(ui, text))
+
+    create = ui.universe_create_confirm_button
+    edit = ui.universe_edit_confirm_button
+
+    create_image = ui.universe_create_image_button
+    create_image_remove = ui.universe_create_image_remove_button
+    create_image_preview = ui.universe_create_image_preview
+
+    edit_image = ui.universe_edit_image_button
+    edit_image_remove = ui.universe_edit_image_remove_button
+    edit_image_preview = ui.universe_edit_image_preview
+
+
+    create_image.clicked.connect(lambda: select_image(create_image_preview, create_image_remove)) # On creation image selection
+
+    edit_image.clicked.connect(lambda: select_image(edit_image_preview, edit_image_remove)) # On edit image selection
+
+    create_image_remove.clicked.connect(lambda: remove_image(create_image_preview, create_image_remove)) # On creation image removal
+
+    edit_image_remove.clicked.connect(lambda: remove_image(edit_image_preview, edit_image_remove)) # On edit image removal
+
+    create.clicked.connect(lambda: create_universe(ui)) # On creation
+
+    edit.clicked.connect(lambda: edit_universe(ui)) # On edit
+
+    ui.universe_filter_input.textChanged.connect(lambda text: filter_universe(ui, text)) # On filter change
 
 def create_universe(ui: Ui_MainWindow):
     db = get_db()
@@ -66,8 +86,9 @@ def post_operation(input_to_clear: QLineEdit, pixmap_to_clear: QLabel, remove_bu
 
 def filter_universe(ui: Ui_MainWindow, name: str):
     clear_grid(ui.universe_grid)
-    for u in get_db().select_filtered_universes(name):
-        insert_tile(ui, ui.universe_grid, u)
+    for universe in get_db().select_filtered_universes(name):
+        insert_tile(ui, ui.universe_grid, universe)
+    restore_selection(ui.universe_grid)
 
 
 def on_move(ui: Ui_MainWindow, universe: Universe, direction: int):
@@ -123,6 +144,42 @@ def on_edit(ui: Ui_MainWindow, universe: Universe):
     ui.universe_edit_confirm_button.setProperty("universe", universe.universe_id)
     ui.edit_universe.show()
 
+
+def on_select(ui: Ui_MainWindow, universe: Universe, tile: QGroupBox):
+    # Deselect previous selection
+    previous = ui.universe_grid.property("selected_tile")
+    if previous:
+        previous.setStyleSheet("")
+
+    Memory.set_selected_universe(universe)
+    tile.setStyleSheet("QGroupBox { border: 1px solid orange; }")
+    ui.universe_grid.setProperty("selected_tile", tile)
+    ui.universe_grid.setProperty("selected_id", universe.universe_id)  # ID merken
+
+def restore_selection(grid_widget) -> bool:
+    selected_id = grid_widget.property("selected_id")
+    if selected_id is None:
+        return False
+    layout = grid_widget.layout()
+    tile, _ = find_tile(layout, selected_id)
+    if tile:
+        tile.setStyleSheet("QGroupBox { border: 1px solid orange; }")
+        grid_widget.setProperty("selected_tile", tile)
+        return True
+    return False
+
+def select_first_or_none(ui: Ui_MainWindow):
+    layout = ui.universe_grid.layout()
+    if layout is None or layout.count() == 0:
+        Memory.set_selected_universe(None)
+        ui.universe_grid.setProperty("selected_tile", None)
+        ui.universe_grid.setProperty("selected_id", None)
+        return
+    first_tile = layout.itemAt(0).widget()
+    if first_tile:
+        entity = first_tile.property("entity")
+        on_select(ui, entity, first_tile)
+
 def on_delete(ui: Ui_MainWindow, universe: Universe, tile: QGroupBox):
     reply = QMessageBox.warning(
         None,
@@ -134,8 +191,16 @@ def on_delete(ui: Ui_MainWindow, universe: Universe, tile: QGroupBox):
     if reply == QMessageBox.StandardButton.Cancel:
         return
 
+    was_selected = ui.universe_grid.property("selected_id") == universe.universe_id
+
     get_db().delete_universe(universe.universe_id, universe.order_position)
     tile.deleteLater()
+
+    if was_selected:
+        ui.universe_grid.setProperty("selected_tile", None)
+        ui.universe_grid.setProperty("selected_id", None)
+        QTimer.singleShot(0, lambda: select_first_or_none(ui))
+
     QTimer.singleShot(0, ui.universe_grid.reflow_filter.reflow)
 
 def get_db():
@@ -152,8 +217,10 @@ def on_tab_change(ui: Ui_MainWindow):
     for u in get_db().select_all_universes():
         insert_tile(ui, ui.universe_grid, u)
     ui.universe_filter_input.clear()
+    restore_selection(ui.universe_grid) or select_first_or_none(ui)
 
 def clear_grid(widget):
+    widget.setProperty("selected_tile", None)
     layout = widget.layout()
     if layout is None:
         return

@@ -15,6 +15,9 @@ def on_move(ui: Ui_MainWindow, character: Character, direction: int):
 def on_edit(ui: Ui_MainWindow, character: Character):
     pass
 
+def on_select(ui: Ui_MainWindow, character: Character, tile: QGroupBox):
+    pass
+
 def on_delete(ui: Ui_MainWindow,character: Character, tile: QGroupBox):
     pass
 

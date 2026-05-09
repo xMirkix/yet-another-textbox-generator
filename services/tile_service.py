@@ -5,6 +5,7 @@ from PySide6.QtGui import QIcon, QPixmap
 from configs.paths import ICON_LEFT, ICON_RIGHT, ICON_EDIT, ICON_DELETE
 from models.entities import Universe, Character, Expression
 from running.connection import universes, characters, expressions
+from running.connection.clickable_tile import ClickableTile
 from services import change_service
 from ui.generated_ui import Ui_MainWindow
 
@@ -31,7 +32,8 @@ def _get_id(entity: Entity) -> int:
     return -1
 
 def create_tile(ui: Ui_MainWindow, parent, entity: Entity) -> QGroupBox:
-    tile = QGroupBox(parent)
+    tile = ClickableTile(parent)
+    tile.clicked.connect(lambda: on_select(ui, entity, tile))
     tile.setProperty("entity_id", _get_id(entity))
     tile.setProperty("entity", entity)
     tile.setMinimumSize(QSize(250, 200))
@@ -107,6 +109,14 @@ def on_edit(ui: Ui_MainWindow, entity: Entity):
         characters.on_edit(ui, entity)
     if isinstance(entity, Expression):
         expressions.on_edit(ui, entity)
+
+def on_select(ui: Ui_MainWindow, entity: Entity, tile: QGroupBox):
+    if isinstance(entity, Universe):
+        universes.on_select(ui, entity, tile)
+    if isinstance(entity, Character):
+        characters.on_select(ui, entity, tile)
+    if isinstance(entity, Expression):
+        expressions.on_select(ui, entity, tile)
 
 def on_delete(ui: Ui_MainWindow,entity: Entity, tile: QGroupBox):
     if isinstance(entity, Universe):
