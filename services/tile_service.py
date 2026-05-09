@@ -5,7 +5,7 @@ from PySide6.QtGui import QIcon, QPixmap
 from configs.paths import ICON_LEFT, ICON_RIGHT, ICON_EDIT, ICON_DELETE
 from models.entities import Universe, Character, Expression
 from running.connection import universes, characters, expressions
-from running.connection.clickable_tile import ClickableTile
+from running.connection.existing_management.clickable_tile import ClickableTile
 from services import change_service
 from ui.generated_ui import Ui_MainWindow
 

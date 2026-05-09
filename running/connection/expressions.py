@@ -27,7 +27,7 @@ def on_delete(ui: Ui_MainWindow, character: Expression, tile: QGroupBox):
 4. Load universes into select (sorted)
 2. clear filter
 """
-def on_tab_change(ui: Ui_MainWindow):
+def reload_ui(ui: Ui_MainWindow):
     ui.edit_expression.hide()
     ui.expressions_create_character_selector.clear()
     ui.expressions_create_universe_selector.clear()

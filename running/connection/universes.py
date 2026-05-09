@@ -3,7 +3,7 @@ from typing import Callable
 from PySide6.QtCore import QTimer
 
 from models.entities import Universe
-from running.connection.resizing import GridReflowFilter
+from running.connection.existing_management.resizing import GridReflowFilter
 from services import change_service
 from services.app_memory import Memory
 from services.change_service import select_image, remove_image
@@ -54,7 +54,7 @@ def create_universe(ui: Ui_MainWindow):
         ui.universe_create_name_input,
         ui.universe_create_image_preview,
         ui.universe_create_image_remove_button,
-        lambda: on_tab_change(ui),
+        lambda: reload_ui(ui),
     )
 
 def edit_universe(ui: Ui_MainWindow):
@@ -68,7 +68,7 @@ def edit_universe(ui: Ui_MainWindow):
         ui.universe_edit_name_input,
         ui.universe_edit_image_preview,
         ui.universe_edit_image_remove_button,
-        lambda: on_tab_change(ui) # For edit to take effect
+        lambda: reload_ui(ui) # For edit to take effect
     )
 
 def form_operation(universe_id: int, name: str, pixmap, order_position: int, db_function: Callable):
@@ -211,7 +211,7 @@ def get_db():
 2. Load universes into grid
 3. clear filter
 """
-def on_tab_change(ui: Ui_MainWindow):
+def reload_ui(ui: Ui_MainWindow):
     ui.edit_universe.hide()
     clear_grid(ui.universe_grid)
     for u in get_db().select_all_universes():

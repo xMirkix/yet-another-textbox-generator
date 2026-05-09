@@ -14,7 +14,7 @@ def connect_generator(ui: Ui_MainWindow):
 2. Load universes into select (sorted)
 Universes, characters and expressions are added dynamically
 """
-def on_tab_change(ui: Ui_MainWindow):
+def reload_ui(ui: Ui_MainWindow):
     ui.expression_selector.clear()
     ui.expression_preview.clear()
     ui.character_selector.clear()

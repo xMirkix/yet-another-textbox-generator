@@ -17,10 +17,10 @@ def connect_ui(ui: Ui_MainWindow):
 def on_tab_changed(ui: Ui_MainWindow, index: int):
     tab_name = ui.tabs.tabText(index)
     if tab_name == "Generator":
-        generator.on_tab_change(ui)
+        generator.reload_ui(ui)
     elif tab_name == "Universes":
-        universes.on_tab_change(ui)
+        universes.reload_ui(ui)
     elif tab_name == "Characters":
         characters.on_tab_change(ui)
     elif tab_name == "Expressions":
-        expressions.on_tab_change(ui)
+        expressions.reload_ui(ui)
