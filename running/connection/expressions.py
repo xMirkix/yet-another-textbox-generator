@@ -8,6 +8,9 @@ from ui.generated_ui import Ui_MainWindow
 def connect_expressions(ui: Ui_MainWindow):
     pass
 
+def filter_expressions(ui: Ui_MainWindow, filter_text: str):
+    pass
+
 def on_move(ui: Ui_MainWindow, character: Expression, direction: int):
     pass
 

@@ -17,16 +17,25 @@ class GridReflowFilter(QObject):
         layout = self.grid_widget.layout()
         if layout is None:
             return
+
         available_width = self.grid_widget.width()
         cols = max(1, available_width // (self.tile_width + self.spacing))
+        
+        items = []
+        for i in range(layout.count()):
+            item = layout.itemAt(i)
+            w = item.widget()
+            if w and not w.isHidden():
+                row, col, _, _ = layout.getItemPosition(i)
+                items.append((row, col, w))
 
-        # Remove all widgets and reinsert them into the grid
-        widgets = []
+        items.sort(key=lambda x: (x[0], x[1]))
+        widgets = [w for _, _, w in items]
+
         while layout.count():
-            item = layout.takeAt(0)
-            if item.widget():
-                widgets.append(item.widget())
+            layout.takeAt(0)
 
+        # In korrekter Reihenfolge neu einfügen
         for i, w in enumerate(widgets):
             layout.addWidget(w, i // cols, i % cols)
 

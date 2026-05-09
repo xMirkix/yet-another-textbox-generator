@@ -1,7 +1,7 @@
 from models.entities import Universe, Character, Expression
 
 
-class Memory:
+class SelectionManager:
     selected_universe: Universe | None = None
     selected_character: Character | None = None
     selected_expression: Expression | None = None

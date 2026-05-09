@@ -1,16 +1,14 @@
 from typing import Callable
 
-from PySide6.QtCore import QTimer
-
 from models.entities import Universe
+from models.handler.universe_handler import UniverseHandler
 from running.connection.existing_management.resizing import GridReflowFilter
 from services import change_service
-from services.app_memory import Memory
+from services.grid_service import clear_grid, restore_selection
 from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
-from services.tile_service import insert_tile
 from ui.generated_ui import Ui_MainWindow
-from PySide6.QtWidgets import QMessageBox, QGroupBox, QLineEdit, QLabel, QPushButton
+from PySide6.QtWidgets import QMessageBox, QLineEdit, QLabel, QPushButton
 
 
 def connect_universes(ui: Ui_MainWindow):
@@ -87,50 +85,8 @@ def post_operation(input_to_clear: QLineEdit, pixmap_to_clear: QLabel, remove_bu
 def filter_universe(ui: Ui_MainWindow, name: str):
     clear_grid(ui.universe_grid)
     for universe in get_db().select_filtered_universes(name):
-        insert_tile(ui, ui.universe_grid, universe)
-    restore_selection(ui.universe_grid)
-
-
-def on_move(ui: Ui_MainWindow, universe: Universe, direction: int):
-    db = get_db()
-    new_order_position = universe.order_position + direction
-    switching_universe = db.select_universe_by_order_position(new_order_position)
-
-    if not switching_universe: # Start or end of grid
-        return
-
-    db.update_universe_order_position(universe.universe_id, new_order_position)
-    db.update_universe_order_position(switching_universe.universe_id, universe.order_position)
-
-    filter_text = ui.universe_filter_input.text()
-    if filter_text:
-        filter_universe(ui, filter_text)
-    else:
-        swap_tiles(ui.universe_grid, universe.universe_id, switching_universe.universe_id)
-
-def swap_tiles(grid_widget, id_a: int, id_b: int):
-    layout = grid_widget.layout()
-    tile_a, pos_a = find_tile(layout, id_a)
-    tile_b, pos_b = find_tile(layout, id_b)
-    if tile_a is None or tile_b is None:
-        return
-
-    # Both capped entities get updated
-    entity_a = tile_a.property("entity")
-    entity_b = tile_b.property("entity")
-    entity_a.order_position, entity_b.order_position = entity_b.order_position, entity_a.order_position
-
-    layout.addWidget(tile_a, pos_b[0], pos_b[1])
-    layout.addWidget(tile_b, pos_a[0], pos_a[1])
-
-def find_tile(layout, entity_id: int):
-    for i in range(layout.count()):
-        item = layout.itemAt(i)
-        widget = item.widget()
-        if widget and widget.property("entity_id") == entity_id:
-            row, col, _, _ = layout.getItemPosition(i)
-            return widget, (row, col)
-    return None, None
+        insert_universe_tile(ui, universe)
+    restore_selection(ui.universe_grid) or UniverseHandler(ui).select_first_or_none()
 
 def on_edit(ui: Ui_MainWindow, universe: Universe):
     ui.universe_edit_name_input.setText(universe.universe_name)
@@ -145,64 +101,6 @@ def on_edit(ui: Ui_MainWindow, universe: Universe):
     ui.edit_universe.show()
 
 
-def on_select(ui: Ui_MainWindow, universe: Universe, tile: QGroupBox):
-    # Deselect previous selection
-    previous = ui.universe_grid.property("selected_tile")
-    if previous:
-        previous.setStyleSheet("")
-
-    Memory.set_selected_universe(universe)
-    tile.setStyleSheet("QGroupBox { border: 1px solid orange; }")
-    ui.universe_grid.setProperty("selected_tile", tile)
-    ui.universe_grid.setProperty("selected_id", universe.universe_id)  # ID merken
-
-def restore_selection(grid_widget) -> bool:
-    selected_id = grid_widget.property("selected_id")
-    if selected_id is None:
-        return False
-    layout = grid_widget.layout()
-    tile, _ = find_tile(layout, selected_id)
-    if tile:
-        tile.setStyleSheet("QGroupBox { border: 1px solid orange; }")
-        grid_widget.setProperty("selected_tile", tile)
-        return True
-    return False
-
-def select_first_or_none(ui: Ui_MainWindow):
-    layout = ui.universe_grid.layout()
-    if layout is None or layout.count() == 0:
-        Memory.set_selected_universe(None)
-        ui.universe_grid.setProperty("selected_tile", None)
-        ui.universe_grid.setProperty("selected_id", None)
-        return
-    first_tile = layout.itemAt(0).widget()
-    if first_tile:
-        entity = first_tile.property("entity")
-        on_select(ui, entity, first_tile)
-
-def on_delete(ui: Ui_MainWindow, universe: Universe, tile: QGroupBox):
-    reply = QMessageBox.warning(
-        None,
-        "Warning!",
-        f"Are you sure you want to delete universe {universe.universe_name}? \n\nThis will delete all characters and expressions that are in this universe.",
-        QMessageBox.StandardButton.Yes |
-        QMessageBox.StandardButton.Cancel
-    )
-    if reply == QMessageBox.StandardButton.Cancel:
-        return
-
-    was_selected = ui.universe_grid.property("selected_id") == universe.universe_id
-
-    get_db().delete_universe(universe.universe_id, universe.order_position)
-    tile.deleteLater()
-
-    if was_selected:
-        ui.universe_grid.setProperty("selected_tile", None)
-        ui.universe_grid.setProperty("selected_id", None)
-        QTimer.singleShot(0, lambda: select_first_or_none(ui))
-
-    QTimer.singleShot(0, ui.universe_grid.reflow_filter.reflow)
-
 def get_db():
     return DBDynamicConnection.get_instance()
 
@@ -214,18 +112,10 @@ def get_db():
 def reload_ui(ui: Ui_MainWindow):
     ui.edit_universe.hide()
     clear_grid(ui.universe_grid)
-    for u in get_db().select_all_universes():
-        insert_tile(ui, ui.universe_grid, u)
+    for universe in get_db().select_all_universes():
+        insert_universe_tile(ui, universe)
     ui.universe_filter_input.clear()
-    restore_selection(ui.universe_grid) or select_first_or_none(ui)
+    restore_selection(ui.universe_grid) or UniverseHandler(ui).select_first_or_none()
 
-def clear_grid(widget):
-    widget.setProperty("selected_tile", None)
-    layout = widget.layout()
-    if layout is None:
-        return
-    while layout.count():
-        item = layout.takeAt(0)
-        w = item.widget()
-        if w:
-            w.deleteLater()
+def insert_universe_tile(ui: Ui_MainWindow, universe: Universe):
+    UniverseHandler(ui).insert_entity_tile(universe)
