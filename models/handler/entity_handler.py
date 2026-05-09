@@ -4,10 +4,12 @@ from PySide6.QtWidgets import QMessageBox, QGroupBox
 from services import grid_service
 from services.database_service import DBDynamicConnection
 from services.tile_service import insert_tile, TileConfig
+from ui.generated_ui import Ui_MainWindow
+
 
 class EntityHandler(ABC):
 
-    def __init__(self, ui):
+    def __init__(self, ui: Ui_MainWindow):
         self.ui = ui
 
     # shared logic
