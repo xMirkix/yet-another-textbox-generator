@@ -9,10 +9,6 @@ class BorderSettings:
         self.style = style
         self.color = color
 
-    def update(self, ui: Ui_MainWindow, style: int, color: int):
-        self.style = style
-        self.color = color
-
 class SpriteSettings:
     universe: int
     character: int

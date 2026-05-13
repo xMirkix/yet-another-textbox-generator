@@ -16,6 +16,9 @@ class Universe:
     def get_id(self):
         return self.universe_id
 
+    def get_name(self):
+        return self.universe_name
+
 @dataclass
 class Character:
     character_id: int
@@ -36,6 +39,9 @@ class Character:
 
     def get_id(self):
         return self.character_id
+
+    def get_name(self):
+        return self.character_name
 
 @dataclass
 class Expression:
@@ -58,3 +64,6 @@ class Expression:
 
     def get_id(self):
         return self.expression_id
+
+    def get_name(self):
+        return self.expression_name

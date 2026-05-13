@@ -32,8 +32,7 @@ if __name__ == '__main__':
     ui.setupUi(window) # Define UI from generated file
     window.ui = ui
 
-    db_path.unlink(missing_ok=True) # Delete possible existing file from unexpected exit
-    db_path.touch() # Create cache file
+    db_path.touch() # Create cache file in case it doesn't exist
 
     p = InitPopulationService()
     p.init_populate(ui) # Initialize/Populate UI with data from Files (e.g. Colors)

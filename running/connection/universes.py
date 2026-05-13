@@ -2,7 +2,7 @@ from typing import Callable
 
 from models.entities import Universe
 from models.handler.universe_handler import UniverseHandler
-from running.connection.existing_management.resizing import GridReflowFilter
+from running.connection.resizing import GridReflowFilter
 from services import change_service
 from services.grid_service import clear_grid, restore_selection
 from services.change_service import select_image, remove_image

@@ -32,7 +32,6 @@ def save_file(ui: Ui_MainWindow) -> bool:
         if not path.endswith(".yatg"):
             path += ".yatg"
         shutil.copyfile(db_path, path)  # Override file from path with cache
-        window = QApplication.activeWindow()
 
         name = Path(path).name
         ui.centralwidget.window().setWindowTitle(f"{name} - Saved")

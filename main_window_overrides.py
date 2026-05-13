@@ -24,26 +24,23 @@ class MainWindow(QMainWindow):
             if reply == QMessageBox.StandardButton.Save:
                 if save_file_without_ui():
                     db = DBDynamicConnection.get_instance()
+                    db.delete_all_tables()
                     db.connection.close()
 
-                    db_path = DBDynamicConnection.db_path
-                    db_path.unlink(missing_ok=True)
                     QApplication.quit()
                 else:
                     event.ignore()
             elif reply == QMessageBox.StandardButton.Discard:
                 db = DBDynamicConnection.get_instance()
+                db.delete_all_tables()
                 db.connection.close()
 
-                db_path = DBDynamicConnection.db_path
-                db_path.unlink(missing_ok=True)
                 QApplication.quit()
             elif reply == QMessageBox.StandardButton.Cancel:
                 event.ignore()
         else:
             db = DBDynamicConnection.get_instance()
+            db.delete_all_tables()
             db.connection.close()
 
-            db_path = DBDynamicConnection.db_path
-            db_path.unlink(missing_ok=True)
             event.accept()
