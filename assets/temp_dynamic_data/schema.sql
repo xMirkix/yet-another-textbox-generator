@@ -8,8 +8,9 @@ CREATE TABLE IF NOT EXISTS Universes (
 CREATE TABLE IF NOT EXISTS Characters (
     character_id INTEGER PRIMARY KEY AUTOINCREMENT,
     character_name TEXT NOT NULL,
-    universe_id INTEGER,
+    universe_id INTEGER NOT NULL,
     default_style INTEGER,
+    default_font INTEGER,
     default_text_transform INTEGER,
     preview_image TEXT NULL, --base64
     order_position INTEGER CHECK (order_position > 0),
@@ -20,7 +21,7 @@ CREATE TABLE IF NOT EXISTS Characters (
 CREATE TABLE IF NOT EXISTS Expressions (
     expression_id INTEGER PRIMARY KEY AUTOINCREMENT,
     expression_name TEXT NOT NULL,
-    character_id INTEGER,
+    character_id INTEGER NOT NULL,
     preview_image TEXT NOT NULL, --base64
     order_position INTEGER CHECK (order_position > 0),
     FOREIGN KEY (character_id) REFERENCES Characters (character_id)

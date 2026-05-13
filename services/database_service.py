@@ -170,15 +170,16 @@ class DBDynamicConnection:
 
     def insert_character(self, character: Character):
         self.connection.execute(
-            "INSERT INTO Characters (character_name, universe_id, default_style, default_text_transform, preview_image, order_position) VALUES (?, ?, ?, ?, ?, ?)",
-            (character.character_name, character.universe_id, character.default_style, character.default_text_transform, character.preview_image, character.order_position)
+            "INSERT INTO Characters (character_name, universe_id, default_style, default_font, default_text_transform, preview_image, order_position) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (character.character_name, character.universe_id, character.default_style, character.default_font,
+             character.default_text_transform, character.preview_image, character.order_position)
         )
         self.connection.commit()
         Changes.change()
 
     def insert_expression(self, expression: Expression):
         self.connection.execute(
-            "INSERT INTO Expressions (expression_name, character_id, image, order_position) VALUES (?, ?, ?, ?)",
+            "INSERT INTO Expressions (expression_name, character_id, preview_image, order_position) VALUES (?, ?, ?, ?)",
             (expression.expression_name, expression.character_id, expression.preview_image, expression.order_position)
         )
         self.connection.commit()
@@ -197,8 +198,9 @@ class DBDynamicConnection:
 
     def update_character(self, character):
         self.connection.execute(
-            "UPDATE Characters SET character_name = ?, universe_id = ?, default_style = ?, default_text_transform = ?, preview_image = ? WHERE character_id = ?",
-            (character.character_name, character.universe_id, character.default_style, character.default_text_transform, character.preview_image, character.character_id)
+            "UPDATE Characters SET character_name = ?, universe_id = ?, default_style = ?, default_font = ?, default_text_transform = ?, preview_image = ? WHERE character_id = ?",
+            (character.character_name, character.universe_id, character.default_style, character.default_font,
+             character.default_text_transform, character.preview_image, character.character_id)
         )
         self.connection.commit()
         Changes.change()
@@ -221,7 +223,7 @@ class DBDynamicConnection:
 
     def update_expression(self, expression):
         self.connection.execute(
-            "UPDATE Expressions SET expression_name = ?, character_id = ?, image = ? WHERE expression_id = ?",
+            "UPDATE Expressions SET expression_name = ?, character_id = ?, preview_image = ? WHERE expression_id = ?",
             (expression.expression_name, expression.character_id, expression.preview_image, expression.expression_id)
         )
         self.connection.commit()

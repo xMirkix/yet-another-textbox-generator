@@ -7,12 +7,12 @@ from services import change_service
 from services.grid_service import clear_grid, restore_selection
 from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
+from services.selection_manager import SelectionManager
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QMessageBox, QLineEdit, QLabel, QPushButton
 
 
 def connect_universes(ui: Ui_MainWindow):
-    GridReflowFilter(ui.universe_grid)
     ui.universe_grid.reflow_filter = GridReflowFilter(ui.universe_grid)
 
     create = ui.universe_create_confirm_button
@@ -27,9 +27,9 @@ def connect_universes(ui: Ui_MainWindow):
     edit_image_preview = ui.universe_edit_image_preview
 
 
-    create_image.clicked.connect(lambda: select_image(create_image_preview, create_image_remove)) # On creation image selection
+    create_image.clicked.connect(lambda: select_image(create_image_preview, create_image_remove, width=230, height=100)) # On creation image selection
 
-    edit_image.clicked.connect(lambda: select_image(edit_image_preview, edit_image_remove)) # On edit image selection
+    edit_image.clicked.connect(lambda: select_image(edit_image_preview, edit_image_remove, width=230, height=100)) # On edit image selection
 
     create_image_remove.clicked.connect(lambda: remove_image(create_image_preview, create_image_remove)) # On creation image removal
 
@@ -39,7 +39,7 @@ def connect_universes(ui: Ui_MainWindow):
 
     edit.clicked.connect(lambda: edit_universe(ui)) # On edit
 
-    ui.universe_filter_input.textChanged.connect(lambda text: filter_universe(ui, text)) # On filter change
+    ui.universe_filter_input.textChanged.connect(lambda text: filter_universes(ui, text)) # On filter change
 
 def create_universe(ui: Ui_MainWindow):
     db = get_db()
@@ -56,7 +56,7 @@ def create_universe(ui: Ui_MainWindow):
     )
 
 def edit_universe(ui: Ui_MainWindow):
-    universe_id = ui.universe_edit_confirm_button.property("universe")
+    universe_id = ui.universe_edit_confirm_button.property("universe_id")
     universe_name = ui.universe_edit_name_input.text()
     pixmap = ui.universe_edit_image_preview.pixmap()
     db = get_db()
@@ -82,11 +82,15 @@ def post_operation(input_to_clear: QLineEdit, pixmap_to_clear: QLabel, remove_bu
     remove_image(pixmap_to_clear, remove_button)
     post_function()
 
-def filter_universe(ui: Ui_MainWindow, name: str):
+def filter_universes(ui: Ui_MainWindow, name: str):
     clear_grid(ui.universe_grid)
     for universe in get_db().select_filtered_universes(name):
         insert_universe_tile(ui, universe)
-    restore_selection(ui.universe_grid) or UniverseHandler(ui).select_first_or_none()
+
+    selected = SelectionManager.get_selected_universe()
+
+    if selected:
+        restore_selection(ui.universe_grid, selected.get_id())
 
 def on_edit(ui: Ui_MainWindow, universe: Universe):
     ui.universe_edit_name_input.setText(universe.universe_name)
@@ -97,7 +101,7 @@ def on_edit(ui: Ui_MainWindow, universe: Universe):
         ui.universe_edit_image_preview.clear()
         ui.universe_edit_image_preview.setText("Nothing...")
         ui.universe_edit_image_remove_button.hide()
-    ui.universe_edit_confirm_button.setProperty("universe", universe.universe_id)
+    ui.universe_edit_confirm_button.setProperty("universe_id", universe.universe_id)
     ui.edit_universe.show()
 
 
@@ -115,7 +119,10 @@ def reload_ui(ui: Ui_MainWindow):
     for universe in get_db().select_all_universes():
         insert_universe_tile(ui, universe)
     ui.universe_filter_input.clear()
-    restore_selection(ui.universe_grid) or UniverseHandler(ui).select_first_or_none()
+
+    selected = SelectionManager.get_selected_universe()
+    restore_selection(ui.universe_grid, selected.get_id() if selected else None) or UniverseHandler(
+        ui).select_first_or_none()
 
 def insert_universe_tile(ui: Ui_MainWindow, universe: Universe):
     UniverseHandler(ui).insert_entity_tile(universe)

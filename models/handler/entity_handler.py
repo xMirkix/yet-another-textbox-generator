@@ -16,7 +16,7 @@ class EntityHandler(ABC):
 
     def handle_move(self, entity, direction: int):
         new_pos = entity.order_position + direction
-        other = self.db_select_by_order(new_pos)
+        other = self.db_select_by_order(entity, new_pos)
         if not other:
             return
         self.db_update_order(entity, new_pos)
@@ -34,35 +34,26 @@ class EntityHandler(ABC):
         )
         if reply == QMessageBox.StandardButton.Cancel:
             return
-
-        was_selected = self.grid_widget().property("selected_id") == entity.get_id()
+        selected = self.get_selected_entity()
+        was_selected = selected is not None and selected.get_id() == entity.get_id()
         self.on_before_delete(entity)
         self.db_delete(entity)
         tile.hide()
         tile.deleteLater()
-
         if was_selected:
-            self.grid_widget().setProperty("selected_tile", None)
-            self.grid_widget().setProperty("selected_id", None)
+            self.clear_selection_manager()
             QTimer.singleShot(0, self.select_first_or_none)
-
         QTimer.singleShot(0, self.grid_widget().reflow_filter.reflow)
 
     def handle_select(self, entity, tile: QGroupBox):
-        previous = self.grid_widget().property("selected_tile")
-        if previous:
-            previous.setStyleSheet("")
+        grid_service.clear_tile_selection(self.grid_widget())
         self.update_selection_manager(entity)
         tile.setStyleSheet("QGroupBox { border: 1px solid orange; }")
-        self.grid_widget().setProperty("selected_tile", tile)
-        self.grid_widget().setProperty("selected_id", entity.get_id())
 
     def select_first_or_none(self):
         layout = self.grid_widget().layout()
         if layout is None or layout.count() == 0:
             self.clear_selection_manager()
-            self.grid_widget().setProperty("selected_tile", None)
-            self.grid_widget().setProperty("selected_id", None)
             return
         first = layout.itemAt(0).widget()
         if first:
@@ -87,7 +78,7 @@ class EntityHandler(ABC):
     def db_delete(self, entity): ...
 
     @abstractmethod
-    def db_select_by_order(self, pos: int): ...
+    def db_select_by_order(self, entity, new_pos: int): ...
 
     @abstractmethod
     def db_update_order(self, entity, new_pos: int): ...
@@ -110,8 +101,11 @@ class EntityHandler(ABC):
     @abstractmethod
     def reload_filtered(self): ...
 
-    def on_before_delete(self, entity):
-        pass  # Override für Cascade
+    @abstractmethod
+    def get_selected_entity(self): ...
+
+    @abstractmethod
+    def on_before_delete(self, entity): ... # Override für Cascade
 
     def get_db(self):
         return DBDynamicConnection.get_instance()

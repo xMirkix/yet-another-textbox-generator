@@ -18,7 +18,7 @@ def base64_to_pixmap(base64_str: str) -> QPixmap:
     pixmap.loadFromData(byte_array)
     return pixmap
 
-def select_image(preview: QLabel, remove_button: QPushButton):
+def select_image(preview: QLabel, remove_button: QPushButton, width: int = 69, height: int = 70):
     path, _ = QFileDialog.getOpenFileName(
         caption="Choose Image",
         filter="PNG Pictures (*.png)"
@@ -27,8 +27,8 @@ def select_image(preview: QLabel, remove_button: QPushButton):
         return  # Nothing selected
 
     image = QImage(path)
-    if image.width() > 69 or image.height() > 70:
-        QMessageBox.warning(None, "Invalid Picture", f"Picture size cannot exceed the resolution 69x70 (current: {image.width()}x{image.height()})")
+    if image.width() > width or image.height() > height:
+        QMessageBox.warning(None, "Invalid Picture", f"Picture size cannot exceed the resolution {width}x{height} (current: {image.width()}x{image.height()})")
         return
 
     preview.setPixmap(QPixmap(image))

@@ -13,10 +13,10 @@ class Universe:
         if not self.order_position or self.order_position <= 0:
             raise ValueError('Order position must be provided and not negative')
 
-    def get_id(self):
+    def get_id(self) -> int:
         return self.universe_id
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self.universe_name
 
 @dataclass
@@ -25,6 +25,7 @@ class Character:
     character_name: str
     universe_id: int
     default_style: int
+    default_font: int
     default_text_transform: int
     preview_image: str | None
     order_position: int
@@ -37,10 +38,10 @@ class Character:
         if self.order_position is None or self.order_position < 0:
             raise ValueError('Order position must be provided and not negative')
 
-    def get_id(self):
+    def get_id(self) -> int:
         return self.character_id
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self.character_name
 
 @dataclass
@@ -62,8 +63,8 @@ class Expression:
         if self.order_position is None or self.order_position < 0:
             raise ValueError('Order position must be provided and not negative')
 
-    def get_id(self):
+    def get_id(self) -> int:
         return self.expression_id
 
-    def get_name(self):
+    def get_name(self) -> str:
         return self.expression_name

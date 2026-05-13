@@ -9,8 +9,8 @@ class UniverseHandler(EntityHandler):
     def db_delete(self, universe):
         self.get_db().delete_universe(universe.universe_id, universe.order_position)
 
-    def db_select_by_order(self, pos):
-        return self.get_db().select_universe_by_order_position(pos)
+    def db_select_by_order(self, entity, new_pos: int):
+        return self.get_db().select_universe_by_order_position(new_pos)
 
     def db_update_order(self, universe, new_pos):
         self.get_db().update_universe_order_position(universe.universe_id, new_pos)
@@ -42,5 +42,8 @@ class UniverseHandler(EntityHandler):
         return self.ui.universe_filter_input.text()
 
     def reload_filtered(self):
-        from running.connection.universes import filter_universe
-        filter_universe(self.ui, self.filter_text())
+        from running.connection.universes import filter_universes
+        filter_universes(self.ui, self.filter_text())
+
+    def get_selected_entity(self):
+        return SelectionManager.get_selected_universe()

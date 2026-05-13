@@ -47,6 +47,7 @@ class InitPopulationService:
         self.populate_border_settings(ui)  # Original/Deltarune/... and Color
         self.populate_sprite_settings(ui)  # Color
         self.populate_font_settings(ui)  # Determination Mono/Comic Sans/..., Asterisk Colors, Uppercase/Lowercase/...
+        self.populate_character_page(ui)
         hide_edits(ui)  # Hide edit blocks
         hide_removes(ui)
         self.create_temporary_data_tables()
@@ -64,6 +65,12 @@ class InitPopulationService:
         populate_selector(self.colors, ui.asterisk_color_selector_2, ui.asterisk_color_preview_2, WHITE_PREVIEW)
         populate_selector(self.colors, ui.asterisk_color_selector_3, ui.asterisk_color_preview_3, WHITE_PREVIEW)
         populate_selector(self.transforms, ui.text_transform_selector)
+
+    def populate_character_page(self, ui: Ui_MainWindow):
+        populate_selector(self.fonts, ui.characters_create_font_selector, filter_fn=lambda f: is_font_installed(str(f)))
+        populate_selector(self.fonts, ui.characters_edit_font_selector, filter_fn=lambda f: is_font_installed(str(f)))
+        populate_selector(self.transforms, ui.characters_create_transform_selector)
+        populate_selector(self.transforms, ui.characters_edit_transform_selector)
 
     def create_temporary_data_tables(self):
         self.dynamic_connection.create_all_tables()

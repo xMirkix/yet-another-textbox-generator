@@ -19,8 +19,27 @@ def swap_tiles(grid_widget, id_a: int, id_b: int):
     layout.addWidget(tile_a, pos_b[0], pos_b[1])
     layout.addWidget(tile_b, pos_a[0], pos_a[1])
 
+def clear_tile_selection(grid_widget):
+    layout = grid_widget.layout()
+    if layout is None:
+        return
+    for i in range(layout.count()):
+        item = layout.itemAt(i)
+        w = item.widget()
+        if w:
+            w.setStyleSheet("")
+
+def restore_selection(grid_widget, entity_id: int | None) -> bool:
+    if entity_id is None:
+        return False
+    tile, _ = find_tile(grid_widget.layout(), entity_id)
+    if tile:
+        clear_tile_selection(grid_widget)
+        tile.setStyleSheet("QGroupBox { border: 1px solid orange; }")
+        return True
+    return False
+
 def clear_grid(widget):
-    widget.setProperty("selected_tile", None)
     layout = widget.layout()
     if layout is None:
         return
@@ -29,14 +48,3 @@ def clear_grid(widget):
         w = item.widget()
         if w:
             w.deleteLater()
-
-def restore_selection(grid_widget) -> bool:
-    selected_id = grid_widget.property("selected_id")
-    if selected_id is None:
-        return False
-    tile, _ = find_tile(grid_widget.layout(), selected_id)
-    if tile:
-        tile.setStyleSheet("QGroupBox { border: 1px solid orange; }")
-        grid_widget.setProperty("selected_tile", tile)
-        return True
-    return False

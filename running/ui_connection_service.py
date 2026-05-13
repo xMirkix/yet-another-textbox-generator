@@ -21,6 +21,6 @@ def on_tab_changed(ui: Ui_MainWindow, index: int):
     elif tab_name == "Universes":
         universes.reload_ui(ui)
     elif tab_name == "Characters":
-        characters.on_tab_change(ui)
+        characters.reload_ui(ui)
     elif tab_name == "Expressions":
         expressions.reload_ui(ui)

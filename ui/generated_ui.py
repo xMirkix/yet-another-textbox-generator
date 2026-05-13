@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiSqeafp.ui'
+## Form generated from reading UI file 'uiSmYpsZ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -1114,6 +1114,21 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_15.addLayout(self.horizontalLayout_46)
 
+        self.horizontalLayout_27 = QHBoxLayout()
+        self.horizontalLayout_27.setObjectName(u"horizontalLayout_27")
+        self.characters_create_font_label = QLabel(self.create_character)
+        self.characters_create_font_label.setObjectName(u"characters_create_font_label")
+
+        self.horizontalLayout_27.addWidget(self.characters_create_font_label)
+
+        self.characters_create_font_selector = QComboBox(self.create_character)
+        self.characters_create_font_selector.setObjectName(u"characters_create_font_selector")
+
+        self.horizontalLayout_27.addWidget(self.characters_create_font_selector)
+
+
+        self.verticalLayout_15.addLayout(self.horizontalLayout_27)
+
         self.horizontalLayout_47 = QHBoxLayout()
         self.horizontalLayout_47.setObjectName(u"horizontalLayout_47")
         self.characters_create_transform_label = QLabel(self.create_character)
@@ -1255,6 +1270,21 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_39.addLayout(self.horizontalLayout_55)
+
+        self.horizontalLayout_29 = QHBoxLayout()
+        self.horizontalLayout_29.setObjectName(u"horizontalLayout_29")
+        self.characters_edit_font_label = QLabel(self.edit_character)
+        self.characters_edit_font_label.setObjectName(u"characters_edit_font_label")
+
+        self.horizontalLayout_29.addWidget(self.characters_edit_font_label)
+
+        self.characters_edit_font_selector = QComboBox(self.edit_character)
+        self.characters_edit_font_selector.setObjectName(u"characters_edit_font_selector")
+
+        self.horizontalLayout_29.addWidget(self.characters_edit_font_selector)
+
+
+        self.verticalLayout_39.addLayout(self.horizontalLayout_29)
 
         self.horizontalLayout_50 = QHBoxLayout()
         self.horizontalLayout_50.setObjectName(u"horizontalLayout_50")
@@ -1799,6 +1829,7 @@ class Ui_MainWindow(object):
         self.characters_create_style_label.setText(QCoreApplication.translate("MainWindow", u"Default Style", None))
         self.characters_create_style_regular_option.setText(QCoreApplication.translate("MainWindow", u"Regular", None))
         self.characters_create_style_dark_world_option.setText(QCoreApplication.translate("MainWindow", u"Dark World", None))
+        self.characters_create_font_label.setText(QCoreApplication.translate("MainWindow", u"Default Font", None))
         self.characters_create_transform_label.setText(QCoreApplication.translate("MainWindow", u"Default Text Transform", None))
         self.characters_create_preview_label.setText(QCoreApplication.translate("MainWindow", u"Preview image (optional)", None))
         self.characters_create_image_button.setText(QCoreApplication.translate("MainWindow", u"Select image", None))
@@ -1811,6 +1842,7 @@ class Ui_MainWindow(object):
         self.characters_edit_style_label.setText(QCoreApplication.translate("MainWindow", u"Default Style", None))
         self.characters_edit_style_regular_option.setText(QCoreApplication.translate("MainWindow", u"Regular", None))
         self.characters_edit_style_dark_world_option.setText(QCoreApplication.translate("MainWindow", u"Dark World", None))
+        self.characters_edit_font_label.setText(QCoreApplication.translate("MainWindow", u"Default Font", None))
         self.characters_edit_transform_label.setText(QCoreApplication.translate("MainWindow", u"Default Text Transform", None))
         self.characters_edit_preview_label.setText(QCoreApplication.translate("MainWindow", u"Preview image (optional)", None))
         self.characters_edit_image_button.setText(QCoreApplication.translate("MainWindow", u"Select image", None))

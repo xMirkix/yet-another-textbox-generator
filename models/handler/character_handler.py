@@ -7,13 +7,13 @@ class CharacterHandler(EntityHandler):
         return self.ui.characters_grid
 
     def db_delete(self, character):
-        self.get_db().delete_universe(character.character_id, character.order_position) # TODO
+        self.get_db().delete_character(character.character_id, character.universe_id, character.order_position)
 
-    def db_select_by_order(self, pos):
-        return self.get_db().select_universe_by_order_position(pos) # TODO
+    def db_select_by_order(self, entity, new_pos: int):
+        return self.get_db().select_character_by_order_position(entity.universe_id, new_pos)
 
     def db_update_order(self, character, new_pos):
-        self.get_db().update_universe_order_position(character.character_id, new_pos)  # TODO
+        self.get_db().update_character_order_position(character.character_id, new_pos)
 
     def handle_edit(self, character):
         from running.connection.characters import on_edit
@@ -42,3 +42,6 @@ class CharacterHandler(EntityHandler):
     def reload_filtered(self):
         from running.connection.characters import filter_characters
         filter_characters(self.ui, self.filter_text())
+
+    def get_selected_entity(self):
+        return SelectionManager.get_selected_character()

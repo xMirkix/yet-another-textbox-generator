@@ -4,7 +4,7 @@ from PySide6.QtCore import QSize
 from PySide6.QtGui import QIcon
 from configs.paths import ICON_LEFT, ICON_RIGHT, ICON_EDIT, ICON_DELETE
 from models.entities import Universe, Character, Expression
-from running.connection.existing_management.clickable_tile import ClickableTile
+from services.existing_management.clickable_tile import ClickableTile
 from services import change_service
 from models.tile_config import TileConfig
 
@@ -38,7 +38,7 @@ def create_tile(parent, entity: Entity, config: TileConfig) -> ClickableTile:
     if entity.preview_image:
         preview.setPixmap(change_service.base64_to_pixmap(entity.preview_image))
     else:
-        preview.setText("Nothing...")
+        preview.setText(entity.get_name())
     preview.setAutoFillBackground(True)
     palette = preview.palette()
     palette.setColor(preview.backgroundRole(), PySide6.QtGui.QColor("black"))

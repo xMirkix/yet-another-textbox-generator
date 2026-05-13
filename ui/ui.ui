@@ -1833,6 +1833,20 @@
                   </layout>
                  </item>
                  <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_27">
+                   <item>
+                    <widget class="QLabel" name="characters_create_font_label">
+                     <property name="text">
+                      <string>Default Font</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="characters_create_font_selector"/>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_47">
                    <item>
                     <widget class="QLabel" name="characters_create_transform_label">
@@ -2024,6 +2038,20 @@
                       <string>Dark World</string>
                      </property>
                     </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_29">
+                   <item>
+                    <widget class="QLabel" name="characters_edit_font_label">
+                     <property name="text">
+                      <string>Default Font</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="characters_edit_font_selector"/>
                    </item>
                   </layout>
                  </item>
