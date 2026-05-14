@@ -2321,6 +2321,13 @@
                   </widget>
                  </item>
                  <item>
+                  <widget class="QPushButton" name="expressions_create_image_remove_button">
+                   <property name="text">
+                    <string>Remove</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
                   <widget class="QLabel" name="expressions_create_image_preview">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
@@ -2473,6 +2480,13 @@
                   <widget class="QPushButton" name="expressions_edit_image_button">
                    <property name="text">
                     <string>Select image</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="expressions_edit_image_remove_button">
+                   <property name="text">
+                    <string>Remove</string>
                    </property>
                   </widget>
                  </item>
