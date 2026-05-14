@@ -4,6 +4,7 @@ from PySide6.QtWidgets import QComboBox, QLabel
 
 from models.entities import Universe, Character, Expression
 from services import change_service
+from services.database_service import DBDynamicConnection
 
 
 class SelectionManager:
@@ -40,6 +41,34 @@ class SelectionManager:
     @classmethod
     def get_selected_expression(cls) -> Expression | None:
         return cls.selected_expression
+
+    @classmethod
+    def try_to_select_first_universe_character_expression(cls):
+        db = get_db()
+        universes = db.select_all_universes()
+        if len(universes) == 0:
+            return
+        cls.set_selected_universe(universes[0])
+        characters = db.select_all_characters_from_universe(universes[0].universe_id)
+        if len(characters) == 0:
+            return
+        cls.set_selected_character(characters[0])
+        expressions = db.select_all_expressions_from_character(characters[0].character_id)
+        if len(expressions) == 0:
+            return
+        cls.set_selected_expression(expressions[0])
+
+    @classmethod
+    def try_to_select_first_character_from_current_universe(cls):
+        db = get_db()
+        universe = cls.get_selected_universe()
+        if universe is None:
+            return
+        characters = db.select_all_characters_from_universe(universe.universe_id)
+        if len(characters) == 0:
+            return
+        cls.set_selected_character(characters[0])
+
 
 def init_entity(db_function: Callable, selector: QComboBox, preview: QLabel | None, selected: Universe | Character | Expression | None) -> bool:
     any_entity_exists = load_entities(db_function, selector)
@@ -89,3 +118,6 @@ def find_by_id(combo_box, search_id):
         if obj.get_id() == search_id:
             return i
     return -1
+
+def get_db():
+    return DBDynamicConnection.get_instance()

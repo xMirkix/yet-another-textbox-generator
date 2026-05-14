@@ -32,6 +32,8 @@ def hide_removes(ui: Ui_MainWindow):
     ui.universe_edit_image_remove_button.hide()
     ui.characters_create_image_remove_button.hide()
     ui.characters_edit_image_remove_button.hide()
+    ui.expressions_create_image_remove_button.hide()
+    ui.expressions_edit_image_remove_button.hide()
 
 class InitPopulationService:
 

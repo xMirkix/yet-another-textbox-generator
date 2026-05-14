@@ -234,6 +234,8 @@ class DBDynamicConnection:
             "UPDATE Expressions SET order_position = ? WHERE expression_id = ?",
             (order_position, expression_id)
         )
+        self.connection.commit()
+        Changes.change()
 
     # DELETES
 

@@ -48,7 +48,6 @@ class Character:
 class Expression:
     expression_id: int
     expression_name: str
-    universe_id: int
     character_id: int
     preview_image: bytes
     order_position: int

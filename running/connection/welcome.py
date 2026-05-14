@@ -5,6 +5,7 @@ from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QApplication, QMessageBox
 from services.change_service import Changes
 from services.database_service import DBDynamicConnection
+from services.selection_manager import SelectionManager
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QFileDialog
 from configs.paths import DYNAMIC_DB
@@ -90,6 +91,7 @@ def manage_file(ui: Ui_MainWindow, caption: str, filter_name: str) -> bool:
         window_title = Path(path).name
         ui.centralwidget.window().setWindowTitle(window_title)
         Changes.set_current_selected_file(path)
+        SelectionManager.try_to_select_first_universe_character_expression()
         return True
     return False
 

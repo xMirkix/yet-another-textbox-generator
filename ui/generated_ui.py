@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiSmYpsZ.ui'
+## Form generated from reading UI file 'uiWivaMK.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -1494,6 +1494,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_37.addWidget(self.expressions_create_image_button)
 
+        self.expressions_create_image_remove_button = QPushButton(self.create_expression)
+        self.expressions_create_image_remove_button.setObjectName(u"expressions_create_image_remove_button")
+
+        self.horizontalLayout_37.addWidget(self.expressions_create_image_remove_button)
+
         self.expressions_create_image_preview = QLabel(self.create_expression)
         self.expressions_create_image_preview.setObjectName(u"expressions_create_image_preview")
         sizePolicy5.setHeightForWidth(self.expressions_create_image_preview.sizePolicy().hasHeightForWidth())
@@ -1603,6 +1608,11 @@ class Ui_MainWindow(object):
         self.expressions_edit_image_button.setObjectName(u"expressions_edit_image_button")
 
         self.horizontalLayout_67.addWidget(self.expressions_edit_image_button)
+
+        self.expressions_edit_image_remove_button = QPushButton(self.edit_expression)
+        self.expressions_edit_image_remove_button.setObjectName(u"expressions_edit_image_remove_button")
+
+        self.horizontalLayout_67.addWidget(self.expressions_edit_image_remove_button)
 
         self.expressions_edit_image_preview = QLabel(self.edit_expression)
         self.expressions_edit_image_preview.setObjectName(u"expressions_edit_image_preview")
@@ -1858,6 +1868,7 @@ class Ui_MainWindow(object):
         self.expressions_create_character_label.setText(QCoreApplication.translate("MainWindow", u"Character", None))
         self.expressions_create_preview_label.setText(QCoreApplication.translate("MainWindow", u"Image (required)", None))
         self.expressions_create_image_button.setText(QCoreApplication.translate("MainWindow", u"Select image", None))
+        self.expressions_create_image_remove_button.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.expressions_create_image_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.expressions_create_confirm_button.setText(QCoreApplication.translate("MainWindow", u"Create", None))
         self.edit_expression.setTitle(QCoreApplication.translate("MainWindow", u"Edit", None))
@@ -1866,6 +1877,7 @@ class Ui_MainWindow(object):
         self.expressions_edit_character_label.setText(QCoreApplication.translate("MainWindow", u"Character", None))
         self.expressions_edit_preview_label.setText(QCoreApplication.translate("MainWindow", u"Image", None))
         self.expressions_edit_image_button.setText(QCoreApplication.translate("MainWindow", u"Select image", None))
+        self.expressions_edit_image_remove_button.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
         self.expressions_edit_image_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.expressions_edit_confirm_button.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("MainWindow", u"Existing", None))

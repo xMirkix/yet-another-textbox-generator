@@ -9,6 +9,9 @@ class ExpressionHandler(EntityHandler):
     def db_delete(self, expression):
         self.get_db().delete_expression(expression.expression_id, expression.character_id, expression.order_position)
 
+    def on_before_delete(self, entity):
+        pass # Does nothing since nothing depends on expressions
+
     def db_select_by_order(self, entity, new_pos: int):
         return self.get_db().select_expression_by_order_position(entity.character_id, new_pos)
 

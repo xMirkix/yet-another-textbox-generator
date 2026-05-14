@@ -108,11 +108,6 @@ def on_edit(ui: Ui_MainWindow, universe: Universe):
 def get_db():
     return DBDynamicConnection.get_instance()
 
-"""
-1. hide edit like initial
-2. Load universes into grid
-3. clear filter
-"""
 def reload_ui(ui: Ui_MainWindow):
     ui.edit_universe.hide()
     clear_grid(ui.universe_grid)

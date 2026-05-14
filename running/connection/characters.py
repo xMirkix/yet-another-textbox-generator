@@ -191,28 +191,21 @@ def get_text_transform_index(character: Character, edit_selector: QComboBox) -> 
             return i
     return -1
 
-
-"""
-1. hide edit like initial
-2. Wipe universes
-3. Load universes into select (sorted)
-4. clear filter
-"""
 def reload_ui(ui: Ui_MainWindow):
     ui.edit_character.hide()
     ui.characters_create_universe_selector.clear() # Wipe universes
     ui.characters_edit_universe_selector.clear()
     ui.characters_filter_input.clear()
 
-    init_entity(get_db().select_all_universes, ui.characters_create_universe_selector, None, SelectionManager.get_selected_universe())
-    init_entity(get_db().select_all_universes, ui.characters_edit_universe_selector, None, SelectionManager.get_selected_universe())
-
-    clear_grid(ui.characters_grid)
-
     universe = SelectionManager.get_selected_universe()
 
     if universe is None:
         return
+
+    init_entity(get_db().select_all_universes, ui.characters_create_universe_selector, None, universe)
+    init_entity(get_db().select_all_universes, ui.characters_edit_universe_selector, None, universe)
+
+    clear_grid(ui.characters_grid)
 
     for character in get_db().select_all_characters_from_universe(universe.universe_id):
         insert_character_tile(ui, character)
