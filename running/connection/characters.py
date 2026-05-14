@@ -114,7 +114,7 @@ def form_operation(character_id: int, name: str, universe_id: int, default_style
         QMessageBox.warning(None, "Invalid Universe", "Character must belong to a universe")
         return
 
-    pixmap = change_service.pixmap_to_base64(pixmap) if pixmap else None
+    pixmap = change_service.pixmap_to_blob(pixmap) if pixmap else None
     character = Character(character_id=character_id,
                           character_name=name,
                           universe_id=universe_id,
@@ -169,7 +169,7 @@ def on_edit(ui: Ui_MainWindow, character: Character):
     ui.characters_edit_transform_selector.setCurrentIndex(selected_transform_index)
 
     if character.preview_image is not None:
-        ui.characters_edit_image_preview.setPixmap(change_service.base64_to_pixmap(character.preview_image))
+        ui.characters_edit_image_preview.setPixmap(change_service.blob_to_pixmap(character.preview_image))
         ui.characters_edit_image_remove_button.show()
     else:
         ui.characters_edit_image_preview.clear()

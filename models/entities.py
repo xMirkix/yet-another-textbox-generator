@@ -4,7 +4,7 @@ from dataclasses import dataclass
 class Universe:
     universe_id: int
     universe_name: str
-    preview_image: str | None
+    preview_image: bytes | None
     order_position: int
 
     def __post_init__(self):
@@ -27,7 +27,7 @@ class Character:
     default_style: int
     default_font: int
     default_text_transform: int
-    preview_image: str | None
+    preview_image: bytes | None
     order_position: int
 
 
@@ -50,7 +50,7 @@ class Expression:
     expression_name: str
     universe_id: int
     character_id: int
-    preview_image: str
+    preview_image: bytes
     order_position: int
 
     def __post_init__(self):

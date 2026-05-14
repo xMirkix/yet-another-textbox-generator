@@ -36,7 +36,7 @@ def create_tile(parent, entity: Entity, config: TileConfig) -> ClickableTile:
     preview.setMaximumSize(QSize(230, 100))
     preview.setAlignment(PySide6.QtCore.Qt.AlignmentFlag.AlignCenter)
     if entity.preview_image:
-        preview.setPixmap(change_service.base64_to_pixmap(entity.preview_image))
+        preview.setPixmap(change_service.blob_to_pixmap(entity.preview_image))
     else:
         preview.setText(entity.get_name())
     preview.setAutoFillBackground(True)

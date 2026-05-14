@@ -77,11 +77,11 @@ def override_with_selected_if_exists(selector: QComboBox, selected: Universe | C
 
     selector.setCurrentIndex(index)  # Set selected entity
 
-def set_preview(preview_object: str | None, preview_ui: QLabel): # Sets universe preview image to first universe
+def set_preview(preview_object: bytes | None, preview_ui: QLabel): # Sets universe preview image to first universe
     if not preview_object:
         preview_ui.setText("Nothing...")
         return
-    preview_ui.setPixmap(change_service.base64_to_pixmap(preview_object))
+    preview_ui.setPixmap(change_service.blob_to_pixmap(preview_object))
 
 def find_by_id(combo_box, search_id):
     for i in range(combo_box.count()):

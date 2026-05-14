@@ -73,7 +73,7 @@ def form_operation(universe_id: int, name: str, pixmap, order_position: int, db_
     if not name:
         QMessageBox.warning(None, "Invalid Name", "Name cannot be empty")
         return
-    pixmap = change_service.pixmap_to_base64(pixmap) if pixmap else None
+    pixmap = change_service.pixmap_to_blob(pixmap) if pixmap else None
     universe = Universe(universe_id, name, pixmap, order_position)
     db_function(universe)
 
@@ -95,7 +95,7 @@ def filter_universes(ui: Ui_MainWindow, name: str):
 def on_edit(ui: Ui_MainWindow, universe: Universe):
     ui.universe_edit_name_input.setText(universe.universe_name)
     if universe.preview_image is not None:
-        ui.universe_edit_image_preview.setPixmap(change_service.base64_to_pixmap(universe.preview_image))
+        ui.universe_edit_image_preview.setPixmap(change_service.blob_to_pixmap(universe.preview_image))
         ui.universe_edit_image_remove_button.show()
     else:
         ui.universe_edit_image_preview.clear()

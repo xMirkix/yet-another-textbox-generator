@@ -5,17 +5,16 @@ from PySide6.QtGui import QPixmap, QImage
 from PySide6.QtWidgets import QFileDialog, QLabel, QPushButton, QMessageBox
 
 
-def pixmap_to_base64(pixmap: QPixmap) -> str:
+def pixmap_to_blob(pixmap: QPixmap) -> bytes:
     buffer = QBuffer()
     buffer.open(QBuffer.OpenModeFlag.WriteOnly)
     pixmap.save(buffer, "PNG")
-    return base64.b64encode(buffer.data()).decode("utf-8")
+    return bytes(buffer.data())
 
 
-def base64_to_pixmap(base64_str: str) -> QPixmap:
-    byte_array = QByteArray.fromBase64(base64_str.encode("utf-8"))
+def blob_to_pixmap(blob: bytes) -> QPixmap:
     pixmap = QPixmap()
-    pixmap.loadFromData(byte_array)
+    pixmap.loadFromData(blob)
     return pixmap
 
 def select_image(preview: QLabel, remove_button: QPushButton, width: int = 69, height: int = 70):

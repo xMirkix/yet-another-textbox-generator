@@ -1,9 +1,8 @@
 import shutil
+import zipfile
 from pathlib import Path
-
 from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QApplication, QMessageBox
-
 from services.change_service import Changes
 from services.database_service import DBDynamicConnection
 from ui.generated_ui import Ui_MainWindow
@@ -18,6 +17,15 @@ def connect_welcome(ui: Ui_MainWindow):
     ui.open_file.clicked.connect(lambda: open_file(ui=ui))
     ui.actionQuit.triggered.connect(quit_app)
 
+def _zip_db_to(path: str):
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as zf:
+        zf.write(db_path, arcname="data.db")
+
+def _unzip_db_from(path: str):
+    with zipfile.ZipFile(path, "r") as zf:
+        with zf.open("data.db") as src, open(db_path, "wb") as dst:
+            shutil.copyfileobj(src, dst)
+
 def save_file(ui: Ui_MainWindow) -> bool:
     file = Changes.get_current_selected_file()
     if file is not None:
@@ -27,15 +35,14 @@ def save_file(ui: Ui_MainWindow) -> bool:
             caption="Save File",
             filter="YATG Files (*.yatg)"
         )
-    if path:  # File got selected
-        Changes.reset()
+    if path:
         if not path.endswith(".yatg"):
             path += ".yatg"
-        shutil.copyfile(db_path, path)  # Override file from path with cache
-
+        _zip_db_to(path)
+        Changes.reset()
         name = Path(path).name
         ui.centralwidget.window().setWindowTitle(f"{name} - Saved")
-        QTimer.singleShot(3000, lambda: ui.centralwidget.window().setWindowTitle(name))  # Change back after 3 seconds
+        QTimer.singleShot(3000, lambda: ui.centralwidget.window().setWindowTitle(name))
         return True
     return False
 
@@ -48,13 +55,14 @@ def save_file_without_ui() -> bool:
             caption="Save File",
             filter="YATG Files (*.yatg)"
         )
-    if path:  # File got selected
-        Changes.reset()
+    if path: # File got selected
         if not path.endswith(".yatg"):
             path += ".yatg"
-        shutil.copyfile(db_path, path)  # Override file from path with cache
+        _zip_db_to(path)
+        Changes.reset()
         return True
     return False
+
 
 def open_file(ui: Ui_MainWindow) -> bool:
     if Changes.get_state():
@@ -74,14 +82,14 @@ def manage_file(ui: Ui_MainWindow, caption: str, filter_name: str) -> bool:
         caption=caption,
         filter=filter_name
     )
-    if path:  # File got selected
+    if path:
         Changes.reset()
-        shutil.copyfile(path, db_path) # Override cache file with selected
-        DBDynamicConnection.get_instance().reconnect() # reconnect to database
-        ui.tabs.setCurrentIndex(0) # Switch to welcome Tab
+        _unzip_db_from(path)
+        DBDynamicConnection.get_instance().reconnect()
+        ui.tabs.setCurrentIndex(0)
         window_title = Path(path).name
-        ui.centralwidget.window().setWindowTitle(window_title) # Set window title
-        Changes.set_current_selected_file(path) # Save current file for quick save
+        ui.centralwidget.window().setWindowTitle(window_title)
+        Changes.set_current_selected_file(path)
         return True
     return False
 
