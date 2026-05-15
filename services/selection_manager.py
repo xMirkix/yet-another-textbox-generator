@@ -69,6 +69,17 @@ class SelectionManager:
             return
         cls.set_selected_character(characters[0])
 
+    @classmethod
+    def try_to_select_first_expression_from_current_character(cls):
+        db = get_db()
+        character = cls.get_selected_character()
+        if character is None:
+            return
+        expressions = db.select_all_expressions_from_character(character.character_id)
+        if len(expressions) == 0:
+            return
+        cls.set_selected_expression(expressions[0])
+
 
 def init_entity(db_function: Callable, selector: QComboBox, preview: QLabel | None, selected: Universe | Character | Expression | None) -> bool:
     any_entity_exists = load_entities(db_function, selector)

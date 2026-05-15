@@ -27,10 +27,10 @@ def reload_ui(ui: Ui_MainWindow):
 
     has_any_entity = init_entity(lambda: db.select_all_characters_from_universe(ui.universe_selector.currentData().universe_id), ui.character_selector, ui.character_preview, SelectionManager.get_selected_character())
 
-    if has_any_entity:
+    if not has_any_entity:
         return
 
-    init_entity(lambda: db.select_all_expressions_from_character(ui.character_selector.currentData()), ui.expression_selector, ui.expression_preview, SelectionManager.get_selected_expression())
+    init_entity(lambda: db.select_all_expressions_from_character(ui.character_selector.currentData().character_id), ui.expression_selector, ui.expression_preview, SelectionManager.get_selected_expression())
 
 def get_db():
     return DBDynamicConnection.get_instance()

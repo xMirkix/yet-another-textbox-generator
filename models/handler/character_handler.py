@@ -25,6 +25,7 @@ class CharacterHandler(EntityHandler):
 
     def update_selection_manager(self, character):
         SelectionManager.set_selected_character(character)
+        SelectionManager.try_to_select_first_expression_from_current_character()
 
     def clear_selection_manager(self):
         SelectionManager.set_selected_character(None)

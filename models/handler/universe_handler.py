@@ -25,6 +25,7 @@ class UniverseHandler(EntityHandler):
 
     def update_selection_manager(self, universe):
         SelectionManager.set_selected_universe(universe)
+        SelectionManager.try_to_select_first_character_from_current_universe()
 
     def clear_selection_manager(self):
         SelectionManager.set_selected_universe(None)
