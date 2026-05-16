@@ -28,9 +28,9 @@ def connect_characters(ui: Ui_MainWindow):
     edit_image_preview = ui.characters_edit_image_preview
 
     create_image.clicked.connect(
-        lambda: select_image(create_image_preview, create_image_remove, width=200, height=100))  # On creation image selection
+        lambda: select_image(create_image_preview, create_image_remove, width=230, height=100))  # On creation image selection
 
-    edit_image.clicked.connect(lambda: select_image(edit_image_preview, edit_image_remove, width=200, height=100))  # On edit image selection
+    edit_image.clicked.connect(lambda: select_image(edit_image_preview, edit_image_remove, width=230, height=100))  # On edit image selection
 
     create_image_remove.clicked.connect(
         lambda: remove_image(create_image_preview, create_image_remove))  # On creation image removal
