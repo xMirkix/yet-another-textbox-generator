@@ -66,6 +66,8 @@ class SelectionManager:
             return
         characters = db.select_all_characters_from_universe(universe.universe_id)
         if len(characters) == 0:
+            SelectionManager.set_selected_character(None)
+            SelectionManager.set_selected_expression(None)
             return
         cls.set_selected_character(characters[0])
 
@@ -92,7 +94,7 @@ def init_entity(db_function: Callable, selector: QComboBox, preview: QLabel | No
     entity = selector.currentData()
 
     if preview is not None:
-        set_preview(entity.preview_image, preview)
+        set_preview(entity.preview_image, preview, entity)
 
     return True
 
@@ -117,9 +119,9 @@ def override_with_selected_if_exists(selector: QComboBox, selected: Universe | C
 
     selector.setCurrentIndex(index)  # Set selected entity
 
-def set_preview(preview_object: bytes | None, preview_ui: QLabel): # Sets universe preview image to first universe
+def set_preview(preview_object: bytes | None, preview_ui: QLabel, entity: Universe | Character | Expression): # Sets universe preview image to first universe
     if not preview_object:
-        preview_ui.setText("Nothing...")
+        preview_ui.setText(entity.get_name())
         return
     preview_ui.setPixmap(change_service.blob_to_pixmap(preview_object))
 

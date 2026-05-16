@@ -47,16 +47,16 @@ def connect_expressions(ui: Ui_MainWindow):
     ui.expressions_filter_input.textChanged.connect(lambda text: filter_expressions(ui, text))  # On filter change
 
     ui.expressions_create_universe_selector.activated.connect(
-        lambda index: universe_change(ui, index)
+        lambda: universe_change(ui)
     )
 
     ui.expressions_create_character_selector.activated.connect(
         lambda index: character_change(ui, index)
     )
 
-def universe_change(ui: Ui_MainWindow, index):
+def universe_change(ui: Ui_MainWindow):
     ui.edit_expression.hide()
-    new_universe : Universe = ui.expressions_create_universe_selector.itemData(index)
+    new_universe : Universe = ui.expressions_create_universe_selector.currentData()
     SelectionManager.set_selected_universe(new_universe)
     SelectionManager.try_to_select_first_character_from_current_universe()
     reload_ui(ui)
@@ -175,6 +175,7 @@ def reload_ui(ui: Ui_MainWindow):
     ui.expressions_edit_character_selector.clear()
     ui.expressions_edit_universe_selector.clear()
     ui.expressions_filter_input.clear()
+    clear_grid(ui.expressions_grid)
 
     universe = SelectionManager.get_selected_universe()
     if universe is None:
@@ -189,8 +190,6 @@ def reload_ui(ui: Ui_MainWindow):
 
     init_entity(lambda: get_db().select_all_characters_from_universe(universe.universe_id), ui.expressions_create_character_selector, None, character)
     init_entity(lambda: get_db().select_all_characters_from_universe(universe.universe_id), ui.expressions_edit_character_selector, None, character)
-
-    clear_grid(ui.expressions_grid)
 
     for expression in get_db().select_all_expressions_from_character(character.character_id):
         insert_expression_tile(ui, expression)
