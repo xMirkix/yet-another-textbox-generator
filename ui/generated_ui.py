@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiKjgYDm.ui'
+## Form generated from reading UI file 'uiefRHmO.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -595,14 +595,11 @@ class Ui_MainWindow(object):
 
         self.font_label = QLabel(self.tab_3)
         self.font_label.setObjectName(u"font_label")
+        self.font_label.setMinimumSize(QSize(300, 0))
         self.font_label.setFont(font1)
         self.font_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_16.addWidget(self.font_label)
-
-        self.horizontalSpacer_30 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_16.addItem(self.horizontalSpacer_30)
 
         self.font_selector = QComboBox(self.tab_3)
         self.font_selector.setObjectName(u"font_selector")
@@ -649,14 +646,11 @@ class Ui_MainWindow(object):
 
         self.asterisk_label = QLabel(self.tab_3)
         self.asterisk_label.setObjectName(u"asterisk_label")
+        self.asterisk_label.setMinimumSize(QSize(300, 0))
         self.asterisk_label.setFont(font1)
         self.asterisk_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_17.addWidget(self.asterisk_label)
-
-        self.horizontalSpacer_44 = QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_17.addItem(self.horizontalSpacer_44)
 
         self.horizontalLayout_20 = QHBoxLayout()
         self.horizontalLayout_20.setObjectName(u"horizontalLayout_20")
@@ -716,48 +710,52 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_18.addWidget(self.line_51)
 
-        self.asterisk_color = QLabel(self.tab_3)
+        self.asterisk_color_everything = QWidget(self.tab_3)
+        self.asterisk_color_everything.setObjectName(u"asterisk_color_everything")
+        self.horizontalLayout_41 = QHBoxLayout(self.asterisk_color_everything)
+        self.horizontalLayout_41.setObjectName(u"horizontalLayout_41")
+        self.asterisk_color = QLabel(self.asterisk_color_everything)
         self.asterisk_color.setObjectName(u"asterisk_color")
+        self.asterisk_color.setMinimumSize(QSize(300, 0))
         self.asterisk_color.setFont(font1)
         self.asterisk_color.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.horizontalLayout_18.addWidget(self.asterisk_color)
+        self.horizontalLayout_41.addWidget(self.asterisk_color)
 
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.horizontalSpacer_35 = QSpacerItem(15, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_5.addItem(self.horizontalSpacer_35)
-
-        self.asterisk_color_selector_2 = QComboBox(self.tab_3)
+        self.asterisk_color_selector_2 = QComboBox(self.asterisk_color_everything)
         self.asterisk_color_selector_2.setObjectName(u"asterisk_color_selector_2")
 
         self.horizontalLayout_5.addWidget(self.asterisk_color_selector_2)
 
-        self.asterisk_color_selector_1 = QComboBox(self.tab_3)
+        self.asterisk_color_selector_1 = QComboBox(self.asterisk_color_everything)
         self.asterisk_color_selector_1.setObjectName(u"asterisk_color_selector_1")
 
         self.horizontalLayout_5.addWidget(self.asterisk_color_selector_1)
 
-        self.asterisk_color_selector_3 = QComboBox(self.tab_3)
+        self.asterisk_color_selector_3 = QComboBox(self.asterisk_color_everything)
         self.asterisk_color_selector_3.setObjectName(u"asterisk_color_selector_3")
 
         self.horizontalLayout_5.addWidget(self.asterisk_color_selector_3)
 
 
-        self.horizontalLayout_18.addLayout(self.horizontalLayout_5)
+        self.horizontalLayout_41.addLayout(self.horizontalLayout_5)
 
         self.horizontalSpacer_32 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_18.addItem(self.horizontalSpacer_32)
+        self.horizontalLayout_41.addItem(self.horizontalSpacer_32)
 
         self.horizontalSpacer_19 = QSpacerItem(200, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_18.addItem(self.horizontalSpacer_19)
+        self.horizontalLayout_41.addItem(self.horizontalSpacer_19)
 
         self.horizontalSpacer_31 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_18.addItem(self.horizontalSpacer_31)
+        self.horizontalLayout_41.addItem(self.horizontalSpacer_31)
+
+
+        self.horizontalLayout_18.addWidget(self.asterisk_color_everything)
 
         self.line_56 = QFrame(self.tab_3)
         self.line_56.setObjectName(u"line_56")
@@ -778,20 +776,21 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_52.addWidget(self.line_50)
 
-        self.asterisk_color_values = QLabel(self.tab_3)
+        self.asterisk_color_values_everything = QWidget(self.tab_3)
+        self.asterisk_color_values_everything.setObjectName(u"asterisk_color_values_everything")
+        self.horizontalLayout_42 = QHBoxLayout(self.asterisk_color_values_everything)
+        self.horizontalLayout_42.setObjectName(u"horizontalLayout_42")
+        self.asterisk_color_values = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_values.setObjectName(u"asterisk_color_values")
+        self.asterisk_color_values.setMinimumSize(QSize(300, 0))
         self.asterisk_color_values.setFont(font1)
         self.asterisk_color_values.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.horizontalLayout_52.addWidget(self.asterisk_color_values)
-
-        self.horizontalSpacer_36 = QSpacerItem(30, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_52.addItem(self.horizontalSpacer_36)
+        self.horizontalLayout_42.addWidget(self.asterisk_color_values)
 
         self.horizontalLayout_8 = QHBoxLayout()
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.asterisk_color_preview_2 = QLabel(self.tab_3)
+        self.asterisk_color_preview_2 = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_preview_2.setObjectName(u"asterisk_color_preview_2")
         sizePolicy7 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
         sizePolicy7.setHorizontalStretch(0)
@@ -805,7 +804,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_8.addWidget(self.asterisk_color_preview_2)
 
-        self.asterisk_color_preview_1 = QLabel(self.tab_3)
+        self.asterisk_color_preview_1 = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_preview_1.setObjectName(u"asterisk_color_preview_1")
         sizePolicy7.setHeightForWidth(self.asterisk_color_preview_1.sizePolicy().hasHeightForWidth())
         self.asterisk_color_preview_1.setSizePolicy(sizePolicy7)
@@ -816,7 +815,7 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_8.addWidget(self.asterisk_color_preview_1)
 
-        self.asterisk_color_preview_3 = QLabel(self.tab_3)
+        self.asterisk_color_preview_3 = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_preview_3.setObjectName(u"asterisk_color_preview_3")
         sizePolicy7.setHeightForWidth(self.asterisk_color_preview_3.sizePolicy().hasHeightForWidth())
         self.asterisk_color_preview_3.setSizePolicy(sizePolicy7)
@@ -828,19 +827,22 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.addWidget(self.asterisk_color_preview_3)
 
 
-        self.horizontalLayout_52.addLayout(self.horizontalLayout_8)
+        self.horizontalLayout_42.addLayout(self.horizontalLayout_8)
 
         self.horizontalSpacer_34 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_52.addItem(self.horizontalSpacer_34)
+        self.horizontalLayout_42.addItem(self.horizontalSpacer_34)
 
         self.horizontalSpacer_20 = QSpacerItem(200, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_52.addItem(self.horizontalSpacer_20)
+        self.horizontalLayout_42.addItem(self.horizontalSpacer_20)
 
         self.horizontalSpacer_33 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_52.addItem(self.horizontalSpacer_33)
+        self.horizontalLayout_42.addItem(self.horizontalSpacer_33)
+
+
+        self.horizontalLayout_52.addWidget(self.asterisk_color_values_everything)
 
         self.line_55 = QFrame(self.tab_3)
         self.line_55.setObjectName(u"line_55")
@@ -870,14 +872,11 @@ class Ui_MainWindow(object):
 
         self.text_style_label = QLabel(self.tab_3)
         self.text_style_label.setObjectName(u"text_style_label")
+        self.text_style_label.setMinimumSize(QSize(300, 0))
         self.text_style_label.setFont(font1)
         self.text_style_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_19.addWidget(self.text_style_label)
-
-        self.horizontalSpacer_41 = QSpacerItem(10, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_19.addItem(self.horizontalSpacer_41)
 
         self.horizontalLayout_12 = QHBoxLayout()
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
@@ -942,6 +941,7 @@ class Ui_MainWindow(object):
 
         self.text_transform_label = QLabel(self.tab_3)
         self.text_transform_label.setObjectName(u"text_transform_label")
+        self.text_transform_label.setMinimumSize(QSize(300, 0))
         self.text_transform_label.setFont(font1)
         self.text_transform_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -1016,21 +1016,28 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_30 = QHBoxLayout()
         self.horizontalLayout_30.setObjectName(u"horizontalLayout_30")
-        self.format_png_option = QRadioButton(self.tab_4)
+        self.widget_4 = QWidget(self.tab_4)
+        self.widget_4.setObjectName(u"widget_4")
+        self.horizontalLayout_39 = QHBoxLayout(self.widget_4)
+        self.horizontalLayout_39.setObjectName(u"horizontalLayout_39")
+        self.format_png_option = QRadioButton(self.widget_4)
         self.format_png_option.setObjectName(u"format_png_option")
         self.format_png_option.setChecked(True)
 
-        self.horizontalLayout_30.addWidget(self.format_png_option)
+        self.horizontalLayout_39.addWidget(self.format_png_option)
 
-        self.label_6 = QLabel(self.tab_4)
+        self.label_6 = QLabel(self.widget_4)
         self.label_6.setObjectName(u"label_6")
 
-        self.horizontalLayout_30.addWidget(self.label_6)
+        self.horizontalLayout_39.addWidget(self.label_6)
 
-        self.format_gif_option = QRadioButton(self.tab_4)
+        self.format_gif_option = QRadioButton(self.widget_4)
         self.format_gif_option.setObjectName(u"format_gif_option")
 
-        self.horizontalLayout_30.addWidget(self.format_gif_option)
+        self.horizontalLayout_39.addWidget(self.format_gif_option)
+
+
+        self.horizontalLayout_30.addWidget(self.widget_4)
 
 
         self.horizontalLayout_6.addLayout(self.horizontalLayout_30)
@@ -1140,21 +1147,28 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_31 = QHBoxLayout()
         self.horizontalLayout_31.setObjectName(u"horizontalLayout_31")
-        self.size_small_option = QRadioButton(self.tab_4)
+        self.widget_5 = QWidget(self.tab_4)
+        self.widget_5.setObjectName(u"widget_5")
+        self.horizontalLayout_40 = QHBoxLayout(self.widget_5)
+        self.horizontalLayout_40.setObjectName(u"horizontalLayout_40")
+        self.size_small_option = QRadioButton(self.widget_5)
         self.size_small_option.setObjectName(u"size_small_option")
 
-        self.horizontalLayout_31.addWidget(self.size_small_option)
+        self.horizontalLayout_40.addWidget(self.size_small_option)
 
-        self.size_medium_option = QRadioButton(self.tab_4)
+        self.size_medium_option = QRadioButton(self.widget_5)
         self.size_medium_option.setObjectName(u"size_medium_option")
         self.size_medium_option.setChecked(True)
 
-        self.horizontalLayout_31.addWidget(self.size_medium_option)
+        self.horizontalLayout_40.addWidget(self.size_medium_option)
 
-        self.size_big_option = QRadioButton(self.tab_4)
+        self.size_big_option = QRadioButton(self.widget_5)
         self.size_big_option.setObjectName(u"size_big_option")
 
-        self.horizontalLayout_31.addWidget(self.size_big_option)
+        self.horizontalLayout_40.addWidget(self.size_big_option)
+
+
+        self.horizontalLayout_31.addWidget(self.widget_5)
 
 
         self.horizontalLayout_7.addLayout(self.horizontalLayout_31)
@@ -2258,7 +2272,7 @@ class Ui_MainWindow(object):
         self.border_style_label.setText(QCoreApplication.translate("MainWindow", u"Border Style", None))
         self.border_style_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.border_color_label.setText(QCoreApplication.translate("MainWindow", u"Border Color", None))
-        self.border_color_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
+        self.border_color_preview.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Border Settings", None))
         self.universe_label.setText(QCoreApplication.translate("MainWindow", u"Universe", None))
         self.universe_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
@@ -2267,7 +2281,7 @@ class Ui_MainWindow(object):
         self.expression_label.setText(QCoreApplication.translate("MainWindow", u"Expression", None))
         self.expression_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.expression_color_label.setText(QCoreApplication.translate("MainWindow", u"Expression Color", None))
-        self.expression_color_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
+        self.expression_color_preview.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Sprite Settings", None))
         self.font_label.setText(QCoreApplication.translate("MainWindow", u"Font", None))
         self.asterisk_label.setText(QCoreApplication.translate("MainWindow", u"Asterisk", None))
@@ -2277,9 +2291,9 @@ class Ui_MainWindow(object):
         self.label_2.setText("")
         self.asterisk_color.setText(QCoreApplication.translate("MainWindow", u"Asterisk Color", None))
         self.asterisk_color_values.setText(QCoreApplication.translate("MainWindow", u"Values", None))
-        self.asterisk_color_preview_2.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.asterisk_color_preview_1.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
-        self.asterisk_color_preview_3.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
+        self.asterisk_color_preview_2.setText("")
+        self.asterisk_color_preview_1.setText("")
+        self.asterisk_color_preview_3.setText("")
         self.text_style_label.setText(QCoreApplication.translate("MainWindow", u"Text Style", None))
         self.label_5.setText("")
         self.text_style_regular_option.setText(QCoreApplication.translate("MainWindow", u"Regular", None))

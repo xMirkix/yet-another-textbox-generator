@@ -23,7 +23,7 @@ VALUES ('no changes'),
 
 INSERT INTO BorderStyles (border_name, preview_file_name, source_image_file_name)
 VALUES ('Original Box','undertale_preview', 'Original Box'),
-       ('Deltarune','deltarune_preview.png', 'Deltarune');
+       ('Deltarune','deltarune_preview', 'Deltarune');
 
 INSERT INTO Fonts (font_name)
 VALUES ('Determination Mono'),

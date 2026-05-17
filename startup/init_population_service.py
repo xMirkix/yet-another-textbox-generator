@@ -1,11 +1,11 @@
 from PySide6.QtWidgets import QComboBox
 
 from services.database_service import DBStaticConnection, DBDynamicConnection
-from startup.in_memory.static_classes import TextFont
+from startup.in_memory.static_classes import TextFont, Color
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtGui import QFontDatabase
 import PySide6.QtGui
-from configs.paths import UNDERTALE_PREVIEW, WHITE_PREVIEW
+from configs.paths import UNDERTALE_PREVIEW
 
 def populate_selector(items, selector, preview=None, preview_path=None, filter_fn=None):
     for item in items:
@@ -13,6 +13,16 @@ def populate_selector(items, selector, preview=None, preview_path=None, filter_f
             selector.addItem(str(item), userData=item)
     if preview and preview_path:
         preview.setPixmap(PySide6.QtGui.QPixmap(str(preview_path)))
+
+def populate_color_selector(items: list[Color], selector, preview=None):
+    for item in items:
+        selector.addItem(str(item), userData=item)
+    if preview:
+        first = items[0]
+        preview.setAutoFillBackground(True)
+        palette = preview.palette()
+        palette.setColor(preview.backgroundRole(),PySide6.QtGui.QColor(first.r, first.g, first.b, 255))
+        preview.setPalette(palette)
 
 def check_with_system_fonts(fonts: list[TextFont], element: QComboBox):
     for f in fonts:
@@ -56,16 +66,16 @@ class InitPopulationService:
 
     def populate_border_settings(self, ui: Ui_MainWindow):
         populate_selector(self.styles, ui.border_style_selector, ui.border_style_preview, UNDERTALE_PREVIEW)
-        populate_selector(self.colors, ui.border_color_selector, ui.border_color_preview, WHITE_PREVIEW)
+        populate_color_selector(self.colors, ui.border_color_selector, ui.border_color_preview)
 
     def populate_sprite_settings(self, ui: Ui_MainWindow):
-        populate_selector(self.colors, ui.expression_color_selector, ui.expression_color_preview, WHITE_PREVIEW)
+        populate_color_selector(self.colors, ui.expression_color_selector, ui.expression_color_preview)
 
     def populate_font_settings(self, ui: Ui_MainWindow):
         populate_selector(self.fonts, ui.font_selector, filter_fn=lambda f: is_font_installed(str(f)))
-        populate_selector(self.colors, ui.asterisk_color_selector_1, ui.asterisk_color_preview_1, WHITE_PREVIEW)
-        populate_selector(self.colors, ui.asterisk_color_selector_2, ui.asterisk_color_preview_2, WHITE_PREVIEW)
-        populate_selector(self.colors, ui.asterisk_color_selector_3, ui.asterisk_color_preview_3, WHITE_PREVIEW)
+        populate_color_selector(self.colors, ui.asterisk_color_selector_1, ui.asterisk_color_preview_1)
+        populate_color_selector(self.colors, ui.asterisk_color_selector_2, ui.asterisk_color_preview_2)
+        populate_color_selector(self.colors, ui.asterisk_color_selector_3, ui.asterisk_color_preview_3)
         populate_selector(self.transforms, ui.text_transform_selector)
 
     def populate_character_page(self, ui: Ui_MainWindow):

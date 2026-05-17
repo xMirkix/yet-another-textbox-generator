@@ -4,7 +4,7 @@ class BorderStyle:
     preview_file_name: str
     source_image_file_name: str
 
-    def __init__(self, border_id: int, border_name: str, source_image_file_name: str, preview_file_name: str):
+    def __init__(self, border_id: int, border_name: str,  preview_file_name: str, source_image_file_name: str):
         self.border_id = border_id
         if border_name is not None:
             self.border_name = border_name
