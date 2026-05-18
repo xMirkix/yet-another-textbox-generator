@@ -99,6 +99,8 @@ def edit_expression(ui: Ui_MainWindow):
     form_operation(expression_id, expression_name, character_id, pixmap, 42,
                    db.update_expression)  # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
 
+    SelectionManager.set_selected_expression(db.select_expression_by_id(expression_id))
+
     post_operation(
         ui.expressions_edit_name_input,
         ui.expressions_edit_image_preview,

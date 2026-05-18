@@ -103,6 +103,10 @@ class DBDynamicConnection:
     def count_universes(self) -> int:
         return self.connection.execute("SELECT COUNT(*) FROM Universes").fetchone()[0]
 
+    def select_universe_by_id(self, universe_id) -> Universe | None:
+        rows = self.connection.execute("SELECT * FROM Universes WHERE universe_id = ?", (universe_id,)).fetchone()
+        return Universe(*rows) if rows is not None else None
+
     def select_all_characters_from_universe(self, universe_id: int) -> list[Character]:
         rows = self.connection.execute(
             "SELECT * FROM Characters WHERE universe_id = ? ORDER BY order_position", (universe_id,)
@@ -128,6 +132,10 @@ class DBDynamicConnection:
         return self.connection.execute(
             "SELECT COUNT(*) FROM Characters WHERE universe_id = ?", (universe_id,)
         ).fetchone()[0]
+
+    def select_character_by_id(self, character_id) -> Character | None:
+        rows = self.connection.execute("SELECT * FROM Characters WHERE character_id = ?", (character_id,)).fetchone()
+        return Character(*rows) if rows is not None else None
 
     def select_all_expressions_from_character(self, character_id: int) -> list[Expression]:
         rows = self.connection.execute(
@@ -156,6 +164,10 @@ class DBDynamicConnection:
         return self.connection.execute(
             "SELECT COUNT(*) FROM Expressions WHERE character_id = ?", (character_id,)
         ).fetchone()[0]
+
+    def select_expression_by_id(self, expression_id) -> Expression | None:
+        rows = self.connection.execute("SELECT * FROM Expressions WHERE expression_id = ?", (expression_id,)).fetchone()
+        return Expression(*rows) if rows is not None else None
 
     # INSERTS
 

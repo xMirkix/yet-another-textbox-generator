@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiefRHmO.ui'
+## Form generated from reading UI file 'uisoEcjP.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -335,6 +335,61 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addWidget(self.line_36)
 
+        self.horizontalLayout_43 = QHBoxLayout()
+        self.horizontalLayout_43.setObjectName(u"horizontalLayout_43")
+        self.line_33 = QFrame(self.tab_2)
+        self.line_33.setObjectName(u"line_33")
+        self.line_33.setFrameShape(QFrame.Shape.VLine)
+        self.line_33.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.horizontalLayout_43.addWidget(self.line_33)
+
+        self.label_9 = QLabel(self.tab_2)
+        self.label_9.setObjectName(u"label_9")
+        sizePolicy3.setHeightForWidth(self.label_9.sizePolicy().hasHeightForWidth())
+        self.label_9.setSizePolicy(sizePolicy3)
+        self.label_9.setMinimumSize(QSize(0, 0))
+        self.label_9.setFont(font1)
+        self.label_9.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout_43.addWidget(self.label_9)
+
+        self.label_10 = QLabel(self.tab_2)
+        self.label_10.setObjectName(u"label_10")
+
+        self.horizontalLayout_43.addWidget(self.label_10)
+
+        self.horizontalLayout_69 = QHBoxLayout()
+        self.horizontalLayout_69.setObjectName(u"horizontalLayout_69")
+        self.horizontalSpacer_35 = QSpacerItem(195, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_69.addItem(self.horizontalSpacer_35)
+
+        self.include_checkbox = QCheckBox(self.tab_2)
+        self.include_checkbox.setObjectName(u"include_checkbox")
+        sizePolicy5.setHeightForWidth(self.include_checkbox.sizePolicy().hasHeightForWidth())
+        self.include_checkbox.setSizePolicy(sizePolicy5)
+        self.include_checkbox.setChecked(True)
+
+        self.horizontalLayout_69.addWidget(self.include_checkbox)
+
+        self.horizontalSpacer_36 = QSpacerItem(200, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_69.addItem(self.horizontalSpacer_36)
+
+
+        self.horizontalLayout_43.addLayout(self.horizontalLayout_69)
+
+        self.line_66 = QFrame(self.tab_2)
+        self.line_66.setObjectName(u"line_66")
+        self.line_66.setFrameShape(QFrame.Shape.VLine)
+        self.line_66.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.horizontalLayout_43.addWidget(self.line_66)
+
+
+        self.verticalLayout_4.addLayout(self.horizontalLayout_43)
+
         self.horizontalLayout_10 = QHBoxLayout()
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
         self.line_34 = QFrame(self.tab_2)
@@ -356,9 +411,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_10.addWidget(self.universe_selector)
 
+        self.horizontalLayout_68 = QHBoxLayout()
+        self.horizontalLayout_68.setObjectName(u"horizontalLayout_68")
         self.horizontalSpacer_12 = QSpacerItem(90, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_10.addItem(self.horizontalSpacer_12)
+        self.horizontalLayout_68.addItem(self.horizontalSpacer_12)
 
         self.universe_preview = QLabel(self.tab_2)
         self.universe_preview.setObjectName(u"universe_preview")
@@ -369,11 +426,14 @@ class Ui_MainWindow(object):
         self.universe_preview.setAutoFillBackground(True)
         self.universe_preview.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.horizontalLayout_10.addWidget(self.universe_preview)
+        self.horizontalLayout_68.addWidget(self.universe_preview)
 
         self.horizontalSpacer_11 = QSpacerItem(90, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_10.addItem(self.horizontalSpacer_11)
+        self.horizontalLayout_68.addItem(self.horizontalSpacer_11)
+
+
+        self.horizontalLayout_10.addLayout(self.horizontalLayout_68)
 
         self.line_35 = QFrame(self.tab_2)
         self.line_35.setObjectName(u"line_35")
@@ -413,9 +473,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_13.addWidget(self.character_selector)
 
+        self.horizontalLayout_60 = QHBoxLayout()
+        self.horizontalLayout_60.setObjectName(u"horizontalLayout_60")
         self.horizontalSpacer_14 = QSpacerItem(90, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_13.addItem(self.horizontalSpacer_14)
+        self.horizontalLayout_60.addItem(self.horizontalSpacer_14)
 
         self.character_preview = QLabel(self.tab_2)
         self.character_preview.setObjectName(u"character_preview")
@@ -429,11 +491,14 @@ class Ui_MainWindow(object):
         self.character_preview.setAutoFillBackground(True)
         self.character_preview.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.horizontalLayout_13.addWidget(self.character_preview)
+        self.horizontalLayout_60.addWidget(self.character_preview)
 
         self.horizontalSpacer_13 = QSpacerItem(90, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_13.addItem(self.horizontalSpacer_13)
+        self.horizontalLayout_60.addItem(self.horizontalSpacer_13)
+
+
+        self.horizontalLayout_13.addLayout(self.horizontalLayout_60)
 
         self.line_43 = QFrame(self.tab_2)
         self.line_43.setObjectName(u"line_43")
@@ -473,9 +538,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_15.addWidget(self.expression_selector)
 
+        self.horizontalLayout_44 = QHBoxLayout()
+        self.horizontalLayout_44.setObjectName(u"horizontalLayout_44")
         self.horizontalSpacer_16 = QSpacerItem(170, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_15.addItem(self.horizontalSpacer_16)
+        self.horizontalLayout_44.addItem(self.horizontalSpacer_16)
 
         self.expression_preview = QLabel(self.tab_2)
         self.expression_preview.setObjectName(u"expression_preview")
@@ -487,11 +554,14 @@ class Ui_MainWindow(object):
         self.expression_preview.setAutoFillBackground(True)
         self.expression_preview.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.horizontalLayout_15.addWidget(self.expression_preview)
+        self.horizontalLayout_44.addWidget(self.expression_preview)
 
         self.horizontalSpacer_15 = QSpacerItem(170, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_15.addItem(self.horizontalSpacer_15)
+        self.horizontalLayout_44.addItem(self.horizontalSpacer_15)
+
+
+        self.horizontalLayout_15.addLayout(self.horizontalLayout_44)
 
         self.line_42 = QFrame(self.tab_2)
         self.line_42.setObjectName(u"line_42")
@@ -531,9 +601,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_11.addWidget(self.expression_color_selector)
 
+        self.horizontalLayout_70 = QHBoxLayout()
+        self.horizontalLayout_70.setObjectName(u"horizontalLayout_70")
         self.horizontalSpacer_24 = QSpacerItem(110, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_11.addItem(self.horizontalSpacer_24)
+        self.horizontalLayout_70.addItem(self.horizontalSpacer_24)
 
         self.expression_color_preview = QLabel(self.tab_2)
         self.expression_color_preview.setObjectName(u"expression_color_preview")
@@ -544,11 +616,14 @@ class Ui_MainWindow(object):
         self.expression_color_preview.setAutoFillBackground(True)
         self.expression_color_preview.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.horizontalLayout_11.addWidget(self.expression_color_preview)
+        self.horizontalLayout_70.addWidget(self.expression_color_preview)
 
         self.horizontalSpacer_17 = QSpacerItem(100, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_11.addItem(self.horizontalSpacer_17)
+        self.horizontalLayout_70.addItem(self.horizontalSpacer_17)
+
+
+        self.horizontalLayout_11.addLayout(self.horizontalLayout_70)
 
         self.line_41 = QFrame(self.tab_2)
         self.line_41.setObjectName(u"line_41")
@@ -2274,6 +2349,9 @@ class Ui_MainWindow(object):
         self.border_color_label.setText(QCoreApplication.translate("MainWindow", u"Border Color", None))
         self.border_color_preview.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab), QCoreApplication.translate("MainWindow", u"Border Settings", None))
+        self.label_9.setText(QCoreApplication.translate("MainWindow", u"Include", None))
+        self.label_10.setText("")
+        self.include_checkbox.setText("")
         self.universe_label.setText(QCoreApplication.translate("MainWindow", u"Universe", None))
         self.universe_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.character_label.setText(QCoreApplication.translate("MainWindow", u"Character", None))

@@ -1,0 +1,7 @@
+from dataclasses import dataclass
+from PIL import Image
+
+@dataclass
+class GenerationContext:
+    image: Image.Image
+    has_expression: bool = False

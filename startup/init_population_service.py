@@ -19,10 +19,14 @@ def populate_color_selector(items: list[Color], selector, preview=None):
         selector.addItem(str(item), userData=item)
     if preview:
         first = items[0]
-        preview.setAutoFillBackground(True)
-        palette = preview.palette()
-        palette.setColor(preview.backgroundRole(),PySide6.QtGui.QColor(first.r, first.g, first.b, 255))
-        preview.setPalette(palette)
+        border = darken(first.r, first.g, first.b)
+        preview.setStyleSheet(
+            f"background-color: rgb({first.r}, {first.g}, {first.b});"
+            f"border: 2px solid rgb({border[0]}, {border[1]}, {border[2]});"
+        )
+
+def darken(r: int, g: int, b: int, factor: float = 0.3) -> tuple[int, int, int]:
+    return int(r * factor), int(g * factor), int(b * factor)
 
 def check_with_system_fonts(fonts: list[TextFont], element: QComboBox):
     for f in fonts:
@@ -62,6 +66,7 @@ class InitPopulationService:
         self.populate_character_page(ui)
         hide_edits(ui)  # Hide edit blocks
         hide_removes(ui)
+        ui.download.hide()
         self.create_temporary_data_tables()
 
     def populate_border_settings(self, ui: Ui_MainWindow):

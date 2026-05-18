@@ -1,46 +1,60 @@
-from ui.generated_ui import Ui_MainWindow
+from enum import Enum
+
+from models.entities import Universe, Character, Expression
+from startup.in_memory.static_classes import BorderStyle, Color, TextFont, TextTransform
 
 
 class BorderSettings:
-    style: int
-    color: int
+    style: BorderStyle
+    color: Color
 
-    def __init__(self, style: int, color: int):
+    def __init__(self, style: BorderStyle, color: Color):
         self.style = style
         self.color = color
 
 class SpriteSettings:
-    universe: int
-    character: int
-    expression: int
-    expression_color: int
+    universe: Universe | None
+    character: Character | None
+    expression: Expression | None
+    expression_color: Color
 
-    def __init__(self, universe: int, character: int, expression: int, expression_color: int):
+    def __init__(self, universe: Universe | None, character: Character | None, expression: Expression | None, expression_color: Color):
         self.universe = universe
         self.character = character
         self.expression = expression
         self.expression_color = expression_color
 
 class FontSettings:
-    font: int
-    asterisk: bool
-    asterisk_color: list[int]
-    text_style: str
-    transform: int
+    font: TextFont | None
+    asterisk_color: list[Color]
+    text_style: TextStyle
+    transform: TextTransform
 
-    def __init__(self, font: int, asterisk: bool, asterisk_color: list[int], text_style: str, transform: int):
+    def __init__(self, font: TextFont | None, asterisk_color: list[Color], text_style: TextStyle, transform: TextTransform):
         self.font = font
-        self.asterisk = asterisk
         self.asterisk_color = asterisk_color
         self.text_style = text_style
         self.transform = transform
 
 class ExportSettings:
-    export_format: str
+    export_format: ExportFormat
     margin: bool
-    size: str
+    size: ExportSize
 
-    def __init__(self, export_format: str, margin: bool, size: str):
+    def __init__(self, export_format: ExportFormat, margin: bool, size: ExportSize):
         self.export_format = export_format
         self.margin = margin
         self.size = size
+
+class TextStyle(Enum):
+    REGULAR = ('Regular','regular')
+    DARK_WORLD = ('Dark World','dark world')
+
+class ExportFormat(Enum):
+    PNG = 'png'
+    GIF = 'gif'
+
+class ExportSize(Enum):
+    SMALL = 'small'
+    MEDIUM = 'medium'
+    LARGE = 'large'

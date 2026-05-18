@@ -35,7 +35,6 @@ class GridReflowFilter(QObject):
         while layout.count():
             layout.takeAt(0)
 
-        # In korrekter Reihenfolge neu einfügen
         for i, w in enumerate(widgets):
             layout.addWidget(w, i // cols, i % cols)
 

@@ -98,6 +98,8 @@ def edit_character(ui: Ui_MainWindow):
     form_operation(character_id, character_name, universe_id, style, font, transform, pixmap, 42,
                    db.update_character)  # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
 
+    SelectionManager.set_selected_character(db.select_character_by_id(character_id))
+
     post_operation(
         ui.characters_edit_name_input,
         ui.characters_edit_image_preview,

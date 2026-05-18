@@ -62,6 +62,8 @@ def edit_universe(ui: Ui_MainWindow):
     db = get_db()
     form_operation(universe_id, universe_name, pixmap, 42, db.update_universe) # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
 
+    SelectionManager.set_selected_universe(db.select_universe_by_id(universe_id))
+
     post_operation(
         ui.universe_edit_name_input,
         ui.universe_edit_image_preview,
