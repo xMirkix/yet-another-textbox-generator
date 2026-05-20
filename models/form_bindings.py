@@ -57,4 +57,4 @@ class ExportFormat(Enum):
 class ExportSize(Enum):
     SMALL = 'small'
     MEDIUM = 'medium'
-    LARGE = 'large'
+    BIG = 'big'

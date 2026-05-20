@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uisoEcjP.ui'
+## Form generated from reading UI file 'uiFCXcRr.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -1332,7 +1332,7 @@ class Ui_MainWindow(object):
         sizePolicy.setHeightForWidth(self.output.sizePolicy().hasHeightForWidth())
         self.output.setSizePolicy(sizePolicy)
         self.output.setMinimumSize(QSize(289, 76))
-        self.output.setMaximumSize(QSize(885, 246))
+        self.output.setMaximumSize(QSize(909, 270))
         self.output.setAutoFillBackground(True)
         self.output.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.output.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse)

@@ -11,6 +11,10 @@ Supported fonts:
 - Papyrus
 - Windings
 
+Also, the UI is crap, I know. I focused more on functionality, so in case there are any severe bugs, please open an issue.
+
+This was my first time making a desktop application, so I made some rather... dubious decisions...
+
 ## About
 
 This is a simple tool for generating Undertale/Deltarune textboxes.
@@ -33,6 +37,7 @@ If you just want to generate textboxes with UT/DT characters, I have included th
 ## Planned future features
 
 - setting text color
+- color wheel for color selection
 - alternating expressions for the GIF format
 - a CLI tool
 

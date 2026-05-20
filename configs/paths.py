@@ -4,6 +4,7 @@ from pathlib import Path
 ROOT = Path(__file__).parent.parent
 
 ASSETS_DIR         = ROOT / 'assets'
+BORDERS_DIR        = ASSETS_DIR / 'borders'
 PREVIEWS_DIR       = ASSETS_DIR / 'previews'
 TEMP_DATA_DIR      = ASSETS_DIR / 'temp_dynamic_data'
 TEMP_PNG           = TEMP_DATA_DIR / 'output.png'

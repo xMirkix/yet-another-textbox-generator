@@ -45,7 +45,7 @@ def connect_generator(ui: Ui_MainWindow):
     ui.margin_checkbox.clicked.connect(lambda: try_generate(ui))
     ui.size_small_option.toggled.connect(lambda change: on_radio_changed(ui, change))
     ui.size_medium_option.toggled.connect(lambda change: on_radio_changed(ui, change))
-    ui.size_small_option.toggled.connect(lambda: try_generate(ui))
+    ui.size_big_option.toggled.connect(lambda change: on_radio_changed(ui, change))
     ui.include_checkbox.clicked.connect(lambda: try_generate(ui))
 
     ui.input.textChanged.connect(lambda: try_generate(ui))
@@ -91,7 +91,7 @@ def try_generate(ui: Ui_MainWindow):
     if ui.size_medium_option.isChecked():
         output_size = ExportSize.MEDIUM
     if ui.size_big_option.isChecked():
-        output_size = ExportSize.LARGE
+        output_size = ExportSize.BIG
 
     export_settings = ExportSettings(export_format=output_format, margin=ui.margin_checkbox.isChecked(), size=output_size)
 
@@ -199,6 +199,8 @@ def download():
         filter="PNG (*.png)" if suffix == ".png" else "GIF (*.gif)"
     )
     if path:
+        if not path.endswith(suffix):
+            path += suffix
         shutil.copyfile(source, path)
 """
 1. Wipe universe/character/expression selector
