@@ -72,7 +72,13 @@ def create_expression(ui: Ui_MainWindow):
 
     expression_name = ui.expressions_create_name_input.text()
 
-    character_id = ui.expressions_create_character_selector.currentData().character_id
+    character = SelectionManager.get_selected_character()
+
+    if not character:
+        QMessageBox.warning(None, "Invalid Character", "No selected Character")
+        return
+
+    character_id = character.character_id
 
     pixmap = ui.expressions_create_image_preview.pixmap()
 

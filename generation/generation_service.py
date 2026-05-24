@@ -45,7 +45,8 @@ def generate(text_input: str, border_settings: BorderSettings, sprite_settings: 
 def generate_png(text_input: str, border_settings: BorderSettings, sprite_settings: SpriteSettings, font_settings: FontSettings, export_settings: ExportSettings) -> Image.Image:
     from generation.steps import border_step, sprite_step, font_step, export_step
     from generation.context import GenerationContext
-    ctx = GenerationContext(image=border_step.apply(border_settings))
+    image, style = border_step.apply(border_settings)
+    ctx = GenerationContext(image=image, has_expression=False, border_style=style)
     ctx = sprite_step.apply(ctx, sprite_settings)
     ctx = font_step.apply(ctx, text_input, font_settings)
     return export_step.apply(ctx, export_settings)

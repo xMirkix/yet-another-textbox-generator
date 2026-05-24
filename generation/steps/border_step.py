@@ -5,11 +5,11 @@ from configs.paths import BORDERS_DIR
 from models.form_bindings import BorderSettings
 
 
-def apply(settings: BorderSettings) -> Image.Image:
+def apply(settings: BorderSettings) -> (Image.Image, str):
     if settings.style.source_image_file_name == "Original Box":
-        return apply_original(settings)
+        return apply_original(settings), "Original Box"
     elif settings.style.source_image_file_name == "Deltarune":
-        return apply_deltarune(settings)
+        return apply_deltarune(settings), "Deltarune"
     raise ValueError(f"Unknown border style: {settings.style.source_image_file_name}")
 
 def apply_original(settings: BorderSettings) -> Image.Image:
