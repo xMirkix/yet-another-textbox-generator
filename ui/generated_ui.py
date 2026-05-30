@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiFCXcRr.ui'
+## Form generated from reading UI file 'uiEDNmuY.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -1170,7 +1170,7 @@ class Ui_MainWindow(object):
 
         self.margin_checkbox = QCheckBox(self.tab_4)
         self.margin_checkbox.setObjectName(u"margin_checkbox")
-        self.margin_checkbox.setChecked(True)
+        self.margin_checkbox.setChecked(False)
 
         self.horizontalLayout_38.addWidget(self.margin_checkbox)
 

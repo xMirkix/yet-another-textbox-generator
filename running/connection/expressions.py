@@ -28,11 +28,11 @@ def connect_expressions(ui: Ui_MainWindow):
     edit_image_preview = ui.expressions_edit_image_preview
 
     create_image.clicked.connect(
-        lambda: select_image(create_image_preview, create_image_remove, width=69,
+        lambda: select_image(create_image_preview, create_image_remove, width=67,
                              height=70))  # On creation image selection
 
     edit_image.clicked.connect(
-        lambda: select_image(edit_image_preview, edit_image_remove, width=69, height=70))  # On edit image selection
+        lambda: select_image(edit_image_preview, edit_image_remove, width=67, height=70))  # On edit image selection
 
     create_image_remove.clicked.connect(
         lambda: remove_image(create_image_preview, create_image_remove))  # On creation image removal
