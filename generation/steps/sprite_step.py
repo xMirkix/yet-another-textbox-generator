@@ -11,6 +11,8 @@ from startup.in_memory.static_classes import Color
 
 def apply(ctx: GenerationContext, settings: SpriteSettings) -> GenerationContext:
     if settings.expression is None:
+        filler = Image.new("RGBA", (67, 70), (0, 0, 0, 255))
+        apply_expression(filler, ctx, get_insert_position(ctx.border_style), get_resolution(ctx.border_style))
         return ctx  # include not checked
     ctx.has_expression = True
 
