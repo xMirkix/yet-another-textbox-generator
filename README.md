@@ -1,6 +1,7 @@
 ## Disclaimer
 
-!IMPORTANT! The wingdings as well as SANS AND PAPYRUS fonts must be installed on the SYSTEM.
+> [!IMPORTANT]
+> The **Wingdings** as well as **Sans** and **Papyrus** fonts must be installed on the SYSTEM.
 
 This is no issue (afaik) on Windows, but on Linux, this can be problematic if a font is only installed in the user's home directory.
 
