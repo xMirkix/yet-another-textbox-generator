@@ -25,8 +25,8 @@ INSERT INTO BorderStyles (border_name, preview_file_name, source_image_file_name
 VALUES ('Original Box','undertale_preview', 'Original Box'),
        ('Deltarune','deltarune_preview', 'Deltarune');
 
-INSERT INTO Fonts (font_name)
-VALUES ('Determination Mono'),
-       ('Comic Sans MS'),
-       ('Papyrus'),
-       ('Wingdings');
+INSERT INTO Fonts (font_name, font_system_name)
+VALUES ('Determination Mono', 'DeterminationMonoWeb.ttf'),
+       ('Comic Sans', 'UndertaleSans.ttf'),
+       ('Papyrus', 'UndertalePapyrus.ttf'),
+       ('Wingdings', 'wingding');

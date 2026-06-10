@@ -40,11 +40,13 @@ class Color:
 class TextFont:
     font_id: int
     font_name: str
+    font_file_name: str
 
-    def __init__(self, font_id: int, font_name: str):
+    def __init__(self, font_id: int, font_name: str, font_file_name: str):
         self.font_id = font_id
-        if font_name is not None:
+        if font_name is not None and font_file_name is not None:
             self.font_name = font_name
+            self.font_file_name = font_file_name
         else:
             raise ValueError('Name must be provided')
 

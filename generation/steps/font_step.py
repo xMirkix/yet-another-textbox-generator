@@ -1,58 +1,83 @@
 # THIRD
+import platform
+from pathlib import Path
+from typing import Literal
 from PIL import ImageFont
-
 from generation.context import GenerationContext
-from models.form_bindings import FontSettings
-from startup.in_memory.static_classes import TextTransform
-from matplotlib import font_manager
-
+from generation.steps.font_substeps.font_config import FontConfig
+from generation.steps.font_substeps.text_image_generator import get_text_image
+from models.form_bindings import FontSettings, TextStyle
+from generation.steps.font_substeps.tokenizer import tokenize
+from configs.paths import GEN_CONFIG, FONTS
+import tomllib
 
 def apply(ctx: GenerationContext, text: str, settings: FontSettings) -> GenerationContext:
-    # Text offset if it has_expression and keep asterisk in mind
-    # Apply transform, line breaks, asterisks and dark world
-    applied_text = apply_text_transform(text, settings.transform)
-    trimmed = trim_newlines(applied_text)
-
-    try:
-        ctx = apply_asterisks(ctx, trimmed, settings)
-        ctx = apply_text(ctx, trimmed, settings)
-        ctx = apply_dark_world(ctx, settings)
-    except OSError:
+    if settings.font is None:
         return ctx
 
+    try:
+        trimmed = trim_newlines(text)
+        lines = tokenize(trimmed, settings.transform)
+
+        config = get_config(settings.font.font_name)
+
+        font = get_font(settings.font.font_name,settings.font.font_file_name, config["font_size"])
+
+        image_text = get_text_image(lines, is_dark_world_style(settings.text_style), font, config) # includes asterisk
+
+        ctx.image.paste(image_text, get_text_insert_position(ctx.border_style, ctx.has_expression , config), image_text)
+
+    except OSError:
+        pass
     return ctx
 
-def apply_text_transform(text: str, transform: TextTransform) -> str:
-    if transform.transform_id == 2:
-        return text.upper()
-    if transform.transform_id == 3:
-        return text.lower()
-    if transform.transform_id == 4:
-        return text.title()
-    return text
+def get_text_insert_position(style: str, with_sprite: bool, config: FontConfig) -> tuple[int, int]:
+    x, y = 3, 3
 
+    if style == "Deltarune":
+        x, y = 7, 7
+
+    key: Literal["x_with_sprite", "x_no_sprite"] = "x_with_sprite" if with_sprite else "x_no_sprite"
+
+    x, y = x + config[key], y + config["y_text_start"]
+    return x, y
+
+def is_dark_world_style(style: TextStyle) -> bool:
+    return style == TextStyle.DARK_WORLD
+
+def get_config(font: str) -> FontConfig:
+    with open(GEN_CONFIG, "rb") as f:
+        config: dict[str, FontConfig] = tomllib.load(f)
+    return config.get(font.replace(" ", "-")) or config["default"]
+
+# helpers
 def trim_newlines(text: str) -> str:
-    while text.count("\n") > 2: # limit to 3 lines
+    while text.count("\n") > 2:
         text = text[:text.rfind("\n")]
     return text
 
-def get_font(font_name: str, font_size: int) -> ImageFont.FreeTypeFont:
-    path = font_manager.findfont(font_manager.FontProperties(family=font_name))
-    return ImageFont.truetype(path, font_size)
 
-def apply_asterisks(ctx: GenerationContext, text: str, settings: FontSettings) -> GenerationContext:
-    if not settings.asterisk_color:  # empty - disabled
-        return ctx
-    # TODO: Place asterisks in right color and position
-    return ctx
+def get_font(font_name, font_file_name: str, size: int) -> ImageFont.FreeTypeFont:
+    system_fonts = ["Wingdings", "UndertaleSans", "UndertalePapyrus"]
 
-def apply_text(ctx: GenerationContext, text: str, settings: FontSettings) -> GenerationContext:
-    # TODO: Wrap text, generate it as an image and place it on ctx.image
-    # Keep offset in mind if ctx.has_expression
-    return ctx
+    if font_name in system_fonts:
+        return load_system_font(font_file_name, size, encoding="symb")
 
-def apply_dark_world(ctx: GenerationContext, settings: FontSettings) -> GenerationContext:
-    if settings.text_style.value != "dark world":
-        return ctx
-    # TODO: Insert Dark World pattern (color has gradients...)
-    return ctx
+    font_path = (FONTS / font_file_name)
+
+    return ImageFont.truetype(str(font_path), size)
+
+def load_system_font(font_file_name: str, size: int, **kwargs) -> ImageFont.FreeTypeFont:
+
+    system = platform.system()
+
+    if system == "Windows":
+        font_dir = Path("C:/Windows/Fonts")
+    elif system == "Linux":
+        font_dir = Path.home() / ".local/share/fonts"
+    elif system == "Darwin":
+        font_dir = Path("/Library/Fonts")
+    else:
+        raise OSError("Unknown OS")
+
+    return ImageFont.truetype(str(font_dir / font_file_name), size, **kwargs)

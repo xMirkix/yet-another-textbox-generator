@@ -25,6 +25,10 @@ class DBStaticConnection:
         rows = self.connection.execute("SELECT * FROM Colors").fetchall()
         return [Color(*row) for row in rows]
 
+    def select_color_by_name(self, name: str) -> list[Color]:
+        rows = self.connection.execute("SELECT * FROM Colors WHERE color_name = ?", (name,)).fetchall()
+        return [Color(*row) for row in rows]
+
     def select_all_border_styles(self) -> list[BorderStyle]:
         rows = self.connection.execute("SELECT * FROM BorderStyles").fetchall()
         return [BorderStyle(*row) for row in rows]

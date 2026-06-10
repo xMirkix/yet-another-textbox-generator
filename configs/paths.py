@@ -23,3 +23,7 @@ ICON_LEFT    = ICONS_DIR / 'arrow-left.png'
 ICON_RIGHT   = ICONS_DIR / 'primary-line-line-arrow-end.png'
 ICON_EDIT    = ICONS_DIR / 'mono-editor.png'
 ICON_DELETE  = ICONS_DIR / 'trash_correct_resolution.png'
+
+GEN_CONFIG = ROOT / 'configs' / 'gen-config.toml'
+
+FONTS = ROOT / 'fonts'

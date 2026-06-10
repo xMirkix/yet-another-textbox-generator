@@ -29,8 +29,12 @@ def darken(r: int, g: int, b: int, factor: float = 0.3) -> tuple[int, int, int]:
     return int(r * factor), int(g * factor), int(b * factor)
 
 def check_with_system_fonts(fonts: list[TextFont], element: QComboBox):
+    system_fonts = ["Wingdings", "UndertaleSans", "UndertalePapyrus"]
     for f in fonts:
-        if is_font_installed(f.font_name):
+        if f.font_name in system_fonts:
+            if is_font_installed(f.font_name):
+                element.addItem(f.font_name, userData=f)
+        else:
             element.addItem(f.font_name, userData=f)
 
 def is_font_installed(font_name: str) -> bool:
@@ -77,15 +81,15 @@ class InitPopulationService:
         populate_color_selector(self.colors, ui.expression_color_selector, ui.expression_color_preview)
 
     def populate_font_settings(self, ui: Ui_MainWindow):
-        populate_selector(self.fonts, ui.font_selector, filter_fn=lambda f: is_font_installed(str(f)))
+        check_with_system_fonts(self.fonts, ui.font_selector)
         populate_color_selector(self.colors, ui.asterisk_color_selector_1, ui.asterisk_color_preview_1)
         populate_color_selector(self.colors, ui.asterisk_color_selector_2, ui.asterisk_color_preview_2)
         populate_color_selector(self.colors, ui.asterisk_color_selector_3, ui.asterisk_color_preview_3)
         populate_selector(self.transforms, ui.text_transform_selector)
 
     def populate_character_page(self, ui: Ui_MainWindow):
-        populate_selector(self.fonts, ui.characters_create_font_selector, filter_fn=lambda f: is_font_installed(str(f)))
-        populate_selector(self.fonts, ui.characters_edit_font_selector, filter_fn=lambda f: is_font_installed(str(f)))
+        check_with_system_fonts(self.fonts, ui.characters_create_font_selector)
+        check_with_system_fonts(self.fonts, ui.characters_edit_font_selector)
         populate_selector(self.transforms, ui.characters_create_transform_selector)
         populate_selector(self.transforms, ui.characters_edit_transform_selector)
 

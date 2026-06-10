@@ -1,15 +1,31 @@
 ## Disclaimer
 
-!IMPORTANT! All fonts must be installed on the SYSTEM.
-This is no issue on Windows, but on Linux, this can be problematic if a font is only installed in the user's home directory.
+!IMPORTANT! The wingdings as well as SANS AND PAPYRUS fonts must be installed on the SYSTEM.
 
-Sorry, but shipping them all would make the app way too bigger, not to mention the licensing stuff...
+This is no issue (afaik) on Windows, but on Linux, this can be problematic if a font is only installed in the user's home directory.
+
+Affected Fonts:
+
+- Undertale Sans
+- Undertale Papyrus
+- Wingdings (pre-installed on Windows)
+
+You need to download the rest from:
+https://gitlab.com/cartr/undertale-fonts
+
+and install them into your system font directory before launching the app.
 
 Supported fonts:
-- Determination Mono
-- Comic Sans MS
+- Determination Mono (included, from © Haley Wakamatsu)
+- Comic Sans
 - Papyrus
 - Windings
+
+I apologize for the inconvenience, but there is no license for the above fonts, and they were the best ones I found.
+
+I would rather not waste time and resources on legal problems...
+
+#
 
 Also, the UI is crap, I know. I focused more on functionality, so in case there are any severe bugs, please open an issue.
 

@@ -1,0 +1,34 @@
+[default]
+font_size = 16
+line_height = 18
+y_text_start = 15
+x_with_sprite = 87
+x_no_sprite = 16
+
+[Determination-Mono]
+font_size = 16
+line_height = 18
+y_text_start = 13
+x_with_sprite = 69
+x_no_sprite = 11
+
+[Comic-Sans-UT]
+font_size = 16 # TODO maybe change me
+line_height = 18
+y_text_start = 12
+x_with_sprite = 69
+x_no_sprite = 11
+
+[Papyrus-UT]
+font_size = 16 # TODO maybe change me
+line_height = 18
+y_text_start = 13
+x_with_sprite = 70
+x_no_sprite = 12
+
+[Wingdings]
+font_size = 16 # TODO maybe change me
+line_height = 18
+y_text_start = 8
+x_with_sprite = 64
+x_no_sprite = 6

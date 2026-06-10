@@ -1,0 +1,11 @@
+Determination Mono
+Copyright © Haley Wakamatsu
+Licensed under SIL Open Font License 1.1
+
+Wingdings
+© Microsoft Corporation
+System font – not distributed with this software
+
+Undertale Sans / Papyrus
+NOT included due to licensing restrictions.
+Users must obtain them separately if desired.

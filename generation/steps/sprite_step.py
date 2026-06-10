@@ -1,7 +1,7 @@
 # SECOND
 import io
 
-from PIL import Image, ImageDraw
+from PIL import Image
 
 from generation.context import GenerationContext
 from models.entities import Expression
