@@ -1,4 +1,5 @@
 from PIL import ImageDraw, Image, ImageFont
+from PIL.ImageFont import FreeTypeFont
 
 from generation.steps.font_substeps.tokenizer import TextLine
 
@@ -9,8 +10,8 @@ def get_shadow_color(color: tuple[int,int,int,int]) -> tuple[int,int,int, int]:
         return 15, 15, 113, 255 # Dark blue
     return color[0] // 4, color[1] // 4, color[2] // 4, color[3]
 
-def get_character_size(text: str, char_width: int) -> int:
-    return len(text) * char_width
+def get_character_size(text: str, font: FreeTypeFont) -> int:
+    return int(font.getlength(text))
 
 def draw_string(
     img: Image.Image,
@@ -19,18 +20,16 @@ def draw_string(
     color: tuple[int, int, int, int],
     font: ImageFont.FreeTypeFont,
     with_shadow: bool,
-    char_width: int,
     spacing: int = 0,
 ) -> int:
     if color[3] == 0:
-        return get_character_size(text, char_width)
+        return get_character_size(text, font)
     if x >= img.width:
-        return get_character_size(text, char_width)
-
+        return get_character_size(text, font)
     start_x = x
     for char in text:
-        draw_single(img, x, y, char, color, font, with_shadow, char_width)
-        x += char_width + spacing
+        width = draw_single(img, x, y, char, color, font, with_shadow)
+        x += width + spacing
     return x - start_x
 
 def draw_single(
@@ -40,14 +39,13 @@ def draw_single(
     color: tuple[int, int, int, int],
     font: ImageFont.FreeTypeFont,
     with_shadow: bool,
-    char_width: int
 ) -> int:
     if with_shadow:
-        return draw_gradient_string(img, x, y, text, color, font, char_width)
+        return draw_gradient_string(img, x, y, text, color, font)
     draw = ImageDraw.Draw(img)
     draw.fontmode = "1"
     draw.text((x, y), text, font=font, fill=color)
-    return get_character_size(text, char_width)
+    return get_character_size(text, font)
 
 def draw_gradient_string(
     image: Image.Image,
@@ -55,7 +53,6 @@ def draw_gradient_string(
     text: str,
     color: tuple[int, int, int, int],
     font: ImageFont.FreeTypeFont,
-    char_width: int,
     gradient_strength: float = 0.45,  # 0.0 = no gradient, 1.0 = white on top
 ) -> int:
     draw = ImageDraw.Draw(image)
@@ -67,7 +64,7 @@ def draw_gradient_string(
     text_h = int(bbox[3] - bbox[1])
 
     if text_w <= 0 or text_h <= 0:
-        return get_character_size(text, char_width)
+        return get_character_size(text, font)
 
     # render text as white mask on black background
     mask_img = Image.new("L", (text_w, text_h), 0)
@@ -96,10 +93,10 @@ def draw_gradient_string(
     # paste on main picture (only where mask is white)
     image.paste(gradient_img, (int(x + bbox[0]), int(y + bbox[1])), mask=mask_img)
 
-    return get_character_size(text, char_width)
+    return get_character_size(text, font)
 
 # DOESN'T WORK WITH WINGDINGS!
-def measure_line(line: TextLine, char_width: int) -> int:
+def measure_line(line: TextLine, font: FreeTypeFont) -> int:
     parts = [t.content for t in line.content]
     text = ("* " if line.has_asterisk else "") + " ".join(parts)
-    return get_character_size(text, char_width)
+    return get_character_size(text, font)

@@ -27,9 +27,7 @@ def get_text_image(
 
     img = Image.new("RGBA", (img_w, img_h), (0, 0, 0, 0))
 
-    char_size = config["character_width"]
-
-    text = calculate_wrapping(text, font, img_w - 2, char_size)
+    text = calculate_wrapping(text, font, img_w - 2)
 
     for i, line in enumerate(text):
         draw_for_each_line(i,
@@ -41,8 +39,7 @@ def get_text_image(
                            asterisk_color,
                            config["initial_asterisk_offset"],
                            config["character_extra_offset"],
-                           config["space_extra_offset"],
-                           char_size)
+                           config["space_extra_offset"])
 
     return img
 
@@ -58,15 +55,14 @@ def draw_for_each_line(
     asterisk_offset: int,
     character_offset: int,
     space_offset: int,
-    char_size: int
 ) -> None:
     x = 0
     y = index * line_height
 
-    x += manage_asterisk(img, x, y, line.has_asterisk, font, dark_world, asterisk_color, index, asterisk_offset, char_size)
+    x += manage_asterisk(img, x, y, line.has_asterisk, font, dark_world, asterisk_color, index, asterisk_offset)
 
     for j, token in enumerate(line.content):
-        x = draw_for_each_token(x, y, j, img, token, default_color, font, dark_world, character_offset, space_offset, char_size)
+        x = draw_for_each_token(x, y, j, img, token, default_color, font, dark_world, character_offset, space_offset)
 
 def draw_for_each_token(
     x: int,
@@ -79,10 +75,9 @@ def draw_for_each_token(
     dark_world: bool,
     character_offset: int,
     space_offset: int,
-    char_size: int
 ) -> int:
     if index > 0: # for adding space between tokens
-        x += draw_string(img, x, y, " ", default_color, font, dark_world, char_size, 0) + space_offset
+        x += draw_string(img, x, y, " ", default_color, font, dark_world, 0) + space_offset
 
     # Batch characters of the same color -> draw as one string
     current_color = default_color
@@ -90,7 +85,7 @@ def draw_for_each_token(
     for ci, char in enumerate(token.content): # for each character in the token (could be mid-token color switch)
         if ci in token.colors: # is a switch color index?
             if batch: # draw previous batch
-                x += draw_string(img, x, y, batch, current_color, font, dark_world, char_size, character_offset)
+                x += draw_string(img, x, y, batch, current_color, font, dark_world, character_offset)
             batch = char
 
             color = token.colors[ci] # get new color
@@ -100,7 +95,7 @@ def draw_for_each_token(
             batch += char
 
     if batch: # draw last batch (or only if no switch entry)
-        x += draw_string(img, x, y, batch, current_color, font, dark_world, char_size, character_offset)
+        x += draw_string(img, x, y, batch, current_color, font, dark_world, character_offset)
 
     return x
 
@@ -115,17 +110,16 @@ def manage_asterisk(
         asterisk_color: list[Color],
         index: int,
         offset: int,
-        char_size: int
 ) -> int:
     if asterisk_color is None or len(asterisk_color) == 0: # No asterisk
         return 0
 
     if not has_asterisk: # Wrapped line, asterisk padding
-        return get_character_size("* ", char_size) + offset
+        return get_character_size("* ", font) + offset
 
     color = (asterisk_color[index].r, asterisk_color[index].g, asterisk_color[index].b, asterisk_color[index].a)
 
     if font.getname()[0] == "Wingdings":
-        return draw_string(img, x, y, "*", color , font, dark_world, char_size, 0)
+        return draw_string(img, x, y, "*", color , font, dark_world, 0)
 
-    return draw_string(img, x, y, "* ", color, font, dark_world, char_size, 0) + offset # offset for longer/shorter space between asterisk and text
+    return draw_string(img, x, y, "* ", color, font, dark_world, 0) + offset # offset for longer/shorter space between asterisk and text
