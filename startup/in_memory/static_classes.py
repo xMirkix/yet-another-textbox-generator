@@ -27,15 +27,25 @@ class Color:
     r: int
     g: int
     b: int
+    a: int = 255
 
-    def __init__(self, color_id: int, color_name: str, r: int, g: int, b: int):
+    def __init__(self, color_id: int, color_name: str, r: int, g: int, b: int, a: int = 255):
         self.color_id = color_id
         self.color_name = color_name
         self.r = r
         self.g = g
         self.b = b
+        self.a = a
 
     def __str__(self): return self.color_name
+
+    def __eq__(self, other) -> bool:
+        if isinstance(other, Color):
+            return self.color_id == other.color_id and self.r == other.r and self.g == other.g and self.b == other.b and self.a == other.a
+        return False
+
+    def __hash__(self) -> int:
+        return hash((self.color_id, self.r, self.g, self.b, self.a))
 
 class TextFont:
     font_id: int
@@ -52,6 +62,9 @@ class TextFont:
 
     def __str__(self): return self.font_name
 
+    def __hash__(self) -> int:
+        return hash(self.font_id)
+
 class TextTransform:
     transform_id: int
     transform_name: str
@@ -65,3 +78,6 @@ class TextTransform:
             raise ValueError('Name must be provided')
 
     def __str__(self): return self.transform_name
+
+    def __hash__(self) -> int:
+        return hash(self.transform_id)

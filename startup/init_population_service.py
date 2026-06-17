@@ -68,6 +68,7 @@ class InitPopulationService:
         self.populate_sprite_settings(ui)  # Color
         self.populate_font_settings(ui)  # Determination Mono/Comic Sans/..., Asterisk Colors, Uppercase/Lowercase/...
         self.populate_character_page(ui)
+        self.populate_default_text_color(ui)
         hide_edits(ui)  # Hide edit blocks
         hide_removes(ui)
         ui.download.hide()
@@ -92,6 +93,9 @@ class InitPopulationService:
         check_with_system_fonts(self.fonts, ui.characters_edit_font_selector)
         populate_selector(self.transforms, ui.characters_create_transform_selector)
         populate_selector(self.transforms, ui.characters_edit_transform_selector)
+
+    def populate_default_text_color(self, ui: Ui_MainWindow):
+        populate_color_selector(self.colors, ui.default_color_selector, ui.default_color_preview)
 
     def create_temporary_data_tables(self):
         self.dynamic_connection.create_all_tables()

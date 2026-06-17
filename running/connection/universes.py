@@ -1,5 +1,7 @@
 from typing import Callable
 
+from PySide6.QtCore import QTimer
+
 from models.entities import Universe
 from models.handler.universe_handler import UniverseHandler
 from running.connection.resizing import GridReflowFilter
@@ -39,7 +41,7 @@ def connect_universes(ui: Ui_MainWindow):
 
     edit.clicked.connect(lambda: edit_universe(ui)) # On edit
 
-    ui.universe_filter_input.textChanged.connect(lambda text: filter_universes(ui, text)) # On filter change
+    ui.universe_filter_input.textChanged.connect(lambda text: QTimer.singleShot(0, lambda: filter_universes(ui, text))) # On filter change
 
 def create_universe(ui: Ui_MainWindow):
     db = get_db()
@@ -52,7 +54,7 @@ def create_universe(ui: Ui_MainWindow):
         ui.universe_create_name_input,
         ui.universe_create_image_preview,
         ui.universe_create_image_remove_button,
-        lambda: reload_ui(ui),
+        lambda: QTimer.singleShot(0, lambda: reload_ui(ui)),
     )
 
 def edit_universe(ui: Ui_MainWindow):
@@ -60,6 +62,18 @@ def edit_universe(ui: Ui_MainWindow):
     universe_name = ui.universe_edit_name_input.text()
     pixmap = ui.universe_edit_image_preview.pixmap()
     db = get_db()
+
+    exists = db.select_universe_by_id(universe_id)
+
+    if not exists:
+        post_operation(
+            ui.universe_edit_name_input,
+            ui.universe_edit_image_preview,
+            ui.universe_edit_image_remove_button,
+            lambda: QTimer.singleShot(0, lambda: reload_ui(ui))
+        )
+        return
+
     form_operation(universe_id, universe_name, pixmap, 42, db.update_universe) # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
 
     SelectionManager.set_selected_universe(db.select_universe_by_id(universe_id))
@@ -68,7 +82,7 @@ def edit_universe(ui: Ui_MainWindow):
         ui.universe_edit_name_input,
         ui.universe_edit_image_preview,
         ui.universe_edit_image_remove_button,
-        lambda: reload_ui(ui) # For edit to take effect
+        lambda: QTimer.singleShot(0, lambda: reload_ui(ui)) # For edit to take effect
     )
 
 def form_operation(universe_id: int, name: str, pixmap, order_position: int, db_function: Callable):

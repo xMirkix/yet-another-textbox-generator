@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiEDNmuY.ui'
+## Form generated from reading UI file 'uiHEbDQH.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -535,6 +535,7 @@ class Ui_MainWindow(object):
 
         self.expression_selector = QComboBox(self.tab_2)
         self.expression_selector.setObjectName(u"expression_selector")
+        self.expression_selector.setMaxVisibleItems(10)
 
         self.horizontalLayout_15.addWidget(self.expression_selector)
 
@@ -799,15 +800,15 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_5 = QHBoxLayout()
         self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
-        self.asterisk_color_selector_2 = QComboBox(self.asterisk_color_everything)
-        self.asterisk_color_selector_2.setObjectName(u"asterisk_color_selector_2")
-
-        self.horizontalLayout_5.addWidget(self.asterisk_color_selector_2)
-
         self.asterisk_color_selector_1 = QComboBox(self.asterisk_color_everything)
         self.asterisk_color_selector_1.setObjectName(u"asterisk_color_selector_1")
 
         self.horizontalLayout_5.addWidget(self.asterisk_color_selector_1)
+
+        self.asterisk_color_selector_2 = QComboBox(self.asterisk_color_everything)
+        self.asterisk_color_selector_2.setObjectName(u"asterisk_color_selector_2")
+
+        self.horizontalLayout_5.addWidget(self.asterisk_color_selector_2)
 
         self.asterisk_color_selector_3 = QComboBox(self.asterisk_color_everything)
         self.asterisk_color_selector_3.setObjectName(u"asterisk_color_selector_3")
@@ -865,22 +866,11 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_8 = QHBoxLayout()
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.asterisk_color_preview_2 = QLabel(self.asterisk_color_values_everything)
-        self.asterisk_color_preview_2.setObjectName(u"asterisk_color_preview_2")
+        self.asterisk_color_preview_1 = QLabel(self.asterisk_color_values_everything)
+        self.asterisk_color_preview_1.setObjectName(u"asterisk_color_preview_1")
         sizePolicy7 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
         sizePolicy7.setHorizontalStretch(0)
         sizePolicy7.setVerticalStretch(0)
-        sizePolicy7.setHeightForWidth(self.asterisk_color_preview_2.sizePolicy().hasHeightForWidth())
-        self.asterisk_color_preview_2.setSizePolicy(sizePolicy7)
-        self.asterisk_color_preview_2.setMinimumSize(QSize(0, 30))
-        self.asterisk_color_preview_2.setMaximumSize(QSize(16777215, 30))
-        self.asterisk_color_preview_2.setAutoFillBackground(True)
-        self.asterisk_color_preview_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.horizontalLayout_8.addWidget(self.asterisk_color_preview_2)
-
-        self.asterisk_color_preview_1 = QLabel(self.asterisk_color_values_everything)
-        self.asterisk_color_preview_1.setObjectName(u"asterisk_color_preview_1")
         sizePolicy7.setHeightForWidth(self.asterisk_color_preview_1.sizePolicy().hasHeightForWidth())
         self.asterisk_color_preview_1.setSizePolicy(sizePolicy7)
         self.asterisk_color_preview_1.setMinimumSize(QSize(0, 30))
@@ -889,6 +879,17 @@ class Ui_MainWindow(object):
         self.asterisk_color_preview_1.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_8.addWidget(self.asterisk_color_preview_1)
+
+        self.asterisk_color_preview_2 = QLabel(self.asterisk_color_values_everything)
+        self.asterisk_color_preview_2.setObjectName(u"asterisk_color_preview_2")
+        sizePolicy7.setHeightForWidth(self.asterisk_color_preview_2.sizePolicy().hasHeightForWidth())
+        self.asterisk_color_preview_2.setSizePolicy(sizePolicy7)
+        self.asterisk_color_preview_2.setMinimumSize(QSize(0, 30))
+        self.asterisk_color_preview_2.setMaximumSize(QSize(16777215, 30))
+        self.asterisk_color_preview_2.setAutoFillBackground(True)
+        self.asterisk_color_preview_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout_8.addWidget(self.asterisk_color_preview_2)
 
         self.asterisk_color_preview_3 = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_preview_3.setObjectName(u"asterisk_color_preview_3")
@@ -1292,6 +1293,52 @@ class Ui_MainWindow(object):
         self.input_preview.setMinimumSize(QSize(400, 600))
         self.verticalLayout_6 = QVBoxLayout(self.input_preview)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
+        self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.verticalLayout_6.addItem(self.verticalSpacer_9)
+
+        self.horizontalLayout_72 = QHBoxLayout()
+        self.horizontalLayout_72.setObjectName(u"horizontalLayout_72")
+        self.label_12 = QLabel(self.input_preview)
+        self.label_12.setObjectName(u"label_12")
+        self.label_12.setFont(font1)
+        self.label_12.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout_72.addWidget(self.label_12)
+
+        self.default_color_selector = QComboBox(self.input_preview)
+        self.default_color_selector.setObjectName(u"default_color_selector")
+
+        self.horizontalLayout_72.addWidget(self.default_color_selector)
+
+        self.horizontalLayout_73 = QHBoxLayout()
+        self.horizontalLayout_73.setObjectName(u"horizontalLayout_73")
+        self.horizontalSpacer_30 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_73.addItem(self.horizontalSpacer_30)
+
+        self.default_color_preview = QLabel(self.input_preview)
+        self.default_color_preview.setObjectName(u"default_color_preview")
+        sizePolicy9 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy9.setHorizontalStretch(0)
+        sizePolicy9.setVerticalStretch(0)
+        sizePolicy9.setHeightForWidth(self.default_color_preview.sizePolicy().hasHeightForWidth())
+        self.default_color_preview.setSizePolicy(sizePolicy9)
+        self.default_color_preview.setMinimumSize(QSize(200, 30))
+        self.default_color_preview.setMaximumSize(QSize(200, 30))
+
+        self.horizontalLayout_73.addWidget(self.default_color_preview)
+
+        self.horizontalSpacer_41 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_73.addItem(self.horizontalSpacer_41)
+
+
+        self.horizontalLayout_72.addLayout(self.horizontalLayout_73)
+
+
+        self.verticalLayout_6.addLayout(self.horizontalLayout_72)
+
         self.verticalSpacer_8 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_6.addItem(self.verticalSpacer_8)
@@ -1300,9 +1347,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout_45.setObjectName(u"horizontalLayout_45")
         self.input = QTextEdit(self.input_preview)
         self.input.setObjectName(u"input")
-        sizePolicy9 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        sizePolicy9.setHorizontalStretch(0)
-        sizePolicy9.setVerticalStretch(0)
         sizePolicy9.setHeightForWidth(self.input.sizePolicy().hasHeightForWidth())
         self.input.setSizePolicy(sizePolicy9)
         self.input.setMinimumSize(QSize(500, 75))
@@ -1317,6 +1361,23 @@ class Ui_MainWindow(object):
         self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_6.addItem(self.verticalSpacer_5)
+
+        self.horizontalLayout_71 = QHBoxLayout()
+        self.horizontalLayout_71.setObjectName(u"horizontalLayout_71")
+        self.label_11 = QLabel(self.input_preview)
+        self.label_11.setObjectName(u"label_11")
+        sizePolicy9.setHeightForWidth(self.label_11.sizePolicy().hasHeightForWidth())
+        self.label_11.setSizePolicy(sizePolicy9)
+        font2 = QFont()
+        font2.setPointSize(8)
+        self.label_11.setFont(font2)
+        self.label_11.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
+        self.label_11.setTextFormat(Qt.TextFormat.AutoText)
+
+        self.horizontalLayout_71.addWidget(self.label_11)
+
+
+        self.verticalLayout_6.addLayout(self.horizontalLayout_71)
 
         self.line_8 = QFrame(self.input_preview)
         self.line_8.setObjectName(u"line_8")
@@ -2369,8 +2430,8 @@ class Ui_MainWindow(object):
         self.label_2.setText("")
         self.asterisk_color.setText(QCoreApplication.translate("MainWindow", u"Asterisk Color", None))
         self.asterisk_color_values.setText(QCoreApplication.translate("MainWindow", u"Values", None))
-        self.asterisk_color_preview_2.setText("")
         self.asterisk_color_preview_1.setText("")
+        self.asterisk_color_preview_2.setText("")
         self.asterisk_color_preview_3.setText("")
         self.text_style_label.setText(QCoreApplication.translate("MainWindow", u"Text Style", None))
         self.label_5.setText("")
@@ -2393,7 +2454,10 @@ class Ui_MainWindow(object):
         self.size_big_option.setText(QCoreApplication.translate("MainWindow", u"Big", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"Export Settings", None))
         self.input_preview.setTitle(QCoreApplication.translate("MainWindow", u"Input/Preview", None))
+        self.label_12.setText(QCoreApplication.translate("MainWindow", u"Default Text Color", None))
+        self.default_color_preview.setText("")
         self.input.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Write your text here.", None))
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Hint: Use color=<color-name> in text to color the text to the right of the expression.", None))
         self.output.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.download.setText(QCoreApplication.translate("MainWindow", u"Download Textbox", None))
         self.tabs.setTabText(self.tabs.indexOf(self.generator), QCoreApplication.translate("MainWindow", u"Generator", None))

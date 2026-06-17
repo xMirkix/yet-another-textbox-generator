@@ -1,12 +1,15 @@
 import shutil
+from pathlib import Path
 from typing import Callable
 
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QLabel, QTextEdit, QFileDialog
 from PySide6.QtGui import QMovie
 
-from configs.paths import PREVIEWS_DIR, TEMP_PNG, TEMP_GIF
-from generation import generation_service
+from configs.paths import PREVIEWS_DIR
+from generation.generation_gif_proxy import GenerationGifProxy
+from generation.generation_png_proxy import GenerationPngProxy, is_valid_configuration_ui
+from generation.generation_request import GenerationRequest
 from models.entities import Universe, Character
 from models.form_bindings import SpriteSettings, FontSettings, TextStyle, BorderSettings, ExportSettings, ExportFormat, \
     ExportSize
@@ -14,6 +17,10 @@ from services.database_service import DBDynamicConnection
 from services.selection_manager import SelectionManager, init_entity
 from startup.in_memory.static_classes import Color, BorderStyle
 from ui.generated_ui import Ui_MainWindow
+
+png_proxy = GenerationPngProxy()
+
+gif_proxy = GenerationGifProxy()
 
 
 def connect_generator(ui: Ui_MainWindow):
@@ -32,11 +39,28 @@ def connect_generator(ui: Ui_MainWindow):
     ui.character_selector.activated.connect(lambda: update_with_function_then_regenerate(ui, lambda: character_change(ui)))
     ui.expression_selector.activated.connect(lambda: update_with_function_then_regenerate(ui, lambda: expression_change(ui)))
 
+    ui.expression_selector.setMaxVisibleItems(10)
+
+    ui.expression_selector.setStyleSheet("""
+        QComboBox {
+            combobox-popup: 0; /* Zwingt Qt dazu, ein echtes Widget statt eines OS-Menüs zu nutzen */
+        }
+        QComboBox QAbstractItemView {
+            max-height: 320px;   /* Schneidet die "Wurscht" nach ca. 10 Elementen knallhart ab */
+            min-height: 100px;
+        }
+        QComboBox QAbstractItemView::item {
+            min-height: 30px;    /* Gibt den Expressions endlich wieder Platz zum Atmen (kein Quetschen) */
+            padding: 4px;
+        }
+    """)
+
     # Asterisk
     ui.asterisk_checkbox.clicked.connect(lambda: update_with_function_then_regenerate(ui, lambda: hide_or_show(ui)))
 
     # Miscellaneous
     ui.font_selector.activated.connect(lambda: try_generate(ui))
+    ui.default_color_selector.activated.connect(lambda: update_with_function_then_regenerate(ui, lambda: set_color(ui.default_color_selector.currentData(), ui.default_color_preview)))
     ui.text_style_regular_option.toggled.connect(lambda change: on_radio_changed(ui, change))
     ui.text_style_dark_world_option.toggled.connect(lambda change: on_radio_changed(ui, change))
     ui.text_transform_selector.activated.connect(lambda: try_generate(ui))
@@ -49,10 +73,11 @@ def connect_generator(ui: Ui_MainWindow):
     ui.include_checkbox.clicked.connect(lambda: try_generate(ui))
 
     ui.input.textChanged.connect(lambda: try_generate(ui))
-    ui.download.clicked.connect(download)
+    ui.download.clicked.connect(lambda: download(ui))
 
 def try_generate(ui: Ui_MainWindow):
     text_input = ui.input.toPlainText()
+    default_color : Color = ui.default_color_selector.currentData()
     sprite_settings = SpriteSettings(universe=SelectionManager.get_selected_universe(),
                                      character=SelectionManager.get_selected_character(),
                                      expression=SelectionManager.get_selected_expression(),
@@ -74,7 +99,7 @@ def try_generate(ui: Ui_MainWindow):
                                  text_style=text_style,
                                  transform=ui.text_transform_selector.currentData())
 
-    if not generation_service.is_valid_configuration_ui(text_input, sprite_settings, ui.include_checkbox.isChecked(), font_settings):
+    if not is_valid_configuration_ui(text_input, sprite_settings, ui.include_checkbox.isChecked(), font_settings):
         ui.download.hide()
         ui.output.setText("Nothing...")
         return
@@ -95,15 +120,18 @@ def try_generate(ui: Ui_MainWindow):
 
     export_settings = ExportSettings(export_format=output_format, margin=ui.margin_checkbox.isChecked(), size=output_size)
 
-    result_path = generation_service.generate(text_input, border_settings, sprite_settings, font_settings, export_settings)
+    generation_request = GenerationRequest(text_input, default_color, border_settings, sprite_settings, font_settings, export_settings)
 
-    if result_path.suffix == ".gif":
+    if output_format == ExportFormat.GIF:
+        result_path = gif_proxy.generate(generation_request)
         movie = QMovie(str(result_path))
         ui.output.setMovie(movie)
         movie.start()
     else:
+        result_path = png_proxy.generate(generation_request)
         ui.output.setPixmap(QPixmap(str(result_path)))
 
+    ui.download.setProperty("path", result_path)
     ui.download.show()
 
 
@@ -113,14 +141,20 @@ def update_with_function_then_regenerate(ui: Ui_MainWindow, function: Callable):
 
 def set_color(color: Color, preview: QLabel):
     border = darken(color.r, color.g, color.b)
-    preview.setStyleSheet(
-        f"background-color: rgb({color.r}, {color.g}, {color.b});"
-        f"border: 2px solid rgb({border[0]}, {border[1]}, {border[2]});"
-    )
+    if color.a == 0:
+        preview.setStyleSheet("background-color: transparent; border: 2px dashed gray;")
+    else:
+        preview.setStyleSheet(
+            f"background-color: rgb({color.r}, {color.g}, {color.b});"
+            f"border: 2px solid rgb({border[0]}, {border[1]}, {border[2]});"
+        )
 
 def set_border_color(text_input: QTextEdit, color: Color, preview: QLabel):
     text_input.setStyleSheet("")
-    text_input.setStyleSheet(f"border: 2px solid rgb({color.r}, {color.g}, {color.b});")
+    if color.a == 0:
+        text_input.setStyleSheet("border: 2px dashed gray;")
+    else:
+        text_input.setStyleSheet(f"border: 2px solid rgb({color.r}, {color.g}, {color.b});")
     set_color(color, preview)
 
 def darken(r: int, g: int, b: int, factor: float = 0.3) -> tuple[int, int, int]:
@@ -188,8 +222,9 @@ def set_defaults(character: Character, ui: Ui_MainWindow):
     ui.text_transform_selector.setCurrentIndex(transform - 1)
     ui.font_selector.setCurrentIndex(font - 1)
 
-def download():
-    source = generation_service.get_last_output()
+def download(ui: Ui_MainWindow):
+    source: Path | None = ui.download.property("path")
+
     if source is None:
         return
 
@@ -225,16 +260,29 @@ def reset_selectors(ui: Ui_MainWindow):
     has_any_entity = init_entity(db.select_all_universes, ui.universe_selector, ui.universe_preview, SelectionManager.get_selected_universe())
 
     if not has_any_entity:
+        SelectionManager.reset()
         return
 
     has_any_entity = init_entity(lambda: db.select_all_characters_from_universe(ui.universe_selector.currentData().universe_id), ui.character_selector, ui.character_preview, SelectionManager.get_selected_character())
 
     if not has_any_entity:
+        SelectionManager.set_selected_character(None)
+        SelectionManager.set_selected_expression(None)
         return
 
     set_defaults(SelectionManager.get_selected_character(), ui)
 
-    init_entity(lambda: db.select_all_expressions_from_character(ui.character_selector.currentData().character_id), ui.expression_selector, ui.expression_preview, SelectionManager.get_selected_expression())
+    has_expressions = init_entity(
+        lambda: db.select_all_expressions_from_character(ui.character_selector.currentData().character_id),
+        ui.expression_selector, ui.expression_preview, SelectionManager.get_selected_expression())
+
+    SelectionManager.set_selected_universe(ui.universe_selector.currentData())
+    SelectionManager.set_selected_character(ui.character_selector.currentData())
+    if has_expressions:
+        SelectionManager.set_selected_expression(ui.expression_selector.currentData())
+    else:
+        SelectionManager.set_selected_expression(None)
+
 
 def get_db():
     return DBDynamicConnection.get_instance()

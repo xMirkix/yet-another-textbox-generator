@@ -1,116 +1,131 @@
-from PIL import ImageFont, ImageDraw, Image
+from PIL import ImageFont, Image
 
 from generation.steps.font_step import FontConfig
+from generation.steps.font_substeps.helpers import get_character_size, draw_string
 from generation.steps.font_substeps.tokenizer import TextLine, TextToken
+from generation.steps.font_substeps.wrapping import calculate_wrapping
+from startup.in_memory.static_classes import Color
 
-
-def get_shadow_color(color: tuple[int,int,int]) -> tuple[int,int,int]:
-    """1px drop-shadow = color/4; white uses special dark-blue shadow."""
-    if color == (255, 255, 255):
-        return 15, 15, 113 # Dark blue
-    return color[0] // 4, color[1] // 4, color[2] // 4
-
-def get_character_size(font: ImageFont.FreeTypeFont, text: str) -> int:
-    draw = ImageDraw.Draw(Image.new("RGBA", (1, 1)))
-    return int(draw.textlength(text, font=font))
-
-def draw_string(
-    draw: ImageDraw.ImageDraw,
-    x: int, y: int,
-    text: str,
-    color: tuple[int, int, int],
-    font: ImageFont.FreeTypeFont,
-    with_shadow: bool,
-) -> int:
-    """Draws a string (whole run of same color) at once — preserves kerning."""
-    if with_shadow:
-        draw.text((x + 1, y + 1), text, font=font, fill=get_shadow_color(color))
-    draw.text((x, y), text, font=font, fill=color)
-    return get_character_size(font, text)
-
-def measure_line(line: TextLine, font: ImageFont.FreeTypeFont) -> int:
-    parts = [t.content for t in line.content]
-    text = ("* " if line.has_asterisk else "") + " ".join(parts)
-    return get_character_size(font, text)
+# logic
 
 def get_text_image(
     text: list[TextLine],
+    default_color: Color,
     dark_world: bool,
     font: ImageFont.FreeTypeFont,
     config: FontConfig,
+    max_size: tuple[int, int],
+    asterisk_color: list[Color],
 ) -> Image.Image:
-    default_color: tuple[int, int, int] = (255, 255, 255)
+    default_color = (default_color.r, default_color.g, default_color.b, default_color.a)
+
     line_height = config["line_height"]
 
-    img_w = max((measure_line(line, font) for line in text), default=1) + 2
-    img_h = len(text) * line_height + 2
-    img   = Image.new("RGBA", (img_w, img_h), (0, 0, 0, 0))
-    draw  = ImageDraw.Draw(img)
+    img_w = max_size[0] - 1 # - 1 for border padding
 
-    draw.fontmode = "1"
+    img_h = max_size[1]
+
+    img = Image.new("RGBA", (img_w, img_h), (0, 0, 0, 0))
+
+    char_size = config["character_width"]
+
+    text = calculate_wrapping(text, font, img_w - 2, char_size)
 
     for i, line in enumerate(text):
-        x = 0
-        y = i * line_height
-
-        if line.has_asterisk:
-            x += draw_string(draw, x, y, "* ", default_color, font, dark_world)
-
-        for j, token in enumerate(line.content):
-            if j > 0:
-                x += draw_string(draw, x, y, " ", default_color, font, dark_world)
-
-            # Batch characters of the same color → draw as one string (fixes kerning)
-            current_color = default_color
-            batch = ""
-            for ci, char in enumerate(token.content):
-                if ci in token.colors:
-                    c = token.colors[ci]
-                    new_color: tuple[int, int, int] = (c.r, c.g, c.b)
-                else:
-                    new_color = current_color
-
-                if new_color != current_color:
-                    if batch:
-                        x += draw_string(draw, x, y, batch, current_color, font, dark_world)
-                    batch = char
-                    current_color = new_color
-                else:
-                    batch += char
-
-            if batch:
-                x += draw_string(draw, x, y, batch, current_color, font, dark_world)
+        draw_for_each_line(i,
+                           img,
+                           line,
+                           line_height,
+                           default_color,
+                           font, dark_world,
+                           asterisk_color,
+                           config["initial_asterisk_offset"],
+                           config["character_extra_offset"],
+                           config["space_extra_offset"],
+                           char_size)
 
     return img
 
-def calculate_wrapping(
-    text: list[TextLine],
+def draw_for_each_line(
+    index: int,
+    img: Image.Image,
+    line: TextLine,
+    line_height: int,
+    default_color: tuple[int, int, int, int],
     font: ImageFont.FreeTypeFont,
-    max_width: int,
-) -> list[TextLine]:
-    space_w    = get_character_size(font, " ")
-    asterisk_w = get_character_size(font, "* ")
-    result: list[TextLine] = []
+    dark_world: bool,
+    asterisk_color: list[Color],
+    asterisk_offset: int,
+    character_offset: int,
+    space_offset: int,
+    char_size: int
+) -> None:
+    x = 0
+    y = index * line_height
 
-    for line in text:
-        current:       list[TextToken] = []
-        current_width: int             = asterisk_w if line.has_asterisk else 0
-        is_first_chunk                 = True
+    x += manage_asterisk(img, x, y, line.has_asterisk, font, dark_world, asterisk_color, index, asterisk_offset, char_size)
 
-        for token in line.content:
-            token_w = get_character_size(font, token.content)
-            gap     = space_w if current else 0
+    for j, token in enumerate(line.content):
+        x = draw_for_each_token(x, y, j, img, token, default_color, font, dark_world, character_offset, space_offset, char_size)
 
-            if current and current_width + gap + token_w > max_width:
-                result.append(TextLine(current, line.has_asterisk and is_first_chunk))
-                is_first_chunk = False
-                current        = [token]
-                current_width  = token_w
-            else:
-                current.append(token)
-                current_width += gap + token_w
+def draw_for_each_token(
+    x: int,
+    y: int,
+    index: int,
+    img: Image.Image,
+    token: TextToken,
+    default_color: tuple[int, int, int, int],
+    font: ImageFont.FreeTypeFont,
+    dark_world: bool,
+    character_offset: int,
+    space_offset: int,
+    char_size: int
+) -> int:
+    if index > 0: # for adding space between tokens
+        x += draw_string(img, x, y, " ", default_color, font, dark_world, char_size, 0) + space_offset
 
-        if current:
-            result.append(TextLine(current, line.has_asterisk and is_first_chunk))
+    # Batch characters of the same color -> draw as one string
+    current_color = default_color
+    batch = ""
+    for ci, char in enumerate(token.content): # for each character in the token (could be mid-token color switch)
+        if ci in token.colors: # is a switch color index?
+            if batch: # draw previous batch
+                x += draw_string(img, x, y, batch, current_color, font, dark_world, char_size, character_offset)
+            batch = char
 
-    return result
+            color = token.colors[ci] # get new color
+            current_color = (color.r, color.g, color.b, color.a)
+
+        else: # just add to batch
+            batch += char
+
+    if batch: # draw last batch (or only if no switch entry)
+        x += draw_string(img, x, y, batch, current_color, font, dark_world, char_size, character_offset)
+
+    return x
+
+
+def manage_asterisk(
+        img: Image.Image,
+        x: int,
+        y: int,
+        has_asterisk: bool,
+        font: ImageFont.FreeTypeFont,
+        dark_world: bool,
+        asterisk_color: list[Color],
+        index: int,
+        offset: int,
+        char_size: int
+) -> int:
+    if asterisk_color is None or len(asterisk_color) == 0: # No asterisk
+        return 0
+
+    if not has_asterisk: # Wrapped line, asterisk padding
+        return get_character_size("* ", char_size) + offset
+
+    color = (asterisk_color[index].r, asterisk_color[index].g, asterisk_color[index].b, asterisk_color[index].a)
+
+    if font.getname()[0] == "Wingdings":
+        return draw_string(img, x, y, "*", color , font, dark_world, char_size, 0)
+
+    return draw_string(img, x, y, "* ", color, font, dark_world, char_size, 0) + offset # offset for longer/shorter space between asterisk and text

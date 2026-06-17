@@ -7,8 +7,6 @@ ASSETS_DIR         = ROOT / 'assets'
 BORDERS_DIR        = ASSETS_DIR / 'borders'
 PREVIEWS_DIR       = ASSETS_DIR / 'previews'
 TEMP_DATA_DIR      = ASSETS_DIR / 'temp_dynamic_data'
-TEMP_PNG           = TEMP_DATA_DIR / 'output.png'
-TEMP_GIF           = TEMP_DATA_DIR / 'output.gif'
 STARTUP_DIR        = ROOT / 'startup'
 IN_MEMORY_DIR      = STARTUP_DIR / 'in_memory'
 

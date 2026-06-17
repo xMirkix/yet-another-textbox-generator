@@ -16,11 +16,6 @@ class DBStaticConnection:
     def saved(cls):
         cls._changed = False
 
-    def select_table(self, table_name: str):
-        return self.connection.execute(f"""
-            SELECT * FROM {table_name}
-        """).fetchall()
-
     def select_all_colors(self) -> list[Color]:
         rows = self.connection.execute("SELECT * FROM Colors").fetchall()
         return [Color(*row) for row in rows]
@@ -80,11 +75,6 @@ class DBDynamicConnection:
 
 
     # SELECTS
-
-    def select_table(self, table_name: str):
-        return self.connection.execute(f"""
-            SELECT * FROM {table_name}
-        """).fetchall()
 
     def select_all_universes(self) -> list[Universe]:
         rows = self.connection.execute("SELECT * FROM Universes ORDER BY order_position").fetchall()

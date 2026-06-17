@@ -11,11 +11,17 @@ def swap_tiles(grid_widget, id_a: int, id_b: int):
     layout = grid_widget.layout()
     tile_a, pos_a = find_tile(layout, id_a)
     tile_b, pos_b = find_tile(layout, id_b)
-    if tile_a is None or tile_b is None:
+    if not tile_a or not tile_b:
         return
+
+    layout.removeWidget(tile_a)
+    layout.removeWidget(tile_b)
+
     entity_a = tile_a.property("entity")
     entity_b = tile_b.property("entity")
+
     entity_a.order_position, entity_b.order_position = entity_b.order_position, entity_a.order_position
+
     layout.addWidget(tile_a, pos_b[0], pos_b[1])
     layout.addWidget(tile_b, pos_a[0], pos_a[1])
 
@@ -47,4 +53,5 @@ def clear_grid(widget):
         item = layout.takeAt(0)
         w = item.widget()
         if w:
+            w.hide()
             w.deleteLater()

@@ -28,15 +28,15 @@ def apply_border(settings: BorderSettings, source_image, resolution: tuple[int, 
 
     for x in range(border_source.width):
         for y in range(border_source.height):
-            for_each_pixel(x, y, (r, g, b), pixels_src, pixels_dst)
+            for_each_pixel(x, y, (r, g, b, settings.color.a), pixels_src, pixels_dst)
 
-    if settings.style.source_image_file_name == "Deltarune":
+    if settings.style.source_image_file_name == "Deltarune" and settings.color.a == 255:
         set_corners(pixels_dst) # Replace 4 Dots in Corner with right color
 
     return result
 
 
-def for_each_pixel(x: int, y: int, rgb: tuple[int, int, int], pixels_src, pixels_dst):
+def for_each_pixel(x: int, y: int, rgb: tuple[int, int, int, int], pixels_src, pixels_dst):
     pixel_src_r, pixel_src_g, pixel_src_b, pixel_src_alpha = pixels_src[x, y]
 
     if pixel_src_alpha > 0:
@@ -44,12 +44,13 @@ def for_each_pixel(x: int, y: int, rgb: tuple[int, int, int], pixels_src, pixels
         final_r = int(rgb[0] * brightness) % 256
         final_g = int(rgb[1] * brightness) % 256
         final_b = int(rgb[2] * brightness) % 256
+        final_a = 255 if (pixel_src_r + pixel_src_g + pixel_src_b) == 0 else rgb[3]
 
         pixels_dst[x, y] = (
             final_r,
             final_g,
             final_b,
-            pixel_src_alpha
+            final_a
             )
 
 def get_color_with_least_values(r: int, g: int, b: int) -> tuple[int, int, int]:

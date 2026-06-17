@@ -1,5 +1,6 @@
 from typing import Callable
 
+from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QLineEdit, QLabel, QPushButton, QMessageBox
 
 from models.entities import Expression, Universe
@@ -44,7 +45,7 @@ def connect_expressions(ui: Ui_MainWindow):
 
     edit.clicked.connect(lambda: edit_expression(ui))  # On edit
 
-    ui.expressions_filter_input.textChanged.connect(lambda text: filter_expressions(ui, text))  # On filter change
+    ui.expressions_filter_input.textChanged.connect(lambda text: QTimer.singleShot(0, lambda: filter_expressions(ui, text)))  # On filter change
 
     ui.expressions_create_universe_selector.activated.connect(
         lambda: universe_change(ui)
@@ -59,13 +60,13 @@ def universe_change(ui: Ui_MainWindow):
     new_universe : Universe = ui.expressions_create_universe_selector.currentData()
     SelectionManager.set_selected_universe(new_universe)
     SelectionManager.try_to_select_first_character_from_current_universe()
-    reload_ui(ui)
+    QTimer.singleShot(0, lambda: reload_ui(ui))
 
 def character_change(ui: Ui_MainWindow, index):
     ui.edit_expression.hide()
     SelectionManager.set_selected_character(
         ui.expressions_create_character_selector.itemData(index))
-    reload_ui(ui)
+    QTimer.singleShot(0, lambda: reload_ui(ui))
 
 def create_expression(ui: Ui_MainWindow):
     db = get_db()
@@ -91,7 +92,7 @@ def create_expression(ui: Ui_MainWindow):
         ui.expressions_create_name_input,
         ui.expressions_create_image_preview,
         ui.expressions_create_image_remove_button,
-        lambda: reload_ui(ui),
+        lambda: QTimer.singleShot(0, lambda: reload_ui(ui)),
     )
 
 def edit_expression(ui: Ui_MainWindow):
@@ -102,6 +103,17 @@ def edit_expression(ui: Ui_MainWindow):
 
     db = get_db()
 
+    exists = db.select_expression_by_id(expression_id)
+
+    if not exists:
+        post_operation(
+            ui.expressions_edit_name_input,
+            ui.expressions_edit_image_preview,
+            ui.expressions_edit_image_remove_button,
+            lambda: QTimer.singleShot(0, lambda: reload_ui(ui))
+        )
+        return
+
     form_operation(expression_id, expression_name, character_id, pixmap, 42,
                    db.update_expression)  # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
 
@@ -111,7 +123,7 @@ def edit_expression(ui: Ui_MainWindow):
         ui.expressions_edit_name_input,
         ui.expressions_edit_image_preview,
         ui.expressions_edit_image_remove_button,
-        lambda: reload_ui(ui)  # For edit to take effect
+        lambda: QTimer.singleShot(0, lambda: reload_ui(ui))  # For edit to take effect
     )
 
 def form_operation(expression_id: int, name: str, character_id: int, pixmap, order_position: int, db_function: Callable):

@@ -1,34 +1,54 @@
 [default]
 font_size = 16
 line_height = 18
-y_text_start = 15
-x_with_sprite = 87
-x_no_sprite = 16
+y_text_start = 7
+x_with_sprite = 69
+x_no_sprite = 11
+character_width = 8
+initial_asterisk_offset = -3
+character_extra_offset = 0
+space_extra_offset = 0
 
 [Determination-Mono]
 font_size = 16
 line_height = 18
-y_text_start = 13
+y_text_start = 7
 x_with_sprite = 69
 x_no_sprite = 11
+character_width = 8
+initial_asterisk_offset = -3
+character_extra_offset = 0
+space_extra_offset = 0
 
-[Comic-Sans-UT]
-font_size = 16 # TODO maybe change me
+[Comic-Sans]
+font_size = 16
 line_height = 18
-y_text_start = 12
+y_text_start = 10
 x_with_sprite = 69
 x_no_sprite = 11
+character_width = 6
+initial_asterisk_offset = 2
+character_extra_offset = 1
+space_extra_offset = 2
 
-[Papyrus-UT]
-font_size = 16 # TODO maybe change me
+[Papyrus]
+font_size = 16
 line_height = 18
-y_text_start = 13
+y_text_start = 5
 x_with_sprite = 70
 x_no_sprite = 12
+character_width = 6
+initial_asterisk_offset = -2
+character_extra_offset = 0
+space_extra_offset = 0
 
 [Wingdings]
-font_size = 16 # TODO maybe change me
+font_size = 16
 line_height = 18
 y_text_start = 8
 x_with_sprite = 64
 x_no_sprite = 6
+character_width = 12
+initial_asterisk_offset = 0
+character_extra_offset = 0
+space_extra_offset = 0

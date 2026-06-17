@@ -19,6 +19,9 @@ class Universe:
     def get_name(self) -> str:
         return self.universe_name
 
+    def __hash__(self) -> int:
+        return hash(self.universe_id)
+
 @dataclass
 class Character:
     character_id: int
@@ -44,6 +47,9 @@ class Character:
     def get_name(self) -> str:
         return self.character_name
 
+    def __hash__(self) -> int:
+        return hash(self.character_id)
+
 @dataclass
 class Expression:
     expression_id: int
@@ -67,3 +73,6 @@ class Expression:
 
     def get_name(self) -> str:
         return self.expression_name
+
+    def __hash__(self) -> int:
+        return hash(self.expression_id)

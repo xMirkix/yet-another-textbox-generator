@@ -23,7 +23,7 @@ class EntityHandler(ABC):
         self.db_update_order(other, entity.order_position)
 
         if self.filter_text():
-            self.reload_filtered()
+            QTimer.singleShot(0, self.reload_filtered)
         else:
             grid_service.swap_tiles(self.grid_widget(), entity.get_id(), other.get_id())
 

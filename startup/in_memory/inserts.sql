@@ -1,19 +1,20 @@
-INSERT INTO Colors (color_name, r, g, b)
-VALUES ('White', 255, 255, 255),
-       ('Red', 255, 0, 0),
-       ('Orange', 255, 128, 0),
-       ('Yellow', 255, 255, 0),
-       ('Lime', 128, 255, 0),
-       ('Green', 0, 255, 0),
-       ('Spring green', 0, 255, 128),
-       ('Cyan', 0, 255, 255),
-       ('Blue', 0, 128, 255),
-       ('Sea blue', 0, 0, 255),
-       ('Purple', 128, 0, 255),
-       ('Pink', 255, 0, 255),
-       ('Hot pink', 255, 0, 128),
-       ('Gray', 128, 128, 128),
-       ('Black', 0, 0, 0);
+INSERT INTO Colors (color_name, r, g, b, a)
+VALUES ('White', 255, 255, 255, 255),
+       ('Red', 255, 0, 0, 255),
+       ('Orange', 255, 128, 0, 255),
+       ('Yellow', 255, 255, 0, 255),
+       ('Lime', 128, 255, 0, 255),
+       ('Green', 0, 255, 0, 255),
+       ('Spring green', 0, 255, 128, 255),
+       ('Cyan', 0, 255, 255, 255),
+       ('Blue', 0, 128, 255, 255),
+       ('Sea blue', 0, 0, 255, 255),
+       ('Purple', 128, 0, 255, 255),
+       ('Pink', 255, 0, 255, 255),
+       ('Hot pink', 255, 0, 128, 255),
+       ('Gray', 128, 128, 128, 255),
+       ('Black', 0, 0, 0, 255),
+       ('Transparent', 0, 0, 0, 0);
 
 INSERT INTO Transforms (transform_name)
 VALUES ('no changes'),

@@ -10,22 +10,28 @@ from models.form_bindings import FontSettings, TextStyle
 from generation.steps.font_substeps.tokenizer import tokenize
 from configs.paths import GEN_CONFIG, FONTS
 import tomllib
+from startup.in_memory.static_classes import Color
 
-def apply(ctx: GenerationContext, text: str, settings: FontSettings) -> GenerationContext:
+
+def apply(ctx: GenerationContext, text: str, default_color: Color, settings: FontSettings) -> GenerationContext:
     if settings.font is None:
         return ctx
 
     try:
         trimmed = trim_newlines(text)
-        lines = tokenize(trimmed, settings.transform)
+        lines = tokenize(trimmed, settings.transform, len(settings.asterisk_color) > 0)
 
         config = get_config(settings.font.font_name)
 
         font = get_font(settings.font.font_name,settings.font.font_file_name, config["font_size"])
 
-        image_text = get_text_image(lines, is_dark_world_style(settings.text_style), font, config) # includes asterisk
+        x, y = get_image_resolution(ctx.has_expression, config)
 
-        ctx.image.paste(image_text, get_text_insert_position(ctx.border_style, ctx.has_expression , config), image_text)
+        image_text = get_text_image(lines, default_color, is_dark_world_style(settings.text_style), font, config, (x, y), settings.asterisk_color) # includes asterisk
+
+        insert_position = get_text_insert_position(ctx.border_style, ctx.has_expression , config)
+
+        ctx.image.paste(image_text, insert_position, image_text)
 
     except OSError:
         pass
@@ -41,6 +47,16 @@ def get_text_insert_position(style: str, with_sprite: bool, config: FontConfig) 
 
     x, y = x + config[key], y + config["y_text_start"]
     return x, y
+
+def get_image_resolution(with_sprite: bool, config: FontConfig) -> tuple[int, int]:
+    x, y = 0, 0
+    key: Literal["x_with_sprite", "x_no_sprite"] = "x_with_sprite" if with_sprite else "x_no_sprite"
+
+    x, y = x + config[key], y + config["y_text_start"]
+    return (
+        283 - x,
+        70 - y,
+    )
 
 def is_dark_world_style(style: TextStyle) -> bool:
     return style == TextStyle.DARK_WORLD

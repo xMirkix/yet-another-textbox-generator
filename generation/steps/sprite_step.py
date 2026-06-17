@@ -49,7 +49,7 @@ def color_image_if_no_color_present(image: Image.Image, color: Color) -> Image.I
             if (r, g, b) not in ((0, 0, 0), (255, 255, 255)): # expression already has a color
                 return image
             if (r, g, b) == (255, 255, 255): # white pixel gets recolored
-                pixels[x, y] = (color.r, color.g, color.b, a)
+                pixels[x, y] = (color.r, color.g, color.b, color.a)
     return result
 
 def get_resolution(border_style) -> tuple[int, int]:

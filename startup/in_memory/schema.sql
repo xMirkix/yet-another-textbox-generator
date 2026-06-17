@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS Colors (
     color_name TEXT NOT NULL,
     r INTEGER CHECK (r >= 0 AND r <= 255) NOT NULL,
     g INTEGER CHECK (r >= 0 AND r <= 255) NOT NULL,
-    b INTEGER CHECK (r >= 0 AND r <= 255) NOT NULL
+    b INTEGER CHECK (r >= 0 AND r <= 255) NOT NULL,
+    a INTEGER CHECK (a >= 0 AND a <= 255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Fonts (
