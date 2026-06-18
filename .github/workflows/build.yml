@@ -43,6 +43,11 @@ jobs:
             --enable-plugin=pyside6 `
             --windows-console-mode=disable `
             --assume-yes-for-downloads `
+            --include-data-dir=assets=assets `
+            --include-data-dir=startup=startup `
+            --include-data-dir=configs=configs `
+            --include-data-dir=fonts=fonts `
+            --include-data-dir=ui/icons=ui/icons `
             --output-filename=YATG.exe `
             main.py
 
@@ -52,7 +57,11 @@ jobs:
           python -m nuitka --standalone --onefile \
             --enable-plugin=pyside6 \
             --assume-yes-for-downloads \
-            --lto=yes \
+            --include-data-dir=assets=assets \
+            --include-data-dir=startup=startup \
+            --include-data-dir=configs=configs \
+            --include-data-dir=fonts=fonts \
+            --include-data-dir=ui/icons=ui/icons \
             --output-filename=YATG \
             main.py
 
