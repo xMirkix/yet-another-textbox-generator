@@ -1,3 +1,4 @@
+from __future__ import annotations
 import sqlite3
 from configs.paths import DYNAMIC_DB, DYNAMIC_SCHEMA, STATIC_DB
 
