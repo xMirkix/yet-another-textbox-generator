@@ -1,4 +1,3 @@
-from __future__ import annotations
 import sqlite3
 from configs.paths import DYNAMIC_DB, DYNAMIC_SCHEMA, STATIC_DB
 
@@ -38,7 +37,7 @@ class DBStaticConnection:
         return [TextTransform(*row) for row in rows]
 
 class DBDynamicConnection:
-    _instance: DBDynamicConnection | None = None
+    _instance = None
     _initialized: bool = False
     db_path = DYNAMIC_DB
 
