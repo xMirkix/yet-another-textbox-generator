@@ -62,6 +62,7 @@ class GenerationPngProxy:
         )
 
         path = TEMP_DATA_DIR / f"output_{self.slot}.png"
+        path.touch()
         image.save(path)
         self.slot = (self.slot + 1) % CACHE_SIZE
 
