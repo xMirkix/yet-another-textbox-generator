@@ -1,8 +1,6 @@
 name: Build Executables
-
 on:
   workflow_dispatch:
-
 jobs:
   build:
     strategy:
@@ -17,15 +15,23 @@ jobs:
           - os: macos-latest
             output: YATG
             asset: YATG-mac.zip
-
     runs-on: ${{ matrix.os }}
-
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Nuitka Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/Nuitka
+            ~/Library/Caches/Nuitka
+            ~\AppData\Local\Nuitka\Nuitka\Cache
+          key: nuitka-${{ runner.os }}-${{ hashFiles('**/*.py') }}
+          restore-keys: nuitka-${{ runner.os }}-
 
       - name: install dependencies
         run: pip install -r requirements.txt nuitka
@@ -36,7 +42,8 @@ jobs:
           python -m nuitka --standalone --onefile `
             --enable-plugin=pyside6 `
             --windows-console-mode=disable `
-            --output-filename=MeinApp.exe `
+            --assume-yes-for-downloads `
+            --output-filename=YATG.exe `
             main.py
 
       - name: Build (Linux/macOS)
@@ -44,7 +51,8 @@ jobs:
         run: |
           python -m nuitka --standalone --onefile \
             --enable-plugin=pyside6 \
-            --output-filename=MeinApp \
+            --assume-yes-for-downloads \
+            --output-filename=YATG \
             main.py
 
       - name: create ZIP (Windows)
@@ -53,7 +61,7 @@ jobs:
 
       - name: create ZIP (Linux/macOS)
         if: runner.os != 'Windows'
-        run: zip ${{ matrix.asset }} MeinApp LICENSES
+        run: zip ${{ matrix.asset }} YATG LICENSES
 
       - name: upload ZIP
         uses: actions/upload-artifact@v4
