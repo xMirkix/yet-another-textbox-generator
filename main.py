@@ -24,6 +24,7 @@ if __name__ == '__main__':
 
     # First instance - continue
     server = QLocalServer()
+    server.setSocketOptions(QLocalServer.SocketOption.WorldAccessOption)
     QLocalServer.removeServer(APP_KEY)  # clear up old socket in case of crashes
     server.listen(APP_KEY)
 

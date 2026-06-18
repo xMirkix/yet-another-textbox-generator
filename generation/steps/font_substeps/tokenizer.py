@@ -4,14 +4,14 @@ from services.database_service import DBStaticConnection
 from startup.in_memory.static_classes import Color, TextTransform
 
 @dataclass
-class TextLine:
-    content: list[TextToken]
-    has_asterisk: bool
-
-@dataclass
 class TextToken: # One word
     content: str
     colors: dict[int, Color]
+
+@dataclass
+class TextLine:
+    content: list[TextToken]
+    has_asterisk: bool
 
 def tokenize(text: str, transform: TextTransform, has_asterisk: bool) -> list[TextLine]:
     connection = DBStaticConnection()
