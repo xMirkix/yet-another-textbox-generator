@@ -1,0 +1,62 @@
+name: Build Executables
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            output: YATG.exe
+            asset: YATG-windows.zip
+          - os: ubuntu-latest
+            output: YATG
+            asset: YATG-linux.zip
+          - os: macos-latest
+            output: YATG
+            asset: YATG-mac.zip
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: install dependencies
+        run: pip install -r requirements.txt nuitka
+
+      - name: Build (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          python -m nuitka --standalone --onefile `
+            --enable-plugin=pyside6 `
+            --windows-console-mode=disable `
+            --output-filename=MeinApp.exe `
+            main.py
+
+      - name: Build (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: |
+          python -m nuitka --standalone --onefile \
+            --enable-plugin=pyside6 \
+            --output-filename=MeinApp \
+            main.py
+
+      - name: create ZIP (Windows)
+        if: runner.os == 'Windows'
+        run: Compress-Archive -Path YATG.exe, LICENSES -DestinationPath ${{ matrix.asset }}
+
+      - name: create ZIP (Linux/macOS)
+        if: runner.os != 'Windows'
+        run: zip ${{ matrix.asset }} MeinApp LICENSES
+
+      - name: upload ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset }}
+          path: ${{ matrix.asset }}

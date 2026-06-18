@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Callable
 
 from PySide6.QtGui import QPixmap
-from PySide6.QtWidgets import QLabel, QTextEdit, QFileDialog
+from PySide6.QtWidgets import QLabel, QTextEdit, QFileDialog, QMessageBox
 from PySide6.QtGui import QMovie
 
 from configs.paths import PREVIEWS_DIR
@@ -43,14 +43,14 @@ def connect_generator(ui: Ui_MainWindow):
 
     ui.expression_selector.setStyleSheet("""
         QComboBox {
-            combobox-popup: 0; /* Zwingt Qt dazu, ein echtes Widget statt eines OS-Menüs zu nutzen */
+            combobox-popup: 0;
         }
         QComboBox QAbstractItemView {
-            max-height: 320px;   /* Schneidet die "Wurscht" nach ca. 10 Elementen knallhart ab */
+            max-height: 320px;
             min-height: 100px;
         }
         QComboBox QAbstractItemView::item {
-            min-height: 30px;    /* Gibt den Expressions endlich wieder Platz zum Atmen (kein Quetschen) */
+            min-height: 30px;
             padding: 4px;
         }
     """)
@@ -170,18 +170,18 @@ def universe_change(ui: Ui_MainWindow):
     SelectionManager.set_selected_universe(new_universe)
     SelectionManager.try_to_select_first_character_from_current_universe()
     SelectionManager.try_to_select_first_expression_from_current_character()
-    reset_selectors(ui)
+    reset_selectors(ui, lambda: set_defaults(SelectionManager.get_selected_character(), ui))
 
 def character_change(ui: Ui_MainWindow):
     character = ui.character_selector.currentData()
     SelectionManager.set_selected_character(character)
     set_defaults(character, ui)
     SelectionManager.try_to_select_first_expression_from_current_character()
-    reset_selectors(ui)
+    reset_selectors(ui, lambda: set_defaults(SelectionManager.get_selected_character(), ui))
 
 def expression_change(ui: Ui_MainWindow):
     SelectionManager.set_selected_expression(ui.expression_selector.currentData())
-    reset_selectors(ui)
+    reset_selectors(ui, lambda: ())
 
 def hide_asterisk(ui: Ui_MainWindow):
     ui.asterisk_color_everything.hide()
@@ -231,23 +231,38 @@ def download(ui: Ui_MainWindow):
     suffix = source.suffix
     path, _ = QFileDialog.getSaveFileName(
         caption="Save",
-        filter="PNG (*.png)" if suffix == ".png" else "GIF (*.gif)"
+        filter="PNG (*.png)" if suffix == ".png" else "GIF (*.gif)",
+        options=QFileDialog.Option.DontConfirmOverwrite
     )
-    if path:
-        if not path.endswith(suffix):
-            path += suffix
-        shutil.copyfile(source, path)
+    if not path:
+        return
+
+    if not path.endswith(suffix):
+        path += suffix
+
+    if Path(path).exists():
+        reply = QMessageBox.warning(
+            None,
+            "Save",
+            f'"{Path(path).name}" already exists.\nDo you want to replace it?',
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.No,
+        )
+        if reply != QMessageBox.StandardButton.Yes:
+            return
+
+    shutil.copyfile(source, path)
 """
 1. Wipe universe/character/expression selector
 2. Load universes into select (sorted)
 Universes, characters and expressions are added dynamically
 """
 def reload_ui(ui: Ui_MainWindow):
-    reset_selectors(ui)
+    reset_selectors(ui, lambda: set_defaults(SelectionManager.get_selected_character(), ui))
     try_generate(ui)
 
 
-def reset_selectors(ui: Ui_MainWindow):
+def reset_selectors(ui: Ui_MainWindow, default_function: Callable):
     ui.expression_selector.clear()
     ui.expression_preview.clear()
     ui.character_selector.clear()
@@ -270,7 +285,7 @@ def reset_selectors(ui: Ui_MainWindow):
         SelectionManager.set_selected_expression(None)
         return
 
-    set_defaults(SelectionManager.get_selected_character(), ui)
+    default_function()
 
     has_expressions = init_entity(
         lambda: db.select_all_expressions_from_character(ui.character_selector.currentData().character_id),
