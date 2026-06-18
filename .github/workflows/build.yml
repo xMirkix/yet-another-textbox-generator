@@ -57,11 +57,11 @@ jobs:
 
       - name: create ZIP (Windows)
         if: runner.os == 'Windows'
-        run: Compress-Archive -Path YATG.exe, LICENSES -DestinationPath ${{ matrix.asset }}
+        run: Compress-Archive -Path YATG.exe, LICENSE -DestinationPath ${{ matrix.asset }}
 
       - name: create ZIP (Linux/macOS)
         if: runner.os != 'Windows'
-        run: zip ${{ matrix.asset }} YATG LICENSES
+        run: zip ${{ matrix.asset }} YATG LICENSE
 
       - name: upload ZIP
         uses: actions/upload-artifact@v4
