@@ -1,27 +1,28 @@
 # config/paths.py
+import sys
 from pathlib import Path
 
-ROOT = Path(__file__).parent.parent
+_BUNDLE = Path(__file__).parent.parent
 
-ASSETS_DIR         = ROOT / 'assets'
-BORDERS_DIR        = ASSETS_DIR / 'borders'
-PREVIEWS_DIR       = ASSETS_DIR / 'previews'
-TEMP_DATA_DIR      = ASSETS_DIR / 'temp_dynamic_data'
-STARTUP_DIR        = ROOT / 'startup'
-IN_MEMORY_DIR      = STARTUP_DIR / 'in_memory'
+_RUNTIME = Path(sys.executable).parent
 
-STATIC_DB          = IN_MEMORY_DIR / 'static_data.sqlite3'
-DYNAMIC_DB         = TEMP_DATA_DIR / 'temp_data.sqlite3'
-DYNAMIC_SCHEMA     = TEMP_DATA_DIR / 'schema.sql'
+ASSETS_DIR = _BUNDLE / 'assets'
+BORDERS_DIR = ASSETS_DIR / 'borders'
+PREVIEWS_DIR = ASSETS_DIR / 'previews'
+STARTUP_DIR = _BUNDLE / 'startup'
+IN_MEMORY_DIR = STARTUP_DIR / 'in_memory'
+STATIC_DB = IN_MEMORY_DIR / 'static_data.sqlite3'
+DYNAMIC_SCHEMA = ASSETS_DIR / 'temp_dynamic_data' / 'schema.sql'
+UNDERTALE_PREVIEW = PREVIEWS_DIR / 'undertale_preview.png'
+ICONS_DIR = _BUNDLE / 'ui' / 'icons'
+ICON_LEFT = ICONS_DIR / 'arrow-left.png'
+ICON_RIGHT  = ICONS_DIR / 'primary-line-line-arrow-end.png'
+ICON_EDIT = ICONS_DIR / 'mono-editor.png'
+ICON_DELETE = ICONS_DIR / 'trash_correct_resolution.png'
+FONTS = _BUNDLE / 'fonts'
+GEN_CONFIG = _BUNDLE / 'configs' / 'gen-config.toml'
 
-UNDERTALE_PREVIEW  = PREVIEWS_DIR / 'undertale_preview.png'
+TEMP_DATA_DIR = _RUNTIME / 'data'
+DYNAMIC_DB = TEMP_DATA_DIR / 'temp_data.sqlite3'
 
-ICONS_DIR    = ROOT / 'ui' / 'icons'
-ICON_LEFT    = ICONS_DIR / 'arrow-left.png'
-ICON_RIGHT   = ICONS_DIR / 'primary-line-line-arrow-end.png'
-ICON_EDIT    = ICONS_DIR / 'mono-editor.png'
-ICON_DELETE  = ICONS_DIR / 'trash_correct_resolution.png'
-
-GEN_CONFIG = ROOT / 'configs' / 'gen-config.toml'
-
-FONTS = ROOT / 'fonts'
+TEMP_DATA_DIR.mkdir(parents=True, exist_ok=True)

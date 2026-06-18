@@ -52,19 +52,24 @@ jobs:
           python -m nuitka --standalone --onefile \
             --enable-plugin=pyside6 \
             --assume-yes-for-downloads \
+            --lto=yes \
             --output-filename=YATG \
             main.py
 
-      - name: create ZIP (Windows)
+      - name: upload (Windows)
         if: runner.os == 'Windows'
-        run: Compress-Archive -Path YATG.exe, LICENSE -DestinationPath ${{ matrix.asset }}
-
-      - name: create ZIP (Linux/macOS)
-        if: runner.os != 'Windows'
-        run: zip ${{ matrix.asset }} YATG LICENSE
-
-      - name: upload ZIP
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.asset }}
-          path: ${{ matrix.asset }}
+          path: |
+            YATG.exe
+            LICENSE
+
+      - name: upload (Linux/macOS)
+        if: runner.os != 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset }}
+          path: |
+            YATG
+            LICENSE
