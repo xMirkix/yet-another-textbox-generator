@@ -40,6 +40,43 @@ class SpriteSettings:
     def __hash__(self) -> int:
         return hash((self.universe, self.character, self.expression, self.expression_color))
 
+class TextStyle(Enum):
+    REGULAR = ('Regular','regular')
+    DARK_WORLD = ('Dark World','dark world')
+
+    def __eq__(self, other) -> bool:
+        if isinstance(other, TextStyle):
+            return self.value[0] == other.value[0]
+        return False
+
+    def __hash__(self) -> int:
+        return hash(self.value[0])
+
+class ExportFormat(Enum):
+    PNG = 'png'
+    GIF = 'gif'
+
+    def __eq__(self, other) -> bool:
+        if isinstance(other, ExportFormat):
+            return self.value == other.value
+        return False
+
+    def __hash__(self):
+        return hash(self.value)
+
+class ExportSize(Enum):
+    SMALL = 'small'
+    MEDIUM = 'medium'
+    BIG = 'big'
+
+    def __eq__(self, other) -> bool:
+        if isinstance(other, ExportSize):
+            return self.value == other.value
+        return False
+
+    def __hash__(self):
+        return hash(self.value)
+
 class FontSettings:
     font: TextFont | None
     asterisk_color: list[Color]
@@ -77,40 +114,3 @@ class ExportSettings:
 
     def __hash__(self) -> int:
         return hash((self.export_format, self.margin, self.size))
-
-class TextStyle(Enum):
-    REGULAR = ('Regular','regular')
-    DARK_WORLD = ('Dark World','dark world')
-
-    def __eq__(self, other) -> bool:
-        if isinstance(other, TextStyle):
-            return self.value[0] == other.value[0]
-        return False
-
-    def __hash__(self) -> int:
-        return hash(self.value[0])
-
-class ExportFormat(Enum):
-    PNG = 'png'
-    GIF = 'gif'
-
-    def __eq__(self, other) -> bool:
-        if isinstance(other, ExportFormat):
-            return self.value == other.value
-        return False
-
-    def __hash__(self):
-        return hash(self.value)
-
-class ExportSize(Enum):
-    SMALL = 'small'
-    MEDIUM = 'medium'
-    BIG = 'big'
-
-    def __eq__(self, other) -> bool:
-        if isinstance(other, ExportSize):
-            return self.value == other.value
-        return False
-
-    def __hash__(self):
-        return hash(self.value)
