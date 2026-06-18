@@ -48,6 +48,7 @@ jobs:
             --include-data-dir=configs=configs `
             --include-data-dir=fonts=fonts `
             --include-data-dir=ui/icons=ui/icons `
+            --include-package=PIL \
             --output-filename=YATG.exe `
             main.py
 
@@ -62,6 +63,8 @@ jobs:
             --include-data-dir=configs=configs \
             --include-data-dir=fonts=fonts \
             --include-data-dir=ui/icons=ui/icons \
+            --include-qt-plugins=all \
+            --include-package=PIL \
             --output-filename=YATG \
             main.py
 
