@@ -16,8 +16,8 @@ CREATE TABLE IF NOT EXISTS Colors (
 
 CREATE TABLE IF NOT EXISTS Fonts (
     font_id    INTEGER PRIMARY KEY AUTOINCREMENT,
-    font_name  TEXT NOT NULL UNIQUE,
-    font_system_name TEXT NOT NULL UNIQUE
+    font_name  TEXT NOT NULL,
+    source_value TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Transforms (

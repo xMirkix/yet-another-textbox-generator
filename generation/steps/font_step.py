@@ -1,15 +1,14 @@
 # THIRD
-import platform
-from pathlib import Path
 from typing import Literal
-from PIL import ImageFont
 from generation.context import GenerationContext
 from generation.steps.font_substeps.font_config import FontConfig
 from generation.steps.font_substeps.text_image_generator import get_text_image
 from models.form_bindings import FontSettings, TextStyle
 from generation.steps.font_substeps.tokenizer import tokenize
-from configs.paths import GEN_CONFIG, FONTS
+from configs.paths import GEN_CONFIG
 import tomllib
+
+from services.font_service import get_font
 from startup.in_memory.static_classes import Color
 
 
@@ -23,7 +22,7 @@ def apply(ctx: GenerationContext, text: str, default_color: Color, settings: Fon
 
         config = get_config(settings.font.font_name)
 
-        font = get_font(settings.font.font_name,settings.font.font_file_name, config["font_size"])
+        font = get_font(settings.font, config["font_size"])
 
         x, y = get_image_resolution(ctx.has_expression, config)
 
@@ -71,29 +70,3 @@ def trim_newlines(text: str) -> str:
     while text.count("\n") > 2:
         text = text[:text.rfind("\n")]
     return text
-
-
-def get_font(font_name, font_file_name: str, size: int) -> ImageFont.FreeTypeFont:
-    system_fonts = ["Wingdings", "UndertaleSans", "UndertalePapyrus"]
-
-    if font_name in system_fonts:
-        return load_system_font(font_file_name, size, encoding="symb")
-
-    font_path = (FONTS / font_file_name)
-
-    return ImageFont.truetype(str(font_path), size)
-
-def load_system_font(font_file_name: str, size: int, **kwargs) -> ImageFont.FreeTypeFont:
-
-    system = platform.system()
-
-    if system == "Windows":
-        font_dir = Path("C:/Windows/Fonts")
-    elif system == "Linux":
-        font_dir = Path.home() / ".local/share/fonts"
-    elif system == "Darwin":
-        font_dir = Path("/Library/Fonts")
-    else:
-        raise OSError("Unknown OS")
-
-    return ImageFont.truetype(str(font_dir / font_file_name), size, **kwargs)

@@ -2,6 +2,7 @@ import shutil
 import zipfile
 from pathlib import Path
 from PySide6.QtCore import QTimer
+from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QApplication, QMessageBox
 from services.change_service import Changes
 from services.database_service import DBDynamicConnection
@@ -9,10 +10,12 @@ from services.selection_manager import SelectionManager
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QFileDialog
 from configs.paths import DYNAMIC_DB
+from configs.paths import TITLE
 
 db_path = DYNAMIC_DB
 
 def connect_welcome(ui: Ui_MainWindow):
+    ui.logo.setPixmap(QPixmap(str(TITLE)))
     ui.actionSave.triggered.connect(lambda: save_file(ui=ui))
     ui.actionOpen_2.triggered.connect(lambda: open_file(ui=ui))
     ui.open_file.clicked.connect(lambda: open_file(ui=ui))

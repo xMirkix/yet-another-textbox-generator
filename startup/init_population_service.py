@@ -1,7 +1,6 @@
-from PySide6.QtWidgets import QComboBox
-
 from services.database_service import DBStaticConnection, DBDynamicConnection
-from startup.in_memory.static_classes import TextFont, Color
+from services.font_service import check_with_system_fonts
+from startup.in_memory.static_classes import Color
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtGui import QFontDatabase
 import PySide6.QtGui
@@ -27,18 +26,6 @@ def populate_color_selector(items: list[Color], selector, preview=None):
 
 def darken(r: int, g: int, b: int, factor: float = 0.3) -> tuple[int, int, int]:
     return int(r * factor), int(g * factor), int(b * factor)
-
-def check_with_system_fonts(fonts: list[TextFont], element: QComboBox):
-    system_fonts = ["Wingdings", "UndertaleSans", "UndertalePapyrus"]
-    for f in fonts:
-        if f.font_name in system_fonts:
-            if is_font_installed(f.font_name):
-                element.addItem(f.font_name, userData=f)
-        else:
-            element.addItem(f.font_name, userData=f)
-
-def is_font_installed(font_name: str) -> bool:
-    return font_name in QFontDatabase.families()
 
 def hide_edits(ui: Ui_MainWindow):
     ui.edit_universe.hide()

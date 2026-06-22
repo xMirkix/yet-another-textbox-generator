@@ -27,7 +27,12 @@ def get_text_image(
 
     img = Image.new("RGBA", (img_w, img_h), (0, 0, 0, 0))
 
-    text = calculate_wrapping(text, font, img_w - 2)
+    text = calculate_wrapping(text, font, img_w - 2,
+                          config["character_extra_offset"],
+                          config["space_extra_offset"],
+                          config["initial_asterisk_offset"])
+
+    is_asterisk_break = count_asterisk_lines(text) == 2 and (not text[1].has_asterisk)
 
     for i, line in enumerate(text):
         draw_for_each_line(i,
@@ -39,9 +44,17 @@ def get_text_image(
                            asterisk_color,
                            config["initial_asterisk_offset"],
                            config["character_extra_offset"],
-                           config["space_extra_offset"])
+                           config["space_extra_offset"],
+                           is_asterisk_break)
 
     return img
+
+def count_asterisk_lines(text: list[TextLine]) -> int:
+    count = 0
+    for line in text:
+        if line.has_asterisk:
+            count += 1
+    return count
 
 def draw_for_each_line(
     index: int,
@@ -55,11 +68,12 @@ def draw_for_each_line(
     asterisk_offset: int,
     character_offset: int,
     space_offset: int,
+    is_asterisk_break: bool,
 ) -> None:
     x = 0
     y = index * line_height
 
-    x += manage_asterisk(img, x, y, line.has_asterisk, font, dark_world, asterisk_color, index, asterisk_offset)
+    x += manage_asterisk(img, x, y, line.has_asterisk, font, dark_world, asterisk_color, index, is_asterisk_break, asterisk_offset)
 
     for j, token in enumerate(line.content):
         x = draw_for_each_token(x, y, j, img, token, default_color, font, dark_world, character_offset, space_offset)
@@ -109,13 +123,20 @@ def manage_asterisk(
         dark_world: bool,
         asterisk_color: list[Color],
         index: int,
+        is_asterisk_break: bool,
         offset: int,
 ) -> int:
     if asterisk_color is None or len(asterisk_color) == 0: # No asterisk
         return 0
 
+    if not has_asterisk and font.getname()[0] == "Wingdings":
+        return get_character_size("*", font) + offset
+
     if not has_asterisk: # Wrapped line, asterisk padding
         return get_character_size("* ", font) + offset
+
+    if index == 2 and is_asterisk_break:
+        index -= 1
 
     color = (asterisk_color[index].r, asterisk_color[index].g, asterisk_color[index].b, asterisk_color[index].a)
 

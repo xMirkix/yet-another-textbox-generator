@@ -96,7 +96,7 @@ def draw_gradient_string(
     return get_character_size(text, font)
 
 # DOESN'T WORK WITH WINGDINGS!
-def measure_line(line: TextLine, font: FreeTypeFont) -> int:
-    parts = [t.content for t in line.content]
-    text = ("* " if line.has_asterisk else "") + " ".join(parts)
-    return get_character_size(text, font)
+#def measure_line(line: TextLine, font: FreeTypeFont) -> int:
+    #parts = [t.content for t in line.content]
+    #text = ("* " if line.has_asterisk else "") + " ".join(parts)
+    #return get_character_size(text, font)

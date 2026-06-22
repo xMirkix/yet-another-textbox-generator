@@ -1,43 +1,30 @@
-## Disclaimer
-
-> [!IMPORTANT]
-> The **Wingdings** as well as **Sans** and **Papyrus** fonts must be installed on the SYSTEM.
-
-This is no issue (afaik) on Windows, but on Linux, this can be problematic if a font is only installed in the user's home directory.
-
-Affected Fonts:
-
-- Undertale Sans
-- Undertale Papyrus
-- Wingdings (pre-installed on Windows)
-
-You need to download the rest from:
-https://gitlab.com/cartr/undertale-fonts
-
-and install them into your system font directory before launching the app.
+## Supported Fonts
 
 Supported fonts:
-- Determination Mono (included, from © Haley Wakamatsu)
-- Comic Sans
-- Papyrus
-- Windings
+- Determination Mono (by © Haley Wakamatsu)
+- Comic Sans (from [here](https://www.spriters-resource.com/pc_computer/undertale/asset/78567/))
+- Papyrus (also from [here](https://www.spriters-resource.com/pc_computer/undertale/asset/78567/))
+- Windings (by sigmath6, from [here](https://fontstruct.com/fontstructions/show/1218140/pixelated-wingdings))
 
-I apologize for the inconvenience, but there is no license for the above fonts, and they were the best ones I found.
-
-I would rather not waste time and resources on legal problems...
-
-#
-
-Also, the UI is crap, I know. I focused more on functionality, so in case there are any severe bugs, please open an issue.
-
-This was my first time making a desktop application, so I made some rather... dubious decisions...
+Keep in mind that I remade the Papyrus/Comic Sans Font in FontStruct, meaning that there might be some slight inconsistencies.
+Also, because of time and language knowledge issues, Japanese is not supported for these.
 
 ## About
 
 This is a simple tool for generating Undertale/Deltarune textboxes.
 
-Crediting this tool is not required, but always appreciated.
+The UI is crap, I know. I focused more on functionality, so in case there are any severe bugs, please open an issue.
+
+This was my first time making a desktop application, so I made some rather... dubious decisions...
+
+Crediting this tool is not required but always appreciated.
 (This only applies for the output textboxes, the code is MIT, as stated above)
+
+> [!NOTE]
+> I did use AI (AS A TOOL) to make this. If this offends you, then please don't complain and just don't use it.
+
+> [!NOTE]
+> Most Qt tutorials are garbage btw, "hEre'S iS hoW yOu mAkE a QApplIcAtIoN iN 4 MinUtEs", like this would be useful for anyone making a bigger program, ever.
 
 ## YATG Format
 
@@ -63,3 +50,6 @@ If you just want to generate textboxes with UT/DT characters, I have included th
 This project is licensed under the MIT License – see [LICENSE](LICENSE) for details.
 
 It uses [PySide6](https://wiki.qt.io/Qt_for_Python), which is licensed under LGPL v3.
+
+All rights to the original assets and content within assets.yatg belong to Toby Fox.
+This is a non-commercial, fan-made project and is not affiliated with, authorized, or endorsed by Toby Fox.

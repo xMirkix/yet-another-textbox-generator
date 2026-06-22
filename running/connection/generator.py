@@ -10,11 +10,11 @@ from configs.paths import PREVIEWS_DIR
 from generation.generation_gif_proxy import GenerationGifProxy
 from generation.generation_png_proxy import GenerationPngProxy, is_valid_configuration_ui
 from generation.generation_request import GenerationRequest
-from models.entities import Universe, Character
+from models.entities import Universe, Character, Expression
 from models.form_bindings import SpriteSettings, FontSettings, TextStyle, BorderSettings, ExportSettings, ExportFormat, \
     ExportSize
 from services.database_service import DBDynamicConnection
-from services.selection_manager import SelectionManager, init_entity
+from services.selection_manager import SelectionManager, init_entity, set_preview
 from startup.in_memory.static_classes import Color, BorderStyle
 from ui.generated_ui import Ui_MainWindow
 
@@ -181,7 +181,12 @@ def character_change(ui: Ui_MainWindow):
 
 def expression_change(ui: Ui_MainWindow):
     SelectionManager.set_selected_expression(ui.expression_selector.currentData())
-    reset_selectors(ui, lambda: ())
+    set_preview_generator_version(SelectionManager.get_selected_expression(), ui.expression_preview)
+
+def set_preview_generator_version(entity: Universe | Character | Expression | None, preview: QLabel):
+    if not entity:
+        return
+    set_preview(entity.preview_image, preview, entity)
 
 def hide_asterisk(ui: Ui_MainWindow):
     ui.asterisk_color_everything.hide()
