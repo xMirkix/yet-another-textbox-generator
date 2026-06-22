@@ -68,20 +68,32 @@ jobs:
             --output-filename=YATG \
             main.py
 
-      - name: upload (Windows)
-        if: runner.os == 'Windows'
-        uses: actions/upload-artifact@v4
-        with:
-          name: ${{ matrix.asset }}
-          path: |
-            YATG.exe
-            LICENSE
+      - name: Prepare license_stuff folder
+        shell: python
+        run: |
+          import os
+          import shutil
 
-      - name: upload (Linux/macOS)
-        if: runner.os != 'Windows'
+          os.makedirs("license_stuff", exist_ok=True)
+
+          files_to_copy = [
+              "fonts/license.txt",
+              "fonts/readme.txt",
+              "OFL.txt",
+              "LICENSE"
+          ]
+
+          for file in files_to_copy:
+              if os.path.exists(file):
+                  shutil.copy(file, "license_stuff")
+                  print(f"Copied {file} to license_stuff/")
+              else:
+                  print(f"Warning: {file} not found!")
+
+      - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.asset }}
           path: |
-            YATG
-            LICENSE
+            ${{ matrix.output }}
+            license_stuff
