@@ -51,6 +51,7 @@ If you just want to generate textboxes with UT/DT characters, I have included th
 ## Planned future features
 
 - ~~setting text color~~
+- GIF export (didn't have enough time)
 - more borders
 - color wheel for color selection
 - alternating expressions for the GIF format
