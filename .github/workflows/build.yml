@@ -35,8 +35,13 @@ jobs:
 
       - name: Get version from git tag
         id: version
+        shell: bash
         run: |
           VERSION=${GITHUB_REF_NAME#v}
+      
+          # remove -alpha / -beta / etc
+          VERSION=$(echo "$VERSION" | cut -d'-' -f1)
+      
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Build (Windows)
