@@ -1,6 +1,6 @@
-from PySide6.QtWidgets import QApplication
-from PySide6.QtNetwork import QLocalServer, QLocalSocket
 import sys
+from PySide6.QtWidgets import QApplication, QComboBox, QStyleFactory
+from PySide6.QtNetwork import QLocalServer, QLocalSocket
 from main_window_overrides import MainWindow
 from running.ui_connection_service import connect_ui
 from startup.init_population_service import InitPopulationService
@@ -32,6 +32,11 @@ if __name__ == '__main__':
     ui = Ui_MainWindow()
     ui.setupUi(window) # Define UI from generated file
     window.ui = ui
+
+    if sys.platform == "win32":
+        fusion_style = QStyleFactory.create("Fusion")
+        for combo in window.findChildren(QComboBox):
+            combo.view().setStyle(fusion_style)
 
     db_path.touch() # Create cache file in case it doesn't exist
 
