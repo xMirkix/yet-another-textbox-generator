@@ -20,7 +20,9 @@ if __name__ == '__main__':
 
     app.setDesktopFileName("YATG")
 
-    app.setWindowIcon(QIcon(str(LOGO_ICON)))
+    icon = QIcon(str(LOGO_ICON))
+
+    app.setWindowIcon(icon)
 
     lock_path = Path(tempfile.gettempdir()) / "yatg.lock"
     lock = QLockFile(str(lock_path))
@@ -33,6 +35,7 @@ if __name__ == '__main__':
     ui.setupUi(window) # Define UI from generated file
     window.setWindowTitle("Yet Another Textbox Generator")
     window.ui = ui
+    window.setWindowIcon(icon)
 
     if sys.platform == "win32":
         fusion_style = QStyleFactory.create("Fusion")
