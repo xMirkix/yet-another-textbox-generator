@@ -7,7 +7,7 @@ from main_window_overrides import MainWindow
 from running.ui_connection_service import connect_ui
 from startup.init_population_service import InitPopulationService
 from ui.generated_ui import Ui_MainWindow
-from configs.paths import DYNAMIC_DB, LOCO_ICON
+from configs.paths import DYNAMIC_DB, LOGO_ICON
 
 db_path =  DYNAMIC_DB
 
@@ -15,7 +15,7 @@ APP_KEY = "yet-another-textbox-generator"
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon(str(LOCO_ICON)))
+    app.setWindowIcon(QIcon(str(LOGO_ICON)))
 
     # Check if instance is running
     socket = QLocalSocket()
