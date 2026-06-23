@@ -36,6 +36,12 @@ jobs:
       - name: install dependencies
         run: pip install -r requirements.txt nuitka
 
+      - name: Get version from git tag
+        id: version
+        run: |
+          VERSION=${GITHUB_REF_NAME#v}
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
       - name: Build (Windows)
         if: runner.os == 'Windows'
         run: |
@@ -50,6 +56,10 @@ jobs:
             --include-data-dir=fonts=fonts `
             --include-data-dir=ui=ui `
             --include-package=PIL `
+            --product-name=YATG `
+            --company-name=xMirkix `
+            --file-version=${{ steps.version.outputs.version }} `
+            --product-version=${{ steps.version.outputs.version }} `
             --output-filename=YATG.exe `
             main.py
 
@@ -67,24 +77,10 @@ jobs:
             --include-data-dir=ui=ui \
             --include-qt-plugins=all \
             --include-package=PIL \
-            --output-filename=YATG \
-            main.py
-
-      - name: Build (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          python -m nuitka --standalone --onefile \
-            --enable-plugin=pyside6 \
-            --assume-yes-for-downloads \
-            --macos-create-app-bundle \
-            --macos-app-icon=ui/icons/app/logo.icns \
-            --include-data-dir=assets=assets \
-            --include-data-dir=startup=startup \
-            --include-data-dir=configs=configs \
-            --include-data-dir=fonts=fonts \
-            --include-data-dir=ui=ui \
-            --include-qt-plugins=all \
-            --include-package=PIL \
+            --product-name=YATG \
+            --company-name=xMirkix \
+            --file-version=${{ steps.version.outputs.version }} \
+            --product-version=${{ steps.version.outputs.version }} \
             --output-filename=YATG \
             main.py
 

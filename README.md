@@ -1,8 +1,8 @@
 ## Warning!
 
 > [!WARNING]
-> In case you try run this app on Windows and get scary warnings or your antivirus warns you, that's because I didn't sign the .exe file.
-> I'll apply for a certificate on signpath.io, but this could take a bit, so in the meantime, use the compiled version at your own risk (if you trust me)
+> If Windows or antivirus software shows warnings, this is due to the executable not being code signed.
+> A signed version will be provided via SignPath once available.
 
 ## Supported Fonts
 
@@ -18,6 +18,8 @@ Also, because of time and language knowledge issues, Japanese is not supported f
 ## About
 
 This is a simple tool for generating Undertale/Deltarune textboxes.
+
+It uses the PIL (Pillow) library for image generation, and the PySide6 library for the GUI.
 
 The UI is crap, I know. I focused more on functionality, so in case there are any severe bugs, please open an issue.
 
@@ -52,6 +54,16 @@ If you just want to generate textboxes with UT/DT characters, I have included th
 - color wheel for color selection
 - alternating expressions for the GIF format
 - a CLI tool
+
+## Code signing policy
+
+Free code signing provided by SignPath.io, certificate by SignPath Foundation
+
+Committers: [Single maintainer](https://github.com/xMirkix) (xMirkix)
+Reviewers: [Single maintainer](https://github.com/xMirkix) (xMirkix)
+Approvers: [Single maintainer](https://github.com/xMirkix) (xMirkix)
+
+This program will not transfer any information to other networked systems unless specifically requested by the user or the person installing or operating it.
 
 ## License
 This project is licensed under the MIT License – see [LICENSE](LICENSE) for details.
