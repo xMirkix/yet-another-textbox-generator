@@ -12,9 +12,6 @@ jobs:
           - os: ubuntu-latest
             output: YATG
             asset: YATG-linux.zip
-          - os: macos-latest
-            output: YATG
-            asset: YATG-mac.zip
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
