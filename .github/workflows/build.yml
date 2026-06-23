@@ -43,8 +43,8 @@ jobs:
             --enable-plugin=pyside6 `
             --windows-console-mode=disable `
             --assume-yes-for-downloads `
-            --windows-icon-from-ico=loco.ico `
-            --include-data-files=loco.ico=loco.ico `
+            --windows-icon-from-ico=logo.ico `
+            --include-data-files=logo.ico=logo.ico `
             --include-data-dir=assets=assets `
             --include-data-dir=startup=startup `
             --include-data-dir=configs=configs `
@@ -61,9 +61,9 @@ jobs:
             --enable-plugin=pyside6 \
             --assume-yes-for-downloads \
             --macos-create-app-bundle \
-            --macos-app-icon=loco.ico \
-            --linux-icon=loco.ico \
-            --include-data-files=loco.ico=loco.ico \
+            --macos-app-icon=logo.ico \
+            --linux-icon=logo.ico \
+            --include-data-files=logo.ico=logo.ico \
             --include-data-dir=assets=assets \
             --include-data-dir=startup=startup \
             --include-data-dir=configs=configs \
