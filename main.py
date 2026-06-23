@@ -1,8 +1,10 @@
 import sys
+import tempfile
+from pathlib import Path
 
+from PySide6.QtCore import QLockFile
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QComboBox, QStyleFactory
-from PySide6.QtNetwork import QLocalServer, QLocalSocket
 from main_window_overrides import MainWindow
 from running.ui_connection_service import connect_ui
 from startup.init_population_service import InitPopulationService
@@ -17,19 +19,11 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon(str(LOGO_ICON)))
 
-    # Check if instance is running
-    socket = QLocalSocket()
-    socket.connectToServer(APP_KEY)
+    lock_path = Path(tempfile.gettempdir()) / "yatg.lock"
+    lock = QLockFile(str(lock_path))
 
-    if socket.waitForConnected(500):
-        # App is already running
+    if not lock.tryLock(200):
         sys.exit(0)
-
-    # First instance - continue
-    server = QLocalServer()
-    server.setSocketOptions(QLocalServer.SocketOption.WorldAccessOption)
-    QLocalServer.removeServer(APP_KEY)  # clear up old socket in case of crashes
-    server.listen(APP_KEY)
 
     window = MainWindow()
     ui = Ui_MainWindow()
