@@ -6,7 +6,6 @@
 
 > [!NOTE]
 > For Mac, I'll rather not deal with the headache that are developer licenses and apple. If anyone knows how to do this, feel free to share.
-> I'm sure there are ways to get this running. (EDIT ME!)
 
 ## Supported Fonts
 
