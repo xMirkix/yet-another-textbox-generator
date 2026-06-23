@@ -4,9 +4,6 @@
 > In case you try run this app on Windows and get scary warnings or your antivirus warns you, that's because I didn't sign the .exe file.
 > I'll apply for a certificate on signpath.io, but this could take a bit, so in the meantime, use the compiled version at your own risk (if you trust me)
 
-> [!NOTE]
-> For Mac, I'll rather not deal with the headache that are developer licenses and apple. If anyone knows how to do this, feel free to share.
-
 ## Supported Fonts
 
 Supported fonts:
