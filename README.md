@@ -25,7 +25,7 @@ The UI is crap, I know. I focused more on functionality, so in case there are an
 
 This was my first time making a desktop application, so I made some rather... dubious decisions...
 
-Crediting this tool is not required but always appreciated. 
+Crediting this tool is not required but always appreciated.
 (This only applies for the output textboxes, the code is MIT, as stated above)
 
 > [!NOTE]
