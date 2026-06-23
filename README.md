@@ -1,3 +1,13 @@
+## Warning!
+
+> [!WARNING]
+> In case you try run this app on Windows and get scary warnings or your antivirus warns you, that's because I didn't sign the .exe file.
+> I'll apply for a certificate on signpath.io, but this could take a bit, so in the meantime, use the compiled version at your own risk (if you trust me)
+
+> [!NOTE]
+> For Mac, I'll rather not deal with the headache that are developer licenses and apple. If anyone knows how to do this, feel free to share.
+> I'm sure there are ways to get this running. (EDIT ME!)
+
 ## Supported Fonts
 
 Supported fonts:
@@ -51,5 +61,7 @@ This project is licensed under the MIT License – see [LICENSE](LICENSE) for de
 
 It uses [PySide6](https://wiki.qt.io/Qt_for_Python), which is licensed under LGPL v3.
 
-All rights to the original assets and content within assets.yatg belong to Toby Fox.
+All rights to the original assets and content within assets.yatg concerning Undertale/Deltarune belong to Toby Fox.
 This is a non-commercial, fan-made project and is not affiliated with, authorized, or endorsed by Toby Fox.
+
+The files regarding Undertale Yellow in assets.yatg were made by Team Undertale Yellow, and like above, I'm not affiliated or endorsed by them.
