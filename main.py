@@ -17,6 +17,9 @@ APP_KEY = "yet-another-textbox-generator"
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+
+    app.setDesktopFileName("YATG")
+
     app.setWindowIcon(QIcon(str(LOGO_ICON)))
 
     lock_path = Path(tempfile.gettempdir()) / "yatg.lock"
@@ -28,6 +31,7 @@ if __name__ == '__main__':
     window = MainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(window) # Define UI from generated file
+    window.setWindowTitle("Yet Another Textbox Generator")
     window.ui = ui
 
     if sys.platform == "win32":
