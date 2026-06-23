@@ -1,6 +1,5 @@
 from PIL import ImageFont
 from PySide6.QtWidgets import QComboBox
-from matplotlib import font_manager
 
 from configs.paths import FONTS
 from startup.in_memory.static_classes import TextFont
