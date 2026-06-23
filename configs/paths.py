@@ -22,6 +22,7 @@ ICON_EDIT = ICONS_DIR / 'mono-editor.png'
 ICON_DELETE = ICONS_DIR / 'trash_correct_resolution.png'
 FONTS = _BUNDLE / 'fonts'
 GEN_CONFIG = _BUNDLE / 'configs' / 'gen-config.toml'
+LOCO_ICON = _BUNDLE / 'loco.ico'
 
 TEMP_DATA_DIR = _RUNTIME / 'data'
 DYNAMIC_DB = TEMP_DATA_DIR / 'temp_data.sqlite3'

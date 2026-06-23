@@ -43,6 +43,8 @@ jobs:
             --enable-plugin=pyside6 `
             --windows-console-mode=disable `
             --assume-yes-for-downloads `
+            --windows-icon-from-ico=loco.ico `
+            --include-data-files=loco.ico=loco.ico `
             --include-data-dir=assets=assets `
             --include-data-dir=startup=startup `
             --include-data-dir=configs=configs `
@@ -58,6 +60,10 @@ jobs:
           python -m nuitka --standalone --onefile \
             --enable-plugin=pyside6 \
             --assume-yes-for-downloads \
+            --macos-create-app-bundle \
+            --macos-app-icon=loco.ico \
+            --linux-icon=loco.ico \
+            --include-data-files=loco.ico=loco.ico \
             --include-data-dir=assets=assets \
             --include-data-dir=startup=startup \
             --include-data-dir=configs=configs \
