@@ -5,14 +5,55 @@ from PIL import Image
 
 from generation.generation_request import GenerationRequest
 from configs.paths import TEMP_DATA_DIR
-from models.form_bindings import BorderSettings, SpriteSettings, FontSettings, ExportSettings
-from startup.in_memory.static_classes import Color
+from generation.gif_logic import deactivate_asterisks, for_each_line
+from generation.gif_save_logic import save_gif
+from generation.steps.font_step import get_config, get_image_resolution
+from generation.steps.font_step import trim_newlines
+from generation.steps.font_substeps.wrapping import calculate_wrapping
+from services.font_service import get_font
+from generation.steps.font_substeps.tokenizer import tokenize
+import copy
 
+def generate_gif(request: GenerationRequest) -> list[Image.Image] | None:
+    font_settings = request.font_settings
+    if font_settings.font is None:
+        return None
 
-def generate_gif(text_input: str, default_color: Color, border_settings: BorderSettings, sprite_settings: SpriteSettings, font_settings: FontSettings, export_settings: ExportSettings) -> list[Image.Image]:
-    pass # TODO
+    request.text_input = trim_newlines(request.text_input)
 
-CACHE_SIZE = 10
+    tokens = tokenize(request.text_input, font_settings.transform, len(font_settings.asterisk_color) > 0)
+
+    config = get_config(font_settings.font.font_name)
+
+    font = get_font(font_settings.font, config["font_size"])
+
+    max_width, _ = get_image_resolution(request.sprite_settings.expression is not None, config)
+
+    text = calculate_wrapping(tokens, font, max_width - 3,
+                          config["character_extra_offset"],
+                          config["space_extra_offset"],
+                          config["initial_asterisk_offset"])
+
+    current_position = [0, 0, 0]  # first line, first token, first character
+
+    frame_counter: list[int] = [0] # for alternating expressions
+
+    result: list[Image.Image] = []
+
+    while current_position[0] < len(text): # for each line
+        text_copy = copy.deepcopy(text) # reset copy for deactivation
+
+        deactivate_asterisks(text_copy, current_position[0]) # deactivates future asterisks
+
+        for_each_line(text_copy, current_position, result, request, frame_counter)
+
+        current_position[0] += 1
+        current_position[1] = 0
+        current_position[2] = 0
+
+    return result
+
+CACHE_SIZE = 16
 
 class GenerationGifProxy:
     cache: OrderedDict[GenerationRequest, Path] = OrderedDict()
@@ -22,20 +63,14 @@ class GenerationGifProxy:
         if request in self.cache:
             return self.cache[request]
 
-        frames = generate_gif(
-            request.text_input,
-            request.default_color,
-            request.border_settings,
-            request.sprite_settings,
-            request.font_settings,
-            request.export_settings,
-        )
+        frames = generate_gif(request)
 
         if not frames:
             return None
 
         path = TEMP_DATA_DIR / f"output_{self.slot}.gif"
-        frames[0].save(path, save_all=True, append_images=frames[1:], loop=0)
+
+        save_gif(frames, [30] * len(frames), path)
 
         self.slot = (self.slot + 1) % CACHE_SIZE
         self.cache[request] = path

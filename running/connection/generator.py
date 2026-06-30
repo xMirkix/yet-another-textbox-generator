@@ -2,6 +2,7 @@ import shutil
 from pathlib import Path
 from typing import Callable
 
+from PySide6.QtCore import QThreadPool, QRunnable, QObject, Signal, QTimer
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QLabel, QTextEdit, QFileDialog, QMessageBox
 from PySide6.QtGui import QMovie
@@ -22,6 +23,29 @@ png_proxy = GenerationPngProxy()
 
 gif_proxy = GenerationGifProxy()
 
+_pool = QThreadPool.globalInstance()
+_pool.setMaxThreadCount(1)
+_current_token = [0]
+_active_signals: set = set()
+
+class _WorkerSignals(QObject):
+    done = Signal(object, object, int)  # path, format, token
+
+class _GenerationRunnable(QRunnable):
+    def __init__(self, signals: _WorkerSignals, request, fmt, token):
+        super().__init__()
+        self._signals = signals
+        self._request = request
+        self._fmt = fmt
+        self._token = token
+        self.setAutoDelete(True)
+
+    def run(self):
+        if self._fmt == ExportFormat.GIF:
+            path = gif_proxy.generate(self._request)
+        else:
+            path = png_proxy.generate(self._request)
+        self._signals.done.emit(path, self._fmt, self._token)
 
 def connect_generator(ui: Ui_MainWindow):
     # Colors
@@ -38,10 +62,25 @@ def connect_generator(ui: Ui_MainWindow):
     ui.universe_selector.activated.connect(lambda: update_with_function_then_regenerate(ui, lambda: universe_change(ui)))
     ui.character_selector.activated.connect(lambda: update_with_function_then_regenerate(ui, lambda: character_change(ui)))
     ui.expression_selector.activated.connect(lambda: update_with_function_then_regenerate(ui, lambda: expression_change(ui)))
+    ui.alternating_selector.activated.connect(lambda: update_with_function_then_regenerate(ui, lambda: alternate_change(ui)))
 
     ui.expression_selector.setMaxVisibleItems(10)
 
     ui.expression_selector.setStyleSheet("""
+        QComboBox {
+            combobox-popup: 0;
+        }
+        QComboBox QAbstractItemView {
+            max-height: 320px;
+            min-height: 100px;
+        }
+        QComboBox QAbstractItemView::item {
+            min-height: 30px;
+            padding: 4px;
+        }
+    """)
+
+    ui.alternating_selector.setStyleSheet("""
         QComboBox {
             combobox-popup: 0;
         }
@@ -64,24 +103,58 @@ def connect_generator(ui: Ui_MainWindow):
     ui.text_style_regular_option.toggled.connect(lambda change: on_radio_changed(ui, change))
     ui.text_style_dark_world_option.toggled.connect(lambda change: on_radio_changed(ui, change))
     ui.text_transform_selector.activated.connect(lambda: try_generate(ui))
-    ui.format_png_option.toggled.connect(lambda change: on_radio_changed(ui, change))
-    ui.format_gif_option.toggled.connect(lambda change: on_radio_changed(ui, change))
+    ui.format_png_option.toggled.connect(lambda change: png_checked(ui, change))
+    ui.format_gif_option.toggled.connect(lambda change: gif_checked(ui, change))
     ui.margin_checkbox.clicked.connect(lambda: try_generate(ui))
     ui.size_small_option.toggled.connect(lambda change: on_radio_changed(ui, change))
     ui.size_medium_option.toggled.connect(lambda change: on_radio_changed(ui, change))
     ui.size_big_option.toggled.connect(lambda change: on_radio_changed(ui, change))
-    ui.include_checkbox.clicked.connect(lambda: try_generate(ui))
+    ui.include_checkbox.clicked.connect(lambda: check_for_alternating(ui))
+
+    ui.debounce_timer = QTimer()
+    ui.debounce_timer.setSingleShot(True)
+    ui.debounce_timer.timeout.connect(lambda: execute_generation(ui))
 
     ui.input.textChanged.connect(lambda: try_generate(ui))
+
     ui.download.clicked.connect(lambda: download(ui))
 
+def png_checked(ui: Ui_MainWindow, change: bool):
+    hide_alternating(ui)
+    on_radio_changed(ui, change)
+
+def gif_checked(ui: Ui_MainWindow, change: bool):
+    if ui.include_checkbox.isChecked():
+        show_alternating(ui)
+    on_radio_changed(ui, change)
+
+def check_for_alternating(ui: Ui_MainWindow):
+    if ui.format_gif_option.isChecked() and ui.include_checkbox.isChecked():
+        show_alternating(ui)
+    else:
+        hide_alternating(ui)
+    try_generate(ui)
+
 def try_generate(ui: Ui_MainWindow):
+    if hasattr(ui, "debounce_timer"):
+        ui.debounce_timer.start(300)
+
+def execute_generation(ui: Ui_MainWindow):
     text_input = ui.input.toPlainText()
-    default_color : Color = ui.default_color_selector.currentData()
-    sprite_settings = SpriteSettings(universe=SelectionManager.get_selected_universe(),
-                                     character=SelectionManager.get_selected_character(),
-                                     expression=SelectionManager.get_selected_expression(),
-                                     expression_color=ui.expression_color_selector.currentData())
+    default_color: Color = ui.default_color_selector.currentData()
+    alternating = None
+    if ui.include_checkbox.isChecked() and ui.format_gif_option.isChecked():
+        alternating = SelectionManager.get_alternating_expression()
+
+    sprite_settings = SpriteSettings(
+        universe=SelectionManager.get_selected_universe(),
+        character=SelectionManager.get_selected_character(),
+        expression=SelectionManager.get_selected_expression(),
+        alternating_expression=alternating,
+        alternating_interval=5, #default
+        alternating_duration=3, #default
+        expression_color=ui.expression_color_selector.currentData()
+    )
 
     asterisk_colors: list[Color] = []
 
@@ -94,17 +167,20 @@ def try_generate(ui: Ui_MainWindow):
     if ui.text_style_dark_world_option.isChecked():
         text_style = TextStyle(TextStyle.DARK_WORLD)
 
-    font_settings = FontSettings(font=ui.font_selector.currentData(),
-                                 asterisk_color=asterisk_colors,
-                                 text_style=text_style,
-                                 transform=ui.text_transform_selector.currentData())
+    font_settings = FontSettings(
+        font=ui.font_selector.currentData(),
+        asterisk_color=asterisk_colors,
+        text_style=text_style,
+        transform=ui.text_transform_selector.currentData()
+    )
 
     if not is_valid_configuration_ui(text_input, sprite_settings, ui.include_checkbox.isChecked(), font_settings):
         ui.download.hide()
         ui.output.setText("Nothing...")
         return
 
-    border_settings = BorderSettings(style=ui.border_style_selector.currentData(), color=ui.border_color_selector.currentData())
+    border_settings = BorderSettings(style=ui.border_style_selector.currentData(),
+                                     color=ui.border_color_selector.currentData())
 
     output_format = ExportFormat.PNG
 
@@ -118,17 +194,37 @@ def try_generate(ui: Ui_MainWindow):
     if ui.size_big_option.isChecked():
         output_size = ExportSize.BIG
 
-    export_settings = ExportSettings(export_format=output_format, margin=ui.margin_checkbox.isChecked(), size=output_size)
+    export_settings = ExportSettings(export_format=output_format, margin=ui.margin_checkbox.isChecked(),
+                                     size=output_size)
 
-    generation_request = GenerationRequest(text_input, default_color, border_settings, sprite_settings, font_settings, export_settings)
+    generation_request = GenerationRequest(text_input, default_color, border_settings, sprite_settings, font_settings,
+                                           export_settings)
+
+    _current_token[0] += 1
+    token = _current_token[0]
+
+    signals = _WorkerSignals()
+    _active_signals.add(signals)
+
+    def _on_done(path, fmt, tok):
+        _active_signals.discard(signals)
+        if tok == _current_token[0]:
+            _on_result(ui, path, fmt)
+
+    signals.done.connect(_on_done)
+    _pool.start(_GenerationRunnable(signals, generation_request, output_format, token))
+
+def _on_result(ui: Ui_MainWindow, result_path, output_format):
+    if not result_path:
+        ui.download.hide()
+        ui.output.setText("Nothing...")
+        return
 
     if output_format == ExportFormat.GIF:
-        result_path = gif_proxy.generate(generation_request)
-        movie = QMovie(str(result_path))
-        ui.output.setMovie(movie)
-        movie.start()
+        ui._movie = QMovie(str(result_path))
+        ui.output.setMovie(ui._movie)
+        ui._movie.start()
     else:
-        result_path = png_proxy.generate(generation_request)
         ui.output.setPixmap(QPixmap(str(result_path)))
 
     ui.download.setProperty("path", result_path)
@@ -181,7 +277,21 @@ def character_change(ui: Ui_MainWindow):
 
 def expression_change(ui: Ui_MainWindow):
     SelectionManager.set_selected_expression(ui.expression_selector.currentData())
+    SelectionManager.try_to_init_alternating_expression()
+
+    target = ui.expression_selector.currentData()
+    for i in range(ui.alternating_selector.count()):
+        if ui.alternating_selector.itemData(i).expression_id == target.expression_id:
+            ui.alternating_selector.setCurrentIndex(i)
+            break
+
+    set_preview_generator_version(SelectionManager.get_alternating_expression(), ui.alternating_preview)
     set_preview_generator_version(SelectionManager.get_selected_expression(), ui.expression_preview)
+
+def alternate_change(ui: Ui_MainWindow):
+    alternating = ui.alternating_selector.currentData()
+    SelectionManager.set_alternating_expression(alternating)
+    set_preview_generator_version(SelectionManager.get_alternating_expression(), ui.alternating_preview)
 
 def set_preview_generator_version(entity: Universe | Character | Expression | None, preview: QLabel):
     if not entity:
@@ -207,6 +317,18 @@ def show_asterisk(ui: Ui_MainWindow):
 
     ui.line_50.show()
     ui.line_55.show()
+
+def hide_alternating(ui: Ui_MainWindow):
+    ui.alternating_everything.hide()
+    ui.line_67.hide()
+    ui.line_68.hide()
+    ui.line_69.hide()
+
+def show_alternating(ui: Ui_MainWindow):
+    ui.alternating_everything.show()
+    ui.line_67.show()
+    ui.line_68.show()
+    ui.line_69.show()
 
 def hide_or_show(ui: Ui_MainWindow):
     if ui.asterisk_checkbox.isChecked():
@@ -274,6 +396,8 @@ def reset_selectors(ui: Ui_MainWindow, default_function: Callable):
     ui.character_preview.clear()
     ui.universe_selector.clear()
     ui.universe_preview.clear() # Wipe existing items in case of changes
+    ui.alternating_selector.clear()
+    ui.alternating_preview.clear()
 
     db = get_db()
 
@@ -300,6 +424,8 @@ def reset_selectors(ui: Ui_MainWindow, default_function: Callable):
     SelectionManager.set_selected_character(ui.character_selector.currentData())
     if has_expressions:
         SelectionManager.set_selected_expression(ui.expression_selector.currentData())
+        init_entity(lambda: db.select_all_expressions_from_character(ui.character_selector.currentData().character_id), ui.alternating_selector, ui.alternating_preview, SelectionManager.get_selected_expression())
+        SelectionManager.try_to_init_alternating_expression()
     else:
         SelectionManager.set_selected_expression(None)
 

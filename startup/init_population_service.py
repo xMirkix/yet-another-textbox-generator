@@ -1,3 +1,4 @@
+from running.connection.generator import hide_alternating
 from services.database_service import DBStaticConnection, DBDynamicConnection
 from services.font_service import check_with_system_fonts
 from startup.in_memory.static_classes import Color
@@ -58,6 +59,7 @@ class InitPopulationService:
         self.populate_default_text_color(ui)
         hide_edits(ui)  # Hide edit blocks
         hide_removes(ui)
+        hide_alternating(ui)
         ui.download.hide()
         self.create_temporary_data_tables()
 

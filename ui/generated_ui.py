@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiHEbDQH.ui'
+## Form generated from reading UI file 'uixUPahp.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -1134,6 +1134,73 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_3.addLayout(self.horizontalLayout_6)
+
+        self.line_69 = QFrame(self.tab_4)
+        self.line_69.setObjectName(u"line_69")
+        self.line_69.setFrameShape(QFrame.Shape.HLine)
+        self.line_69.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_3.addWidget(self.line_69)
+
+        self.horizontalLayout_74 = QHBoxLayout()
+        self.horizontalLayout_74.setObjectName(u"horizontalLayout_74")
+        self.line_67 = QFrame(self.tab_4)
+        self.line_67.setObjectName(u"line_67")
+        self.line_67.setFrameShape(QFrame.Shape.VLine)
+        self.line_67.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.horizontalLayout_74.addWidget(self.line_67)
+
+        self.alternating_everything = QWidget(self.tab_4)
+        self.alternating_everything.setObjectName(u"alternating_everything")
+        self.horizontalLayout_76 = QHBoxLayout(self.alternating_everything)
+        self.horizontalLayout_76.setObjectName(u"horizontalLayout_76")
+        self.alternating_label = QLabel(self.alternating_everything)
+        self.alternating_label.setObjectName(u"alternating_label")
+        self.alternating_label.setFont(font1)
+        self.alternating_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout_76.addWidget(self.alternating_label)
+
+        self.alternating_selector = QComboBox(self.alternating_everything)
+        self.alternating_selector.setObjectName(u"alternating_selector")
+
+        self.horizontalLayout_76.addWidget(self.alternating_selector)
+
+        self.horizontalLayout_75 = QHBoxLayout()
+        self.horizontalLayout_75.setObjectName(u"horizontalLayout_75")
+        self.horizontalSpacer_44 = QSpacerItem(170, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_75.addItem(self.horizontalSpacer_44)
+
+        self.alternating_preview = QLabel(self.alternating_everything)
+        self.alternating_preview.setObjectName(u"alternating_preview")
+        self.alternating_preview.setMinimumSize(QSize(69, 70))
+        self.alternating_preview.setMaximumSize(QSize(69, 70))
+        self.alternating_preview.setAutoFillBackground(True)
+        self.alternating_preview.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout_75.addWidget(self.alternating_preview)
+
+        self.horizontalSpacer_45 = QSpacerItem(170, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_75.addItem(self.horizontalSpacer_45)
+
+
+        self.horizontalLayout_76.addLayout(self.horizontalLayout_75)
+
+
+        self.horizontalLayout_74.addWidget(self.alternating_everything)
+
+        self.line_68 = QFrame(self.tab_4)
+        self.line_68.setObjectName(u"line_68")
+        self.line_68.setFrameShape(QFrame.Shape.VLine)
+        self.line_68.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.horizontalLayout_74.addWidget(self.line_68)
+
+
+        self.verticalLayout_3.addLayout(self.horizontalLayout_74)
 
         self.line = QFrame(self.tab_4)
         self.line.setObjectName(u"line")
@@ -2444,6 +2511,8 @@ class Ui_MainWindow(object):
         self.format_png_option.setText(QCoreApplication.translate("MainWindow", u"PNG", None))
         self.label_6.setText("")
         self.format_gif_option.setText(QCoreApplication.translate("MainWindow", u"GIF", None))
+        self.alternating_label.setText(QCoreApplication.translate("MainWindow", u"Alternating Expression", None))
+        self.alternating_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.margin_label.setText(QCoreApplication.translate("MainWindow", u"Margin", None))
         self.label_7.setText("")
         self.margin_checkbox.setText("")

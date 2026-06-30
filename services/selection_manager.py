@@ -11,6 +11,7 @@ class SelectionManager:
     selected_universe: Universe | None = None
     selected_character: Character | None = None
     selected_expression: Expression | None = None
+    selected_alternating: Expression | None = None
 
     @classmethod
     def reset(cls):
@@ -81,6 +82,19 @@ class SelectionManager:
         if len(expressions) == 0:
             return
         cls.set_selected_expression(expressions[0])
+
+    @classmethod
+    def try_to_init_alternating_expression(cls):
+        if cls.selected_expression:
+            cls.selected_alternating = cls.selected_expression
+
+    @classmethod
+    def set_alternating_expression(cls, expression: Expression | None):
+        cls.selected_alternating = expression
+
+    @classmethod
+    def get_alternating_expression(cls) -> Expression | None:
+        return cls.selected_alternating
 
 
 def init_entity(db_function: Callable, selector: QComboBox, preview: QLabel | None, selected: Universe | Character | Expression | None) -> bool:

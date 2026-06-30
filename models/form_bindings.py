@@ -24,21 +24,33 @@ class SpriteSettings:
     universe: Universe | None
     character: Character | None
     expression: Expression | None
+    alternating_expression: Expression | None
+    alternating_interval: int
+    alternating_duration: int
     expression_color: Color
 
-    def __init__(self, universe: Universe | None, character: Character | None, expression: Expression | None, expression_color: Color):
+    def __init__(self, universe: Universe | None, character: Character | None, expression: Expression | None, alternating_expression: Expression | None, alternating_interval: int, alternating_duration: int, expression_color: Color):
         self.universe = universe
         self.character = character
         self.expression = expression
+        self.alternating_expression = alternating_expression
+        self.alternating_interval = alternating_interval
+        self.alternating_duration = alternating_duration
         self.expression_color = expression_color
 
     def __eq__(self, other) -> bool:
         if isinstance(other, SpriteSettings):
-            return self.universe == other.universe and self.character == other.character and self.expression == other.expression and self.expression_color == other.expression_color
+            return (self.universe == other.universe
+                    and self.character == other.character
+                    and self.expression == other.expression
+                    and self.expression_color == other.expression_color
+                    and self.alternating_expression == other.alternating_expression
+                    and self.alternating_interval == other.alternating_interval
+                    and self.alternating_duration == other.alternating_duration)
         return False
 
     def __hash__(self) -> int:
-        return hash((self.universe, self.character, self.expression, self.expression_color))
+        return hash((self.universe, self.character, self.expression, self.alternating_expression, self.alternating_interval, self.alternating_duration, self.expression_color))
 
 class TextStyle(Enum):
     REGULAR = ('Regular','regular')
