@@ -1,6 +1,7 @@
+from dataclasses import dataclass, field
 from typing import Callable
 
-from PySide6.QtWidgets import QComboBox, QLabel
+from PySide6.QtWidgets import QComboBox, QLabel, QCheckBox, QWidget
 
 from models.entities import Universe, Character, Expression
 from services import change_service
@@ -8,93 +9,127 @@ from services.database_service import DBDynamicConnection
 
 
 class SelectionManager:
-    selected_universe: Universe | None = None
-    selected_character: Character | None = None
-    selected_expression: Expression | None = None
-    selected_alternating: Expression | None = None
+    def __init__(self):
+        self.selected_universe: Universe | None = None
+        self.selected_character: Character | None = None
+        self.selected_expression: Expression | None = None
+        self.selected_alternating: Expression | None = None
 
-    @classmethod
-    def reset(cls):
-        cls.selected_universe = None
-        cls.selected_character = None
-        cls.selected_expression = None
+    def reset(self):
+        self.selected_universe = None
+        self.selected_character = None
+        self.selected_expression = None
+        self.selected_alternating = None
 
-    @classmethod
-    def set_selected_universe(cls, universe: Universe | None):
-        cls.selected_universe = universe
+    def set_selected_universe(self, universe: Universe | None):
+        self.selected_universe = universe
 
-    @classmethod
-    def set_selected_character(cls, character: Character | None):
-        cls.selected_character = character
+    def set_selected_character(self, character: Character | None):
+        self.selected_character = character
 
-    @classmethod
-    def set_selected_expression(cls, expression: Expression | None):
-        cls.selected_expression = expression
+    def set_selected_expression(self, expression: Expression | None):
+        self.selected_expression = expression
 
-    @classmethod
-    def get_selected_universe(cls) -> Universe | None:
-        return cls.selected_universe
+    def get_selected_universe(self) -> Universe | None:
+        return self.selected_universe
 
-    @classmethod
-    def get_selected_character(cls) -> Character | None:
-        return cls.selected_character
+    def get_selected_character(self) -> Character | None:
+        return self.selected_character
 
-    @classmethod
-    def get_selected_expression(cls) -> Expression | None:
-        return cls.selected_expression
+    def get_selected_expression(self) -> Expression | None:
+        return self.selected_expression
 
-    @classmethod
-    def try_to_select_first_universe_character_expression(cls):
+    def get_alternating_expression(self) -> Expression | None:
+        return self.selected_alternating
+
+    def set_alternating_expression(self, expression: Expression | None):
+        self.selected_alternating = expression
+
+    def try_to_init_alternating_expression(self):
+        if self.selected_expression:
+            self.selected_alternating = self.selected_expression
+
+    def try_to_select_first_universe_character_expression(self):
         db = get_db()
         universes = db.select_all_universes()
-        if len(universes) == 0:
+        if not universes:
             return
-        cls.set_selected_universe(universes[0])
+        self.set_selected_universe(universes[0])
         characters = db.select_all_characters_from_universe(universes[0].universe_id)
-        if len(characters) == 0:
+        if not characters:
             return
-        cls.set_selected_character(characters[0])
+        self.set_selected_character(characters[0])
         expressions = db.select_all_expressions_from_character(characters[0].character_id)
-        if len(expressions) == 0:
+        if not expressions:
             return
-        cls.set_selected_expression(expressions[0])
+        self.set_selected_expression(expressions[0])
 
-    @classmethod
-    def try_to_select_first_character_from_current_universe(cls):
+    def try_to_select_first_character_from_current_universe(self):
         db = get_db()
-        universe = cls.get_selected_universe()
+        universe = self.get_selected_universe()
         if universe is None:
             return
         characters = db.select_all_characters_from_universe(universe.universe_id)
-        if len(characters) == 0:
-            SelectionManager.set_selected_character(None)
-            SelectionManager.set_selected_expression(None)
+        if not characters:
+            self.set_selected_character(None)
+            self.set_selected_expression(None)
             return
-        cls.set_selected_character(characters[0])
+        self.set_selected_character(characters[0])
 
-    @classmethod
-    def try_to_select_first_expression_from_current_character(cls):
+    def try_to_select_first_expression_from_current_character(self):
         db = get_db()
-        character = cls.get_selected_character()
+        character = self.get_selected_character()
         if character is None:
             return
         expressions = db.select_all_expressions_from_character(character.character_id)
-        if len(expressions) == 0:
+        if not expressions:
             return
-        cls.set_selected_expression(expressions[0])
+        self.set_selected_expression(expressions[0])
 
-    @classmethod
-    def try_to_init_alternating_expression(cls):
-        if cls.selected_expression:
-            cls.selected_alternating = cls.selected_expression
+    def check_if_selected_exist(self):
+        db = get_db()
+        if None in (self.selected_universe, self.selected_character,
+                    self.selected_expression, self.selected_alternating):
+            return
 
-    @classmethod
-    def set_alternating_expression(cls, expression: Expression | None):
-        cls.selected_alternating = expression
+        if not db.universe_exists(self.selected_universe.universe_id):
+            self.reset()
+            return
 
-    @classmethod
-    def get_alternating_expression(cls) -> Expression | None:
-        return cls.selected_alternating
+        if not db.character_exists(self.selected_character.character_id):
+            self.selected_character = None
+            self.selected_expression = None
+            self.selected_alternating = None
+            self.try_to_select_first_character_from_current_universe()
+            self.try_to_select_first_expression_from_current_character()
+            return
+
+        if not db.expression_exists(self.selected_expression.expression_id):
+            self.selected_expression = None
+            self.selected_alternating = None
+            self.try_to_select_first_expression_from_current_character()
+            self.try_to_init_alternating_expression()
+
+
+@dataclass
+class SideSelectors:
+    universe_selector:         QComboBox
+    universe_preview:          QLabel
+    character_selector:        QComboBox
+    character_preview:         QLabel
+    expression_selector:       QComboBox
+    expression_preview:        QLabel
+    alternating_selector:      QComboBox
+    alternating_preview:       QLabel
+    include_checkbox:          QCheckBox
+    expression_color_selector: QComboBox
+    expression_color_preview:  QLabel
+    alternating_container:     QWidget
+    alternating_lines:         list[QWidget]
+
+
+left_manager  = SelectionManager()
+right_manager = SelectionManager()
 
 
 def init_entity(db_function: Callable, selector: QComboBox, preview: QLabel | None, selected: Universe | Character | Expression | None) -> bool:

@@ -283,4 +283,19 @@ class DBDynamicConnection:
         self.connection.execute("DELETE FROM Expressions")
         self.connection.commit()
 
+    # EXISTS
 
+    def universe_exists(self, universe_id: int) -> bool:
+        return self.connection.execute(
+            "SELECT * FROM Universes WHERE universe_id = ?", (universe_id,)
+        ).fetchone() is not None
+
+    def character_exists(self, character_id: int) -> bool:
+        return self.connection.execute(
+            "SELECT * FROM Characters WHERE character_id = ?", (character_id,)
+        ).fetchone() is not None
+
+    def expression_exists(self, expression_id: int) -> bool:
+        return self.connection.execute(
+            "SELECT * FROM Expressions WHERE expression_id = ?", (expression_id,)
+        ).fetchone() is not None

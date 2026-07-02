@@ -1,5 +1,6 @@
 from models.handler.entity_handler import EntityHandler
-from services.selection_manager import SelectionManager
+from services.selection_manager import left_manager
+
 
 class CharacterHandler(EntityHandler):
 
@@ -24,18 +25,18 @@ class CharacterHandler(EntityHandler):
                 f"This will delete all associated expressions.")
 
     def update_selection_manager(self, character):
-        SelectionManager.set_selected_character(character)
-        SelectionManager.try_to_select_first_expression_from_current_character()
+        left_manager.set_selected_character(character)
+        left_manager.try_to_select_first_expression_from_current_character()
 
     def clear_selection_manager(self):
-        SelectionManager.set_selected_character(None)
-        SelectionManager.set_selected_expression(None)
+        left_manager.set_selected_character(None)
+        left_manager.set_selected_expression(None)
 
     def on_before_delete(self, character):
         # Cascade: selected expressions belonged to character
-        char = SelectionManager.get_selected_character()
+        char = left_manager.get_selected_character()
         if char and char.character_id == character.character_id:
-            SelectionManager.set_selected_expression(None)
+            left_manager.set_selected_expression(None)
 
     def filter_text(self) -> str:
         return self.ui.characters_filter_input.text()
@@ -45,4 +46,4 @@ class CharacterHandler(EntityHandler):
         filter_characters(self.ui, self.filter_text())
 
     def get_selected_entity(self):
-        return SelectionManager.get_selected_character()
+        return left_manager.get_selected_character()

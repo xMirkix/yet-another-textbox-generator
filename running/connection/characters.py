@@ -10,7 +10,7 @@ from services import change_service
 from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
 from services.grid_service import clear_grid, restore_selection
-from services.selection_manager import init_entity, SelectionManager
+from services.selection_manager import init_entity, left_manager
 from ui.generated_ui import Ui_MainWindow
 
 
@@ -51,7 +51,7 @@ def connect_characters(ui: Ui_MainWindow):
 
 def universe_change(ui: Ui_MainWindow, index):
     ui.edit_character.hide()
-    SelectionManager.set_selected_universe(
+    left_manager.set_selected_universe(
         ui.characters_create_universe_selector.itemData(index))
     QTimer.singleShot(0, lambda: reload_ui(ui))
 
@@ -110,7 +110,7 @@ def edit_character(ui: Ui_MainWindow):
     form_operation(character_id, character_name, universe_id, style, font, transform, pixmap, 42,
                    db.update_character)  # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
 
-    SelectionManager.set_selected_character(db.select_character_by_id(character_id))
+    left_manager.set_selected_character(db.select_character_by_id(character_id))
 
     post_operation(
         ui.characters_edit_name_input,
@@ -146,7 +146,7 @@ def post_operation(input_to_clear: QLineEdit, pixmap_to_clear: QLabel, remove_bu
 
 def filter_characters(ui: Ui_MainWindow, filter_text: str):
     clear_grid(ui.characters_grid)
-    universe = SelectionManager.get_selected_universe()
+    universe = left_manager.get_selected_universe()
 
     if universe is None:
         return
@@ -154,7 +154,7 @@ def filter_characters(ui: Ui_MainWindow, filter_text: str):
     for character in get_db().select_filtered_characters(universe.universe_id, filter_text):
         insert_character_tile(ui, character)
 
-    selected = SelectionManager.get_selected_character()
+    selected = left_manager.get_selected_character()
 
     if selected:
         restore_selection(ui.characters_grid, selected.get_id())
@@ -232,7 +232,7 @@ def reload_ui(ui: Ui_MainWindow):
     ui.characters_edit_universe_selector.clear()
     ui.characters_filter_input.clear()
 
-    universe = SelectionManager.get_selected_universe()
+    universe = left_manager.get_selected_universe()
 
     if universe is None:
         return
@@ -245,7 +245,7 @@ def reload_ui(ui: Ui_MainWindow):
     for character in get_db().select_all_characters_from_universe(universe.universe_id):
         insert_character_tile(ui, character)
 
-    selected = SelectionManager.get_selected_character()
+    selected = left_manager.get_selected_character()
     restore_selection(ui.characters_grid, selected.get_id() if selected else None) or CharacterHandler(
         ui).select_first_or_none()
 

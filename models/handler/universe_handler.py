@@ -1,5 +1,5 @@
 from models.handler.entity_handler import EntityHandler
-from services.selection_manager import SelectionManager
+from services.selection_manager import left_manager
 
 class UniverseHandler(EntityHandler):
 
@@ -24,20 +24,20 @@ class UniverseHandler(EntityHandler):
                 f"This will delete all characters and expressions in this universe.")
 
     def update_selection_manager(self, universe):
-        SelectionManager.set_selected_universe(universe)
-        SelectionManager.try_to_select_first_character_from_current_universe()
+        left_manager.set_selected_universe(universe)
+        left_manager.try_to_select_first_character_from_current_universe()
 
     def clear_selection_manager(self):
-        SelectionManager.set_selected_universe(None)
-        SelectionManager.set_selected_character(None)
-        SelectionManager.set_selected_expression(None)
+        left_manager.set_selected_universe(None)
+        left_manager.set_selected_character(None)
+        left_manager.set_selected_expression(None)
 
     def on_before_delete(self, universe):
         # Cascade: selected character/expression belonged to universe
-        char = SelectionManager.get_selected_character()
+        char = left_manager.get_selected_character()
         if char and char.universe_id == universe.universe_id:
-            SelectionManager.set_selected_character(None)
-            SelectionManager.set_selected_expression(None)
+            left_manager.set_selected_character(None)
+            left_manager.set_selected_expression(None)
 
     def filter_text(self) -> str:
         return self.ui.universe_filter_input.text()
@@ -47,4 +47,4 @@ class UniverseHandler(EntityHandler):
         filter_universes(self.ui, self.filter_text())
 
     def get_selected_entity(self):
-        return SelectionManager.get_selected_universe()
+        return left_manager.get_selected_universe()

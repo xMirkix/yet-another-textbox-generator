@@ -10,7 +10,7 @@ from services import change_service
 from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
 from services.grid_service import clear_grid, restore_selection
-from services.selection_manager import init_entity, SelectionManager
+from services.selection_manager import init_entity, left_manager
 from ui.generated_ui import Ui_MainWindow
 
 
@@ -58,13 +58,13 @@ def connect_expressions(ui: Ui_MainWindow):
 def universe_change(ui: Ui_MainWindow):
     ui.edit_expression.hide()
     new_universe : Universe = ui.expressions_create_universe_selector.currentData()
-    SelectionManager.set_selected_universe(new_universe)
-    SelectionManager.try_to_select_first_character_from_current_universe()
+    left_manager.set_selected_universe(new_universe)
+    left_manager.try_to_select_first_character_from_current_universe()
     QTimer.singleShot(0, lambda: reload_ui(ui))
 
 def character_change(ui: Ui_MainWindow, index):
     ui.edit_expression.hide()
-    SelectionManager.set_selected_character(
+    left_manager.set_selected_character(
         ui.expressions_create_character_selector.itemData(index))
     QTimer.singleShot(0, lambda: reload_ui(ui))
 
@@ -73,7 +73,7 @@ def create_expression(ui: Ui_MainWindow):
 
     expression_name = ui.expressions_create_name_input.text()
 
-    character = SelectionManager.get_selected_character()
+    character = left_manager.get_selected_character()
 
     if not character:
         QMessageBox.warning(None, "Invalid Character", "No selected Character")
@@ -117,7 +117,7 @@ def edit_expression(ui: Ui_MainWindow):
     form_operation(expression_id, expression_name, character_id, pixmap, 42,
                    db.update_expression)  # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
 
-    SelectionManager.set_selected_expression(db.select_expression_by_id(expression_id))
+    left_manager.set_selected_expression(db.select_expression_by_id(expression_id))
 
     post_operation(
         ui.expressions_edit_name_input,
@@ -155,7 +155,7 @@ def post_operation(input_to_clear: QLineEdit, pixmap_to_clear: QLabel, remove_bu
 
 def filter_expressions(ui: Ui_MainWindow, filter_text: str):
     clear_grid(ui.expressions_grid)
-    character = SelectionManager.get_selected_character()
+    character = left_manager.get_selected_character()
 
     if character is None:
         return
@@ -163,7 +163,7 @@ def filter_expressions(ui: Ui_MainWindow, filter_text: str):
     for expression in get_db().select_filtered_expressions(character.character_id, filter_text):
         insert_expression_tile(ui, expression)
 
-    selected = SelectionManager.get_selected_expression()
+    selected = left_manager.get_selected_expression()
 
     if selected:
         restore_selection(ui.expressions_grid, selected.get_id())
@@ -197,14 +197,14 @@ def reload_ui(ui: Ui_MainWindow):
     ui.expressions_filter_input.clear()
     clear_grid(ui.expressions_grid)
 
-    universe = SelectionManager.get_selected_universe()
+    universe = left_manager.get_selected_universe()
     if universe is None:
         return
 
     init_entity(get_db().select_all_universes, ui.expressions_create_universe_selector, None, universe)
     init_entity(get_db().select_all_universes, ui.expressions_edit_universe_selector, None, universe)
 
-    character = SelectionManager.get_selected_character()
+    character = left_manager.get_selected_character()
     if character is None:
         return
 
@@ -214,7 +214,7 @@ def reload_ui(ui: Ui_MainWindow):
     for expression in get_db().select_all_expressions_from_character(character.character_id):
         insert_expression_tile(ui, expression)
 
-    selected = SelectionManager.get_selected_expression()
+    selected = left_manager.get_selected_expression()
 
     restore_selection(ui.expressions_grid, selected.get_id() if selected else None) or ExpressionHandler(
         ui).select_first_or_none()

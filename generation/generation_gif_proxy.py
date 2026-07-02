@@ -27,7 +27,7 @@ def generate_gif(request: GenerationRequest) -> list[Image.Image] | None:
 
     font = get_font(font_settings.font, config["font_size"])
 
-    max_width, _ = get_image_resolution(request.sprite_settings.expression is not None, config)
+    max_width, _ = get_image_resolution(request.sprite_settings.expression is not None, request.right_sprite_settings.expression is not None, config)
 
     text = calculate_wrapping(tokens, font, max_width - 3,
                           config["character_extra_offset"],

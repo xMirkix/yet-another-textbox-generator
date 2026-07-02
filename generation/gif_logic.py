@@ -74,14 +74,19 @@ def append_additional_images(text: list[TextLine], current_position: list[int], 
     for _ in range(amount):
         if is_talking_pause:
             sprite = resolve_sprite(request.sprite_settings, frame_counter[0])
+            sprite_right = resolve_sprite(request.right_sprite_settings, frame_counter[0])
             frame_counter[0] += 1
         else:
             sprite = request.sprite_settings
+            sprite_right = request.right_sprite_settings
 
         result.append(generate_single(
             text, request.default_color, request.border_settings,
-            sprite, request.font_settings, request.export_settings
+            sprite, sprite_right, request.font_settings, request.export_settings
         ))
+
+    if not is_talking_pause:
+        frame_counter[0] = 0
 
 
 def get_transparent() -> Color:
@@ -106,8 +111,10 @@ def for_each_character(text: list[TextLine],
 
         sprite = resolve_sprite(request.sprite_settings, frame_counter[0])
 
+        sprite_right = resolve_sprite(request.right_sprite_settings, frame_counter[0])
+
         result.append(
-            generate_single(text_copy, request.default_color, request.border_settings, sprite,
+            generate_single(text_copy, request.default_color, request.border_settings, sprite, sprite_right,
                             request.font_settings, request.export_settings))
 
         frame_counter[0] += 1
@@ -132,7 +139,6 @@ def resolve_sprite(sprite_settings: SpriteSettings, frame_index: int) -> SpriteS
         return sprite_settings
 
     cycle_length = sprite_settings.alternating_interval + sprite_settings.alternating_duration
-    #cycle_pos = frame_index % cycle_length # this old version didn't start with alternate, less useful
     cycle_pos = (frame_index + sprite_settings.alternating_interval) % cycle_length
 
     if cycle_pos < sprite_settings.alternating_interval:
@@ -144,12 +150,12 @@ def resolve_sprite(sprite_settings: SpriteSettings, frame_index: int) -> SpriteS
 
 
 def generate_single(text_input: list[TextLine], default_color: Color, border_settings: BorderSettings,
-                    sprite_settings: SpriteSettings, font_settings: FontSettings,
+                    sprite_settings: SpriteSettings, right_sprite_settings: SpriteSettings, font_settings: FontSettings,
                     export_settings: ExportSettings) -> Image.Image:
     from generation.steps import border_step, sprite_step, font_step_gif, export_step
     from generation.context import GenerationContext
     image, style = border_step.apply(border_settings)
     ctx = GenerationContext(image=image, has_expression=False, border_style=style)
-    ctx = sprite_step.apply(ctx, sprite_settings)
+    ctx = sprite_step.apply(ctx, sprite_settings, right_sprite_settings)
     ctx = font_step_gif.apply(ctx, text_input, default_color, font_settings)
     return export_step.apply(ctx, export_settings)

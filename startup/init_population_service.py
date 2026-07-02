@@ -1,4 +1,4 @@
-from running.connection.generator import hide_alternating
+from running.connection.generator.generator import hide_alternating, make_sides
 from services.database_service import DBStaticConnection, DBDynamicConnection
 from services.font_service import check_with_system_fonts
 from startup.in_memory.static_classes import Color
@@ -54,12 +54,15 @@ class InitPopulationService:
     def init_populate(self, ui: Ui_MainWindow):
         self.populate_border_settings(ui)  # Original/Deltarune/... and Color
         self.populate_sprite_settings(ui)  # Color
+        populate_color_selector(self.colors, ui.expression_color_selector_2, ui.expression_color_preview_2)
         self.populate_font_settings(ui)  # Determination Mono/Comic Sans/..., Asterisk Colors, Uppercase/Lowercase/...
         self.populate_character_page(ui)
         self.populate_default_text_color(ui)
         hide_edits(ui)  # Hide edit blocks
         hide_removes(ui)
-        hide_alternating(ui)
+        sides = make_sides(ui)
+        hide_alternating(sides[0])
+        hide_alternating(sides[1])
         ui.download.hide()
         self.create_temporary_data_tables()
 

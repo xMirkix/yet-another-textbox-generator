@@ -18,7 +18,7 @@ def apply(ctx: GenerationContext, text_tokenized: list[TextLine], default_color:
 
         font = get_font(settings.font, config["font_size"])
 
-        x, y = get_image_resolution(ctx.has_expression, config)
+        x, y = get_image_resolution(ctx.has_expression, ctx.has_right_expression, config)
 
         image_text = get_text_image(text_tokenized, default_color, is_dark_world_style(settings.text_style), font, config, (x, y), settings.asterisk_color) # includes asterisk
 

@@ -8,19 +8,26 @@ from generation.generation_request import GenerationRequest
 from models.form_bindings import BorderSettings, SpriteSettings, ExportSettings, FontSettings
 from startup.in_memory.static_classes import Color
 
-def is_valid_configuration_ui(text_input: str, sprite_settings: SpriteSettings, checked: bool, font_settings: FontSettings):
+def is_valid_configuration_ui(text_input: str, sprite_settings: SpriteSettings, checked: bool, right_sprite_settings: SpriteSettings, right_checked: bool, font_settings: FontSettings):
     if text_input is None or text_input == "":
         return False
     if font_settings.font is None:
         return False
+    if not validate_and_clear_sprite(sprite_settings, checked):
+        return False
+    if not validate_and_clear_sprite(right_sprite_settings, right_checked):
+        return False
+    return True
+
+def validate_and_clear_sprite(sprite_settings: SpriteSettings, checked: bool) -> bool:
     if not checked:
         sprite_settings.universe = None
         sprite_settings.character = None
         sprite_settings.expression = None
         return True
-    if sprite_settings.universe is None or sprite_settings.character is None or sprite_settings.expression is None:
-        return False
-    return True
+    return not (sprite_settings.universe is None
+                or sprite_settings.character is None
+                or sprite_settings.expression is None)
 
 def is_valid_configuration(text_input: str, font_settings: FontSettings):
     if text_input is None or text_input == "":
@@ -30,13 +37,13 @@ def is_valid_configuration(text_input: str, font_settings: FontSettings):
     return True
 
 def generate_png(text_input: str, default_color: Color, border_settings: BorderSettings,
-                 sprite_settings: SpriteSettings, font_settings: FontSettings,
+                 sprite_settings: SpriteSettings, right_sprite_settings: SpriteSettings, font_settings: FontSettings,
                  export_settings: ExportSettings) -> Image.Image:
     from generation.steps import border_step, sprite_step, font_step, export_step
     from generation.context import GenerationContext
     image, style = border_step.apply(border_settings)
     ctx = GenerationContext(image=image, has_expression=False, border_style=style)
-    ctx = sprite_step.apply(ctx, sprite_settings)
+    ctx = sprite_step.apply(ctx, sprite_settings, right_sprite_settings)
     ctx = font_step.apply(ctx, text_input, default_color, font_settings)
     return export_step.apply(ctx, export_settings)
 
@@ -57,6 +64,7 @@ class GenerationPngProxy:
             request.default_color,
             request.border_settings,
             request.sprite_settings,
+            request.right_sprite_settings,
             request.font_settings,
             request.export_settings,
         )

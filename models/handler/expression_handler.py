@@ -1,5 +1,6 @@
 from models.handler.entity_handler import EntityHandler
-from services.selection_manager import SelectionManager
+from services.selection_manager import left_manager
+
 
 class ExpressionHandler(EntityHandler):
 
@@ -27,10 +28,10 @@ class ExpressionHandler(EntityHandler):
                 f"This action cannot be undone.")
 
     def update_selection_manager(self, expression):
-        SelectionManager.set_selected_expression(expression)
+        left_manager.set_selected_expression(expression)
 
     def clear_selection_manager(self):
-        SelectionManager.set_selected_expression(None)
+        left_manager.set_selected_expression(None)
 
     def filter_text(self) -> str:
         return self.ui.expressions_filter_input.text()
@@ -40,4 +41,4 @@ class ExpressionHandler(EntityHandler):
         filter_expressions(self.ui, self.filter_text())
 
     def get_selected_entity(self):
-        return SelectionManager.get_selected_expression()
+        return left_manager.get_selected_expression()

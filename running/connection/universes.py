@@ -9,7 +9,7 @@ from services import change_service
 from services.grid_service import clear_grid, restore_selection
 from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
-from services.selection_manager import SelectionManager
+from services.selection_manager import left_manager
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QMessageBox, QLineEdit, QLabel, QPushButton
 
@@ -76,7 +76,7 @@ def edit_universe(ui: Ui_MainWindow):
 
     form_operation(universe_id, universe_name, pixmap, 42, db.update_universe) # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
 
-    SelectionManager.set_selected_universe(db.select_universe_by_id(universe_id))
+    left_manager.set_selected_universe(db.select_universe_by_id(universe_id))
 
     post_operation(
         ui.universe_edit_name_input,
@@ -103,7 +103,7 @@ def filter_universes(ui: Ui_MainWindow, name: str):
     for universe in get_db().select_filtered_universes(name):
         insert_universe_tile(ui, universe)
 
-    selected = SelectionManager.get_selected_universe()
+    selected = left_manager.get_selected_universe()
 
     if selected:
         restore_selection(ui.universe_grid, selected.get_id())
@@ -131,7 +131,7 @@ def reload_ui(ui: Ui_MainWindow):
         insert_universe_tile(ui, universe)
     ui.universe_filter_input.clear()
 
-    selected = SelectionManager.get_selected_universe()
+    selected = left_manager.get_selected_universe()
     restore_selection(ui.universe_grid, selected.get_id() if selected else None) or UniverseHandler(
         ui).select_first_or_none()
 

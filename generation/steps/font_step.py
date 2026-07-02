@@ -24,7 +24,7 @@ def apply(ctx: GenerationContext, text: str, default_color: Color, settings: Fon
 
         font = get_font(settings.font, config["font_size"])
 
-        x, y = get_image_resolution(ctx.has_expression, config)
+        x, y = get_image_resolution(ctx.has_expression, ctx.has_right_expression, config)
 
         image_text = get_text_image(lines, default_color, is_dark_world_style(settings.text_style), font, config, (x, y), settings.asterisk_color) # includes asterisk
 
@@ -47,11 +47,16 @@ def get_text_insert_position(style: str, with_sprite: bool, config: FontConfig) 
     x, y = x + config[key], y + config["y_text_start"]
     return x, y
 
-def get_image_resolution(with_sprite: bool, config: FontConfig) -> tuple[int, int]:
+def get_image_resolution(with_sprite: bool, with_right_sprite: bool, config: FontConfig) -> tuple[int, int]:
     x, y = 0, 0
     key: Literal["x_with_sprite", "x_no_sprite"] = "x_with_sprite" if with_sprite else "x_no_sprite"
 
-    x, y = x + config[key], y + config["y_text_start"]
+    right = 0
+
+    if with_right_sprite:
+        right += config["x_with_sprite"]
+
+    x, y = x + config[key] + right, y + config["y_text_start"]
     return (
         283 - x,
         70 - y,
