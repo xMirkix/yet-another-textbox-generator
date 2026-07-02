@@ -49,10 +49,11 @@ If you just want to generate textboxes with UT/DT characters, I have included th
 ## Planned future features
 
 - ~~setting text color~~
-- GIF export (didn't have enough time)
+- ~~GIF export~~
 - more borders
 - color wheel for color selection
-- alternating expressions for the GIF format
+- ~~alternating expressions for the GIF format~~
+- ~~putting expressions on the right side of the textbox~~
 - a CLI tool
 
 ## Code signing policy
