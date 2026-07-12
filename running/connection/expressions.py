@@ -76,7 +76,7 @@ def create_expression(ui: Ui_MainWindow):
     character = left_manager.get_selected_character()
 
     if not character:
-        QMessageBox.warning(None, "Invalid Character", "No selected Character")
+        QMessageBox.warning(ui.centralwidget, "Invalid Character", "No selected Character")
         return
 
     character_id = character.character_id
@@ -85,7 +85,7 @@ def create_expression(ui: Ui_MainWindow):
 
     order_position = db.count_expressions(character_id) + 1
 
-    form_operation(-1, expression_name, character_id, pixmap,
+    form_operation(ui, -1, expression_name, character_id, pixmap,
                    order_position, db.insert_expression)
 
     post_operation(
@@ -114,7 +114,7 @@ def edit_expression(ui: Ui_MainWindow):
         )
         return
 
-    form_operation(expression_id, expression_name, character_id, pixmap, 42,
+    form_operation(ui, expression_id, expression_name, character_id, pixmap, 42,
                    db.update_expression)  # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
 
     left_manager.set_selected_expression(db.select_expression_by_id(expression_id))
@@ -126,17 +126,17 @@ def edit_expression(ui: Ui_MainWindow):
         lambda: QTimer.singleShot(0, lambda: reload_ui(ui))  # For edit to take effect
     )
 
-def form_operation(expression_id: int, name: str, character_id: int, pixmap, order_position: int, db_function: Callable):
+def form_operation(ui: Ui_MainWindow, expression_id: int, name: str, character_id: int, pixmap, order_position: int, db_function: Callable):
     if not name:
-        QMessageBox.warning(None, "Invalid Name", "Name cannot be empty")
+        QMessageBox.warning(ui.centralwidget, "Invalid Name", "Name cannot be empty")
         return
 
     if character_id is None:
-        QMessageBox.warning(None, "Invalid Universe", "Expression must belong to a character")
+        QMessageBox.warning(ui.centralwidget, "Invalid Character", "Expression must belong to a character")
         return
 
     if pixmap is None or pixmap.isNull():
-        QMessageBox.warning(None, "Invalid Image", "Expression must have an image")
+        QMessageBox.warning(ui.centralwidget, "Invalid Image", "Expression must have an image")
         return
 
     pixmap = change_service.pixmap_to_blob(pixmap)

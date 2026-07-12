@@ -5,6 +5,7 @@ class Universe:
     universe_id: int
     universe_name: str
     preview_image: bytes | None
+    default_border_style: int
     order_position: int
 
     def __post_init__(self):

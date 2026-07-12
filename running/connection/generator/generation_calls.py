@@ -1,7 +1,8 @@
 import copy
 
 from PySide6.QtCore import QThreadPool, QRunnable, QObject, Signal
-from PySide6.QtGui import QMovie, QPixmap
+from PySide6.QtGui import QMovie, QPixmap, QColor
+from PySide6.QtWidgets import QGraphicsDropShadowEffect
 
 from generation.generation_gif_proxy import GenerationGifProxy
 from generation.generation_png_proxy import GenerationPngProxy, is_valid_configuration_ui
@@ -54,13 +55,15 @@ def execute_generation(ui: Ui_MainWindow,
 
     sprite_left  = build_sprite_settings(left_manager,  left,  output_format)
 
-    if sprite_left is None:
-        ui.download.hide()
-        ui.output.setText("Nothing...")
+    if sprite_left.expression is None and ui.include_checkbox.isChecked():
+        hide_download(ui, "ERROR in Sprite Settings (Left) \n Fixes: Uncheck include, create an universe, character and expression or open a filled .yatg file")
         return
 
-    right_built = build_sprite_settings(right_manager, right, output_format)
-    sprite_right = right_built if right_built is not None else empty_sprite(sprite_left)
+    sprite_right = build_sprite_settings(right_manager, right, output_format)
+
+    if sprite_right.expression is None and ui.include_checkbox_2.isChecked():
+        hide_download(ui, "ERROR in Sprite Settings (Right) \n Fixes: Uncheck include, create an universe, character and expression or open a filled .yatg file")
+        return
 
     asterisk_colors = []
     if ui.asterisk_checkbox.isChecked():
@@ -81,12 +84,14 @@ def execute_generation(ui: Ui_MainWindow,
         transform=ui.text_transform_selector.currentData(),
     )
 
-    if not is_valid_configuration_ui(text_input, sprite_left,
+    message = is_valid_configuration_ui(text_input, sprite_left,
                                      left.include_checkbox.isChecked(),
                                      sprite_right, right.include_checkbox.isChecked(),
-                                     font_settings):
+                                     font_settings)
+
+    if message is not None:
         ui.download.hide()
-        ui.output.setText("Nothing...")
+        ui.output.setText(message)
         return
 
     border_settings = BorderSettings(
@@ -128,21 +133,17 @@ def execute_generation(ui: Ui_MainWindow,
     signals.done.connect(on_done)
     _pool.start(_GenerationRunnable(signals, generation_request, output_format, token))
 
-def empty_sprite(base: SpriteSettings) -> SpriteSettings:
-    empty = copy.copy(base)
-    empty.expression = None
-    empty.alternating_expression = None
-    return empty
-
 def build_sprite_settings(manager: SelectionManager,
                             side: SideSelectors,
-                            output_format: ExportFormat) -> SpriteSettings | None:
+                            output_format: ExportFormat) -> SpriteSettings:
     universe   = side.universe_selector.currentData()
     character  = side.character_selector.currentData()
     expression = side.expression_selector.currentData()
 
     if None in (universe, character, expression):
-        return None
+        universe = None
+        character = None
+        expression = None
 
     alternating = None
     if side.include_checkbox.isChecked() and output_format == ExportFormat.GIF:
@@ -154,15 +155,14 @@ def build_sprite_settings(manager: SelectionManager,
         expression=expression,
         alternating_expression=alternating,
         alternating_interval=5,
-        alternating_duration=3,
+        alternating_duration=5,
         expression_color=side.expression_color_selector.currentData(),
     )
 
 
 def on_result(ui: Ui_MainWindow, result_path, output_format):
     if not result_path:
-        ui.download.hide()
-        ui.output.setText("Nothing...")
+        hide_download(ui, "ERROR! Textbox could not be generated. \n Please try again, and restart the app if it keeps failing.")
         return
 
     if output_format == ExportFormat.GIF:
@@ -174,3 +174,15 @@ def on_result(ui: Ui_MainWindow, result_path, output_format):
 
     ui.download.setProperty("path", result_path)
     ui.download.show()
+    ui.copy_to_clipboard.show()
+
+def hide_download(ui: Ui_MainWindow, message: str):
+    effect = QGraphicsDropShadowEffect()
+    effect.setColor(QColor("black"))
+    effect.setOffset(0, 0)
+    effect.setBlurRadius(4)
+    ui.output.setGraphicsEffect(effect)
+
+    ui.download.hide()
+    ui.copy_to_clipboard.hide()
+    ui.output.setText(message)

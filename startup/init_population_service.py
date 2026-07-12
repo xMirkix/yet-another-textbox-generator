@@ -5,7 +5,7 @@ from startup.in_memory.static_classes import Color
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtGui import QFontDatabase
 import PySide6.QtGui
-from configs.paths import UNDERTALE_PREVIEW
+from configs.paths import UNDERTALE_PREVIEW, STATIC_DB
 
 def populate_selector(items, selector, preview=None, preview_path=None, filter_fn=None):
     for item in items:
@@ -44,7 +44,7 @@ def hide_removes(ui: Ui_MainWindow):
 class InitPopulationService:
 
     def __init__(self):
-        self.connection = DBStaticConnection()
+        self.connection = DBStaticConnection(STATIC_DB)
         self.colors = self.connection.select_all_colors()
         self.styles = self.connection.select_all_border_styles()
         self.fonts = self.connection.select_all_text_fonts()
@@ -56,6 +56,7 @@ class InitPopulationService:
         self.populate_sprite_settings(ui)  # Color
         populate_color_selector(self.colors, ui.expression_color_selector_2, ui.expression_color_preview_2)
         self.populate_font_settings(ui)  # Determination Mono/Comic Sans/..., Asterisk Colors, Uppercase/Lowercase/...
+        self.populate_universe_page(ui)
         self.populate_character_page(ui)
         self.populate_default_text_color(ui)
         hide_edits(ui)  # Hide edit blocks
@@ -64,6 +65,8 @@ class InitPopulationService:
         hide_alternating(sides[0])
         hide_alternating(sides[1])
         ui.download.hide()
+        ui.import_load.hide()
+        ui.import_progress.hide()
         self.create_temporary_data_tables()
 
     def populate_border_settings(self, ui: Ui_MainWindow):
@@ -79,6 +82,10 @@ class InitPopulationService:
         populate_color_selector(self.colors, ui.asterisk_color_selector_2, ui.asterisk_color_preview_2)
         populate_color_selector(self.colors, ui.asterisk_color_selector_3, ui.asterisk_color_preview_3)
         populate_selector(self.transforms, ui.text_transform_selector)
+
+    def populate_universe_page(self, ui: Ui_MainWindow):
+        populate_selector(self.styles, ui.universe_create_border_style_selector)
+        populate_selector(self.styles, ui.universe_edit_border_style_selector)
 
     def populate_character_page(self, ui: Ui_MainWindow):
         check_with_system_fonts(self.fonts, ui.characters_create_font_selector)

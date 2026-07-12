@@ -8,16 +8,16 @@ from generation.generation_request import GenerationRequest
 from models.form_bindings import BorderSettings, SpriteSettings, ExportSettings, FontSettings
 from startup.in_memory.static_classes import Color
 
-def is_valid_configuration_ui(text_input: str, sprite_settings: SpriteSettings, checked: bool, right_sprite_settings: SpriteSettings, right_checked: bool, font_settings: FontSettings):
+def is_valid_configuration_ui(text_input: str, sprite_settings: SpriteSettings, checked: bool, right_sprite_settings: SpriteSettings, right_checked: bool, font_settings: FontSettings) -> str | None:
     if text_input is None or text_input == "":
-        return False
+        return "ERROR in Input/Preview \n To generate empty textboxes, use whitespaces"
     if font_settings.font is None:
-        return False
+        return "ERROR in Font Settings \n No fonts exist. This shouldn't happen. Contact the developer"
     if not validate_and_clear_sprite(sprite_settings, checked):
-        return False
+        return "ERROR in Sprite Settings (Left) \n Fixes: Uncheck include, create an universe, character and expression or open a filled .yatg file"
     if not validate_and_clear_sprite(right_sprite_settings, right_checked):
-        return False
-    return True
+        return "ERROR in Sprite Settings (Right) \n Fixes: Uncheck include, create an universe, character and expression or open a filled .yatg file"
+    return None
 
 def validate_and_clear_sprite(sprite_settings: SpriteSettings, checked: bool) -> bool:
     if not checked:

@@ -30,9 +30,9 @@ def for_each_line(text: list[TextLine],
 
         deactivate_tokens(text_copy, current_position[0], current_position[1])  # deactivate future tokens
 
-        for_each_character(text_copy, current_position, result, request, frame_counter)
+        paused = for_each_character(text_copy, current_position, result, request, frame_counter)
 
-        append_additional_images(text_copy, current_position, result, request, frame_counter)
+        append_additional_images(text_copy, current_position, result, request, frame_counter, paused)
 
         current_position[1] += 1
         current_position[2] = 0
@@ -55,7 +55,7 @@ def deactivate_tokens(text_copy: list[TextLine], current_line: int, current_toke
         i += 1
 
 
-def append_additional_images(text: list[TextLine], current_position: list[int], result: list[Image.Image], request: GenerationRequest, frame_counter: list[int]):
+def append_additional_images(text: list[TextLine], current_position: list[int], result: list[Image.Image], request: GenerationRequest, frame_counter: list[int], paused: bool):
     amount = 1
 
     if current_position[2] == 0:
@@ -70,6 +70,9 @@ def append_additional_images(text: list[TextLine], current_position: list[int], 
         amount = 19
 
     is_talking_pause = amount == 1 or amount == 6
+
+    if paused:
+        is_talking_pause = False
 
     for _ in range(amount):
         if is_talking_pause:
@@ -97,12 +100,16 @@ def for_each_character(text: list[TextLine],
                        current_position: list[int],
                        result: list[Image.Image],
                        request: GenerationRequest,
-                       frame_counter: list[int],):
+                       frame_counter: list[int],) -> bool:
     line = text[current_position[0]]
 
     token = line.content[current_position[1]]
 
     content = token.content
+
+    pauses = token.pauses
+
+    has_pauses = False
 
     while current_position[2] < len(content):  # for each character
         text_copy = copy.deepcopy(text)
@@ -119,7 +126,51 @@ def for_each_character(text: list[TextLine],
 
         frame_counter[0] += 1
 
+        pause = pauses.get(current_position[2] + 1, 0)
+
+        if pause > 0:
+            has_pauses = True
+            frame_counter[0] = 0
+
+            padding_image = generate_single(
+                text_copy,
+                request.default_color,
+                request.border_settings,
+                request.sprite_settings,
+                request.right_sprite_settings,
+                request.font_settings,
+                request.export_settings,
+            )
+
+            for _ in range(pause):
+                result.append(padding_image.copy())
+
         current_position[2] += 1
+
+    last_pause = pauses.get(len(content), 0)
+
+    sprite = request.sprite_settings
+    sprite_right = request.right_sprite_settings
+
+    padding_image = generate_single(text, request.default_color, request.border_settings, sprite,
+                                    sprite_right, request.font_settings,request.export_settings)
+
+    for _ in range(last_pause):
+        result.append(padding_image.copy())
+
+    only_pause = pauses.get(0, 0)
+
+    if len(content) == 0 and 0 in pauses:
+        for _ in range(only_pause):
+            result.append(padding_image.copy())
+
+    if last_pause > 0 or only_pause > 0:
+        has_pauses = True
+
+    if last_pause > 0 or only_pause > 0:
+        frame_counter[0] = 0
+
+    return has_pauses
 
 
 def deactivate_characters(text_copy: list[TextLine], current_line: int, current_token: int, current_character: int):

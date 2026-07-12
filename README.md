@@ -4,6 +4,10 @@
 > If Windows or antivirus software shows warnings, this is due to the executable not being code signed.
 > A signed version will be provided via SignPath once available.
 
+> [!WARNING]
+> Starting with version 2.0.0, all .yatg files created with past versions won't work anymore (without external modifications).
+> This was my mistake due to poor planning, but I hope the new import feature makes up for it.
+
 ## Supported Fonts
 
 Supported fonts:
@@ -13,7 +17,13 @@ Supported fonts:
 - Windings (by sigmath6, from [here](https://fontstruct.com/fontstructions/show/1218140/pixelated-wingdings))
 
 Keep in mind that I remade the Papyrus/Comic Sans Font in FontStruct, meaning that there might be some slight inconsistencies.
-Also, because of time and language knowledge issues, Japanese is not supported for these.
+Also, because of time and language knowledge factors, Japanese is not supported for these.
+
+## Credits
+
+> [!NOTE]
+> This tool uses [Demirramon](https://www.demirramon.com) for one of its features. If the site is down, it may not work.
+> In case the site owner is not okay with this, please contact me, and I will remove the feature.
 
 ## About
 

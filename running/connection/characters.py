@@ -60,7 +60,13 @@ def create_character(ui: Ui_MainWindow):
 
     character_name = ui.characters_create_name_input.text()
 
-    universe_id = ui.characters_create_universe_selector.currentData().universe_id
+    universe = left_manager.get_selected_universe()
+
+    if not universe:
+        QMessageBox.warning(ui.centralwidget, "Invalid Universe", "No selected Universe")
+        return
+
+    universe_id = universe.universe_id
 
     default_style = get_default_style(ui.characters_create_style_regular_option)
 
@@ -73,7 +79,7 @@ def create_character(ui: Ui_MainWindow):
     order_position = db.count_characters(universe_id) + 1
 
 
-    form_operation(-1, character_name, universe_id, default_style, default_font, default_text_transform, pixmap, order_position, db.insert_character)
+    form_operation(ui, -1, character_name, universe_id, default_style, default_font, default_text_transform, pixmap, order_position, db.insert_character)
 
     post_operation(
         ui.characters_create_name_input,
@@ -107,7 +113,7 @@ def edit_character(ui: Ui_MainWindow):
         )
         return
 
-    form_operation(character_id, character_name, universe_id, style, font, transform, pixmap, 42,
+    form_operation(ui, character_id, character_name, universe_id, style, font, transform, pixmap, 42,
                    db.update_character)  # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
 
     left_manager.set_selected_character(db.select_character_by_id(character_id))
@@ -119,13 +125,13 @@ def edit_character(ui: Ui_MainWindow):
         lambda: QTimer.singleShot(0, lambda: reload_ui(ui))  # For edit to take effect
     )
 
-def form_operation(character_id: int, name: str, universe_id: int, default_style: int, default_font: int, default_text_transform: int, pixmap, order_position: int, db_function: Callable):
+def form_operation(ui: Ui_MainWindow, character_id: int, name: str, universe_id: int, default_style: int, default_font: int, default_text_transform: int, pixmap, order_position: int, db_function: Callable):
     if not name:
-        QMessageBox.warning(None, "Invalid Name", "Name cannot be empty")
+        QMessageBox.warning(ui.centralwidget, "Invalid Name", "Name cannot be empty")
         return
 
     if universe_id is None:
-        QMessageBox.warning(None, "Invalid Universe", "Character must belong to a universe")
+        QMessageBox.warning(ui.centralwidget, "Invalid Universe", "Character must belong to a universe")
         return
 
     pixmap = change_service.pixmap_to_blob(pixmap) if pixmap else None

@@ -59,13 +59,27 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE
 OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 
---
+---
 
-contourpy, cycler, kiwisolver, numpy — BSD 3-Clause License
-Copyright (c) respective authors and contributors
+This software uses Beautiful Soup 4.
 
-fonttools, pyparsing, six — MIT License
-Copyright (c) respective authors and contributors
+Beautiful Soup 4 is licensed under the MIT License and the
+Python Software Foundation License.
 
-python-dateutil, packaging — Apache License 2.0 / BSD License
-Copyright (c) respective authors and contributors
+Copyright (c) Leonard Richardson.
+
+The full text of the MIT License and the Python Software Foundation
+License should be included with this distribution.
+
+---
+
+This software uses Requests.
+
+Requests is licensed under the Apache License, Version 2.0.
+
+Copyright (c) Kenneth Reitz and contributors.
+
+The full text of the Apache License, Version 2.0 should be included
+with this distribution.
+
+NOTICE files, if applicable, must also be included.

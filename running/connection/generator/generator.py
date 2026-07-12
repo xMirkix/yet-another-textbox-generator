@@ -1,7 +1,8 @@
 from typing import Callable
 
 from PySide6.QtCore import QTimer
-from PySide6.QtWidgets import QComboBox
+from PySide6.QtGui import QGuiApplication
+from PySide6.QtWidgets import QComboBox, QLabel
 
 from running.connection.generator.generation_calls import execute_generation
 from running.connection.generator.generator_utils import set_color, set_border_style, set_stylesheet, set_defaults, \
@@ -112,6 +113,22 @@ def connect_generator(ui: Ui_MainWindow):
 
     ui.download.clicked.connect(lambda: download(ui))
 
+    ui.copy_to_clipboard.clicked.connect(lambda: on_copy(ui))
+
+def on_copy(ui: Ui_MainWindow):
+    worked = copy_to_clipboard(ui.output)
+    if not worked:
+        return
+    ui.copy_to_clipboard.setText("Copied!")
+    QTimer.singleShot(1500, lambda: ui.copy_to_clipboard.setText("Copy to Clipboard"))
+
+def copy_to_clipboard(output: QLabel) -> bool:
+    pixmap = output.movie().currentPixmap() if output.movie() else output.pixmap()
+    if pixmap and not pixmap.isNull() and not output.text():
+        QGuiApplication.clipboard().setPixmap(pixmap)
+        return True
+    return False
+
 def connect_side(ui: Ui_MainWindow, manager: SelectionManager, side: SideSelectors):
     def helper(selector: QComboBox, fn: Callable):
         selector.activated.connect(lambda: update_with_function_then_regenerate(ui, fn))
@@ -160,15 +177,14 @@ def universe_change(ui: Ui_MainWindow, manager: SelectionManager, side: SideSele
     manager.set_selected_universe(side.universe_selector.currentData())
     manager.try_to_select_first_character_from_current_universe()
     manager.try_to_select_first_expression_from_current_character()
-    reset_selectors(manager, side,
-                    lambda: set_defaults(manager.get_selected_character(), ui))
+    reset_selectors(ui, manager, side)
+    set_universe_default_border(ui)
 
 def character_change(ui: Ui_MainWindow, manager: SelectionManager, side: SideSelectors):
     manager.set_selected_character(side.character_selector.currentData())
     set_defaults(manager.get_selected_character(), ui)
     manager.try_to_select_first_expression_from_current_character()
-    reset_selectors(manager, side,
-                    lambda: set_defaults(manager.get_selected_character(), ui))
+    reset_selectors(ui, manager, side)
 
 def expression_change(manager: SelectionManager, side: SideSelectors):
     manager.set_selected_expression(side.expression_selector.currentData())
@@ -193,14 +209,12 @@ def alternate_change(manager: SelectionManager, side: SideSelectors):
 Universes, characters and expressions are added dynamically
 """
 def reload_ui(ui: Ui_MainWindow, left: SideSelectors, right: SideSelectors):
-    reset_selectors(left_manager,  left,
-                    lambda: set_defaults(left_manager.get_selected_character(), ui))
-    reset_selectors(right_manager, right,
-                    lambda: set_defaults(right_manager.get_selected_character(), ui))
+    reset_selectors(ui, left_manager,  left)
+    reset_selectors(ui, right_manager, right,)
+    set_universe_default_border(ui)
     try_generate(ui)
 
-def reset_selectors(manager: SelectionManager, side: SideSelectors,
-                    default_function: Callable):
+def reset_selectors(ui: Ui_MainWindow, manager: SelectionManager, side: SideSelectors):
     db = get_db()
 
     for selector, preview in [
@@ -226,8 +240,6 @@ def reset_selectors(manager: SelectionManager, side: SideSelectors,
         manager.set_selected_expression(None)
         return
 
-    default_function()
-
     character_id = side.character_selector.currentData().character_id
     has_expressions = init_entity(
         lambda: db.select_all_expressions_from_character(character_id),
@@ -237,6 +249,8 @@ def reset_selectors(manager: SelectionManager, side: SideSelectors,
 
     manager.set_selected_universe(side.universe_selector.currentData())
     manager.set_selected_character(side.character_selector.currentData())
+
+    set_defaults(left_manager.get_selected_character(), ui)
 
     if has_expressions:
         manager.set_selected_expression(side.expression_selector.currentData())
@@ -249,6 +263,11 @@ def reset_selectors(manager: SelectionManager, side: SideSelectors,
     else:
         manager.set_selected_expression(None)
 
+def set_universe_default_border(ui: Ui_MainWindow):
+    universe = ui.universe_selector.currentData()
+    if universe is not None:
+        ui.border_style_selector.setCurrentIndex(universe.default_border_style - 1)
+        set_border_style(ui.border_style_selector.currentData(), ui.border_style_preview)
 
 def get_db():
     return DBDynamicConnection.get_instance()

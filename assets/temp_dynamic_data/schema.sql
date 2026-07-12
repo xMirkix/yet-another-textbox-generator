@@ -2,6 +2,7 @@ CREATE TABLE IF NOT EXISTS Universes (
     universe_id INTEGER PRIMARY KEY AUTOINCREMENT,
     universe_name TEXT NOT NULL,
     preview_image BLOB NULL, --picture as bytes
+    default_border_style INTEGER,
     order_position INTEGER CHECK (order_position > 0)
 );
 

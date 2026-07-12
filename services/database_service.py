@@ -1,6 +1,8 @@
 from __future__ import annotations
 import sqlite3
-from configs.paths import DYNAMIC_DB, DYNAMIC_SCHEMA, STATIC_DB
+import threading
+
+from configs.paths import DYNAMIC_DB, DYNAMIC_SCHEMA
 
 from models.entities import Character, Universe, Expression
 from services.change_service import Changes
@@ -9,9 +11,16 @@ from startup.in_memory.static_classes import Color, BorderStyle, TextFont, TextT
 
 class DBStaticConnection:
 
-    DB_PATH = STATIC_DB
-    connection = sqlite3.connect(DB_PATH)
-    cursor = connection.cursor()
+    _local = threading.local()
+
+    def __init__(self, db_path):
+        self.db_path = db_path
+
+    @property
+    def connection(self) -> sqlite3.Connection:
+        if not hasattr(self._local, "conn"):
+            self._local.conn = sqlite3.connect(self.db_path)
+        return self._local.conn
 
     @classmethod
     def saved(cls):
@@ -37,6 +46,10 @@ class DBStaticConnection:
         rows = self.connection.execute("SELECT * FROM Transforms").fetchall()
         return [TextTransform(*row) for row in rows]
 
+    def select_font_by_name(self, name: str) -> TextFont | None:
+        rows = self.connection.execute("SELECT * FROM Fonts WHERE font_name = ?", (name,)).fetchone()
+        return TextFont(*rows) if rows is not None else None
+
 class DBDynamicConnection:
     _instance = None
     _initialized: bool = False
@@ -51,7 +64,7 @@ class DBDynamicConnection:
         if self._initialized:
             return
 
-        self.connection = sqlite3.connect(self.db_path)
+        self.connection = sqlite3.connect(self.db_path, check_same_thread=False)
         self.connection.execute("PRAGMA foreign_keys = ON")
         self.cursor = self.connection.cursor()
         self._changed = False
@@ -65,7 +78,7 @@ class DBDynamicConnection:
 
     def reconnect(self):
         self.connection.close()
-        self.connection = sqlite3.connect(self.db_path)
+        self.connection = sqlite3.connect(self.db_path, check_same_thread=False)
         self.connection.execute("PRAGMA foreign_keys = ON")
         self.cursor = self.connection.cursor()
 
@@ -169,20 +182,28 @@ class DBDynamicConnection:
 
     def insert_universe(self, universe: Universe):
         self.connection.execute(
-            "INSERT INTO Universes (universe_name, preview_image, order_position) VALUES (?, ?, ?)",
-            (universe.universe_name, universe.preview_image, universe.order_position)
+            "INSERT INTO Universes (universe_name, preview_image, default_border_style, order_position) VALUES (?, ?, ?, ?)",
+            (universe.universe_name, universe.preview_image, universe.default_border_style, universe.order_position)
         )
         self.connection.commit()
         Changes.change()
 
-    def insert_character(self, character: Character):
-        self.connection.execute(
+    def insert_character(self, character: Character) -> Character:
+        cursor = self.connection.execute(
             "INSERT INTO Characters (character_name, universe_id, default_style, default_font, default_text_transform, preview_image, order_position) VALUES (?, ?, ?, ?, ?, ?, ?)",
             (character.character_name, character.universe_id, character.default_style, character.default_font,
              character.default_text_transform, character.preview_image, character.order_position)
         )
         self.connection.commit()
+
+        last_id = cursor.lastrowid
+
+        if last_id is not None:
+            character.character_id = last_id
+
         Changes.change()
+
+        return character
 
     def insert_expression(self, expression: Expression):
         self.connection.execute(
@@ -197,8 +218,8 @@ class DBDynamicConnection:
 
     def update_universe(self, universe):
         self.connection.execute(
-            "UPDATE Universes SET universe_name = ?, preview_image = ? WHERE universe_id = ?",
-            (universe.universe_name, universe.preview_image, universe.universe_id)
+            "UPDATE Universes SET universe_name = ?, preview_image = ?, default_border_style = ? WHERE universe_id = ?",
+            (universe.universe_name, universe.preview_image, universe.default_border_style, universe.universe_id)
         )
         self.connection.commit()
         Changes.change()

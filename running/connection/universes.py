@@ -47,8 +47,9 @@ def create_universe(ui: Ui_MainWindow):
     db = get_db()
     universe_name = ui.universe_create_name_input.text()
     pixmap = ui.universe_create_image_preview.pixmap()
+    default_border_style = ui.universe_create_border_style_selector.currentData().border_id
     order_position = db.count_universes() + 1
-    form_operation(-1, universe_name, pixmap, order_position, db.insert_universe)
+    form_operation(-1, universe_name, pixmap, default_border_style, order_position, db.insert_universe)
 
     post_operation(
         ui.universe_create_name_input,
@@ -61,6 +62,7 @@ def edit_universe(ui: Ui_MainWindow):
     universe_id = ui.universe_edit_confirm_button.property("universe_id")
     universe_name = ui.universe_edit_name_input.text()
     pixmap = ui.universe_edit_image_preview.pixmap()
+    default_border_style = ui.universe_edit_border_style_selector.currentData().border_id
     db = get_db()
 
     exists = db.select_universe_by_id(universe_id)
@@ -74,7 +76,7 @@ def edit_universe(ui: Ui_MainWindow):
         )
         return
 
-    form_operation(universe_id, universe_name, pixmap, 42, db.update_universe) # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
+    form_operation(universe_id, universe_name, pixmap, default_border_style, 42, db.update_universe) # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
 
     left_manager.set_selected_universe(db.select_universe_by_id(universe_id))
 
@@ -85,12 +87,12 @@ def edit_universe(ui: Ui_MainWindow):
         lambda: QTimer.singleShot(0, lambda: reload_ui(ui)) # For edit to take effect
     )
 
-def form_operation(universe_id: int, name: str, pixmap, order_position: int, db_function: Callable):
+def form_operation(universe_id: int, name: str, pixmap, border_style: int, order_position: int, db_function: Callable):
     if not name:
         QMessageBox.warning(None, "Invalid Name", "Name cannot be empty")
         return
     pixmap = change_service.pixmap_to_blob(pixmap) if pixmap else None
-    universe = Universe(universe_id, name, pixmap, order_position)
+    universe = Universe(universe_id, name, pixmap, border_style, order_position)
     db_function(universe)
 
 def post_operation(input_to_clear: QLineEdit, pixmap_to_clear: QLabel, remove_button: QPushButton, post_function: Callable):
@@ -110,6 +112,7 @@ def filter_universes(ui: Ui_MainWindow, name: str):
 
 def on_edit(ui: Ui_MainWindow, universe: Universe):
     ui.universe_edit_name_input.setText(universe.universe_name)
+    ui.universe_edit_border_style_selector.setCurrentIndex(universe.default_border_style - 1)
     if universe.preview_image is not None:
         ui.universe_edit_image_preview.setPixmap(change_service.blob_to_pixmap(universe.preview_image))
         ui.universe_edit_image_remove_button.show()
