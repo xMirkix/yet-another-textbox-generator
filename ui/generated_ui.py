@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiawBLyo.ui'
+## Form generated from reading UI file 'uirXKHVo.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.1
 ##
@@ -2920,6 +2920,25 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_9.addWidget(self.label_15)
 
+        self.label_18 = QLabel(self.demi_character_import)
+        self.label_18.setObjectName(u"label_18")
+        sizePolicy6.setHeightForWidth(self.label_18.sizePolicy().hasHeightForWidth())
+        self.label_18.setSizePolicy(sizePolicy6)
+        self.label_18.setMinimumSize(QSize(0, 30))
+        font4 = QFont()
+        font4.setPointSize(18)
+        font4.setBold(True)
+        self.label_18.setFont(font4)
+        self.label_18.setMouseTracking(True)
+        self.label_18.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_18.setOpenExternalLinks(True)
+
+        self.verticalLayout_9.addWidget(self.label_18)
+
+        self.verticalSpacer_10 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.verticalLayout_9.addItem(self.verticalSpacer_10)
+
         self.horizontalLayout_80 = QHBoxLayout()
         self.horizontalLayout_80.setObjectName(u"horizontalLayout_80")
         self.horizontalSpacer_48 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
@@ -2936,10 +2955,10 @@ class Ui_MainWindow(object):
         self.formLayout.setContentsMargins(0, 0, 0, 0)
         self.universe_import_label = QLabel(self.demi_character_import)
         self.universe_import_label.setObjectName(u"universe_import_label")
-        font4 = QFont()
-        font4.setPointSize(16)
-        font4.setWeight(QFont.DemiBold)
-        self.universe_import_label.setFont(font4)
+        font5 = QFont()
+        font5.setPointSize(16)
+        font5.setWeight(QFont.DemiBold)
+        self.universe_import_label.setFont(font5)
         self.universe_import_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.universe_import_label)
@@ -2953,7 +2972,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
         self.character_page_import_label = QLabel(self.demi_character_import)
         self.character_page_import_label.setObjectName(u"character_page_import_label")
-        self.character_page_import_label.setFont(font4)
+        self.character_page_import_label.setFont(font5)
 
         self.verticalLayout_27.addWidget(self.character_page_import_label)
 
@@ -2968,9 +2987,9 @@ class Ui_MainWindow(object):
         sizePolicy10.setHeightForWidth(self.character_page_for_import.sizePolicy().hasHeightForWidth())
         self.character_page_for_import.setSizePolicy(sizePolicy10)
         self.character_page_for_import.setMinimumSize(QSize(655, 0))
-        font5 = QFont()
-        font5.setPointSize(13)
-        self.character_page_for_import.setFont(font5)
+        font6 = QFont()
+        font6.setPointSize(13)
+        self.character_page_for_import.setFont(font6)
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.character_page_for_import)
 
@@ -2978,7 +2997,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
         self.token_import_label = QLabel(self.demi_character_import)
         self.token_import_label.setObjectName(u"token_import_label")
-        self.token_import_label.setFont(font4)
+        self.token_import_label.setFont(font5)
 
         self.verticalLayout_28.addWidget(self.token_import_label)
 
@@ -2995,13 +3014,13 @@ class Ui_MainWindow(object):
 
         self.import_button = QPushButton(self.demi_character_import)
         self.import_button.setObjectName(u"import_button")
-        self.import_button.setFont(font5)
+        self.import_button.setFont(font6)
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.import_button)
 
         self.import_load = QLabel(self.demi_character_import)
         self.import_load.setObjectName(u"import_load")
-        self.import_load.setFont(font5)
+        self.import_load.setFont(font6)
         self.import_load.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.import_load)
@@ -3021,6 +3040,10 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_9.addLayout(self.horizontalLayout_80)
+
+        self.verticalSpacer = QSpacerItem(20, 25, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.verticalLayout_9.addItem(self.verticalSpacer)
 
         self.verticalLayout_24 = QVBoxLayout()
         self.verticalLayout_24.setObjectName(u"verticalLayout_24")
@@ -3369,6 +3392,7 @@ class Ui_MainWindow(object):
         self.expressions_filter_label.setText(QCoreApplication.translate("MainWindow", u"Filter by name", None))
         self.tabs.setTabText(self.tabs.indexOf(self.expressions), QCoreApplication.translate("MainWindow", u"Expressions", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"<a href='https://www.demirramon.com/user_content/undertale_browse'>Import Characters from Demirramon</a>", None))
+        self.label_18.setText(QCoreApplication.translate("MainWindow", u"<a href='https://drive.google.com/drive/folders/1BJ3sQR91SAJNJEusO4O_uckkyL3HIX2b'>Or download characters directly from the UTDR Fan Resource!</a>", None))
         self.universe_import_label.setText(QCoreApplication.translate("MainWindow", u"Universe (Destination)", None))
         self.character_page_import_label.setText(QCoreApplication.translate("MainWindow", u"Character Page", None))
         self.character_page_for_import.setInputMask("")
