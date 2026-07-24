@@ -25,8 +25,8 @@ Also, because of time and language knowledge factors, Japanese is not supported 
 > This tool uses [Demirramon](https://www.demirramon.com) for one of its features. If the site is down, it may not work.
 > In case the site owner is not okay with this, please contact me, and I will remove the feature.
 
-> [!Note]
-> I'm not hosting the .yatg files myself (at the moment), so if you simply want to share your stuff somewhere, I suggest making a [submission](https://docs.google.com/document/d/1_k7cxnzJPNcYuG3tronscqK-fw3vy1c6mhBiWvEncDo/edit?tab=t.0) at the [UTDR Fan Resource](https://drive.google.com/drive/folders/1BJ3sQR91SAJNJEusO4O_uckkyL3HIX2b)
+<!-- > [!Note] -->
+<!-- > I'm not hosting the .yatg files myself (at the moment), so if you simply want to share your stuff somewhere, I suggest making a [submission](https://docs.google.com/document/d/1_k7cxnzJPNcYuG3tronscqK-fw3vy1c6mhBiWvEncDo/edit?tab=t.0) at the [UTDR Fan Resource](https://drive.google.com/drive/folders/1BJ3sQR91SAJNJEusO4O_uckkyL3HIX2b) -->
 
 ## About
 
