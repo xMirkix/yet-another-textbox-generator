@@ -1,5 +1,3 @@
-import copy
-
 from PySide6.QtCore import QThreadPool, QRunnable, QObject, Signal
 from PySide6.QtGui import QMovie, QPixmap, QColor
 from PySide6.QtWidgets import QGraphicsDropShadowEffect
@@ -9,7 +7,7 @@ from generation.generation_png_proxy import GenerationPngProxy, is_valid_configu
 from generation.generation_request import GenerationRequest
 from models.form_bindings import (
     ExportFormat, ExportSettings, ExportSize,
-    BorderSettings, FontSettings, TextStyle, SpriteSettings,
+    BorderSettings, FontSettings, TextStyle, SpriteSettings, ColorType,
 )
 from services.selection_manager import SelectionManager, SideSelectors
 from ui.generated_ui import Ui_MainWindow
@@ -47,6 +45,29 @@ class _GenerationRunnable(QRunnable):
 def execute_generation(ui: Ui_MainWindow,
                        left: SideSelectors,
                        right: SideSelectors):
+
+    request = make_request(ui, left, right)
+
+    if request is None:
+        return
+
+    _current_token[0] += 1
+    token = _current_token[0]
+
+    signals = _WorkerSignals()
+    _active_signals.add(signals)
+
+    def on_done(path, fmt, tok):
+        _active_signals.discard(signals)
+        if tok == _current_token[0]:
+            on_result(ui, path, fmt)
+
+    signals.done.connect(on_done)
+    _pool.start(_GenerationRunnable(signals, request, request.export_settings.export_format, token))
+
+def make_request(ui: Ui_MainWindow,
+                       left: SideSelectors,
+                       right: SideSelectors) -> GenerationRequest | None:
     from services.selection_manager import left_manager, right_manager
 
     text_input   = ui.input.toPlainText()
@@ -57,13 +78,13 @@ def execute_generation(ui: Ui_MainWindow,
 
     if sprite_left.expression is None and ui.include_checkbox.isChecked():
         hide_download(ui, "ERROR in Sprite Settings (Left) \n Fixes: Uncheck include, create an universe, character and expression or open a filled .yatg file")
-        return
+        return None
 
     sprite_right = build_sprite_settings(right_manager, right, output_format)
 
     if sprite_right.expression is None and ui.include_checkbox_2.isChecked():
         hide_download(ui, "ERROR in Sprite Settings (Right) \n Fixes: Uncheck include, create an universe, character and expression or open a filled .yatg file")
-        return
+        return None
 
     asterisk_colors = []
     if ui.asterisk_checkbox.isChecked():
@@ -91,8 +112,10 @@ def execute_generation(ui: Ui_MainWindow,
 
     if message is not None:
         ui.download.hide()
+        ui.copy_to_clipboard.hide()
+        ui.add_to_stack.hide()
         ui.output.setText(message)
-        return
+        return None
 
     border_settings = BorderSettings(
         style=ui.border_style_selector.currentData(),
@@ -119,19 +142,7 @@ def execute_generation(ui: Ui_MainWindow,
         export_settings,
     )
 
-    _current_token[0] += 1
-    token = _current_token[0]
-
-    signals = _WorkerSignals()
-    _active_signals.add(signals)
-
-    def on_done(path, fmt, tok):
-        _active_signals.discard(signals)
-        if tok == _current_token[0]:
-            on_result(ui, path, fmt)
-
-    signals.done.connect(on_done)
-    _pool.start(_GenerationRunnable(signals, generation_request, output_format, token))
+    return generation_request
 
 def build_sprite_settings(manager: SelectionManager,
                             side: SideSelectors,
@@ -149,6 +160,23 @@ def build_sprite_settings(manager: SelectionManager,
     if side.include_checkbox.isChecked() and output_format == ExportFormat.GIF:
         alternating = side.alternating_selector.currentData() or manager.get_alternating_expression()
 
+    expression_color = side.expression_color_selector.currentData()
+
+    color_type = manager.get_color_manager().get_selected_color_type()
+
+    selected_colors = manager.get_color_manager().get_selected_colors()
+
+    simple_recoloring = manager.get_color_manager().get_simple_recoloring()
+
+    if color_type != ColorType.CUSTOM:
+        selected_colors = None
+        simple_recoloring = None
+
+    if expression_color is None:
+        color_type = None
+        selected_colors = None
+        simple_recoloring = None
+
     return SpriteSettings(
         universe=universe,
         character=character,
@@ -156,7 +184,10 @@ def build_sprite_settings(manager: SelectionManager,
         alternating_expression=alternating,
         alternating_interval=5,
         alternating_duration=5,
-        expression_color=side.expression_color_selector.currentData(),
+        expression_color=expression_color,
+        color_type=color_type,
+        selected_colors=selected_colors,
+        simple_recoloring=simple_recoloring
     )
 
 
@@ -166,10 +197,12 @@ def on_result(ui: Ui_MainWindow, result_path, output_format):
         return
 
     if output_format == ExportFormat.GIF:
+        ui.add_to_stack.hide()
         ui.movie = QMovie(str(result_path))
         ui.output.setMovie(ui.movie)
         ui.movie.start()
     else:
+        ui.add_to_stack.show()
         ui.output.setPixmap(QPixmap(str(result_path)))
 
     ui.download.setProperty("path", result_path)

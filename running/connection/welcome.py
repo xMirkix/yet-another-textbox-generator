@@ -21,8 +21,8 @@ def connect_welcome(ui: Ui_MainWindow):
     ui.open_file.clicked.connect(lambda: open_file(ui=ui))
     ui.actionQuit.triggered.connect(quit_app)
     ui.generator_link.clicked.connect(lambda: ui.tabs.setCurrentIndex(1))
-    ui.import_link.clicked.connect(lambda: ui.tabs.setCurrentIndex(5))
-    ui.universe_link.clicked.connect(lambda: ui.tabs.setCurrentIndex(2))
+    ui.import_link.clicked.connect(lambda: ui.tabs.setCurrentIndex(6))
+    ui.universe_link.clicked.connect(lambda: ui.tabs.setCurrentIndex(3))
 
 def _zip_db_to(path: str):
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as zf:

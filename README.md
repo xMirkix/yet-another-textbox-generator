@@ -4,7 +4,7 @@
 > If Windows or antivirus software shows warnings, this is due to the executable not being code signed.
 > A signed version will be provided via SignPath once available.
 
-> [!WARNING]
+> [!CAUTION]
 > Starting with version 2.0.0, all .yatg files created with past versions won't work anymore (without external modifications).
 > This was my mistake due to poor planning, but I hope the new import feature makes up for it.
 
@@ -20,6 +20,12 @@ Keep in mind that I remade the Papyrus/Comic Sans Font in FontStruct, meaning th
 Also, because of time and language knowledge factors, Japanese is not supported for these.
 
 ## Credits
+Credits to s0L_G4zer for the updated arrow, edit, delete, and preview icons.
+
+[Twitter/X](https://x.com/s0L_G4zer)
+
+[Reddit](https://www.reddit.com/user/Automatic-Guava-6098/)
+
 
 > [!NOTE]
 > This tool uses [Demirramon](https://www.demirramon.com) for one of its features. If the site is down, it may not work.
@@ -43,13 +49,12 @@ Crediting this tool is not required but always appreciated.
 
 > [!NOTE]
 > I did use AI (AS A TOOL) to make this. If this offends you, then please don't complain and just don't use it.
-
-> [!NOTE]
+>
 > Most Qt tutorials are garbage btw, "hEre'S iS hoW yOu mAkE a QApplIcAtIoN iN 4 MinUtEs", like this would be useful for anyone making a bigger program, ever.
 
 ## YATG Format
 
-This tool uses a "custom" format for storing Universes, Characters and Expressions.
+This tool uses a "custom" format for storing Universes, Characters, and Expressions.
 
 Although it's just a .zip file containing a .sqlite3 database...
 

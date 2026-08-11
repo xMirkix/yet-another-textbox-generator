@@ -20,6 +20,19 @@ class BorderSettings:
     def __hash__(self) -> int:
         return hash((self.style, self.color))
 
+class ColorType(Enum):
+    SIMPLE = ('Simple','simple')
+    EVERYTHING = ('Everything','everything')
+    CUSTOM = ('Custom','custom')
+
+    def __eq__(self, other) -> bool:
+        if isinstance(other, ColorType):
+            return self.value[0] == other.value[0]
+        return False
+
+    def __hash__(self) -> int:
+        return hash(self.value[0])
+
 class SpriteSettings:
     universe: Universe | None
     character: Character | None
@@ -27,9 +40,14 @@ class SpriteSettings:
     alternating_expression: Expression | None
     alternating_interval: int
     alternating_duration: int
-    expression_color: Color
+    expression_color: Color | None
+    color_type: ColorType | None
+    selected_colors: tuple | None
+    simple_recoloring: bool | None
 
-    def __init__(self, universe: Universe | None, character: Character | None, expression: Expression | None, alternating_expression: Expression | None, alternating_interval: int, alternating_duration: int, expression_color: Color):
+    def __init__(self, universe: Universe | None, character: Character | None, expression: Expression | None,
+                 alternating_expression: Expression | None, alternating_interval: int, alternating_duration: int,
+                 expression_color: Color | None, color_type: ColorType | None, selected_colors: tuple | None, simple_recoloring: bool | None):
         self.universe = universe
         self.character = character
         self.expression = expression
@@ -37,6 +55,9 @@ class SpriteSettings:
         self.alternating_interval = alternating_interval
         self.alternating_duration = alternating_duration
         self.expression_color = expression_color
+        self.color_type = color_type
+        self.selected_colors = selected_colors
+        self.simple_recoloring = simple_recoloring
 
     def __eq__(self, other) -> bool:
         if isinstance(other, SpriteSettings):
@@ -46,11 +67,14 @@ class SpriteSettings:
                     and self.expression_color == other.expression_color
                     and self.alternating_expression == other.alternating_expression
                     and self.alternating_interval == other.alternating_interval
-                    and self.alternating_duration == other.alternating_duration)
+                    and self.alternating_duration == other.alternating_duration
+                    and self.color_type == other.color_type
+                    and self.selected_colors == other.selected_colors
+                    and self.simple_recoloring == other.simple_recoloring)
         return False
 
     def __hash__(self) -> int:
-        return hash((self.universe, self.character, self.expression, self.alternating_expression, self.alternating_interval, self.alternating_duration, self.expression_color))
+        return hash((self.universe, self.character, self.expression, self.alternating_expression, self.alternating_interval, self.alternating_duration, self.expression_color, self.color_type, tuple(self.selected_colors) if self.selected_colors is not None else None, self.simple_recoloring))
 
 class TextStyle(Enum):
     REGULAR = ('Regular','regular')

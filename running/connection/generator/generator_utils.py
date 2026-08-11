@@ -1,11 +1,14 @@
 import shutil
+from io import BytesIO
 from pathlib import Path
 
+from PIL import Image
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QLabel, QTextEdit, QFileDialog, QMessageBox
 
 from configs.paths import PREVIEWS_DIR
 from models.entities import Universe, Character, Expression
+from services.color_service import fit_expression_image
 from services.selection_manager import SideSelectors, set_preview
 from startup.in_memory.static_classes import Color, BorderStyle
 from ui.generated_ui import Ui_MainWindow
@@ -15,7 +18,10 @@ def darken(r: int, g: int, b: int, factor: float = 0.3) -> tuple[int, int, int]:
     return int(r * factor), int(g * factor), int(b * factor)
 
 
-def set_color(color: Color, preview: QLabel):
+def set_color(color: Color | None, preview: QLabel):
+    if color is None:
+        preview.setStyleSheet("")
+        return
     border = darken(color.r, color.g, color.b)
     if color.a == 0:
         preview.setStyleSheet("background-color: transparent; border: 2px dashed gray;")
@@ -50,7 +56,8 @@ def set_border_color(text_input: QTextEdit, color: Color, preview: QLabel):
 def set_preview_generator_version(entity: Universe | Character | Expression | None,
                                    preview: QLabel):
     if entity:
-        set_preview(entity.preview_image, preview, entity)
+        formatter = fit_expression_image if isinstance(entity, Expression) else None
+        set_preview(entity.preview_image, preview, entity, formatter)
 
 
 def set_defaults(character, ui: Ui_MainWindow):

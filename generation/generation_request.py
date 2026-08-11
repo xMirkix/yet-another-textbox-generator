@@ -14,7 +14,9 @@ class GenerationRequest:
     font_settings: FontSettings
     export_settings: ExportSettings
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, GenerationRequest):
+            return NotImplemented
         return (
                 self.text_input == other.text_input and
                 self.default_color == other.default_color and

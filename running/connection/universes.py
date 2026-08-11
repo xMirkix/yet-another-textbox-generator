@@ -6,6 +6,7 @@ from models.entities import Universe
 from models.handler.universe_handler import UniverseHandler
 from running.connection.resizing import GridReflowFilter
 from services import change_service
+from services.exporting_service import export_all_universes, export_selected_universe
 from services.grid_service import clear_grid, restore_selection
 from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
@@ -42,6 +43,9 @@ def connect_universes(ui: Ui_MainWindow):
     edit.clicked.connect(lambda: edit_universe(ui)) # On edit
 
     ui.universe_filter_input.textChanged.connect(lambda text: QTimer.singleShot(0, lambda: filter_universes(ui, text))) # On filter change
+
+    ui.export_all_universe.clicked.connect(lambda: export_all_universes())
+    ui.export_selected_universe.clicked.connect(lambda: export_selected_universe())
 
 def create_universe(ui: Ui_MainWindow):
     db = get_db()
@@ -128,9 +132,16 @@ def get_db():
     return DBDynamicConnection.get_instance()
 
 def reload_ui(ui: Ui_MainWindow):
+    db = get_db()
+    if db.count_universes() > 0:
+        ui.export_all_universe.setEnabled(True)
+        ui.export_selected_universe.setEnabled(True)
+    else:
+        ui.export_all_universe.setEnabled(False)
+        ui.export_selected_universe.setEnabled(False)
     ui.edit_universe.hide()
     clear_grid(ui.universe_grid)
-    for universe in get_db().select_all_universes():
+    for universe in db.select_all_universes():
         insert_universe_tile(ui, universe)
     ui.universe_filter_input.clear()
 

@@ -11,7 +11,20 @@ class ExpressionHandler(EntityHandler):
         self.get_db().delete_expression(expression.expression_id, expression.character_id, expression.order_position)
 
     def on_before_delete(self, entity):
-        pass # Does nothing since nothing depends on expressions
+        # Would normally do nothing since nothing depends on it, but the check for exporting is convenient here
+        db = self.get_db()
+
+        universe = left_manager.get_selected_universe()
+        character = left_manager.get_selected_character()
+
+        if universe is None or character is None: # Safety check, should never happen
+            self.ui.export_selected_expression.setEnabled(False)
+            self.ui.export_all_expression.setEnabled(False)
+            return
+
+        if db.count_expressions(character.character_id) == 1: # No expression left after deletion, disable downloads
+            self.ui.export_selected_expression.setEnabled(False)
+            self.ui.export_all_expression.setEnabled(False)
 
     def db_select_by_order(self, entity, new_pos: int):
         return self.get_db().select_expression_by_order_position(entity.character_id, new_pos)

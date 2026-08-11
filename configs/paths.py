@@ -16,10 +16,13 @@ UNDERTALE_PREVIEW = PREVIEWS_DIR / 'undertale_preview.png'
 TITLE = ASSETS_DIR / 'title_transparent.png'
 
 ICONS_DIR = _BUNDLE / 'ui' / 'icons'
-ICON_LEFT = ICONS_DIR / 'arrow-left.png'
-ICON_RIGHT = ICONS_DIR / 'primary-line-line-arrow-end.png'
-ICON_EDIT = ICONS_DIR / 'mono-editor.png'
-ICON_DELETE = ICONS_DIR / 'trash_correct_resolution.png'
+ICON_LEFT = ICONS_DIR / 'left.png'
+ICON_RIGHT = ICONS_DIR / 'right.png'
+ICON_EDIT = ICONS_DIR / 'edit.png'
+ICON_DELETE = ICONS_DIR / 'trash.png'
+ICON_UP = ICONS_DIR / 'up.png'
+ICON_DOWN = ICONS_DIR / 'down.png'
+ICON_EYE = ICONS_DIR / 'preview.png'
 
 ICON_APP_DIR = ICONS_DIR / 'app'
 LOGO_ICON = ICON_APP_DIR / (

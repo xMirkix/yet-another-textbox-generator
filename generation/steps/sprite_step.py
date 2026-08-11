@@ -1,11 +1,14 @@
 # SECOND
+import colorsys
 import io
+from typing import Callable
 
 from PIL import Image
 
 from generation.context import GenerationContext
 from models.entities import Expression
-from models.form_bindings import SpriteSettings
+from models.form_bindings import SpriteSettings, ColorType
+from services.color_service import get_primary_color, fit_image_to_resolution, clamp01, is_similar
 from startup.in_memory.static_classes import Color
 
 
@@ -18,46 +21,102 @@ def apply(ctx: GenerationContext, settings: SpriteSettings, right_settings: Spri
     if settings.expression is not None:
         ctx.has_expression = True
         fixed = fit_image_to_resolution(settings.expression)
-        left_image = color_image_if_no_color_present(fixed, settings.expression_color)
+        left_image = color_image_if_color_present(fixed, settings.expression_color, settings.color_type, settings.selected_colors, settings.simple_recoloring)
 
     right_image = make_filler()
 
     if right_settings.expression is not None:
         ctx.has_right_expression = True
         fixed = fit_image_to_resolution(right_settings.expression)
-        right_image = color_image_if_no_color_present(fixed, right_settings.expression_color)
+        right_image = color_image_if_color_present(fixed, right_settings.expression_color, settings.color_type, settings.selected_colors, settings.simple_recoloring)
 
     return apply_expression(left_image, right_image, ctx, left_pos, right_pos, resolution)
 
 def make_filler() -> Image.Image:
     return Image.new("RGBA", (67, 70), (0, 0, 0, 255))
 
-def fit_image_to_resolution(expression: Expression) -> Image.Image:
-    image = bytes_to_image(expression.preview_image)
+def color_image_if_color_present(image: Image.Image, color: Color | None, color_type: ColorType | None, selected_colors: tuple | None, simple_recoloring: bool | None, hue_threshold: float = 0.08, sat_threshold: float = 0.25, ) -> Image.Image:
+    if color is None or color_type is None:
+        return image
 
-    result = Image.new("RGBA", (67, 70), (0, 0, 0, 255))
+    if color_type == ColorType.CUSTOM:
+        return simple_color_logic(image, color, selected_colors, simple_recoloring)
 
-    x = (67 - image.width) // 2
-    y = (70 - image.height) // 2
-    result.paste(image, (x, y), image)
+    if color_type == ColorType.EVERYTHING:
+        return complex_color_logic(image, color, False)
 
-    return result
+    return complex_color_logic(image, color, True)
 
-def bytes_to_image(image_bytes: bytes) -> Image.Image:
-    return Image.open(io.BytesIO(image_bytes)).convert("RGBA")
+def simple_color_logic(image: Image.Image, color: Color, selected_colors: tuple | None, simple_recoloring: bool) -> Image.Image:
+    if selected_colors is None or simple_recoloring is None:
+        return image
 
-def color_image_if_no_color_present(image: Image.Image, color: Color) -> Image.Image:
+    primary = get_primary_color(image)
+    if primary is None:
+        return image
+
+    pr, pg, pb = primary
+    _, _, vp = colorsys.rgb_to_hsv(pr / 255, pg / 255, pb / 255)
+    ht, st, vt = colorsys.rgb_to_hsv(color.r / 255, color.g / 255, color.b / 255)
+
+    pixels = image.load()
+
+    for x in range(image.width):
+        for y in range(image.height):
+
+            r, g, b, a = pixels[x, y]
+
+            if a == 0: continue
+            if (r, g, b) == (0, 0, 0): continue
+
+            c = Color(-1, "", r, g, b)
+
+            h, s, v = colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)
+
+            if c in selected_colors:
+                if simple_recoloring:
+                    pixels[x, y] = (color.r, color.g, color.b, color.a)
+                else:
+                    delta_v = v - vp
+                    new_v = clamp01(vt + delta_v)
+
+                    nr, ng, nb = colorsys.hsv_to_rgb(ht, st, new_v)
+                    pixels[x, y] = (round(nr * 255), round(ng * 255), round(nb * 255),
+                                    a)  # color in pixels with adjusted new color
+
+    return image
+
+
+def complex_color_logic(image: Image.Image, color: Color, is_simple: bool, hue_threshold: float = 0.08, sat_threshold: float = 0.25,):
     result = image.convert("RGBA")
+    primary = get_primary_color(result)
+    if primary is None:
+        return result
+
+    pr, pg, pb = primary
+    hp, sp, vp = colorsys.rgb_to_hsv(pr / 255, pg / 255, pb / 255)
+    ht, st, vt = colorsys.rgb_to_hsv(color.r / 255, color.g / 255, color.b / 255)
     pixels = result.load()
+
     for x in range(result.width):
         for y in range(result.height):
             r, g, b, a = pixels[x, y]
             if a == 0: # skip transparent pixels
                 continue
-            if (r, g, b) not in ((0, 0, 0), (255, 255, 255)): # expression already has a color
-                return image
-            if (r, g, b) == (255, 255, 255): # white pixel gets recolored
-                pixels[x, y] = (color.r, color.g, color.b, color.a)
+            if (r, g, b) == (0, 0, 0): # skip black pixels
+                continue
+
+            h, s, v = colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)
+
+            if is_simple and not is_similar((hp, sp, vp), (h, s, v), hue_threshold, sat_threshold): # color is distinct enough to not get colored (e.g., eyes)
+                continue
+
+            delta_v = v - vp
+            new_v = clamp01(vt + delta_v)
+
+            nr, ng, nb = colorsys.hsv_to_rgb(ht, st, new_v)
+            pixels[x, y] = (round(nr * 255), round(ng * 255), round(nb * 255), a) # color in pixels with adjusted new color
+
     return result
 
 def get_resolution(border_style) -> tuple[int, int]:

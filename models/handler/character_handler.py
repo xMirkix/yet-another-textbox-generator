@@ -35,8 +35,20 @@ class CharacterHandler(EntityHandler):
     def on_before_delete(self, character):
         # Cascade: selected expressions belonged to character
         char = left_manager.get_selected_character()
+        universe = left_manager.get_selected_universe()
         if char and char.character_id == character.character_id:
             left_manager.set_selected_expression(None)
+
+        db = self.get_db()
+
+        if universe is None: # Safety check, should never happen
+            self.ui.export_selected_character.setEnabled(False)
+            self.ui.export_all_character.setEnabled(False)
+            return
+
+        if db.count_characters(universe.universe_id) == 1: # No character left after deletion, disable downloads
+            self.ui.export_selected_character.setEnabled(False)
+            self.ui.export_all_character.setEnabled(False)
 
     def filter_text(self) -> str:
         return self.ui.characters_filter_input.text()

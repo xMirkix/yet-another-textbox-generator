@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uirXKHVo.ui'
+## Form generated from reading UI file 'uiaeuQVY.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.1
 ##
@@ -21,14 +21,14 @@ from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFormLayout,
     QLabel, QLayout, QLineEdit, QMainWindow,
     QMenu, QMenuBar, QProgressBar, QPushButton,
     QRadioButton, QScrollArea, QSizePolicy, QSpacerItem,
-    QStatusBar, QTabWidget, QTextEdit, QVBoxLayout,
-    QWidget)
+    QSpinBox, QStatusBar, QTabWidget, QTextEdit,
+    QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1085, 839)
+        MainWindow.resize(1141, 839)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -172,7 +172,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1001, 1124))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1057, 1404))
         self.scrollAreaWidgetContents_2.setMinimumSize(QSize(0, 0))
         self.gridLayout_7 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_7.setObjectName(u"gridLayout_7")
@@ -180,14 +180,14 @@ class Ui_MainWindow(object):
         self.settings.setObjectName(u"settings")
         sizePolicy3.setHeightForWidth(self.settings.sizePolicy().hasHeightForWidth())
         self.settings.setSizePolicy(sizePolicy3)
-        self.settings.setMinimumSize(QSize(950, 500))
+        self.settings.setMinimumSize(QSize(950, 550))
         self.gridLayout_11 = QGridLayout(self.settings)
         self.gridLayout_11.setObjectName(u"gridLayout_11")
         self.tabWidget = QTabWidget(self.settings)
         self.tabWidget.setObjectName(u"tabWidget")
         sizePolicy3.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
         self.tabWidget.setSizePolicy(sizePolicy3)
-        self.tabWidget.setMinimumSize(QSize(0, 0))
+        self.tabWidget.setMinimumSize(QSize(0, 35))
         self.tabWidget.setTabPosition(QTabWidget.TabPosition.North)
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
@@ -428,10 +428,27 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_10.addWidget(self.universe_label)
 
+        self.horizontalLayout_106 = QHBoxLayout()
+        self.horizontalLayout_106.setObjectName(u"horizontalLayout_106")
         self.universe_selector = QComboBox(self.tab_2)
         self.universe_selector.setObjectName(u"universe_selector")
 
-        self.horizontalLayout_10.addWidget(self.universe_selector)
+        self.horizontalLayout_106.addWidget(self.universe_selector)
+
+        self.all_universes = QPushButton(self.tab_2)
+        self.all_universes.setObjectName(u"all_universes")
+        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.all_universes.sizePolicy().hasHeightForWidth())
+        self.all_universes.setSizePolicy(sizePolicy5)
+        self.all_universes.setMaximumSize(QSize(50, 16777215))
+        self.all_universes.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_106.addWidget(self.all_universes)
+
+
+        self.horizontalLayout_10.addLayout(self.horizontalLayout_106)
 
         self.horizontalLayout_68 = QHBoxLayout()
         self.horizontalLayout_68.setObjectName(u"horizontalLayout_68")
@@ -490,10 +507,24 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_13.addWidget(self.character_label)
 
+        self.horizontalLayout_107 = QHBoxLayout()
+        self.horizontalLayout_107.setObjectName(u"horizontalLayout_107")
         self.character_selector = QComboBox(self.tab_2)
         self.character_selector.setObjectName(u"character_selector")
 
-        self.horizontalLayout_13.addWidget(self.character_selector)
+        self.horizontalLayout_107.addWidget(self.character_selector)
+
+        self.all_characters = QPushButton(self.tab_2)
+        self.all_characters.setObjectName(u"all_characters")
+        sizePolicy5.setHeightForWidth(self.all_characters.sizePolicy().hasHeightForWidth())
+        self.all_characters.setSizePolicy(sizePolicy5)
+        self.all_characters.setMaximumSize(QSize(50, 16777215))
+        self.all_characters.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_107.addWidget(self.all_characters)
+
+
+        self.horizontalLayout_13.addLayout(self.horizontalLayout_107)
 
         self.horizontalLayout_60 = QHBoxLayout()
         self.horizontalLayout_60.setObjectName(u"horizontalLayout_60")
@@ -503,11 +534,11 @@ class Ui_MainWindow(object):
 
         self.character_preview = QLabel(self.tab_2)
         self.character_preview.setObjectName(u"character_preview")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
-        sizePolicy5.setHorizontalStretch(230)
-        sizePolicy5.setVerticalStretch(100)
-        sizePolicy5.setHeightForWidth(self.character_preview.sizePolicy().hasHeightForWidth())
-        self.character_preview.setSizePolicy(sizePolicy5)
+        sizePolicy6 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        sizePolicy6.setHorizontalStretch(230)
+        sizePolicy6.setVerticalStretch(100)
+        sizePolicy6.setHeightForWidth(self.character_preview.sizePolicy().hasHeightForWidth())
+        self.character_preview.setSizePolicy(sizePolicy6)
         self.character_preview.setMinimumSize(QSize(230, 100))
         self.character_preview.setMaximumSize(QSize(100, 100))
         self.character_preview.setAutoFillBackground(True)
@@ -555,11 +586,25 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_15.addWidget(self.expression_label)
 
+        self.horizontalLayout_108 = QHBoxLayout()
+        self.horizontalLayout_108.setObjectName(u"horizontalLayout_108")
         self.expression_selector = QComboBox(self.tab_2)
         self.expression_selector.setObjectName(u"expression_selector")
         self.expression_selector.setMaxVisibleItems(10)
 
-        self.horizontalLayout_15.addWidget(self.expression_selector)
+        self.horizontalLayout_108.addWidget(self.expression_selector)
+
+        self.all_expressions = QPushButton(self.tab_2)
+        self.all_expressions.setObjectName(u"all_expressions")
+        sizePolicy5.setHeightForWidth(self.all_expressions.sizePolicy().hasHeightForWidth())
+        self.all_expressions.setSizePolicy(sizePolicy5)
+        self.all_expressions.setMaximumSize(QSize(50, 16777215))
+        self.all_expressions.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_108.addWidget(self.all_expressions)
+
+
+        self.horizontalLayout_15.addLayout(self.horizontalLayout_108)
 
         self.horizontalLayout_44 = QHBoxLayout()
         self.horizontalLayout_44.setObjectName(u"horizontalLayout_44")
@@ -571,8 +616,8 @@ class Ui_MainWindow(object):
         self.expression_preview.setObjectName(u"expression_preview")
         sizePolicy4.setHeightForWidth(self.expression_preview.sizePolicy().hasHeightForWidth())
         self.expression_preview.setSizePolicy(sizePolicy4)
-        self.expression_preview.setMinimumSize(QSize(69, 70))
-        self.expression_preview.setMaximumSize(QSize(69, 70))
+        self.expression_preview.setMinimumSize(QSize(67, 70))
+        self.expression_preview.setMaximumSize(QSize(67, 70))
         self.expression_preview.setSizeIncrement(QSize(69, 70))
         self.expression_preview.setAutoFillBackground(True)
         self.expression_preview.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -614,6 +659,7 @@ class Ui_MainWindow(object):
 
         self.expression_color_label = QLabel(self.tab_2)
         self.expression_color_label.setObjectName(u"expression_color_label")
+        self.expression_color_label.setMinimumSize(QSize(0, 35))
         self.expression_color_label.setFont(font1)
         self.expression_color_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -658,12 +704,76 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_4.addLayout(self.horizontalLayout_11)
 
-        self.line_37 = QFrame(self.tab_2)
-        self.line_37.setObjectName(u"line_37")
-        self.line_37.setFrameShape(QFrame.Shape.HLine)
-        self.line_37.setFrameShadow(QFrame.Shadow.Sunken)
+        self.horizontalLayout_101 = QHBoxLayout()
+        self.horizontalLayout_101.setObjectName(u"horizontalLayout_101")
+        self.line_79 = QFrame(self.tab_2)
+        self.line_79.setObjectName(u"line_79")
+        self.line_79.setFrameShape(QFrame.Shape.VLine)
+        self.line_79.setFrameShadow(QFrame.Shadow.Sunken)
 
-        self.verticalLayout_4.addWidget(self.line_37)
+        self.horizontalLayout_101.addWidget(self.line_79)
+
+        self.expression_color_type_label = QLabel(self.tab_2)
+        self.expression_color_type_label.setObjectName(u"expression_color_type_label")
+        self.expression_color_type_label.setMinimumSize(QSize(0, 35))
+        self.expression_color_type_label.setFont(font1)
+        self.expression_color_type_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout_101.addWidget(self.expression_color_type_label)
+
+        self.expression_color_type_selector = QComboBox(self.tab_2)
+        self.expression_color_type_selector.setObjectName(u"expression_color_type_selector")
+
+        self.horizontalLayout_101.addWidget(self.expression_color_type_selector)
+
+        self.horizontalLayout_103 = QHBoxLayout()
+        self.horizontalLayout_103.setObjectName(u"horizontalLayout_103")
+        self.label_left = QLabel(self.tab_2)
+        self.label_left.setObjectName(u"label_left")
+        sizePolicy5.setHeightForWidth(self.label_left.sizePolicy().hasHeightForWidth())
+        self.label_left.setSizePolicy(sizePolicy5)
+        self.label_left.setMinimumSize(QSize(100, 20))
+        self.label_left.setMaximumSize(QSize(110, 20))
+
+        self.horizontalLayout_103.addWidget(self.label_left)
+
+        self.expression_color_type_button = QPushButton(self.tab_2)
+        self.expression_color_type_button.setObjectName(u"expression_color_type_button")
+        sizePolicy5.setHeightForWidth(self.expression_color_type_button.sizePolicy().hasHeightForWidth())
+        self.expression_color_type_button.setSizePolicy(sizePolicy5)
+        self.expression_color_type_button.setMinimumSize(QSize(200, 30))
+        self.expression_color_type_button.setMaximumSize(QSize(200, 30))
+
+        self.horizontalLayout_103.addWidget(self.expression_color_type_button)
+
+        self.label_right = QLabel(self.tab_2)
+        self.label_right.setObjectName(u"label_right")
+        sizePolicy5.setHeightForWidth(self.label_right.sizePolicy().hasHeightForWidth())
+        self.label_right.setSizePolicy(sizePolicy5)
+        self.label_right.setMinimumSize(QSize(100, 20))
+        self.label_right.setMaximumSize(QSize(100, 20))
+
+        self.horizontalLayout_103.addWidget(self.label_right)
+
+
+        self.horizontalLayout_101.addLayout(self.horizontalLayout_103)
+
+        self.line_80 = QFrame(self.tab_2)
+        self.line_80.setObjectName(u"line_80")
+        self.line_80.setFrameShape(QFrame.Shape.VLine)
+        self.line_80.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.horizontalLayout_101.addWidget(self.line_80)
+
+
+        self.verticalLayout_4.addLayout(self.horizontalLayout_101)
+
+        self.line_81 = QFrame(self.tab_2)
+        self.line_81.setObjectName(u"line_81")
+        self.line_81.setFrameShape(QFrame.Shape.HLine)
+        self.line_81.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_4.addWidget(self.line_81)
 
 
         self.gridLayout_9.addLayout(self.verticalLayout_4, 0, 0, 1, 1)
@@ -760,10 +870,24 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_92.addWidget(self.universe_label_2)
 
+        self.horizontalLayout_109 = QHBoxLayout()
+        self.horizontalLayout_109.setObjectName(u"horizontalLayout_109")
         self.universe_selector_2 = QComboBox(self.tab_5)
         self.universe_selector_2.setObjectName(u"universe_selector_2")
 
-        self.horizontalLayout_92.addWidget(self.universe_selector_2)
+        self.horizontalLayout_109.addWidget(self.universe_selector_2)
+
+        self.all_universes_2 = QPushButton(self.tab_5)
+        self.all_universes_2.setObjectName(u"all_universes_2")
+        sizePolicy5.setHeightForWidth(self.all_universes_2.sizePolicy().hasHeightForWidth())
+        self.all_universes_2.setSizePolicy(sizePolicy5)
+        self.all_universes_2.setMaximumSize(QSize(50, 16777215))
+        self.all_universes_2.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_109.addWidget(self.all_universes_2)
+
+
+        self.horizontalLayout_92.addLayout(self.horizontalLayout_109)
 
         self.horizontalLayout_93 = QHBoxLayout()
         self.horizontalLayout_93.setObjectName(u"horizontalLayout_93")
@@ -822,10 +946,24 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_94.addWidget(self.character_label_2)
 
+        self.horizontalLayout_110 = QHBoxLayout()
+        self.horizontalLayout_110.setObjectName(u"horizontalLayout_110")
         self.character_selector_2 = QComboBox(self.tab_5)
         self.character_selector_2.setObjectName(u"character_selector_2")
 
-        self.horizontalLayout_94.addWidget(self.character_selector_2)
+        self.horizontalLayout_110.addWidget(self.character_selector_2)
+
+        self.all_characters_2 = QPushButton(self.tab_5)
+        self.all_characters_2.setObjectName(u"all_characters_2")
+        sizePolicy5.setHeightForWidth(self.all_characters_2.sizePolicy().hasHeightForWidth())
+        self.all_characters_2.setSizePolicy(sizePolicy5)
+        self.all_characters_2.setMaximumSize(QSize(50, 16777215))
+        self.all_characters_2.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_110.addWidget(self.all_characters_2)
+
+
+        self.horizontalLayout_94.addLayout(self.horizontalLayout_110)
 
         self.horizontalLayout_95 = QHBoxLayout()
         self.horizontalLayout_95.setObjectName(u"horizontalLayout_95")
@@ -835,8 +973,8 @@ class Ui_MainWindow(object):
 
         self.character_preview_2 = QLabel(self.tab_5)
         self.character_preview_2.setObjectName(u"character_preview_2")
-        sizePolicy5.setHeightForWidth(self.character_preview_2.sizePolicy().hasHeightForWidth())
-        self.character_preview_2.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.character_preview_2.sizePolicy().hasHeightForWidth())
+        self.character_preview_2.setSizePolicy(sizePolicy6)
         self.character_preview_2.setMinimumSize(QSize(230, 100))
         self.character_preview_2.setMaximumSize(QSize(100, 100))
         self.character_preview_2.setAutoFillBackground(True)
@@ -884,11 +1022,23 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_96.addWidget(self.expression_label_2)
 
+        self.horizontalLayout_111 = QHBoxLayout()
+        self.horizontalLayout_111.setObjectName(u"horizontalLayout_111")
         self.expression_selector_2 = QComboBox(self.tab_5)
         self.expression_selector_2.setObjectName(u"expression_selector_2")
         self.expression_selector_2.setMaxVisibleItems(10)
 
-        self.horizontalLayout_96.addWidget(self.expression_selector_2)
+        self.horizontalLayout_111.addWidget(self.expression_selector_2)
+
+        self.all_expressions_2 = QPushButton(self.tab_5)
+        self.all_expressions_2.setObjectName(u"all_expressions_2")
+        self.all_expressions_2.setMaximumSize(QSize(50, 16777215))
+        self.all_expressions_2.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_111.addWidget(self.all_expressions_2)
+
+
+        self.horizontalLayout_96.addLayout(self.horizontalLayout_111)
 
         self.horizontalLayout_97 = QHBoxLayout()
         self.horizontalLayout_97.setObjectName(u"horizontalLayout_97")
@@ -900,8 +1050,8 @@ class Ui_MainWindow(object):
         self.expression_preview_2.setObjectName(u"expression_preview_2")
         sizePolicy4.setHeightForWidth(self.expression_preview_2.sizePolicy().hasHeightForWidth())
         self.expression_preview_2.setSizePolicy(sizePolicy4)
-        self.expression_preview_2.setMinimumSize(QSize(69, 70))
-        self.expression_preview_2.setMaximumSize(QSize(69, 70))
+        self.expression_preview_2.setMinimumSize(QSize(67, 70))
+        self.expression_preview_2.setMaximumSize(QSize(67, 70))
         self.expression_preview_2.setSizeIncrement(QSize(69, 70))
         self.expression_preview_2.setAutoFillBackground(True)
         self.expression_preview_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -943,6 +1093,7 @@ class Ui_MainWindow(object):
 
         self.expression_color_label_2 = QLabel(self.tab_5)
         self.expression_color_label_2.setObjectName(u"expression_color_label_2")
+        self.expression_color_label_2.setMinimumSize(QSize(0, 35))
         self.expression_color_label_2.setFont(font1)
         self.expression_color_label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -986,6 +1137,70 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_23.addLayout(self.horizontalLayout_98)
+
+        self.horizontalLayout_104 = QHBoxLayout()
+        self.horizontalLayout_104.setObjectName(u"horizontalLayout_104")
+        self.line_37 = QFrame(self.tab_5)
+        self.line_37.setObjectName(u"line_37")
+        self.line_37.setFrameShape(QFrame.Shape.VLine)
+        self.line_37.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.horizontalLayout_104.addWidget(self.line_37)
+
+        self.expression_color_type_label_2 = QLabel(self.tab_5)
+        self.expression_color_type_label_2.setObjectName(u"expression_color_type_label_2")
+        self.expression_color_type_label_2.setMinimumSize(QSize(0, 35))
+        self.expression_color_type_label_2.setFont(font1)
+        self.expression_color_type_label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.horizontalLayout_104.addWidget(self.expression_color_type_label_2)
+
+        self.expression_color_type_selector_2 = QComboBox(self.tab_5)
+        self.expression_color_type_selector_2.setObjectName(u"expression_color_type_selector_2")
+
+        self.horizontalLayout_104.addWidget(self.expression_color_type_selector_2)
+
+        self.horizontalLayout_105 = QHBoxLayout()
+        self.horizontalLayout_105.setObjectName(u"horizontalLayout_105")
+        self.label_left_2 = QLabel(self.tab_5)
+        self.label_left_2.setObjectName(u"label_left_2")
+        sizePolicy5.setHeightForWidth(self.label_left_2.sizePolicy().hasHeightForWidth())
+        self.label_left_2.setSizePolicy(sizePolicy5)
+        self.label_left_2.setMinimumSize(QSize(100, 20))
+        self.label_left_2.setMaximumSize(QSize(110, 20))
+
+        self.horizontalLayout_105.addWidget(self.label_left_2)
+
+        self.expression_color_type_button_2 = QPushButton(self.tab_5)
+        self.expression_color_type_button_2.setObjectName(u"expression_color_type_button_2")
+        sizePolicy5.setHeightForWidth(self.expression_color_type_button_2.sizePolicy().hasHeightForWidth())
+        self.expression_color_type_button_2.setSizePolicy(sizePolicy5)
+        self.expression_color_type_button_2.setMinimumSize(QSize(200, 30))
+        self.expression_color_type_button_2.setMaximumSize(QSize(200, 30))
+
+        self.horizontalLayout_105.addWidget(self.expression_color_type_button_2)
+
+        self.label_right_2 = QLabel(self.tab_5)
+        self.label_right_2.setObjectName(u"label_right_2")
+        sizePolicy5.setHeightForWidth(self.label_right_2.sizePolicy().hasHeightForWidth())
+        self.label_right_2.setSizePolicy(sizePolicy5)
+        self.label_right_2.setMinimumSize(QSize(100, 20))
+        self.label_right_2.setMaximumSize(QSize(100, 20))
+
+        self.horizontalLayout_105.addWidget(self.label_right_2)
+
+
+        self.horizontalLayout_104.addLayout(self.horizontalLayout_105)
+
+        self.line_82 = QFrame(self.tab_5)
+        self.line_82.setObjectName(u"line_82")
+        self.line_82.setFrameShape(QFrame.Shape.VLine)
+        self.line_82.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.horizontalLayout_104.addWidget(self.line_82)
+
+
+        self.verticalLayout_23.addLayout(self.horizontalLayout_104)
 
         self.line_97 = QFrame(self.tab_5)
         self.line_97.setObjectName(u"line_97")
@@ -1219,11 +1434,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
         self.asterisk_color_preview_1 = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_preview_1.setObjectName(u"asterisk_color_preview_1")
-        sizePolicy6 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
-        sizePolicy6.setHorizontalStretch(0)
-        sizePolicy6.setVerticalStretch(0)
-        sizePolicy6.setHeightForWidth(self.asterisk_color_preview_1.sizePolicy().hasHeightForWidth())
-        self.asterisk_color_preview_1.setSizePolicy(sizePolicy6)
+        sizePolicy7 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy7.setHorizontalStretch(0)
+        sizePolicy7.setVerticalStretch(0)
+        sizePolicy7.setHeightForWidth(self.asterisk_color_preview_1.sizePolicy().hasHeightForWidth())
+        self.asterisk_color_preview_1.setSizePolicy(sizePolicy7)
         self.asterisk_color_preview_1.setMinimumSize(QSize(0, 30))
         self.asterisk_color_preview_1.setMaximumSize(QSize(16777215, 30))
         self.asterisk_color_preview_1.setAutoFillBackground(True)
@@ -1233,8 +1448,8 @@ class Ui_MainWindow(object):
 
         self.asterisk_color_preview_2 = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_preview_2.setObjectName(u"asterisk_color_preview_2")
-        sizePolicy6.setHeightForWidth(self.asterisk_color_preview_2.sizePolicy().hasHeightForWidth())
-        self.asterisk_color_preview_2.setSizePolicy(sizePolicy6)
+        sizePolicy7.setHeightForWidth(self.asterisk_color_preview_2.sizePolicy().hasHeightForWidth())
+        self.asterisk_color_preview_2.setSizePolicy(sizePolicy7)
         self.asterisk_color_preview_2.setMinimumSize(QSize(0, 30))
         self.asterisk_color_preview_2.setMaximumSize(QSize(16777215, 30))
         self.asterisk_color_preview_2.setAutoFillBackground(True)
@@ -1244,8 +1459,8 @@ class Ui_MainWindow(object):
 
         self.asterisk_color_preview_3 = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_preview_3.setObjectName(u"asterisk_color_preview_3")
-        sizePolicy6.setHeightForWidth(self.asterisk_color_preview_3.sizePolicy().hasHeightForWidth())
-        self.asterisk_color_preview_3.setSizePolicy(sizePolicy6)
+        sizePolicy7.setHeightForWidth(self.asterisk_color_preview_3.sizePolicy().hasHeightForWidth())
+        self.asterisk_color_preview_3.setSizePolicy(sizePolicy7)
         self.asterisk_color_preview_3.setMinimumSize(QSize(0, 30))
         self.asterisk_color_preview_3.setMaximumSize(QSize(16777215, 30))
         self.asterisk_color_preview_3.setAutoFillBackground(True)
@@ -1314,8 +1529,8 @@ class Ui_MainWindow(object):
 
         self.text_style_regular_option = QRadioButton(self.tab_3)
         self.text_style_regular_option.setObjectName(u"text_style_regular_option")
-        sizePolicy6.setHeightForWidth(self.text_style_regular_option.sizePolicy().hasHeightForWidth())
-        self.text_style_regular_option.setSizePolicy(sizePolicy6)
+        sizePolicy7.setHeightForWidth(self.text_style_regular_option.sizePolicy().hasHeightForWidth())
+        self.text_style_regular_option.setSizePolicy(sizePolicy7)
         self.text_style_regular_option.setChecked(True)
 
         self.horizontalLayout_12.addWidget(self.text_style_regular_option)
@@ -1327,8 +1542,8 @@ class Ui_MainWindow(object):
 
         self.text_style_dark_world_option = QRadioButton(self.tab_3)
         self.text_style_dark_world_option.setObjectName(u"text_style_dark_world_option")
-        sizePolicy6.setHeightForWidth(self.text_style_dark_world_option.sizePolicy().hasHeightForWidth())
-        self.text_style_dark_world_option.setSizePolicy(sizePolicy6)
+        sizePolicy7.setHeightForWidth(self.text_style_dark_world_option.sizePolicy().hasHeightForWidth())
+        self.text_style_dark_world_option.setSizePolicy(sizePolicy7)
 
         self.horizontalLayout_12.addWidget(self.text_style_dark_world_option)
 
@@ -1508,21 +1723,35 @@ class Ui_MainWindow(object):
         self.horizontalLayout_76.setObjectName(u"horizontalLayout_76")
         self.alternating_label = QLabel(self.alternating_everything)
         self.alternating_label.setObjectName(u"alternating_label")
-        sizePolicy7 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
-        sizePolicy7.setHorizontalStretch(0)
-        sizePolicy7.setVerticalStretch(0)
-        sizePolicy7.setHeightForWidth(self.alternating_label.sizePolicy().hasHeightForWidth())
-        self.alternating_label.setSizePolicy(sizePolicy7)
+        sizePolicy8 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
+        sizePolicy8.setHorizontalStretch(0)
+        sizePolicy8.setVerticalStretch(0)
+        sizePolicy8.setHeightForWidth(self.alternating_label.sizePolicy().hasHeightForWidth())
+        self.alternating_label.setSizePolicy(sizePolicy8)
         self.alternating_label.setMinimumSize(QSize(300, 0))
         self.alternating_label.setFont(font1)
         self.alternating_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_76.addWidget(self.alternating_label)
 
+        self.horizontalLayout_88 = QHBoxLayout()
+        self.horizontalLayout_88.setObjectName(u"horizontalLayout_88")
         self.alternating_selector = QComboBox(self.alternating_everything)
         self.alternating_selector.setObjectName(u"alternating_selector")
 
-        self.horizontalLayout_76.addWidget(self.alternating_selector)
+        self.horizontalLayout_88.addWidget(self.alternating_selector)
+
+        self.all_expressions_alt = QPushButton(self.alternating_everything)
+        self.all_expressions_alt.setObjectName(u"all_expressions_alt")
+        sizePolicy5.setHeightForWidth(self.all_expressions_alt.sizePolicy().hasHeightForWidth())
+        self.all_expressions_alt.setSizePolicy(sizePolicy5)
+        self.all_expressions_alt.setMaximumSize(QSize(50, 16777215))
+        self.all_expressions_alt.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_88.addWidget(self.all_expressions_alt)
+
+
+        self.horizontalLayout_76.addLayout(self.horizontalLayout_88)
 
         self.horizontalLayout_75 = QHBoxLayout()
         self.horizontalLayout_75.setObjectName(u"horizontalLayout_75")
@@ -1587,10 +1816,22 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_79.addWidget(self.alternating_right_label)
 
+        self.horizontalLayout_89 = QHBoxLayout()
+        self.horizontalLayout_89.setObjectName(u"horizontalLayout_89")
         self.alternating_right_selector = QComboBox(self.alternating_everything_right)
         self.alternating_right_selector.setObjectName(u"alternating_right_selector")
 
-        self.horizontalLayout_79.addWidget(self.alternating_right_selector)
+        self.horizontalLayout_89.addWidget(self.alternating_right_selector)
+
+        self.all_expressions_alt_2 = QPushButton(self.alternating_everything_right)
+        self.all_expressions_alt_2.setObjectName(u"all_expressions_alt_2")
+        self.all_expressions_alt_2.setMaximumSize(QSize(50, 16777215))
+        self.all_expressions_alt_2.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_89.addWidget(self.all_expressions_alt_2)
+
+
+        self.horizontalLayout_79.addLayout(self.horizontalLayout_89)
 
         self.horizontalLayout_78 = QHBoxLayout()
         self.horizontalLayout_78.setObjectName(u"horizontalLayout_78")
@@ -1600,11 +1841,8 @@ class Ui_MainWindow(object):
 
         self.alternating_right_preview = QLabel(self.alternating_everything_right)
         self.alternating_right_preview.setObjectName(u"alternating_right_preview")
-        sizePolicy8 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        sizePolicy8.setHorizontalStretch(0)
-        sizePolicy8.setVerticalStretch(0)
-        sizePolicy8.setHeightForWidth(self.alternating_right_preview.sizePolicy().hasHeightForWidth())
-        self.alternating_right_preview.setSizePolicy(sizePolicy8)
+        sizePolicy5.setHeightForWidth(self.alternating_right_preview.sizePolicy().hasHeightForWidth())
+        self.alternating_right_preview.setSizePolicy(sizePolicy5)
         self.alternating_right_preview.setMinimumSize(QSize(69, 70))
         self.alternating_right_preview.setMaximumSize(QSize(69, 70))
         self.alternating_right_preview.setAutoFillBackground(True)
@@ -1791,7 +2029,7 @@ class Ui_MainWindow(object):
         sizePolicy9.setVerticalStretch(0)
         sizePolicy9.setHeightForWidth(self.input_preview.sizePolicy().hasHeightForWidth())
         self.input_preview.setSizePolicy(sizePolicy9)
-        self.input_preview.setMinimumSize(QSize(400, 600))
+        self.input_preview.setMinimumSize(QSize(400, 830))
         self.verticalLayout_6 = QVBoxLayout(self.input_preview)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
         self.verticalSpacer_9 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
@@ -1820,8 +2058,8 @@ class Ui_MainWindow(object):
 
         self.default_color_preview = QLabel(self.input_preview)
         self.default_color_preview.setObjectName(u"default_color_preview")
-        sizePolicy8.setHeightForWidth(self.default_color_preview.sizePolicy().hasHeightForWidth())
-        self.default_color_preview.setSizePolicy(sizePolicy8)
+        sizePolicy5.setHeightForWidth(self.default_color_preview.sizePolicy().hasHeightForWidth())
+        self.default_color_preview.setSizePolicy(sizePolicy5)
         self.default_color_preview.setMinimumSize(QSize(200, 30))
         self.default_color_preview.setMaximumSize(QSize(200, 30))
 
@@ -1845,8 +2083,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_45.setObjectName(u"horizontalLayout_45")
         self.input = QTextEdit(self.input_preview)
         self.input.setObjectName(u"input")
-        sizePolicy8.setHeightForWidth(self.input.sizePolicy().hasHeightForWidth())
-        self.input.setSizePolicy(sizePolicy8)
+        sizePolicy5.setHeightForWidth(self.input.sizePolicy().hasHeightForWidth())
+        self.input.setSizePolicy(sizePolicy5)
         self.input.setMinimumSize(QSize(500, 75))
         self.input.setMaximumSize(QSize(400, 75))
         self.input.setStyleSheet(u"border: 2px solid white")
@@ -1885,14 +2123,18 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addWidget(self.line_8)
 
+        self.verticalSpacer_12 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.verticalLayout_6.addItem(self.verticalSpacer_12)
+
         self.horizontalLayout_56 = QHBoxLayout()
         self.horizontalLayout_56.setObjectName(u"horizontalLayout_56")
         self.output = QLabel(self.input_preview)
         self.output.setObjectName(u"output")
-        sizePolicy.setHeightForWidth(self.output.sizePolicy().hasHeightForWidth())
-        self.output.setSizePolicy(sizePolicy)
-        self.output.setMinimumSize(QSize(289, 76))
-        self.output.setMaximumSize(QSize(909, 270))
+        sizePolicy5.setHeightForWidth(self.output.sizePolicy().hasHeightForWidth())
+        self.output.setSizePolicy(sizePolicy5)
+        self.output.setMinimumSize(QSize(950, 200))
+        self.output.setMaximumSize(QSize(1000, 400))
         palette = QPalette()
         brush = QBrush(QColor(255, 0, 0, 255))
         brush.setStyle(Qt.BrushStyle.SolidPattern)
@@ -1922,27 +2164,38 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_51.addWidget(self.label_13)
 
-        self.verticalLayout_32 = QVBoxLayout()
-        self.verticalLayout_32.setObjectName(u"verticalLayout_32")
-        self.download = QPushButton(self.input_preview)
-        self.download.setObjectName(u"download")
-        sizePolicy4.setHeightForWidth(self.download.sizePolicy().hasHeightForWidth())
-        self.download.setSizePolicy(sizePolicy4)
-        self.download.setMinimumSize(QSize(0, 0))
-        self.download.setMaximumSize(QSize(300, 16777215))
-
-        self.verticalLayout_32.addWidget(self.download)
-
+        self.horizontalLayout_81 = QHBoxLayout()
+        self.horizontalLayout_81.setSpacing(15)
+        self.horizontalLayout_81.setObjectName(u"horizontalLayout_81")
         self.copy_to_clipboard = QPushButton(self.input_preview)
         self.copy_to_clipboard.setObjectName(u"copy_to_clipboard")
         sizePolicy4.setHeightForWidth(self.copy_to_clipboard.sizePolicy().hasHeightForWidth())
         self.copy_to_clipboard.setSizePolicy(sizePolicy4)
+        self.copy_to_clipboard.setMinimumSize(QSize(250, 0))
         self.copy_to_clipboard.setMaximumSize(QSize(300, 16777215))
 
-        self.verticalLayout_32.addWidget(self.copy_to_clipboard)
+        self.horizontalLayout_81.addWidget(self.copy_to_clipboard)
+
+        self.download = QPushButton(self.input_preview)
+        self.download.setObjectName(u"download")
+        sizePolicy4.setHeightForWidth(self.download.sizePolicy().hasHeightForWidth())
+        self.download.setSizePolicy(sizePolicy4)
+        self.download.setMinimumSize(QSize(250, 0))
+        self.download.setMaximumSize(QSize(300, 16777215))
+
+        self.horizontalLayout_81.addWidget(self.download)
+
+        self.add_to_stack = QPushButton(self.input_preview)
+        self.add_to_stack.setObjectName(u"add_to_stack")
+        sizePolicy4.setHeightForWidth(self.add_to_stack.sizePolicy().hasHeightForWidth())
+        self.add_to_stack.setSizePolicy(sizePolicy4)
+        self.add_to_stack.setMinimumSize(QSize(250, 0))
+        self.add_to_stack.setMaximumSize(QSize(300, 16777215))
+
+        self.horizontalLayout_81.addWidget(self.add_to_stack)
 
 
-        self.horizontalLayout_51.addLayout(self.verticalLayout_32)
+        self.horizontalLayout_51.addLayout(self.horizontalLayout_81)
 
         self.label_14 = QLabel(self.input_preview)
         self.label_14.setObjectName(u"label_14")
@@ -1960,6 +2213,121 @@ class Ui_MainWindow(object):
         self.gridLayout_6.addWidget(self.scrollArea_4, 0, 0, 1, 1)
 
         self.tabs.addTab(self.generator, "")
+        self.textbox_stacker = QWidget()
+        self.textbox_stacker.setObjectName(u"textbox_stacker")
+        self.horizontalLayout_84 = QHBoxLayout(self.textbox_stacker)
+        self.horizontalLayout_84.setObjectName(u"horizontalLayout_84")
+        self.groupBox = QGroupBox(self.textbox_stacker)
+        self.groupBox.setObjectName(u"groupBox")
+        self.verticalLayout_32 = QVBoxLayout(self.groupBox)
+        self.verticalLayout_32.setObjectName(u"verticalLayout_32")
+        self.verticalLayout_29 = QVBoxLayout()
+        self.verticalLayout_29.setObjectName(u"verticalLayout_29")
+        self.horizontalLayout_87 = QHBoxLayout()
+        self.horizontalLayout_87.setSpacing(6)
+        self.horizontalLayout_87.setObjectName(u"horizontalLayout_87")
+        self.amount_of_columns_label = QLabel(self.groupBox)
+        self.amount_of_columns_label.setObjectName(u"amount_of_columns_label")
+        sizePolicy7.setHeightForWidth(self.amount_of_columns_label.sizePolicy().hasHeightForWidth())
+        self.amount_of_columns_label.setSizePolicy(sizePolicy7)
+
+        self.horizontalLayout_87.addWidget(self.amount_of_columns_label)
+
+        self.amount_of_columns = QSpinBox(self.groupBox)
+        self.amount_of_columns.setObjectName(u"amount_of_columns")
+        self.amount_of_columns.setMinimum(1)
+        self.amount_of_columns.setMaximum(50)
+
+        self.horizontalLayout_87.addWidget(self.amount_of_columns)
+
+
+        self.verticalLayout_29.addLayout(self.horizontalLayout_87)
+
+        self.add_current_box = QPushButton(self.groupBox)
+        self.add_current_box.setObjectName(u"add_current_box")
+
+        self.verticalLayout_29.addWidget(self.add_current_box)
+
+
+        self.verticalLayout_32.addLayout(self.verticalLayout_29)
+
+        self.line_77 = QFrame(self.groupBox)
+        self.line_77.setObjectName(u"line_77")
+        self.line_77.setFrameShape(QFrame.Shape.HLine)
+        self.line_77.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_32.addWidget(self.line_77)
+
+        self.scrollArea_5 = QScrollArea(self.groupBox)
+        self.scrollArea_5.setObjectName(u"scrollArea_5")
+        self.scrollArea_5.setWidgetResizable(True)
+        self.scrollAreaWidgetContents = QWidget()
+        self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 508, 628))
+        self.verticalLayout_26 = QVBoxLayout(self.scrollAreaWidgetContents)
+        self.verticalLayout_26.setObjectName(u"verticalLayout_26")
+        self.verticalLayout_30 = QVBoxLayout()
+        self.verticalLayout_30.setObjectName(u"verticalLayout_30")
+
+        self.verticalLayout_26.addLayout(self.verticalLayout_30)
+
+        self.scrollArea_5.setWidget(self.scrollAreaWidgetContents)
+
+        self.verticalLayout_32.addWidget(self.scrollArea_5)
+
+
+        self.horizontalLayout_84.addWidget(self.groupBox)
+
+        self.groupBox_2 = QGroupBox(self.textbox_stacker)
+        self.groupBox_2.setObjectName(u"groupBox_2")
+        self.verticalLayout_35 = QVBoxLayout(self.groupBox_2)
+        self.verticalLayout_35.setObjectName(u"verticalLayout_35")
+        self.verticalLayout_37 = QVBoxLayout()
+        self.verticalLayout_37.setObjectName(u"verticalLayout_37")
+        self.add_textboxes = QPushButton(self.groupBox_2)
+        self.add_textboxes.setObjectName(u"add_textboxes")
+
+        self.verticalLayout_37.addWidget(self.add_textboxes)
+
+        self.download_stack = QPushButton(self.groupBox_2)
+        self.download_stack.setObjectName(u"download_stack")
+
+        self.verticalLayout_37.addWidget(self.download_stack)
+
+        self.line_78 = QFrame(self.groupBox_2)
+        self.line_78.setObjectName(u"line_78")
+        self.line_78.setFrameShape(QFrame.Shape.HLine)
+        self.line_78.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.verticalLayout_37.addWidget(self.line_78)
+
+
+        self.verticalLayout_35.addLayout(self.verticalLayout_37)
+
+        self.scrollArea_6 = QScrollArea(self.groupBox_2)
+        self.scrollArea_6.setObjectName(u"scrollArea_6")
+        self.scrollArea_6.setWidgetResizable(True)
+        self.scrollArea_6.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.scrollAreaWidgetContents_3 = QWidget()
+        self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 507, 631))
+        self.verticalLayout_25 = QVBoxLayout(self.scrollAreaWidgetContents_3)
+        self.verticalLayout_25.setObjectName(u"verticalLayout_25")
+        self.output_stack = QLabel(self.scrollAreaWidgetContents_3)
+        self.output_stack.setObjectName(u"output_stack")
+        self.output_stack.setMinimumSize(QSize(0, 0))
+        self.output_stack.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.verticalLayout_25.addWidget(self.output_stack)
+
+        self.scrollArea_6.setWidget(self.scrollAreaWidgetContents_3)
+
+        self.verticalLayout_35.addWidget(self.scrollArea_6)
+
+
+        self.horizontalLayout_84.addWidget(self.groupBox_2)
+
+        self.tabs.addTab(self.textbox_stacker, "")
         self.universes = QWidget()
         self.universes.setObjectName(u"universes")
         self.gridLayout_3 = QGridLayout(self.universes)
@@ -1982,6 +2350,16 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout.addWidget(self.universe_filter_input)
 
+        self.export_selected_universe = QPushButton(self.existing)
+        self.export_selected_universe.setObjectName(u"export_selected_universe")
+
+        self.horizontalLayout.addWidget(self.export_selected_universe)
+
+        self.export_all_universe = QPushButton(self.existing)
+        self.export_all_universe.setObjectName(u"export_all_universe")
+
+        self.horizontalLayout.addWidget(self.export_all_universe)
+
 
         self.verticalLayout_10.addLayout(self.horizontalLayout)
 
@@ -1997,7 +2375,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.universe_grid = QWidget()
         self.universe_grid.setObjectName(u"universe_grid")
-        self.universe_grid.setGeometry(QRect(0, 0, 989, 427))
+        self.universe_grid.setGeometry(QRect(0, 0, 1045, 427))
         self.gridLayout_2 = QGridLayout(self.universe_grid)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout_2.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
@@ -2015,8 +2393,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_53.setObjectName(u"horizontalLayout_53")
         self.create_universe = QGroupBox(self.universes)
         self.create_universe.setObjectName(u"create_universe")
-        sizePolicy8.setHeightForWidth(self.create_universe.sizePolicy().hasHeightForWidth())
-        self.create_universe.setSizePolicy(sizePolicy8)
+        sizePolicy5.setHeightForWidth(self.create_universe.sizePolicy().hasHeightForWidth())
+        self.create_universe.setSizePolicy(sizePolicy5)
         self.create_universe.setMinimumSize(QSize(500, 226))
         self.create_universe.setMaximumSize(QSize(354, 226))
         self.verticalLayout_11 = QVBoxLayout(self.create_universe)
@@ -2127,8 +2505,8 @@ class Ui_MainWindow(object):
 
         self.edit_universe = QGroupBox(self.universes)
         self.edit_universe.setObjectName(u"edit_universe")
-        sizePolicy8.setHeightForWidth(self.edit_universe.sizePolicy().hasHeightForWidth())
-        self.edit_universe.setSizePolicy(sizePolicy8)
+        sizePolicy5.setHeightForWidth(self.edit_universe.sizePolicy().hasHeightForWidth())
+        self.edit_universe.setSizePolicy(sizePolicy5)
         self.edit_universe.setMinimumSize(QSize(500, 226))
         self.edit_universe.setMaximumSize(QSize(354, 226))
         self.verticalLayout_33 = QVBoxLayout(self.edit_universe)
@@ -2190,8 +2568,8 @@ class Ui_MainWindow(object):
 
         self.universe_edit_image_button = QPushButton(self.edit_universe)
         self.universe_edit_image_button.setObjectName(u"universe_edit_image_button")
-        sizePolicy8.setHeightForWidth(self.universe_edit_image_button.sizePolicy().hasHeightForWidth())
-        self.universe_edit_image_button.setSizePolicy(sizePolicy8)
+        sizePolicy5.setHeightForWidth(self.universe_edit_image_button.sizePolicy().hasHeightForWidth())
+        self.universe_edit_image_button.setSizePolicy(sizePolicy5)
         self.universe_edit_image_button.setMinimumSize(QSize(109, 0))
         self.universe_edit_image_button.setMaximumSize(QSize(109, 16777215))
 
@@ -2250,8 +2628,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_58.setObjectName(u"horizontalLayout_58")
         self.create_character = QGroupBox(self.characters)
         self.create_character.setObjectName(u"create_character")
-        sizePolicy8.setHeightForWidth(self.create_character.sizePolicy().hasHeightForWidth())
-        self.create_character.setSizePolicy(sizePolicy8)
+        sizePolicy5.setHeightForWidth(self.create_character.sizePolicy().hasHeightForWidth())
+        self.create_character.setSizePolicy(sizePolicy5)
         self.create_character.setMinimumSize(QSize(500, 335))
         self.create_character.setMaximumSize(QSize(354, 335))
         self.verticalLayout_16 = QVBoxLayout(self.create_character)
@@ -2284,10 +2662,24 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_32.addWidget(self.characters_create_universe_label)
 
+        self.horizontalLayout_112 = QHBoxLayout()
+        self.horizontalLayout_112.setObjectName(u"horizontalLayout_112")
         self.characters_create_universe_selector = QComboBox(self.create_character)
         self.characters_create_universe_selector.setObjectName(u"characters_create_universe_selector")
 
-        self.horizontalLayout_32.addWidget(self.characters_create_universe_selector)
+        self.horizontalLayout_112.addWidget(self.characters_create_universe_selector)
+
+        self.all_universes_3 = QPushButton(self.create_character)
+        self.all_universes_3.setObjectName(u"all_universes_3")
+        sizePolicy5.setHeightForWidth(self.all_universes_3.sizePolicy().hasHeightForWidth())
+        self.all_universes_3.setSizePolicy(sizePolicy5)
+        self.all_universes_3.setMaximumSize(QSize(50, 16777215))
+        self.all_universes_3.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_112.addWidget(self.all_universes_3)
+
+
+        self.horizontalLayout_32.addLayout(self.horizontalLayout_112)
 
 
         self.verticalLayout_15.addLayout(self.horizontalLayout_32)
@@ -2408,8 +2800,8 @@ class Ui_MainWindow(object):
 
         self.edit_character = QGroupBox(self.characters)
         self.edit_character.setObjectName(u"edit_character")
-        sizePolicy8.setHeightForWidth(self.edit_character.sizePolicy().hasHeightForWidth())
-        self.edit_character.setSizePolicy(sizePolicy8)
+        sizePolicy5.setHeightForWidth(self.edit_character.sizePolicy().hasHeightForWidth())
+        self.edit_character.setSizePolicy(sizePolicy5)
         self.edit_character.setMinimumSize(QSize(500, 335))
         self.edit_character.setMaximumSize(QSize(354, 335))
         self.verticalLayout_34 = QVBoxLayout(self.edit_character)
@@ -2442,10 +2834,24 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_49.addWidget(self.characters_edit_universe_label)
 
+        self.horizontalLayout_113 = QHBoxLayout()
+        self.horizontalLayout_113.setObjectName(u"horizontalLayout_113")
         self.characters_edit_universe_selector = QComboBox(self.edit_character)
         self.characters_edit_universe_selector.setObjectName(u"characters_edit_universe_selector")
 
-        self.horizontalLayout_49.addWidget(self.characters_edit_universe_selector)
+        self.horizontalLayout_113.addWidget(self.characters_edit_universe_selector)
+
+        self.all_universes_4 = QPushButton(self.edit_character)
+        self.all_universes_4.setObjectName(u"all_universes_4")
+        sizePolicy5.setHeightForWidth(self.all_universes_4.sizePolicy().hasHeightForWidth())
+        self.all_universes_4.setSizePolicy(sizePolicy5)
+        self.all_universes_4.setMaximumSize(QSize(50, 16777215))
+        self.all_universes_4.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_113.addWidget(self.all_universes_4)
+
+
+        self.horizontalLayout_49.addLayout(self.horizontalLayout_113)
 
 
         self.verticalLayout_39.addLayout(self.horizontalLayout_49)
@@ -2584,6 +2990,16 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_25.addWidget(self.characters_filter_input)
 
+        self.export_selected_character = QPushButton(self.groupBox_5)
+        self.export_selected_character.setObjectName(u"export_selected_character")
+
+        self.horizontalLayout_25.addWidget(self.export_selected_character)
+
+        self.export_all_character = QPushButton(self.groupBox_5)
+        self.export_all_character.setObjectName(u"export_all_character")
+
+        self.horizontalLayout_25.addWidget(self.export_all_character)
+
 
         self.verticalLayout_14.addLayout(self.horizontalLayout_25)
 
@@ -2599,7 +3015,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.characters_grid = QWidget()
         self.characters_grid.setObjectName(u"characters_grid")
-        self.characters_grid.setGeometry(QRect(0, 0, 987, 316))
+        self.characters_grid.setGeometry(QRect(0, 0, 1043, 316))
         self.gridLayout = QGridLayout(self.characters_grid)
         self.gridLayout.setObjectName(u"gridLayout")
         self.scrollArea_2.setWidget(self.characters_grid)
@@ -2624,8 +3040,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_59.setObjectName(u"horizontalLayout_59")
         self.create_expression = QGroupBox(self.expressions)
         self.create_expression.setObjectName(u"create_expression")
-        sizePolicy8.setHeightForWidth(self.create_expression.sizePolicy().hasHeightForWidth())
-        self.create_expression.setSizePolicy(sizePolicy8)
+        sizePolicy5.setHeightForWidth(self.create_expression.sizePolicy().hasHeightForWidth())
+        self.create_expression.setSizePolicy(sizePolicy5)
         self.create_expression.setMinimumSize(QSize(500, 294))
         self.create_expression.setMaximumSize(QSize(354, 294))
         self.verticalLayout_20 = QVBoxLayout(self.create_expression)
@@ -2658,10 +3074,24 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_35.addWidget(self.expressions_create_universe_label)
 
+        self.horizontalLayout_114 = QHBoxLayout()
+        self.horizontalLayout_114.setObjectName(u"horizontalLayout_114")
         self.expressions_create_universe_selector = QComboBox(self.create_expression)
         self.expressions_create_universe_selector.setObjectName(u"expressions_create_universe_selector")
 
-        self.horizontalLayout_35.addWidget(self.expressions_create_universe_selector)
+        self.horizontalLayout_114.addWidget(self.expressions_create_universe_selector)
+
+        self.all_universes_5 = QPushButton(self.create_expression)
+        self.all_universes_5.setObjectName(u"all_universes_5")
+        sizePolicy5.setHeightForWidth(self.all_universes_5.sizePolicy().hasHeightForWidth())
+        self.all_universes_5.setSizePolicy(sizePolicy5)
+        self.all_universes_5.setMaximumSize(QSize(50, 16777215))
+        self.all_universes_5.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_114.addWidget(self.all_universes_5)
+
+
+        self.horizontalLayout_35.addLayout(self.horizontalLayout_114)
 
 
         self.verticalLayout_19.addLayout(self.horizontalLayout_35)
@@ -2673,10 +3103,22 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_36.addWidget(self.expressions_create_character_label)
 
+        self.horizontalLayout_115 = QHBoxLayout()
+        self.horizontalLayout_115.setObjectName(u"horizontalLayout_115")
         self.expressions_create_character_selector = QComboBox(self.create_expression)
         self.expressions_create_character_selector.setObjectName(u"expressions_create_character_selector")
 
-        self.horizontalLayout_36.addWidget(self.expressions_create_character_selector)
+        self.horizontalLayout_115.addWidget(self.expressions_create_character_selector)
+
+        self.all_characters_3 = QPushButton(self.create_expression)
+        self.all_characters_3.setObjectName(u"all_characters_3")
+        self.all_characters_3.setMaximumSize(QSize(50, 16777215))
+        self.all_characters_3.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_115.addWidget(self.all_characters_3)
+
+
+        self.horizontalLayout_36.addLayout(self.horizontalLayout_115)
 
 
         self.verticalLayout_19.addLayout(self.horizontalLayout_36)
@@ -2739,8 +3181,8 @@ class Ui_MainWindow(object):
 
         self.edit_expression = QGroupBox(self.expressions)
         self.edit_expression.setObjectName(u"edit_expression")
-        sizePolicy8.setHeightForWidth(self.edit_expression.sizePolicy().hasHeightForWidth())
-        self.edit_expression.setSizePolicy(sizePolicy8)
+        sizePolicy5.setHeightForWidth(self.edit_expression.sizePolicy().hasHeightForWidth())
+        self.edit_expression.setSizePolicy(sizePolicy5)
         self.edit_expression.setMinimumSize(QSize(500, 294))
         self.edit_expression.setMaximumSize(QSize(354, 294))
         self.verticalLayout_40 = QVBoxLayout(self.edit_expression)
@@ -2773,10 +3215,22 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_65.addWidget(self.expressions_edit_universe_label)
 
+        self.horizontalLayout_116 = QHBoxLayout()
+        self.horizontalLayout_116.setObjectName(u"horizontalLayout_116")
         self.expressions_edit_universe_selector = QComboBox(self.edit_expression)
         self.expressions_edit_universe_selector.setObjectName(u"expressions_edit_universe_selector")
 
-        self.horizontalLayout_65.addWidget(self.expressions_edit_universe_selector)
+        self.horizontalLayout_116.addWidget(self.expressions_edit_universe_selector)
+
+        self.all_universes_6 = QPushButton(self.edit_expression)
+        self.all_universes_6.setObjectName(u"all_universes_6")
+        self.all_universes_6.setMaximumSize(QSize(50, 16777215))
+        self.all_universes_6.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_116.addWidget(self.all_universes_6)
+
+
+        self.horizontalLayout_65.addLayout(self.horizontalLayout_116)
 
 
         self.verticalLayout_41.addLayout(self.horizontalLayout_65)
@@ -2788,10 +3242,24 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_66.addWidget(self.expressions_edit_character_label)
 
+        self.horizontalLayout_117 = QHBoxLayout()
+        self.horizontalLayout_117.setObjectName(u"horizontalLayout_117")
         self.expressions_edit_character_selector = QComboBox(self.edit_expression)
         self.expressions_edit_character_selector.setObjectName(u"expressions_edit_character_selector")
 
-        self.horizontalLayout_66.addWidget(self.expressions_edit_character_selector)
+        self.horizontalLayout_117.addWidget(self.expressions_edit_character_selector)
+
+        self.all_characters_4 = QPushButton(self.edit_expression)
+        self.all_characters_4.setObjectName(u"all_characters_4")
+        sizePolicy5.setHeightForWidth(self.all_characters_4.sizePolicy().hasHeightForWidth())
+        self.all_characters_4.setSizePolicy(sizePolicy5)
+        self.all_characters_4.setMaximumSize(QSize(50, 16777215))
+        self.all_characters_4.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_117.addWidget(self.all_characters_4)
+
+
+        self.horizontalLayout_66.addLayout(self.horizontalLayout_117)
 
 
         self.verticalLayout_41.addLayout(self.horizontalLayout_66)
@@ -2873,6 +3341,16 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_33.addWidget(self.expressions_filter_input)
 
+        self.export_selected_expression = QPushButton(self.groupBox_7)
+        self.export_selected_expression.setObjectName(u"export_selected_expression")
+
+        self.horizontalLayout_33.addWidget(self.export_selected_expression)
+
+        self.export_all_expression = QPushButton(self.groupBox_7)
+        self.export_all_expression.setObjectName(u"export_all_expression")
+
+        self.horizontalLayout_33.addWidget(self.export_all_expression)
+
 
         self.verticalLayout_21.addLayout(self.horizontalLayout_33)
 
@@ -2888,7 +3366,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.expressions_grid = QWidget()
         self.expressions_grid.setObjectName(u"expressions_grid")
-        self.expressions_grid.setGeometry(QRect(0, 0, 989, 359))
+        self.expressions_grid.setGeometry(QRect(0, 0, 1045, 359))
         self.gridLayout_5 = QGridLayout(self.expressions_grid)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.scrollArea_3.setWidget(self.expressions_grid)
@@ -2908,8 +3386,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.label_15 = QLabel(self.demi_character_import)
         self.label_15.setObjectName(u"label_15")
-        sizePolicy6.setHeightForWidth(self.label_15.sizePolicy().hasHeightForWidth())
-        self.label_15.setSizePolicy(sizePolicy6)
+        sizePolicy7.setHeightForWidth(self.label_15.sizePolicy().hasHeightForWidth())
+        self.label_15.setSizePolicy(sizePolicy7)
         self.label_15.setMinimumSize(QSize(0, 140))
         font3 = QFont()
         font3.setPointSize(23)
@@ -2922,8 +3400,8 @@ class Ui_MainWindow(object):
 
         self.label_18 = QLabel(self.demi_character_import)
         self.label_18.setObjectName(u"label_18")
-        sizePolicy6.setHeightForWidth(self.label_18.sizePolicy().hasHeightForWidth())
-        self.label_18.setSizePolicy(sizePolicy6)
+        sizePolicy7.setHeightForWidth(self.label_18.sizePolicy().hasHeightForWidth())
+        self.label_18.setSizePolicy(sizePolicy7)
         self.label_18.setMinimumSize(QSize(0, 30))
         font4 = QFont()
         font4.setPointSize(18)
@@ -2961,12 +3439,7 @@ class Ui_MainWindow(object):
         self.universe_import_label.setFont(font5)
         self.universe_import_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.LabelRole, self.universe_import_label)
-
-        self.universe_for_import = QComboBox(self.demi_character_import)
-        self.universe_for_import.setObjectName(u"universe_for_import")
-
-        self.formLayout.setWidget(0, QFormLayout.ItemRole.FieldRole, self.universe_for_import)
+        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.universe_import_label)
 
         self.verticalLayout_27 = QVBoxLayout()
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
@@ -2977,7 +3450,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_27.addWidget(self.character_page_import_label)
 
 
-        self.formLayout.setLayout(1, QFormLayout.ItemRole.LabelRole, self.verticalLayout_27)
+        self.formLayout.setLayout(4, QFormLayout.ItemRole.LabelRole, self.verticalLayout_27)
 
         self.character_page_for_import = QLineEdit(self.demi_character_import)
         self.character_page_for_import.setObjectName(u"character_page_for_import")
@@ -2991,7 +3464,7 @@ class Ui_MainWindow(object):
         font6.setPointSize(13)
         self.character_page_for_import.setFont(font6)
 
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.FieldRole, self.character_page_for_import)
+        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.character_page_for_import)
 
         self.verticalLayout_28 = QVBoxLayout()
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
@@ -3002,7 +3475,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_28.addWidget(self.token_import_label)
 
 
-        self.formLayout.setLayout(5, QFormLayout.ItemRole.LabelRole, self.verticalLayout_28)
+        self.formLayout.setLayout(8, QFormLayout.ItemRole.LabelRole, self.verticalLayout_28)
 
         self.token_for_import = QLineEdit(self.demi_character_import)
         self.token_for_import.setObjectName(u"token_for_import")
@@ -3010,26 +3483,61 @@ class Ui_MainWindow(object):
         self.token_for_import.setSizePolicy(sizePolicy10)
         self.token_for_import.setMinimumSize(QSize(655, 0))
 
-        self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.token_for_import)
+        self.formLayout.setWidget(8, QFormLayout.ItemRole.FieldRole, self.token_for_import)
 
         self.import_button = QPushButton(self.demi_character_import)
         self.import_button.setObjectName(u"import_button")
         self.import_button.setFont(font6)
 
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.import_button)
+        self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.import_button)
 
         self.import_load = QLabel(self.demi_character_import)
         self.import_load.setObjectName(u"import_load")
         self.import_load.setFont(font6)
         self.import_load.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.import_load)
+        self.formLayout.setWidget(7, QFormLayout.ItemRole.FieldRole, self.import_load)
 
         self.import_progress = QProgressBar(self.demi_character_import)
         self.import_progress.setObjectName(u"import_progress")
         self.import_progress.setValue(0)
 
-        self.formLayout.setWidget(3, QFormLayout.ItemRole.FieldRole, self.import_progress)
+        self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.import_progress)
+
+        self.universe_import_create_label = QLabel(self.demi_character_import)
+        self.universe_import_create_label.setObjectName(u"universe_import_create_label")
+        self.universe_import_create_label.setFont(font5)
+        self.universe_import_create_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.universe_import_create_label)
+
+        self.new_universe_for_import = QLineEdit(self.demi_character_import)
+        self.new_universe_for_import.setObjectName(u"new_universe_for_import")
+
+        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.new_universe_for_import)
+
+        self.verticalSpacer_11 = QSpacerItem(20, 25, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.formLayout.setItem(3, QFormLayout.ItemRole.FieldRole, self.verticalSpacer_11)
+
+        self.horizontalLayout_122 = QHBoxLayout()
+        self.horizontalLayout_122.setObjectName(u"horizontalLayout_122")
+        self.universe_for_import = QComboBox(self.demi_character_import)
+        self.universe_for_import.setObjectName(u"universe_for_import")
+
+        self.horizontalLayout_122.addWidget(self.universe_for_import)
+
+        self.all_universes_7 = QPushButton(self.demi_character_import)
+        self.all_universes_7.setObjectName(u"all_universes_7")
+        sizePolicy5.setHeightForWidth(self.all_universes_7.sizePolicy().hasHeightForWidth())
+        self.all_universes_7.setSizePolicy(sizePolicy5)
+        self.all_universes_7.setMaximumSize(QSize(50, 16777215))
+        self.all_universes_7.setIconSize(QSize(24, 24))
+
+        self.horizontalLayout_122.addWidget(self.all_universes_7)
+
+
+        self.formLayout.setLayout(1, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_122)
 
 
         self.horizontalLayout_80.addLayout(self.formLayout)
@@ -3049,8 +3557,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_24.setObjectName(u"verticalLayout_24")
         self.disclaimer_1 = QLabel(self.demi_character_import)
         self.disclaimer_1.setObjectName(u"disclaimer_1")
-        sizePolicy6.setHeightForWidth(self.disclaimer_1.sizePolicy().hasHeightForWidth())
-        self.disclaimer_1.setSizePolicy(sizePolicy6)
+        sizePolicy7.setHeightForWidth(self.disclaimer_1.sizePolicy().hasHeightForWidth())
+        self.disclaimer_1.setSizePolicy(sizePolicy7)
         self.disclaimer_1.setMinimumSize(QSize(0, 35))
         self.disclaimer_1.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -3058,8 +3566,8 @@ class Ui_MainWindow(object):
 
         self.disclaimer_2 = QLabel(self.demi_character_import)
         self.disclaimer_2.setObjectName(u"disclaimer_2")
-        sizePolicy6.setHeightForWidth(self.disclaimer_2.sizePolicy().hasHeightForWidth())
-        self.disclaimer_2.setSizePolicy(sizePolicy6)
+        sizePolicy7.setHeightForWidth(self.disclaimer_2.sizePolicy().hasHeightForWidth())
+        self.disclaimer_2.setSizePolicy(sizePolicy7)
         self.disclaimer_2.setMinimumSize(QSize(0, 35))
         self.disclaimer_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -3075,7 +3583,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1085, 23))
+        self.menubar.setGeometry(QRect(0, 0, 1141, 23))
         self.menuFile = QMenu(self.menubar)
         self.menuFile.setObjectName(u"menuFile")
         MainWindow.setMenuBar(self.menubar)
@@ -3174,22 +3682,32 @@ class Ui_MainWindow(object):
         self.universe_label.setToolTip(QCoreApplication.translate("MainWindow", u"Selects the given universe for the left image", None))
 #endif // QT_CONFIG(tooltip)
         self.universe_label.setText(QCoreApplication.translate("MainWindow", u"Universe", None))
+        self.all_universes.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.universe_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
 #if QT_CONFIG(tooltip)
         self.character_label.setToolTip(QCoreApplication.translate("MainWindow", u"Selects the given character for the left image", None))
 #endif // QT_CONFIG(tooltip)
         self.character_label.setText(QCoreApplication.translate("MainWindow", u"Character", None))
+        self.all_characters.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.character_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
 #if QT_CONFIG(tooltip)
         self.expression_label.setToolTip(QCoreApplication.translate("MainWindow", u"Selects the given expression for the left image", None))
 #endif // QT_CONFIG(tooltip)
         self.expression_label.setText(QCoreApplication.translate("MainWindow", u"Expression", None))
+        self.all_expressions.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.expression_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
 #if QT_CONFIG(tooltip)
         self.expression_color_label.setToolTip(QCoreApplication.translate("MainWindow", u"Changes the expression color of the left image (only with black and white source)", None))
 #endif // QT_CONFIG(tooltip)
         self.expression_color_label.setText(QCoreApplication.translate("MainWindow", u"Expression Color", None))
         self.expression_color_preview.setText("")
+#if QT_CONFIG(tooltip)
+        self.expression_color_type_label.setToolTip(QCoreApplication.translate("MainWindow", u"Controls the coloring specifics. \"Simple\" works best for eyes, \"Everything\" works good on Darkners and \"Custom\" gives the most control", None))
+#endif // QT_CONFIG(tooltip)
+        self.expression_color_type_label.setText(QCoreApplication.translate("MainWindow", u"Coloring Type", None))
+        self.label_left.setText("")
+        self.expression_color_type_button.setText(QCoreApplication.translate("MainWindow", u"Configure Colors", None))
+        self.label_right.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), QCoreApplication.translate("MainWindow", u"Sprite Settings (Left)", None))
 #if QT_CONFIG(tooltip)
         self.label_16.setToolTip(QCoreApplication.translate("MainWindow", u"Adds an expression on the right side of the image", None))
@@ -3201,22 +3719,32 @@ class Ui_MainWindow(object):
         self.universe_label_2.setToolTip(QCoreApplication.translate("MainWindow", u"Selects the given universe for the right image", None))
 #endif // QT_CONFIG(tooltip)
         self.universe_label_2.setText(QCoreApplication.translate("MainWindow", u"Universe", None))
+        self.all_universes_2.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.universe_preview_2.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
 #if QT_CONFIG(tooltip)
         self.character_label_2.setToolTip(QCoreApplication.translate("MainWindow", u"Selects the given character for the right image", None))
 #endif // QT_CONFIG(tooltip)
         self.character_label_2.setText(QCoreApplication.translate("MainWindow", u"Character", None))
+        self.all_characters_2.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.character_preview_2.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
 #if QT_CONFIG(tooltip)
         self.expression_label_2.setToolTip(QCoreApplication.translate("MainWindow", u"Selects the given expression for the right image", None))
 #endif // QT_CONFIG(tooltip)
         self.expression_label_2.setText(QCoreApplication.translate("MainWindow", u"Expression", None))
+        self.all_expressions_2.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.expression_preview_2.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
 #if QT_CONFIG(tooltip)
         self.expression_color_label_2.setToolTip(QCoreApplication.translate("MainWindow", u"Changes the expression color of the right image (only with black and white source)", None))
 #endif // QT_CONFIG(tooltip)
         self.expression_color_label_2.setText(QCoreApplication.translate("MainWindow", u"Expression Color", None))
         self.expression_color_preview_2.setText("")
+#if QT_CONFIG(tooltip)
+        self.expression_color_type_label_2.setToolTip(QCoreApplication.translate("MainWindow", u"Controls the coloring specifics. \"Simple\" works best for eyes, \"Everything\" works good on Darkners and \"Custom\" gives the most control", None))
+#endif // QT_CONFIG(tooltip)
+        self.expression_color_type_label_2.setText(QCoreApplication.translate("MainWindow", u"Coloring Type", None))
+        self.label_left_2.setText("")
+        self.expression_color_type_button_2.setText(QCoreApplication.translate("MainWindow", u"Configure Colors", None))
+        self.label_right_2.setText("")
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_5), QCoreApplication.translate("MainWindow", u"Sprite Settings (Right)", None))
 #if QT_CONFIG(tooltip)
         self.font_label.setToolTip(QCoreApplication.translate("MainWindow", u"Used font (only basic latin alphabet for Sans/Papyrus)", None))
@@ -3271,11 +3799,13 @@ class Ui_MainWindow(object):
         self.alternating_label.setToolTip(QCoreApplication.translate("MainWindow", u"Replaces the left expression every 5 frames", None))
 #endif // QT_CONFIG(tooltip)
         self.alternating_label.setText(QCoreApplication.translate("MainWindow", u"Alternating Expression (Left)", None))
+        self.all_expressions_alt.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.alternating_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
 #if QT_CONFIG(tooltip)
         self.alternating_right_label.setToolTip(QCoreApplication.translate("MainWindow", u"Replaces the right expression every 5 frames", None))
 #endif // QT_CONFIG(tooltip)
         self.alternating_right_label.setText(QCoreApplication.translate("MainWindow", u"Alternating Expression (Right)", None))
+        self.all_expressions_alt_2.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.alternating_right_preview.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
 #if QT_CONFIG(tooltip)
         self.margin_label.setToolTip(QCoreApplication.translate("MainWindow", u"Adds a 3px black border (before size increase)", None))
@@ -3318,12 +3848,23 @@ class Ui_MainWindow(object):
 "Use pause=<frameamount> to insert extra frames (GIF only)", None))
         self.output.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.label_13.setText("")
-        self.download.setText(QCoreApplication.translate("MainWindow", u"Download Textbox", None))
         self.copy_to_clipboard.setText(QCoreApplication.translate("MainWindow", u"Copy to Clipboard", None))
+        self.download.setText(QCoreApplication.translate("MainWindow", u"Download Textbox", None))
+        self.add_to_stack.setText(QCoreApplication.translate("MainWindow", u"Add to Stack", None))
         self.label_14.setText("")
         self.tabs.setTabText(self.tabs.indexOf(self.generator), QCoreApplication.translate("MainWindow", u"Generator", None))
+        self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Contents", None))
+        self.amount_of_columns_label.setText(QCoreApplication.translate("MainWindow", u"Amount of columns", None))
+        self.add_current_box.setText(QCoreApplication.translate("MainWindow", u"Add current box", None))
+        self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Stack", None))
+        self.add_textboxes.setText(QCoreApplication.translate("MainWindow", u"Create Textboxes (Generator)", None))
+        self.download_stack.setText(QCoreApplication.translate("MainWindow", u"Download Stack", None))
+        self.output_stack.setText("")
+        self.tabs.setTabText(self.tabs.indexOf(self.textbox_stacker), QCoreApplication.translate("MainWindow", u"Textbox Stacker", None))
         self.existing.setTitle(QCoreApplication.translate("MainWindow", u"Existing", None))
         self.universe_filter_label.setText(QCoreApplication.translate("MainWindow", u"Filter by name", None))
+        self.export_selected_universe.setText(QCoreApplication.translate("MainWindow", u"Export Selected", None))
+        self.export_all_universe.setText(QCoreApplication.translate("MainWindow", u"Export All", None))
         self.create_universe.setTitle(QCoreApplication.translate("MainWindow", u"Create a new Universe", None))
         self.universe_create_name_label.setText(QCoreApplication.translate("MainWindow", u"Name", None))
         self.universe_create_border_style_label.setText(QCoreApplication.translate("MainWindow", u"Default Border Style", None))
@@ -3344,6 +3885,7 @@ class Ui_MainWindow(object):
         self.create_character.setTitle(QCoreApplication.translate("MainWindow", u"Create a new Character", None))
         self.characters_create_name_label.setText(QCoreApplication.translate("MainWindow", u"Name", None))
         self.characters_create_universe_label.setText(QCoreApplication.translate("MainWindow", u"Universe", None))
+        self.all_universes_3.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.characters_create_style_label.setText(QCoreApplication.translate("MainWindow", u"Default Style", None))
         self.characters_create_style_regular_option.setText(QCoreApplication.translate("MainWindow", u"Regular", None))
         self.characters_create_style_dark_world_option.setText(QCoreApplication.translate("MainWindow", u"Dark World", None))
@@ -3357,6 +3899,7 @@ class Ui_MainWindow(object):
         self.edit_character.setTitle(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.characters_edit_name_label.setText(QCoreApplication.translate("MainWindow", u"Name", None))
         self.characters_edit_universe_label.setText(QCoreApplication.translate("MainWindow", u"Universe", None))
+        self.all_universes_4.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.characters_edit_style_label.setText(QCoreApplication.translate("MainWindow", u"Default Style", None))
         self.characters_edit_style_regular_option.setText(QCoreApplication.translate("MainWindow", u"Regular", None))
         self.characters_edit_style_dark_world_option.setText(QCoreApplication.translate("MainWindow", u"Dark World", None))
@@ -3369,11 +3912,15 @@ class Ui_MainWindow(object):
         self.characters_edit_confirm_button.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"Existing", None))
         self.characters_filter_label.setText(QCoreApplication.translate("MainWindow", u"Filter by name", None))
+        self.export_selected_character.setText(QCoreApplication.translate("MainWindow", u"Export Selected", None))
+        self.export_all_character.setText(QCoreApplication.translate("MainWindow", u"Export All", None))
         self.tabs.setTabText(self.tabs.indexOf(self.characters), QCoreApplication.translate("MainWindow", u"Characters", None))
         self.create_expression.setTitle(QCoreApplication.translate("MainWindow", u"Create a new expression", None))
         self.expressions_create_name_label.setText(QCoreApplication.translate("MainWindow", u"Name", None))
         self.expressions_create_universe_label.setText(QCoreApplication.translate("MainWindow", u"Universe", None))
+        self.all_universes_5.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.expressions_create_character_label.setText(QCoreApplication.translate("MainWindow", u"Character", None))
+        self.all_characters_3.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.expressions_create_preview_label.setText(QCoreApplication.translate("MainWindow", u"Image (required)", None))
         self.expressions_create_image_button.setText(QCoreApplication.translate("MainWindow", u"Select image", None))
         self.expressions_create_image_remove_button.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
@@ -3382,7 +3929,9 @@ class Ui_MainWindow(object):
         self.edit_expression.setTitle(QCoreApplication.translate("MainWindow", u"Edit", None))
         self.expressions_edit_name_label.setText(QCoreApplication.translate("MainWindow", u"Name", None))
         self.expressions_edit_universe_label.setText(QCoreApplication.translate("MainWindow", u"Universe", None))
+        self.all_universes_6.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.expressions_edit_character_label.setText(QCoreApplication.translate("MainWindow", u"Character", None))
+        self.all_characters_4.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.expressions_edit_preview_label.setText(QCoreApplication.translate("MainWindow", u"Image", None))
         self.expressions_edit_image_button.setText(QCoreApplication.translate("MainWindow", u"Select image", None))
         self.expressions_edit_image_remove_button.setText(QCoreApplication.translate("MainWindow", u"Remove", None))
@@ -3390,6 +3939,8 @@ class Ui_MainWindow(object):
         self.expressions_edit_confirm_button.setText(QCoreApplication.translate("MainWindow", u"Save", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("MainWindow", u"Existing", None))
         self.expressions_filter_label.setText(QCoreApplication.translate("MainWindow", u"Filter by name", None))
+        self.export_selected_expression.setText(QCoreApplication.translate("MainWindow", u"Export Selected", None))
+        self.export_all_expression.setText(QCoreApplication.translate("MainWindow", u"Export All", None))
         self.tabs.setTabText(self.tabs.indexOf(self.expressions), QCoreApplication.translate("MainWindow", u"Expressions", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"<a href='https://www.demirramon.com/user_content/undertale_browse'>Import Characters from Demirramon</a>", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"<a href='https://drive.google.com/drive/folders/1BJ3sQR91SAJNJEusO4O_uckkyL3HIX2b'>Or download characters directly from the UTDR Fan Resource!</a>", None))
@@ -3397,14 +3948,19 @@ class Ui_MainWindow(object):
         self.character_page_import_label.setText(QCoreApplication.translate("MainWindow", u"Character Page", None))
         self.character_page_for_import.setInputMask("")
         self.character_page_for_import.setText("")
-        self.character_page_for_import.setPlaceholderText(QCoreApplication.translate("MainWindow", u"demirramon.com/user_content/undertale_character/{creator}/{character-id}", None))
+        self.character_page_for_import.setPlaceholderText(QCoreApplication.translate("MainWindow", u" demirramon.com/user_content/undertale_character/{creator}/{character-id}", None))
         self.token_import_label.setText(QCoreApplication.translate("MainWindow", u"Login Token", None))
         self.token_for_import.setPlaceholderText(QCoreApplication.translate("MainWindow", u"I recommend using a browser extension like cookies.txt to export your login token from demirramon.com", None))
         self.import_button.setText(QCoreApplication.translate("MainWindow", u"Import", None))
         self.import_load.setText(QCoreApplication.translate("MainWindow", u"Importing... Please wait.", None))
+#if QT_CONFIG(tooltip)
+        self.universe_import_create_label.setToolTip(QCoreApplication.translate("MainWindow", u"Creates a new universe with the default border setting", None))
+#endif // QT_CONFIG(tooltip)
+        self.universe_import_create_label.setText(QCoreApplication.translate("MainWindow", u"Or insert into new universe:", None))
+        self.all_universes_7.setText(QCoreApplication.translate("MainWindow", u"prev", None))
         self.disclaimer_1.setText(QCoreApplication.translate("MainWindow", u"Disclaimer: The Login Token is ONLY used to avoid authentication issues with the website. ", None))
         self.disclaimer_2.setText(QCoreApplication.translate("MainWindow", u"If you don't trust me, you can check the source code or compile the app yourself. (I dunno what I would even do with demi logins, but still)", None))
-        self.tabs.setTabText(self.tabs.indexOf(self.demi_character_import), QCoreApplication.translate("MainWindow", u"Import Character", None))
+        self.tabs.setTabText(self.tabs.indexOf(self.demi_character_import), QCoreApplication.translate("MainWindow", u"Import Characters", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
     # retranslateUi
 

@@ -39,6 +39,13 @@ class UniverseHandler(EntityHandler):
             left_manager.set_selected_character(None)
             left_manager.set_selected_expression(None)
 
+        # Disable Export All/Selected buttons if necessary
+        db = self.get_db()
+
+        if db.count_universes() == 1: # No universe left after deletion, disable downloads
+            self.ui.export_selected_universe.setEnabled(False)
+            self.ui.export_all_universe.setEnabled(False)
+
     def filter_text(self) -> str:
         return self.ui.universe_filter_input.text()
 

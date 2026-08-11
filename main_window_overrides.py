@@ -1,15 +1,54 @@
+import shutil
+import zipfile
+from pathlib import Path
+
 from PySide6.QtWidgets import QMainWindow, QApplication
 from PySide6.QtGui import QCloseEvent
 from PySide6.QtWidgets import QMessageBox
 
+from configs.paths import DYNAMIC_DB
 from running.connection.welcome import save_file_without_ui
 from services.change_service import Changes
 from services.database_service import DBDynamicConnection
+from services.selection_manager import left_manager
+
+
+db_path = DYNAMIC_DB
+
+def _unzip_db_from(path: str):
+    with zipfile.ZipFile(path, "r") as zf:
+        with zf.open("data.db") as src, open(db_path, "wb") as dst:
+            shutil.copyfileobj(src, dst)
+
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.ui = None
+
+
+    def dragEnterEvent(self, event):
+        if event.mimeData().hasUrls():
+            urls = event.mimeData().urls()
+            if len(urls) == 1 and urls[0].toLocalFile().lower().endswith(".yatg"):
+                event.acceptProposedAction()
+
+    def dragMoveEvent(self, event):
+        event.acceptProposedAction()
+
+    def dropEvent(self, event):
+        path = event.mimeData().urls()[0].toLocalFile()
+        if path and self.ui is not None:
+            Changes.reset()
+            _unzip_db_from(path)
+            DBDynamicConnection.get_instance().reconnect()
+            self.ui.tabs.setCurrentIndex(0)
+            window_title = Path(path).name
+            self.ui.centralwidget.window().setWindowTitle(window_title)
+            Changes.set_current_selected_file(path)
+            left_manager.try_to_select_first_universe_character_expression()
+            return True
+        event.acceptProposedAction()
 
     def closeEvent(self, event: QCloseEvent):
         if Changes.get_state():

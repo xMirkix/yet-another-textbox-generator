@@ -7,9 +7,33 @@ from PIL import Image
 TRANSPARENT_IDX = 255
 
 
-def _encode_single_frame(img: Image.Image) -> bytes:
+def _encode_single_frame(img: Image.Image, dither: bool = True) -> bytes:
+    has_alpha = img.mode in ('RGBA', 'LA') or 'transparency' in img.info
+
+    if img.mode != 'P':
+        rgba = img.convert('RGBA')
+        rgb = rgba.convert('RGB')
+
+        quantized = rgb.quantize(
+            colors=255,
+            method=Image.Quantize.MEDIANCUT,
+            dither=Image.Dither.FLOYDSTEINBERG if dither else Image.Dither.NONE
+        )
+
+        if has_alpha:
+            alpha = rgba.split()[-1]
+            mask = alpha.point(lambda a: 255 if a < 128 else 0).convert('1')
+            if mask.getbbox() is not None:
+                quantized.paste(255, mask)
+                quantized.info['transparency'] = 255
+
+        img = quantized
+
     buf = io.BytesIO()
-    img.save(buf, format='GIF')
+    save_kwargs = {'format': 'GIF'}
+    if 'transparency' in img.info:
+        save_kwargs['transparency'] = img.info['transparency']
+    img.save(buf, **save_kwargs)
     return buf.getvalue()
 
 

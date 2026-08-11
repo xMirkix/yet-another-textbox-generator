@@ -1,15 +1,25 @@
+import colorsys
 from typing import Callable
 
 from PySide6.QtCore import QTimer
 from PySide6.QtGui import QGuiApplication
-from PySide6.QtWidgets import QComboBox, QLabel
+from PySide6.QtWidgets import QComboBox, QLabel, QPushButton
 
-from running.connection.generator.generation_calls import execute_generation
+from models.entities import Character, Universe, Expression
+from models.form_bindings import ColorType
+from running.connection.generator.generation_calls import execute_generation, make_request
 from running.connection.generator.generator_utils import set_color, set_border_style, set_stylesheet, set_defaults, \
     set_preview_generator_version, set_border_color, show_alternating, \
     hide_alternating, hide_or_show, download
+from running.connection.stacker import stacker, stacker_ui
+from services.color_service import bytes_to_image, get_primary_color, is_similar
+from services.color_window_service import create_color_window
 from services.database_service import DBDynamicConnection
-from services.selection_manager import SelectionManager, init_entity, SideSelectors, left_manager, right_manager
+from services.new_window_service import connect_universe_create, connect_character_create, \
+    connect_expression_create, connect_alt_expression
+from services.selection_manager import SelectionManager, init_entity, SideSelectors, left_manager, right_manager, \
+    select_entity_in_combo
+from startup.in_memory.static_classes import Color
 from ui.generated_ui import Ui_MainWindow
 
 def make_sides(ui: Ui_MainWindow) -> tuple[SideSelectors, SideSelectors]:
@@ -25,6 +35,16 @@ def make_sides(ui: Ui_MainWindow) -> tuple[SideSelectors, SideSelectors]:
         include_checkbox=ui.include_checkbox,
         expression_color_selector=ui.expression_color_selector,
         expression_color_preview=ui.expression_color_preview,
+        color_type_selector=ui.expression_color_type_selector,
+        color_type_button=ui.expression_color_type_button,
+        color_type_everything= [ui.expression_color_type_selector,
+                                ui.expression_color_type_label,
+                                ui.expression_color_type_button,
+                                ui.line_79,
+                                ui.line_80,
+                                ui.label_left,
+                                ui.label_right
+                                ],
         alternating_container=ui.alternating_everything,
         alternating_lines=[ui.line_67, ui.line_68, ui.line_69],
     )
@@ -40,13 +60,55 @@ def make_sides(ui: Ui_MainWindow) -> tuple[SideSelectors, SideSelectors]:
         include_checkbox=ui.include_checkbox_2,
         expression_color_selector=ui.expression_color_selector_2,
         expression_color_preview=ui.expression_color_preview_2,
+        color_type_selector=ui.expression_color_type_selector_2,
+        color_type_button=ui.expression_color_type_button_2,
+        color_type_everything=[ui.expression_color_type_selector_2,
+                               ui.expression_color_type_label_2,
+                               ui.expression_color_type_button_2,
+                               ui.line_37,
+                               ui.line_82,
+                               ui.label_left_2,
+                               ui.label_right_2
+                               ],
         alternating_container=ui.alternating_everything_right,
         alternating_lines=[ui.line_70, ui.line_71, ui.line_72],
     )
     return left, right
 
+
+
 def connect_generator(ui: Ui_MainWindow):
+
+    def post_universe_fn(universe: Universe, man: SelectionManager):
+        man.set_selected_universe(universe)
+        reload_ui(ui, True, left, right)
+
+    def post_character_fn(character: Character, man: SelectionManager):
+        man.set_selected_character(character)
+        reload_ui(ui, True, left, right)
+
+    def post_expression_fn(expression: Expression, man: SelectionManager):
+        man.set_selected_expression(expression)
+        reload_ui(ui, False, left, right)
+
+    connect_universe_create(ui, ui.all_universes, left_manager, post_universe_fn)
+    connect_character_create(ui, ui.all_characters, left_manager, post_character_fn)
+    connect_expression_create(ui, ui.all_expressions, left_manager, post_expression_fn)
+
+    connect_universe_create(ui, ui.all_universes_2, right_manager, post_universe_fn)
+    connect_character_create(ui, ui.all_characters_2, right_manager, post_character_fn)
+    connect_expression_create(ui, ui.all_expressions_2, right_manager, post_expression_fn)
+
     left, right = make_sides(ui)
+
+    def post_alt_expression_fn(expression: Expression, man: SelectionManager, sel_side: SideSelectors, selector: QComboBox):
+        man.set_alternating_expression(expression)
+        select_entity_in_combo(selector, expression)
+        set_preview_generator_version(expression, sel_side.alternating_preview)
+        try_generate(ui)
+
+    connect_alt_expression(ui, ui.all_expressions_alt, left_manager, post_alt_expression_fn, left, ui.alternating_selector)
+    connect_alt_expression(ui, ui.all_expressions_alt_2, right_manager, post_alt_expression_fn, right, ui.alternating_right_selector)
 
     def helper(selector: QComboBox, fn: Callable):
         selector.activated.connect(lambda: update_with_function_then_regenerate(ui, fn))
@@ -69,6 +131,38 @@ def connect_generator(ui: Ui_MainWindow):
                                         s.expression_color_preview))
         set_stylesheet(side.expression_selector)
         set_stylesheet(side.alternating_selector)
+
+    def create_window(man: SelectionManager):
+        included, excluded, simple = create_color_window(ui, man.get_color_manager().get_selected_colors(),
+                            man.get_color_manager().get_excluded_colors(), man.get_color_manager().get_simple_recoloring())
+        man.get_color_manager().set_selected_colors(tuple(included))
+        man.get_color_manager().set_excluded_colors(tuple(excluded))
+        man.get_color_manager().set_simple_recoloring(simple)
+        try_generate(ui)
+
+    ui.expression_color_type_button.clicked.connect(lambda: create_window(left_manager))
+    ui.expression_color_type_button_2.clicked.connect(lambda: create_window(right_manager))
+
+
+    helper(ui.expression_color_type_selector, lambda: left_manager.get_color_manager().set_selected_color_type(ui.expression_color_type_selector.currentData()))
+
+    helper(ui.expression_color_type_selector_2, lambda: right_manager.get_color_manager().set_selected_color_type(ui.expression_color_type_selector.currentData()))
+
+    left.expression_color_selector.activated.connect(lambda: show_type_if_valid(left))
+    right.expression_color_selector.activated.connect(lambda: show_type_if_valid(right))
+
+    def color_button_enabling(affected_side: SideSelectors, man: SelectionManager, selector: QComboBox, button: QPushButton):
+        enabled = selector.currentData() == ColorType.CUSTOM
+        if enabled and man.get_color_manager().get_selected_colors() is None:
+            colors, excluded = try_to_set_simple_colors(affected_side)
+            man.get_color_manager().set_selected_colors(tuple(colors))
+            man.get_color_manager().set_excluded_colors(tuple(excluded))
+            man.get_color_manager().set_simple_recoloring(True)
+        button.setEnabled(enabled)
+        try_generate(ui)
+
+    helper(ui.expression_color_type_selector, lambda: color_button_enabling(left, left_manager, ui.expression_color_type_selector, ui.expression_color_type_button))
+    helper(ui.expression_color_type_selector_2, lambda: color_button_enabling(right, right_manager, ui.expression_color_type_selector_2, ui.expression_color_type_button_2))
 
     # Border style
     helper(ui.border_style_selector,
@@ -105,6 +199,15 @@ def connect_generator(ui: Ui_MainWindow):
     ui.size_medium_option.toggled.connect(lambda c: on_radio_changed(ui, c))
     ui.size_big_option.toggled.connect(lambda c: on_radio_changed(ui, c))
 
+    def add_to_stack():
+        req = make_request(ui, left, right)
+        if req is None:
+            return
+        stacker_ui.add_to_stack(ui, req)
+        stacker.generate_stack(ui)
+
+    ui.add_to_stack.clicked.connect(lambda: add_to_stack())
+
     ui.input.textChanged.connect(lambda: try_generate(ui))
 
     ui.debounce_timer = QTimer()
@@ -114,6 +217,64 @@ def connect_generator(ui: Ui_MainWindow):
     ui.download.clicked.connect(lambda: download(ui))
 
     ui.copy_to_clipboard.clicked.connect(lambda: on_copy(ui))
+
+def try_to_set_simple_colors(side: SideSelectors) -> tuple[list[Color], list[Color]]:
+    color_list = []
+    excluded_list = []
+    affected_expression: Expression = side.expression_selector.currentData()
+    image = bytes_to_image(affected_expression.preview_image)
+    primary = get_primary_color(image)
+    if primary is None:
+        return [], []
+
+    pr, pg, pb = primary
+    primary_color = Color(-1, "", pr, pg, pb, 255)
+    color_list.append(primary_color)
+
+    hp, sp, vp = colorsys.rgb_to_hsv(pr / 255, pg / 255, pb / 255)
+    pixels = image.load()
+
+    for x in range(image.width):
+        for y in range(image.height):
+            r, g, b, a = pixels[x, y]
+            if a == 0: # skip transparent pixels
+                continue
+            if (r, g, b) == (0, 0, 0): # skip black pixels
+                continue
+
+            h, s, v = colorsys.rgb_to_hsv(r / 255, g / 255, b / 255)
+
+            color = Color(-1, "", r, g, b, a)
+            if is_similar((hp, sp, vp), (h, s, v), 0.08, 0.25): # color is not distinct enough and gets included
+                try:
+                    color_list.index(color)
+                except ValueError:
+                    color_list.append(color)
+            else:
+                try:
+                    excluded_list.index(color)
+                except ValueError:
+                    excluded_list.append(color)
+
+    return color_list, excluded_list
+
+
+def show_type_if_valid(side):
+    if side.expression_selector.currentData() is None: # no expression exists
+        for item in side.color_type_everything:
+            item.hide()
+        side.expression_color_selector.setEnabled(False)
+        return
+
+    if side.expression_color_selector.currentData() is None: # no changes
+        for item in side.color_type_everything:
+            item.hide()
+        side.expression_color_selector.setEnabled(True)
+        return
+
+    for item in side.color_type_everything:
+        item.show()
+    side.expression_color_selector.setEnabled(True)
 
 def on_copy(ui: Ui_MainWindow):
     worked = copy_to_clipboard(ui.output)
@@ -208,14 +369,22 @@ def alternate_change(manager: SelectionManager, side: SideSelectors):
 2. Load universes into select (sorted)
 Universes, characters and expressions are added dynamically
 """
-def reload_ui(ui: Ui_MainWindow, left: SideSelectors, right: SideSelectors):
-    reset_selectors(ui, left_manager,  left)
-    reset_selectors(ui, right_manager, right,)
+def reload_ui(ui: Ui_MainWindow, reset_color_things: bool, left: SideSelectors, right: SideSelectors):
+    reset_selectors(ui, left_manager,  left, reset_color_things)
+    reset_selectors(ui, right_manager, right, reset_color_things)
     set_universe_default_border(ui)
     try_generate(ui)
 
-def reset_selectors(ui: Ui_MainWindow, manager: SelectionManager, side: SideSelectors):
+def reset_selectors(ui: Ui_MainWindow, manager: SelectionManager, side: SideSelectors, reset_color_things: bool = True):
     db = get_db()
+
+    if reset_color_things:
+        side.color_type_selector.setCurrentIndex(0)
+        manager.get_color_manager().set_selected_color_type(side.color_type_selector.currentData())
+        manager.get_color_manager().set_selected_colors(None)
+        manager.get_color_manager().set_excluded_colors(None)
+        manager.get_color_manager().set_simple_recoloring(None)
+        side.color_type_button.setEnabled(False)
 
     for selector, preview in [
         (side.universe_selector,   side.universe_preview),
@@ -230,6 +399,7 @@ def reset_selectors(ui: Ui_MainWindow, manager: SelectionManager, side: SideSele
                        side.universe_selector, side.universe_preview,
                        manager.get_selected_universe()):
         manager.reset()
+        show_type_if_valid(side)
         return
 
     universe_id = side.universe_selector.currentData().universe_id
@@ -238,6 +408,7 @@ def reset_selectors(ui: Ui_MainWindow, manager: SelectionManager, side: SideSele
                        manager.get_selected_character()):
         manager.set_selected_character(None)
         manager.set_selected_expression(None)
+        show_type_if_valid(side)
         return
 
     character_id = side.character_selector.currentData().character_id
@@ -262,6 +433,7 @@ def reset_selectors(ui: Ui_MainWindow, manager: SelectionManager, side: SideSele
         manager.try_to_init_alternating_expression()
     else:
         manager.set_selected_expression(None)
+    show_type_if_valid(side)
 
 def set_universe_default_border(ui: Ui_MainWindow):
     universe = ui.universe_selector.currentData()

@@ -1,15 +1,16 @@
 import requests
 from PySide6.QtCore import QTimer, QThreadPool, QObject, Signal, QRunnable
-from PySide6.QtWidgets import QMessageBox, QApplication
+from PySide6.QtWidgets import QMessageBox, QApplication, QPushButton
 
 from configs.paths import STATIC_DB
-from models.entities import Character, Expression
+from models.entities import Character, Expression, Universe
 from running.connection.importing.import_logic import fetch_character, ImportedCharacter, ImportedExpression
 from running.connection.importing.import_cache import RequestCache
 from running.connection.importing.import_utils import parse_import_url, on_failure, on_import_done, reset_progress, \
     on_import_startup
 from services.database_service import DBDynamicConnection, DBStaticConnection
-from services.selection_manager import left_manager, init_entity
+from services.new_window_service import create_preview_window
+from services.selection_manager import left_manager, init_entity, SelectionManager
 from ui.generated_ui import Ui_MainWindow
 
 connection = DBStaticConnection(STATIC_DB)
@@ -60,6 +61,36 @@ def connect_import(ui: Ui_MainWindow):
     ui.disclaimer_2.hide()
     ui.import_button.clicked.connect(lambda: on_import(ui))
     ui.universe_for_import.activated.connect(lambda index: universe_change(ui, index))
+    ui.new_universe_for_import.textChanged.connect(lambda: new_universe(ui))
+
+    def connect_universe(button: QPushButton):
+        def open_picker():
+            universe = create_preview_window(
+                ui,
+                get_db().select_all_universes(),
+                left_manager.get_selected_universe()
+            )
+
+            if universe is not None:
+                left_manager.set_selected_universe(universe)
+                left_manager.try_to_select_first_character_from_current_universe()
+                left_manager.try_to_select_first_expression_from_current_character()
+            reload_ui(ui)
+
+        button.clicked.connect(open_picker)
+
+    connect_universe(ui.all_universes_7)
+
+def new_universe(ui: Ui_MainWindow):
+    universe_name = ui.new_universe_for_import.text()
+    if universe_name == "":
+        ui.universe_import_label.show()
+        ui.universe_for_import.show()
+        ui.all_universes_7.show()
+    else:
+        ui.universe_import_label.hide()
+        ui.universe_for_import.hide()
+        ui.all_universes_7.hide()
 
 def universe_change(ui: Ui_MainWindow, index):
     left_manager.set_selected_universe(
@@ -79,7 +110,19 @@ def reload_ui(ui: Ui_MainWindow):
     init_entity(get_db().select_all_universes, ui.universe_for_import, None, universe)
 
 def on_import(ui: Ui_MainWindow):
+    db = get_db()
+
     universe = left_manager.get_selected_universe()
+
+    new_universe_name = ui.new_universe_for_import.text()
+    new_universe_position = db.count_universes() + 1
+
+    if new_universe_name and new_universe_name.strip() != "":
+        u = Universe(-1, new_universe_name, None, 1, new_universe_position)
+        db.insert_universe(u)
+        universe = db.select_universe_by_order_position(new_universe_position)
+        left_manager.set_selected_universe(universe)
+
     mira_url = ui.character_page_for_import.text()
 
     if universe is None:
@@ -119,6 +162,8 @@ def on_import(ui: Ui_MainWindow):
 
         try_set_selected(new_character)
         ui.character_page_for_import.clear()
+        ui.new_universe_for_import.clear()
+        reload_ui(ui)
         QMessageBox.information(QApplication.activeWindow(), "Success", "Character imported successfully")
 
     signals.progress.connect(on_progress)

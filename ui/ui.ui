@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1085</width>
+    <width>1141</width>
     <height>839</height>
    </rect>
   </property>
@@ -267,8 +267,8 @@
             <rect>
              <x>0</x>
              <y>0</y>
-             <width>1001</width>
-             <height>1124</height>
+             <width>1057</width>
+             <height>1404</height>
             </rect>
            </property>
            <property name="minimumSize">
@@ -289,7 +289,7 @@
               <property name="minimumSize">
                <size>
                 <width>950</width>
-                <height>500</height>
+                <height>550</height>
                </size>
               </property>
               <property name="title">
@@ -307,7 +307,7 @@
                  <property name="minimumSize">
                   <size>
                    <width>0</width>
-                   <height>0</height>
+                   <height>35</height>
                   </size>
                  </property>
                  <property name="toolTip">
@@ -740,7 +740,36 @@
                         </widget>
                        </item>
                        <item>
-                        <widget class="QComboBox" name="universe_selector"/>
+                        <layout class="QHBoxLayout" name="horizontalLayout_106">
+                         <item>
+                          <widget class="QComboBox" name="universe_selector"/>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="all_universes">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>50</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string>prev</string>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>24</width>
+                             <height>24</height>
+                            </size>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
                        </item>
                        <item>
                         <layout class="QHBoxLayout" name="horizontalLayout_68">
@@ -854,7 +883,36 @@
                         </widget>
                        </item>
                        <item>
-                        <widget class="QComboBox" name="character_selector"/>
+                        <layout class="QHBoxLayout" name="horizontalLayout_107">
+                         <item>
+                          <widget class="QComboBox" name="character_selector"/>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="all_characters">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>50</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string>prev</string>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>24</width>
+                             <height>24</height>
+                            </size>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
                        </item>
                        <item>
                         <layout class="QHBoxLayout" name="horizontalLayout_60">
@@ -968,11 +1026,40 @@
                         </widget>
                        </item>
                        <item>
-                        <widget class="QComboBox" name="expression_selector">
-                         <property name="maxVisibleItems">
-                          <number>10</number>
-                         </property>
-                        </widget>
+                        <layout class="QHBoxLayout" name="horizontalLayout_108">
+                         <item>
+                          <widget class="QComboBox" name="expression_selector">
+                           <property name="maxVisibleItems">
+                            <number>10</number>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="all_expressions">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>50</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string>prev</string>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>24</width>
+                             <height>24</height>
+                            </size>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
                        </item>
                        <item>
                         <layout class="QHBoxLayout" name="horizontalLayout_44">
@@ -1002,13 +1089,13 @@
                            </property>
                            <property name="minimumSize">
                             <size>
-                             <width>69</width>
+                             <width>67</width>
                              <height>70</height>
                             </size>
                            </property>
                            <property name="maximumSize">
                             <size>
-                             <width>69</width>
+                             <width>67</width>
                              <height>70</height>
                             </size>
                            </property>
@@ -1074,6 +1161,12 @@
                        </item>
                        <item>
                         <widget class="QLabel" name="expression_color_label">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>35</height>
+                          </size>
+                         </property>
                          <property name="font">
                           <font>
                            <pointsize>13</pointsize>
@@ -1171,7 +1264,132 @@
                       </layout>
                      </item>
                      <item>
-                      <widget class="Line" name="line_37">
+                      <layout class="QHBoxLayout" name="horizontalLayout_101">
+                       <item>
+                        <widget class="Line" name="line_79">
+                         <property name="orientation">
+                          <enum>Qt::Orientation::Vertical</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="expression_color_type_label">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>35</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>13</pointsize>
+                           <fontweight>DemiBold</fontweight>
+                          </font>
+                         </property>
+                         <property name="toolTip">
+                          <string>Controls the coloring specifics. &quot;Simple&quot; works best for eyes, &quot;Everything&quot; works good on Darkners and &quot;Custom&quot; gives the most control</string>
+                         </property>
+                         <property name="text">
+                          <string>Coloring Type</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignmentFlag::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QComboBox" name="expression_color_type_selector"/>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_103">
+                         <item>
+                          <widget class="QLabel" name="label_left">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>100</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>110</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="expression_color_type_button">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>200</width>
+                             <height>30</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>200</width>
+                             <height>30</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string>Configure Colors</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_right">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>100</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>100</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <widget class="Line" name="line_80">
+                         <property name="orientation">
+                          <enum>Qt::Orientation::Vertical</enum>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <widget class="Line" name="line_81">
                        <property name="orientation">
                         <enum>Qt::Orientation::Horizontal</enum>
                        </property>
@@ -1339,7 +1557,36 @@
                         </widget>
                        </item>
                        <item>
-                        <widget class="QComboBox" name="universe_selector_2"/>
+                        <layout class="QHBoxLayout" name="horizontalLayout_109">
+                         <item>
+                          <widget class="QComboBox" name="universe_selector_2"/>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="all_universes_2">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>50</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string>prev</string>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>24</width>
+                             <height>24</height>
+                            </size>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
                        </item>
                        <item>
                         <layout class="QHBoxLayout" name="horizontalLayout_93">
@@ -1453,7 +1700,36 @@
                         </widget>
                        </item>
                        <item>
-                        <widget class="QComboBox" name="character_selector_2"/>
+                        <layout class="QHBoxLayout" name="horizontalLayout_110">
+                         <item>
+                          <widget class="QComboBox" name="character_selector_2"/>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="all_characters_2">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>50</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string>prev</string>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>24</width>
+                             <height>24</height>
+                            </size>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
                        </item>
                        <item>
                         <layout class="QHBoxLayout" name="horizontalLayout_95">
@@ -1567,11 +1843,34 @@
                         </widget>
                        </item>
                        <item>
-                        <widget class="QComboBox" name="expression_selector_2">
-                         <property name="maxVisibleItems">
-                          <number>10</number>
-                         </property>
-                        </widget>
+                        <layout class="QHBoxLayout" name="horizontalLayout_111">
+                         <item>
+                          <widget class="QComboBox" name="expression_selector_2">
+                           <property name="maxVisibleItems">
+                            <number>10</number>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="all_expressions_2">
+                           <property name="maximumSize">
+                            <size>
+                             <width>50</width>
+                             <height>16777215</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string>prev</string>
+                           </property>
+                           <property name="iconSize">
+                            <size>
+                             <width>24</width>
+                             <height>24</height>
+                            </size>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
                        </item>
                        <item>
                         <layout class="QHBoxLayout" name="horizontalLayout_97">
@@ -1601,13 +1900,13 @@
                            </property>
                            <property name="minimumSize">
                             <size>
-                             <width>69</width>
+                             <width>67</width>
                              <height>70</height>
                             </size>
                            </property>
                            <property name="maximumSize">
                             <size>
-                             <width>69</width>
+                             <width>67</width>
                              <height>70</height>
                             </size>
                            </property>
@@ -1673,6 +1972,12 @@
                        </item>
                        <item>
                         <widget class="QLabel" name="expression_color_label_2">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>35</height>
+                          </size>
+                         </property>
                          <property name="font">
                           <font>
                            <pointsize>13</pointsize>
@@ -1762,6 +2067,131 @@
                        </item>
                        <item>
                         <widget class="Line" name="line_96">
+                         <property name="orientation">
+                          <enum>Qt::Orientation::Vertical</enum>
+                         </property>
+                        </widget>
+                       </item>
+                      </layout>
+                     </item>
+                     <item>
+                      <layout class="QHBoxLayout" name="horizontalLayout_104">
+                       <item>
+                        <widget class="Line" name="line_37">
+                         <property name="orientation">
+                          <enum>Qt::Orientation::Vertical</enum>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QLabel" name="expression_color_type_label_2">
+                         <property name="minimumSize">
+                          <size>
+                           <width>0</width>
+                           <height>35</height>
+                          </size>
+                         </property>
+                         <property name="font">
+                          <font>
+                           <pointsize>13</pointsize>
+                           <fontweight>DemiBold</fontweight>
+                          </font>
+                         </property>
+                         <property name="toolTip">
+                          <string>Controls the coloring specifics. &quot;Simple&quot; works best for eyes, &quot;Everything&quot; works good on Darkners and &quot;Custom&quot; gives the most control</string>
+                         </property>
+                         <property name="text">
+                          <string>Coloring Type</string>
+                         </property>
+                         <property name="alignment">
+                          <set>Qt::AlignmentFlag::AlignCenter</set>
+                         </property>
+                        </widget>
+                       </item>
+                       <item>
+                        <widget class="QComboBox" name="expression_color_type_selector_2"/>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_105">
+                         <item>
+                          <widget class="QLabel" name="label_left_2">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>100</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>110</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QPushButton" name="expression_color_type_button_2">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>200</width>
+                             <height>30</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>200</width>
+                             <height>30</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string>Configure Colors</string>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <widget class="QLabel" name="label_right_2">
+                           <property name="sizePolicy">
+                            <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                             <horstretch>0</horstretch>
+                             <verstretch>0</verstretch>
+                            </sizepolicy>
+                           </property>
+                           <property name="minimumSize">
+                            <size>
+                             <width>100</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                           <property name="maximumSize">
+                            <size>
+                             <width>100</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                           <property name="text">
+                            <string/>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <widget class="Line" name="line_82">
                          <property name="orientation">
                           <enum>Qt::Orientation::Vertical</enum>
                          </property>
@@ -2725,7 +3155,36 @@
                            </widget>
                           </item>
                           <item>
-                           <widget class="QComboBox" name="alternating_selector"/>
+                           <layout class="QHBoxLayout" name="horizontalLayout_88">
+                            <item>
+                             <widget class="QComboBox" name="alternating_selector"/>
+                            </item>
+                            <item>
+                             <widget class="QPushButton" name="all_expressions_alt">
+                              <property name="sizePolicy">
+                               <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                                <horstretch>0</horstretch>
+                                <verstretch>0</verstretch>
+                               </sizepolicy>
+                              </property>
+                              <property name="maximumSize">
+                               <size>
+                                <width>50</width>
+                                <height>16777215</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>prev</string>
+                              </property>
+                              <property name="iconSize">
+                               <size>
+                                <width>24</width>
+                                <height>24</height>
+                               </size>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
                           </item>
                           <item>
                            <layout class="QHBoxLayout" name="horizontalLayout_75">
@@ -2845,7 +3304,30 @@
                            </widget>
                           </item>
                           <item>
-                           <widget class="QComboBox" name="alternating_right_selector"/>
+                           <layout class="QHBoxLayout" name="horizontalLayout_89">
+                            <item>
+                             <widget class="QComboBox" name="alternating_right_selector"/>
+                            </item>
+                            <item>
+                             <widget class="QPushButton" name="all_expressions_alt_2">
+                              <property name="maximumSize">
+                               <size>
+                                <width>50</width>
+                                <height>16777215</height>
+                               </size>
+                              </property>
+                              <property name="text">
+                               <string>prev</string>
+                              </property>
+                              <property name="iconSize">
+                               <size>
+                                <width>24</width>
+                                <height>24</height>
+                               </size>
+                              </property>
+                             </widget>
+                            </item>
+                           </layout>
                           </item>
                           <item>
                            <layout class="QHBoxLayout" name="horizontalLayout_78">
@@ -3154,7 +3636,7 @@
               <property name="minimumSize">
                <size>
                 <width>400</width>
-                <height>600</height>
+                <height>830</height>
                </size>
               </property>
               <property name="title">
@@ -3368,25 +3850,41 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                 </widget>
                </item>
                <item>
+                <spacer name="verticalSpacer_12">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Vertical</enum>
+                 </property>
+                 <property name="sizeType">
+                  <enum>QSizePolicy::Policy::Fixed</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>20</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_56">
                  <item>
                   <widget class="QLabel" name="output">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
                    <property name="minimumSize">
                     <size>
-                     <width>289</width>
-                     <height>76</height>
+                     <width>950</width>
+                     <height>200</height>
                     </size>
                    </property>
                    <property name="maximumSize">
                     <size>
-                     <width>909</width>
-                     <height>270</height>
+                     <width>1000</width>
+                     <height>400</height>
                     </size>
                    </property>
                    <property name="palette">
@@ -3470,7 +3968,35 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                   </widget>
                  </item>
                  <item>
-                  <layout class="QVBoxLayout" name="verticalLayout_32">
+                  <layout class="QHBoxLayout" name="horizontalLayout_81">
+                   <property name="spacing">
+                    <number>15</number>
+                   </property>
+                   <item>
+                    <widget class="QPushButton" name="copy_to_clipboard">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>250</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>300</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>Copy to Clipboard</string>
+                     </property>
+                    </widget>
+                   </item>
                    <item>
                     <widget class="QPushButton" name="download">
                      <property name="sizePolicy">
@@ -3481,7 +4007,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                      </property>
                      <property name="minimumSize">
                       <size>
-                       <width>0</width>
+                       <width>250</width>
                        <height>0</height>
                       </size>
                      </property>
@@ -3497,12 +4023,18 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QPushButton" name="copy_to_clipboard">
+                    <widget class="QPushButton" name="add_to_stack">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
+                     </property>
+                     <property name="minimumSize">
+                      <size>
+                       <width>250</width>
+                       <height>0</height>
+                      </size>
                      </property>
                      <property name="maximumSize">
                       <size>
@@ -3511,7 +4043,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                       </size>
                      </property>
                      <property name="text">
-                      <string>Copy to Clipboard</string>
+                      <string>Add to Stack</string>
                      </property>
                     </widget>
                    </item>
@@ -3531,6 +4063,164 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
             </item>
            </layout>
           </widget>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="textbox_stacker">
+       <attribute name="title">
+        <string>Textbox Stacker</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="horizontalLayout_84">
+        <item>
+         <widget class="QGroupBox" name="groupBox">
+          <property name="title">
+           <string>Contents</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_32">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_29">
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_87">
+               <property name="spacing">
+                <number>6</number>
+               </property>
+               <item>
+                <widget class="QLabel" name="amount_of_columns_label">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string>Amount of columns</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="amount_of_columns">
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>50</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="add_current_box">
+               <property name="text">
+                <string>Add current box</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="Line" name="line_77">
+             <property name="orientation">
+              <enum>Qt::Orientation::Horizontal</enum>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QScrollArea" name="scrollArea_5">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>508</width>
+                <height>628</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_26">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_30"/>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="title">
+           <string>Stack</string>
+          </property>
+          <layout class="QVBoxLayout" name="verticalLayout_35">
+           <item>
+            <layout class="QVBoxLayout" name="verticalLayout_37">
+             <item>
+              <widget class="QPushButton" name="add_textboxes">
+               <property name="text">
+                <string>Create Textboxes (Generator)</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="download_stack">
+               <property name="text">
+                <string>Download Stack</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="Line" name="line_78">
+               <property name="orientation">
+                <enum>Qt::Orientation::Horizontal</enum>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QScrollArea" name="scrollArea_6">
+             <property name="widgetResizable">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignmentFlag::AlignCenter</set>
+             </property>
+             <widget class="QWidget" name="scrollAreaWidgetContents_3">
+              <property name="geometry">
+               <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>507</width>
+                <height>631</height>
+               </rect>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_25">
+               <item>
+                <widget class="QLabel" name="output_stack">
+                 <property name="minimumSize">
+                  <size>
+                   <width>0</width>
+                   <height>0</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignmentFlag::AlignCenter</set>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+          </layout>
          </widget>
         </item>
        </layout>
@@ -3560,6 +4250,20 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                <item>
                 <widget class="QLineEdit" name="universe_filter_input"/>
                </item>
+               <item>
+                <widget class="QPushButton" name="export_selected_universe">
+                 <property name="text">
+                  <string>Export Selected</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="export_all_universe">
+                 <property name="text">
+                  <string>Export All</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item>
@@ -3579,7 +4283,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>989</width>
+                  <width>1045</width>
                   <height>427</height>
                  </rect>
                 </property>
@@ -4008,7 +4712,36 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="characters_create_universe_selector"/>
+                    <layout class="QHBoxLayout" name="horizontalLayout_112">
+                     <item>
+                      <widget class="QComboBox" name="characters_create_universe_selector"/>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="all_universes_3">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>50</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>prev</string>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>24</width>
+                         <height>24</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
                    </item>
                   </layout>
                  </item>
@@ -4220,7 +4953,36 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="characters_edit_universe_selector"/>
+                    <layout class="QHBoxLayout" name="horizontalLayout_113">
+                     <item>
+                      <widget class="QComboBox" name="characters_edit_universe_selector"/>
+                     </item>
+                     <item>
+                      <widget class="QPushButton" name="all_universes_4">
+                       <property name="sizePolicy">
+                        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                         <horstretch>0</horstretch>
+                         <verstretch>0</verstretch>
+                        </sizepolicy>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>50</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>prev</string>
+                       </property>
+                       <property name="iconSize">
+                        <size>
+                         <width>24</width>
+                         <height>24</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
                    </item>
                   </layout>
                  </item>
@@ -4388,6 +5150,20 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                  <item>
                   <widget class="QLineEdit" name="characters_filter_input"/>
                  </item>
+                 <item>
+                  <widget class="QPushButton" name="export_selected_character">
+                   <property name="text">
+                    <string>Export Selected</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="export_all_character">
+                   <property name="text">
+                    <string>Export All</string>
+                   </property>
+                  </widget>
+                 </item>
                 </layout>
                </item>
                <item>
@@ -4407,7 +5183,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                    <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>987</width>
+                    <width>1043</width>
                     <height>316</height>
                    </rect>
                   </property>
@@ -4494,7 +5270,36 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="expressions_create_universe_selector"/>
+                  <layout class="QHBoxLayout" name="horizontalLayout_114">
+                   <item>
+                    <widget class="QComboBox" name="expressions_create_universe_selector"/>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="all_universes_5">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>prev</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>24</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                 </layout>
                </item>
@@ -4508,7 +5313,30 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="expressions_create_character_selector"/>
+                  <layout class="QHBoxLayout" name="horizontalLayout_115">
+                   <item>
+                    <widget class="QComboBox" name="expressions_create_character_selector"/>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="all_characters_3">
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>prev</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>24</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                 </layout>
                </item>
@@ -4657,7 +5485,30 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="expressions_edit_universe_selector"/>
+                  <layout class="QHBoxLayout" name="horizontalLayout_116">
+                   <item>
+                    <widget class="QComboBox" name="expressions_edit_universe_selector"/>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="all_universes_6">
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>prev</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>24</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                 </layout>
                </item>
@@ -4671,7 +5522,36 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                   </widget>
                  </item>
                  <item>
-                  <widget class="QComboBox" name="expressions_edit_character_selector"/>
+                  <layout class="QHBoxLayout" name="horizontalLayout_117">
+                   <item>
+                    <widget class="QComboBox" name="expressions_edit_character_selector"/>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="all_characters_4">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>50</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="text">
+                      <string>prev</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>24</width>
+                       <height>24</height>
+                      </size>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                 </layout>
                </item>
@@ -4779,6 +5659,20 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                <item>
                 <widget class="QLineEdit" name="expressions_filter_input"/>
                </item>
+               <item>
+                <widget class="QPushButton" name="export_selected_expression">
+                 <property name="text">
+                  <string>Export Selected</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="export_all_expression">
+                 <property name="text">
+                  <string>Export All</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item>
@@ -4798,7 +5692,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                  <rect>
                   <x>0</x>
                   <y>0</y>
-                  <width>989</width>
+                  <width>1045</width>
                   <height>359</height>
                  </rect>
                 </property>
@@ -4815,7 +5709,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
       </widget>
       <widget class="QWidget" name="demi_character_import">
        <attribute name="title">
-        <string>Import Character</string>
+        <string>Import Characters</string>
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_9">
         <item>
@@ -4943,7 +5837,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
             <property name="bottomMargin">
              <number>0</number>
             </property>
-            <item row="0" column="0">
+            <item row="1" column="0">
              <widget class="QLabel" name="universe_import_label">
               <property name="font">
                <font>
@@ -4959,10 +5853,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="1">
-             <widget class="QComboBox" name="universe_for_import"/>
-            </item>
-            <item row="1" column="0">
+            <item row="4" column="0">
              <layout class="QVBoxLayout" name="verticalLayout_27">
               <item>
                <widget class="QLabel" name="character_page_import_label">
@@ -4979,7 +5870,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
               </item>
              </layout>
             </item>
-            <item row="1" column="1">
+            <item row="4" column="1">
              <widget class="QLineEdit" name="character_page_for_import">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -5005,11 +5896,11 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                <string/>
               </property>
               <property name="placeholderText">
-               <string>demirramon.com/user_content/undertale_character/{creator}/{character-id}</string>
+               <string> demirramon.com/user_content/undertale_character/{creator}/{character-id}</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
+            <item row="8" column="0">
              <layout class="QVBoxLayout" name="verticalLayout_28">
               <item>
                <widget class="QLabel" name="token_import_label">
@@ -5026,7 +5917,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
               </item>
              </layout>
             </item>
-            <item row="5" column="1">
+            <item row="8" column="1">
              <widget class="QLineEdit" name="token_for_import">
               <property name="sizePolicy">
                <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -5045,7 +5936,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="1">
+            <item row="5" column="1">
              <widget class="QPushButton" name="import_button">
               <property name="font">
                <font>
@@ -5057,7 +5948,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
+            <item row="7" column="1">
              <widget class="QLabel" name="import_load">
               <property name="font">
                <font>
@@ -5072,12 +5963,82 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
               </property>
              </widget>
             </item>
-            <item row="3" column="1">
+            <item row="6" column="1">
              <widget class="QProgressBar" name="import_progress">
               <property name="value">
                <number>0</number>
               </property>
              </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="universe_import_create_label">
+              <property name="font">
+               <font>
+                <pointsize>16</pointsize>
+                <fontweight>DemiBold</fontweight>
+               </font>
+              </property>
+              <property name="toolTip">
+               <string>Creates a new universe with the default border setting</string>
+              </property>
+              <property name="text">
+               <string>Or insert into new universe:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignmentFlag::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="new_universe_for_import"/>
+            </item>
+            <item row="3" column="1">
+             <spacer name="verticalSpacer_11">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeType">
+               <enum>QSizePolicy::Policy::Fixed</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>25</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item row="1" column="1">
+             <layout class="QHBoxLayout" name="horizontalLayout_122">
+              <item>
+               <widget class="QComboBox" name="universe_for_import"/>
+              </item>
+              <item>
+               <widget class="QPushButton" name="all_universes_7">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>50</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>prev</string>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>24</width>
+                  <height>24</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
             </item>
            </layout>
           </item>
@@ -5171,7 +6132,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1085</width>
+     <width>1141</width>
      <height>23</height>
     </rect>
    </property>

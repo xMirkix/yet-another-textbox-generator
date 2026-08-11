@@ -24,7 +24,10 @@ class RequestCache:
             return self._text_cache[url]
         response = self._session.get(url, timeout=timeout)
         response.raise_for_status()
-        self._text_cache[url] = response.text
+        if len(self._text_cache.keys()) < 100:
+            self._text_cache[url] = response.text
+        else:
+            self._text_cache.clear()
         return response.text
 
     def get_bytes(self, url: str, timeout: float = 10) -> bytes:
@@ -32,7 +35,10 @@ class RequestCache:
             return self._binary_cache[url]
         response = self._session.get(url, timeout=timeout)
         response.raise_for_status()
-        self._binary_cache[url] = response.content
+        if len(self._binary_cache.keys()) < 130:
+            self._binary_cache[url] = response.content
+        else:
+            self._binary_cache.clear()
         return response.content
 
     def clear(self) -> None:

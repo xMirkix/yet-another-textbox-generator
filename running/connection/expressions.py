@@ -1,16 +1,19 @@
 from typing import Callable
 
 from PySide6.QtCore import QTimer
-from PySide6.QtWidgets import QLineEdit, QLabel, QPushButton, QMessageBox
+from PySide6.QtWidgets import QLineEdit, QLabel, QPushButton, QMessageBox, QComboBox
 
-from models.entities import Expression, Universe
+from models.entities import Expression, Universe, Character
 from models.handler.expression_handler import ExpressionHandler
 from running.connection.resizing import GridReflowFilter
 from services import change_service
 from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
+from services.exporting_service import export_all_expressions, export_selected_expression
 from services.grid_service import clear_grid, restore_selection
-from services.selection_manager import init_entity, left_manager
+from services.new_window_service import create_preview_window, connect_universe_create, connect_character_create, \
+    connect_universe_edit, connect_character_edit
+from services.selection_manager import init_entity, left_manager, select_entity_in_combo, select_chars, SelectionManager
 from ui.generated_ui import Ui_MainWindow
 
 
@@ -55,12 +58,48 @@ def connect_expressions(ui: Ui_MainWindow):
         lambda index: character_change(ui, index)
     )
 
+    ui.expressions_edit_universe_selector.activated.connect(lambda: edit_universe_change(ui))
+
+    def post_universe_fn(universe: Universe, man: SelectionManager):
+        man.set_selected_universe(universe)
+        man.try_to_select_first_character_from_current_universe()
+        man.try_to_select_first_expression_from_current_character()
+        reload_ui(ui)
+
+    connect_universe_create(ui, ui.all_universes_5, left_manager, post_universe_fn)
+
+    connect_universe_edit(ui, ui.all_universes_6, ui.expressions_edit_universe_selector, lambda: edit_universe_change(ui))
+
+    def post_character_fn(character: Character, man: SelectionManager):
+        man.set_selected_character(character)
+        man.try_to_select_first_expression_from_current_character()
+        reload_ui(ui)
+
+    connect_character_create(ui, ui.all_characters_3, left_manager, post_character_fn)
+
+    connect_character_edit(ui, ui.all_characters_4, ui.expressions_edit_character_selector)
+
+    ui.export_all_expression.clicked.connect(lambda: export_all_expressions())
+    ui.export_selected_expression.clicked.connect(lambda: export_selected_expression())
+
+
 def universe_change(ui: Ui_MainWindow):
     ui.edit_expression.hide()
     new_universe : Universe = ui.expressions_create_universe_selector.currentData()
     left_manager.set_selected_universe(new_universe)
     left_manager.try_to_select_first_character_from_current_universe()
     QTimer.singleShot(0, lambda: reload_ui(ui))
+
+def edit_universe_change(ui: Ui_MainWindow):
+    ui.expressions_edit_character_selector.clear()
+    universe = ui.expressions_edit_universe_selector.currentData()
+    db = get_db()
+
+    characters = db.select_all_characters_from_universe(universe.universe_id)
+
+    for c in characters:
+        ui.expressions_edit_character_selector.addItem(c.character_name, userData=c)
+
 
 def character_change(ui: Ui_MainWindow, index):
     ui.edit_expression.hide()
@@ -115,7 +154,7 @@ def edit_expression(ui: Ui_MainWindow):
         return
 
     form_operation(ui, expression_id, expression_name, character_id, pixmap, 42,
-                   db.update_expression)  # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
+                   lambda expression: edit_expression_check_for_universe(expression))
 
     left_manager.set_selected_expression(db.select_expression_by_id(expression_id))
 
@@ -125,6 +164,20 @@ def edit_expression(ui: Ui_MainWindow):
         ui.expressions_edit_image_remove_button,
         lambda: QTimer.singleShot(0, lambda: reload_ui(ui))  # For edit to take effect
     )
+
+def edit_expression_check_for_universe(expression: Expression):
+    db = get_db()
+    character_id = expression.character_id
+    selected_character_id = left_manager.get_selected_character().character_id
+
+    if character_id != selected_character_id:
+        count = db.count_expressions(character_id)
+        expression.order_position = count + 1
+
+    db.update_expression(expression)  # Order position is not changed on update and thus not considered
+
+    if character_id != selected_character_id:
+        db.update_expression_order_position(expression.expression_id, expression.order_position)
 
 def form_operation(ui: Ui_MainWindow, expression_id: int, name: str, character_id: int, pixmap, order_position: int, db_function: Callable):
     if not name:
@@ -197,21 +250,34 @@ def reload_ui(ui: Ui_MainWindow):
     ui.expressions_filter_input.clear()
     clear_grid(ui.expressions_grid)
 
+    db = get_db()
+
     universe = left_manager.get_selected_universe()
     if universe is None:
+        ui.export_all_expression.setEnabled(False)
+        ui.export_selected_expression.setEnabled(False)
         return
 
-    init_entity(get_db().select_all_universes, ui.expressions_create_universe_selector, None, universe)
-    init_entity(get_db().select_all_universes, ui.expressions_edit_universe_selector, None, universe)
+    init_entity(db.select_all_universes, ui.expressions_create_universe_selector, None, universe)
+    init_entity(db.select_all_universes, ui.expressions_edit_universe_selector, None, universe)
 
     character = left_manager.get_selected_character()
     if character is None:
+        ui.export_all_expression.setEnabled(False)
+        ui.export_selected_expression.setEnabled(False)
         return
 
-    init_entity(lambda: get_db().select_all_characters_from_universe(universe.universe_id), ui.expressions_create_character_selector, None, character)
-    init_entity(lambda: get_db().select_all_characters_from_universe(universe.universe_id), ui.expressions_edit_character_selector, None, character)
+    if db.count_expressions(character.character_id) > 0:
+        ui.export_all_expression.setEnabled(True)
+        ui.export_selected_expression.setEnabled(True)
+    else:
+        ui.export_all_expression.setEnabled(False)
+        ui.export_selected_expression.setEnabled(False)
 
-    for expression in get_db().select_all_expressions_from_character(character.character_id):
+    init_entity(lambda: db.select_all_characters_from_universe(universe.universe_id), ui.expressions_create_character_selector, None, character)
+    init_entity(lambda: db.select_all_characters_from_universe(universe.universe_id), ui.expressions_edit_character_selector, None, character)
+
+    for expression in db.select_all_expressions_from_character(character.character_id):
         insert_expression_tile(ui, expression)
 
     selected = left_manager.get_selected_expression()

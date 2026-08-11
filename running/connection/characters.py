@@ -3,14 +3,16 @@ from typing import Callable
 from PySide6.QtCore import QTimer
 from PySide6.QtWidgets import QMessageBox, QLineEdit, QLabel, QPushButton, QComboBox, QRadioButton
 
-from models.entities import Character
+from models.entities import Character, Universe
 from models.handler.character_handler import CharacterHandler
 from running.connection.resizing import GridReflowFilter
 from services import change_service
 from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
+from services.exporting_service import export_all_characters, export_selected_character
 from services.grid_service import clear_grid, restore_selection
-from services.selection_manager import init_entity, left_manager
+from services.new_window_service import connect_universe_create, connect_universe_edit
+from services.selection_manager import init_entity, left_manager, SelectionManager
 from ui.generated_ui import Ui_MainWindow
 
 
@@ -48,6 +50,19 @@ def connect_characters(ui: Ui_MainWindow):
     ui.characters_create_universe_selector.activated.connect(
         lambda index: universe_change(ui, index)
     )
+
+    def post_universe_fn(universe: Universe, man: SelectionManager):
+        man.set_selected_universe(universe)
+        man.try_to_select_first_character_from_current_universe()
+        man.try_to_select_first_expression_from_current_character()
+        reload_ui(ui)
+
+    connect_universe_create(ui, ui.all_universes_3, left_manager, post_universe_fn)
+
+    connect_universe_edit(ui, ui.all_universes_4, ui.characters_edit_universe_selector, lambda: ())
+
+    ui.export_all_character.clicked.connect(lambda: export_all_characters())
+    ui.export_selected_character.clicked.connect(lambda: export_selected_character())
 
 def universe_change(ui: Ui_MainWindow, index):
     ui.edit_character.hide()
@@ -114,7 +129,7 @@ def edit_character(ui: Ui_MainWindow):
         return
 
     form_operation(ui, character_id, character_name, universe_id, style, font, transform, pixmap, 42,
-                   db.update_character)  # Order position is not changed on update and thus not considered, 42 is the answer to the question of live
+                   lambda character: edit_character_check_for_universe(character))
 
     left_manager.set_selected_character(db.select_character_by_id(character_id))
 
@@ -124,6 +139,20 @@ def edit_character(ui: Ui_MainWindow):
         ui.characters_edit_image_remove_button,
         lambda: QTimer.singleShot(0, lambda: reload_ui(ui))  # For edit to take effect
     )
+
+def edit_character_check_for_universe(character: Character):
+    db = get_db()
+    universe_id = character.universe_id
+    selected_universe_id = left_manager.get_selected_universe().universe_id
+
+    if universe_id != selected_universe_id:
+        count = db.count_characters(universe_id)
+        character.order_position = count + 1
+
+    db.update_character(character)  # Order position is not changed on update and thus not considered
+
+    if universe_id != selected_universe_id:
+        db.update_character_order_position(character.character_id, character.order_position)
 
 def form_operation(ui: Ui_MainWindow, character_id: int, name: str, universe_id: int, default_style: int, default_font: int, default_text_transform: int, pixmap, order_position: int, db_function: Callable):
     if not name:
@@ -238,17 +267,28 @@ def reload_ui(ui: Ui_MainWindow):
     ui.characters_edit_universe_selector.clear()
     ui.characters_filter_input.clear()
 
+    db = get_db()
+
     universe = left_manager.get_selected_universe()
 
     if universe is None:
+        ui.export_all_character.setEnabled(False)
+        ui.export_selected_character.setEnabled(False)
         return
 
-    init_entity(get_db().select_all_universes, ui.characters_create_universe_selector, None, universe)
-    init_entity(get_db().select_all_universes, ui.characters_edit_universe_selector, None, universe)
+    if db.count_characters(universe.universe_id) > 0:
+        ui.export_all_character.setEnabled(True)
+        ui.export_selected_character.setEnabled(True)
+    else:
+        ui.export_all_character.setEnabled(False)
+        ui.export_selected_character.setEnabled(False)
+
+    init_entity(db.select_all_universes, ui.characters_create_universe_selector, None, universe)
+    init_entity(db.select_all_universes, ui.characters_edit_universe_selector, None, universe)
 
     clear_grid(ui.characters_grid)
 
-    for character in get_db().select_all_characters_from_universe(universe.universe_id):
+    for character in db.select_all_characters_from_universe(universe.universe_id):
         insert_character_tile(ui, character)
 
     selected = left_manager.get_selected_character()
