@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiaeuQVY.ui'
+## Form generated from reading UI file 'uiyngmSI.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.1
 ##
@@ -16,13 +16,14 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFormLayout,
-    QFrame, QGridLayout, QGroupBox, QHBoxLayout,
-    QLabel, QLayout, QLineEdit, QMainWindow,
-    QMenu, QMenuBar, QProgressBar, QPushButton,
-    QRadioButton, QScrollArea, QSizePolicy, QSpacerItem,
-    QSpinBox, QStatusBar, QTabWidget, QTextEdit,
-    QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComboBox,
+    QFormLayout, QFrame, QGridLayout, QGroupBox,
+    QHBoxLayout, QLabel, QLayout, QLineEdit,
+    QListWidget, QListWidgetItem, QMainWindow, QMenu,
+    QMenuBar, QProgressBar, QPushButton, QRadioButton,
+    QScrollArea, QSizePolicy, QSpacerItem, QSpinBox,
+    QStatusBar, QTabWidget, QTextEdit, QVBoxLayout,
+    QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -114,6 +115,29 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_31.addWidget(self.open_file)
 
+        self.last_opened_list = QListWidget(self.welcome)
+        self.last_opened_list.setObjectName(u"last_opened_list")
+        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+        sizePolicy3.setHorizontalStretch(0)
+        sizePolicy3.setVerticalStretch(0)
+        sizePolicy3.setHeightForWidth(self.last_opened_list.sizePolicy().hasHeightForWidth())
+        self.last_opened_list.setSizePolicy(sizePolicy3)
+        self.last_opened_list.setMaximumSize(QSize(16777215, 100))
+        font = QFont()
+        font.setPointSize(11)
+        self.last_opened_list.setFont(font)
+        self.last_opened_list.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.last_opened_list.setEditTriggers(QAbstractItemView.EditTrigger.NoEditTriggers)
+        self.last_opened_list.setTabKeyNavigation(True)
+        self.last_opened_list.setProperty(u"showDropIndicator", False)
+        self.last_opened_list.setDefaultDropAction(Qt.DropAction.IgnoreAction)
+        self.last_opened_list.setAlternatingRowColors(True)
+        self.last_opened_list.setKeyboardSearchFlags(Qt.MatchFlag.MatchStartsWith)
+        self.last_opened_list.setUniformItemSizes(False)
+        self.last_opened_list.setSupportedDragActions(Qt.DropAction.IgnoreAction)
+
+        self.verticalLayout_31.addWidget(self.last_opened_list)
+
         self.generator_link = QPushButton(self.welcome)
         self.generator_link.setObjectName(u"generator_link")
 
@@ -157,17 +181,17 @@ class Ui_MainWindow(object):
         self.tabs.addTab(self.welcome, "")
         self.generator = QWidget()
         self.generator.setObjectName(u"generator")
-        sizePolicy3 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy3.setHorizontalStretch(0)
-        sizePolicy3.setVerticalStretch(0)
-        sizePolicy3.setHeightForWidth(self.generator.sizePolicy().hasHeightForWidth())
-        self.generator.setSizePolicy(sizePolicy3)
+        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy4.setHorizontalStretch(0)
+        sizePolicy4.setVerticalStretch(0)
+        sizePolicy4.setHeightForWidth(self.generator.sizePolicy().hasHeightForWidth())
+        self.generator.setSizePolicy(sizePolicy4)
         self.gridLayout_6 = QGridLayout(self.generator)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.scrollArea_4 = QScrollArea(self.generator)
         self.scrollArea_4.setObjectName(u"scrollArea_4")
-        sizePolicy3.setHeightForWidth(self.scrollArea_4.sizePolicy().hasHeightForWidth())
-        self.scrollArea_4.setSizePolicy(sizePolicy3)
+        sizePolicy4.setHeightForWidth(self.scrollArea_4.sizePolicy().hasHeightForWidth())
+        self.scrollArea_4.setSizePolicy(sizePolicy4)
         self.scrollArea_4.setMinimumSize(QSize(1000, 600))
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
@@ -178,21 +202,21 @@ class Ui_MainWindow(object):
         self.gridLayout_7.setObjectName(u"gridLayout_7")
         self.settings = QGroupBox(self.scrollAreaWidgetContents_2)
         self.settings.setObjectName(u"settings")
-        sizePolicy3.setHeightForWidth(self.settings.sizePolicy().hasHeightForWidth())
-        self.settings.setSizePolicy(sizePolicy3)
+        sizePolicy4.setHeightForWidth(self.settings.sizePolicy().hasHeightForWidth())
+        self.settings.setSizePolicy(sizePolicy4)
         self.settings.setMinimumSize(QSize(950, 550))
         self.gridLayout_11 = QGridLayout(self.settings)
         self.gridLayout_11.setObjectName(u"gridLayout_11")
         self.tabWidget = QTabWidget(self.settings)
         self.tabWidget.setObjectName(u"tabWidget")
-        sizePolicy3.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
-        self.tabWidget.setSizePolicy(sizePolicy3)
+        sizePolicy4.setHeightForWidth(self.tabWidget.sizePolicy().hasHeightForWidth())
+        self.tabWidget.setSizePolicy(sizePolicy4)
         self.tabWidget.setMinimumSize(QSize(0, 35))
         self.tabWidget.setTabPosition(QTabWidget.TabPosition.North)
         self.tab = QWidget()
         self.tab.setObjectName(u"tab")
-        sizePolicy3.setHeightForWidth(self.tab.sizePolicy().hasHeightForWidth())
-        self.tab.setSizePolicy(sizePolicy3)
+        sizePolicy4.setHeightForWidth(self.tab.sizePolicy().hasHeightForWidth())
+        self.tab.setSizePolicy(sizePolicy4)
         self.gridLayout_8 = QGridLayout(self.tab)
         self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.verticalLayout_2 = QVBoxLayout()
@@ -215,13 +239,13 @@ class Ui_MainWindow(object):
 
         self.border_style_label = QLabel(self.tab)
         self.border_style_label.setObjectName(u"border_style_label")
-        font = QFont()
-        font.setPointSize(13)
-        font.setWeight(QFont.DemiBold)
-        font.setItalic(False)
-        font.setUnderline(False)
-        font.setStrikeOut(False)
-        self.border_style_label.setFont(font)
+        font1 = QFont()
+        font1.setPointSize(13)
+        font1.setWeight(QFont.DemiBold)
+        font1.setItalic(False)
+        font1.setUnderline(False)
+        font1.setStrikeOut(False)
+        self.border_style_label.setFont(font1)
         self.border_style_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_3.addWidget(self.border_style_label)
@@ -240,11 +264,11 @@ class Ui_MainWindow(object):
 
         self.border_style_preview = QLabel(self.tab)
         self.border_style_preview.setObjectName(u"border_style_preview")
-        sizePolicy4 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
-        sizePolicy4.setHorizontalStretch(0)
-        sizePolicy4.setVerticalStretch(0)
-        sizePolicy4.setHeightForWidth(self.border_style_preview.sizePolicy().hasHeightForWidth())
-        self.border_style_preview.setSizePolicy(sizePolicy4)
+        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        sizePolicy5.setHorizontalStretch(0)
+        sizePolicy5.setVerticalStretch(0)
+        sizePolicy5.setHeightForWidth(self.border_style_preview.sizePolicy().hasHeightForWidth())
+        self.border_style_preview.setSizePolicy(sizePolicy5)
         self.border_style_preview.setMinimumSize(QSize(67, 70))
         self.border_style_preview.setMaximumSize(QSize(67, 70))
         self.border_style_preview.setAutoFillBackground(True)
@@ -284,10 +308,10 @@ class Ui_MainWindow(object):
 
         self.border_color_label = QLabel(self.tab)
         self.border_color_label.setObjectName(u"border_color_label")
-        font1 = QFont()
-        font1.setPointSize(13)
-        font1.setWeight(QFont.DemiBold)
-        self.border_color_label.setFont(font1)
+        font2 = QFont()
+        font2.setPointSize(13)
+        font2.setWeight(QFont.DemiBold)
+        self.border_color_label.setFont(font2)
         self.border_color_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_4.addWidget(self.border_color_label)
@@ -303,8 +327,8 @@ class Ui_MainWindow(object):
 
         self.border_color_preview = QLabel(self.tab)
         self.border_color_preview.setObjectName(u"border_color_preview")
-        sizePolicy4.setHeightForWidth(self.border_color_preview.sizePolicy().hasHeightForWidth())
-        self.border_color_preview.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.border_color_preview.sizePolicy().hasHeightForWidth())
+        self.border_color_preview.setSizePolicy(sizePolicy5)
         self.border_color_preview.setMinimumSize(QSize(200, 30))
         self.border_color_preview.setMaximumSize(QSize(200, 30))
         self.border_color_preview.setAutoFillBackground(True)
@@ -361,10 +385,10 @@ class Ui_MainWindow(object):
 
         self.label_9 = QLabel(self.tab_2)
         self.label_9.setObjectName(u"label_9")
-        sizePolicy3.setHeightForWidth(self.label_9.sizePolicy().hasHeightForWidth())
-        self.label_9.setSizePolicy(sizePolicy3)
+        sizePolicy4.setHeightForWidth(self.label_9.sizePolicy().hasHeightForWidth())
+        self.label_9.setSizePolicy(sizePolicy4)
         self.label_9.setMinimumSize(QSize(0, 0))
-        self.label_9.setFont(font1)
+        self.label_9.setFont(font2)
         self.label_9.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_43.addWidget(self.label_9)
@@ -382,8 +406,8 @@ class Ui_MainWindow(object):
 
         self.include_checkbox = QCheckBox(self.tab_2)
         self.include_checkbox.setObjectName(u"include_checkbox")
-        sizePolicy4.setHeightForWidth(self.include_checkbox.sizePolicy().hasHeightForWidth())
-        self.include_checkbox.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.include_checkbox.sizePolicy().hasHeightForWidth())
+        self.include_checkbox.setSizePolicy(sizePolicy5)
         self.include_checkbox.setChecked(True)
 
         self.horizontalLayout_69.addWidget(self.include_checkbox)
@@ -423,7 +447,7 @@ class Ui_MainWindow(object):
 
         self.universe_label = QLabel(self.tab_2)
         self.universe_label.setObjectName(u"universe_label")
-        self.universe_label.setFont(font1)
+        self.universe_label.setFont(font2)
         self.universe_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_10.addWidget(self.universe_label)
@@ -437,11 +461,11 @@ class Ui_MainWindow(object):
 
         self.all_universes = QPushButton(self.tab_2)
         self.all_universes.setObjectName(u"all_universes")
-        sizePolicy5 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
-        sizePolicy5.setHorizontalStretch(0)
-        sizePolicy5.setVerticalStretch(0)
-        sizePolicy5.setHeightForWidth(self.all_universes.sizePolicy().hasHeightForWidth())
-        self.all_universes.setSizePolicy(sizePolicy5)
+        sizePolicy6 = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        sizePolicy6.setHorizontalStretch(0)
+        sizePolicy6.setVerticalStretch(0)
+        sizePolicy6.setHeightForWidth(self.all_universes.sizePolicy().hasHeightForWidth())
+        self.all_universes.setSizePolicy(sizePolicy6)
         self.all_universes.setMaximumSize(QSize(50, 16777215))
         self.all_universes.setIconSize(QSize(24, 24))
 
@@ -458,8 +482,8 @@ class Ui_MainWindow(object):
 
         self.universe_preview = QLabel(self.tab_2)
         self.universe_preview.setObjectName(u"universe_preview")
-        sizePolicy4.setHeightForWidth(self.universe_preview.sizePolicy().hasHeightForWidth())
-        self.universe_preview.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.universe_preview.sizePolicy().hasHeightForWidth())
+        self.universe_preview.setSizePolicy(sizePolicy5)
         self.universe_preview.setMinimumSize(QSize(230, 100))
         self.universe_preview.setMaximumSize(QSize(230, 100))
         self.universe_preview.setAutoFillBackground(True)
@@ -502,7 +526,7 @@ class Ui_MainWindow(object):
 
         self.character_label = QLabel(self.tab_2)
         self.character_label.setObjectName(u"character_label")
-        self.character_label.setFont(font1)
+        self.character_label.setFont(font2)
         self.character_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_13.addWidget(self.character_label)
@@ -516,8 +540,8 @@ class Ui_MainWindow(object):
 
         self.all_characters = QPushButton(self.tab_2)
         self.all_characters.setObjectName(u"all_characters")
-        sizePolicy5.setHeightForWidth(self.all_characters.sizePolicy().hasHeightForWidth())
-        self.all_characters.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.all_characters.sizePolicy().hasHeightForWidth())
+        self.all_characters.setSizePolicy(sizePolicy6)
         self.all_characters.setMaximumSize(QSize(50, 16777215))
         self.all_characters.setIconSize(QSize(24, 24))
 
@@ -534,11 +558,11 @@ class Ui_MainWindow(object):
 
         self.character_preview = QLabel(self.tab_2)
         self.character_preview.setObjectName(u"character_preview")
-        sizePolicy6 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
-        sizePolicy6.setHorizontalStretch(230)
-        sizePolicy6.setVerticalStretch(100)
-        sizePolicy6.setHeightForWidth(self.character_preview.sizePolicy().hasHeightForWidth())
-        self.character_preview.setSizePolicy(sizePolicy6)
+        sizePolicy7 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Maximum)
+        sizePolicy7.setHorizontalStretch(230)
+        sizePolicy7.setVerticalStretch(100)
+        sizePolicy7.setHeightForWidth(self.character_preview.sizePolicy().hasHeightForWidth())
+        self.character_preview.setSizePolicy(sizePolicy7)
         self.character_preview.setMinimumSize(QSize(230, 100))
         self.character_preview.setMaximumSize(QSize(100, 100))
         self.character_preview.setAutoFillBackground(True)
@@ -581,7 +605,7 @@ class Ui_MainWindow(object):
 
         self.expression_label = QLabel(self.tab_2)
         self.expression_label.setObjectName(u"expression_label")
-        self.expression_label.setFont(font1)
+        self.expression_label.setFont(font2)
         self.expression_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_15.addWidget(self.expression_label)
@@ -596,8 +620,8 @@ class Ui_MainWindow(object):
 
         self.all_expressions = QPushButton(self.tab_2)
         self.all_expressions.setObjectName(u"all_expressions")
-        sizePolicy5.setHeightForWidth(self.all_expressions.sizePolicy().hasHeightForWidth())
-        self.all_expressions.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.all_expressions.sizePolicy().hasHeightForWidth())
+        self.all_expressions.setSizePolicy(sizePolicy6)
         self.all_expressions.setMaximumSize(QSize(50, 16777215))
         self.all_expressions.setIconSize(QSize(24, 24))
 
@@ -614,8 +638,8 @@ class Ui_MainWindow(object):
 
         self.expression_preview = QLabel(self.tab_2)
         self.expression_preview.setObjectName(u"expression_preview")
-        sizePolicy4.setHeightForWidth(self.expression_preview.sizePolicy().hasHeightForWidth())
-        self.expression_preview.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.expression_preview.sizePolicy().hasHeightForWidth())
+        self.expression_preview.setSizePolicy(sizePolicy5)
         self.expression_preview.setMinimumSize(QSize(67, 70))
         self.expression_preview.setMaximumSize(QSize(67, 70))
         self.expression_preview.setSizeIncrement(QSize(69, 70))
@@ -660,7 +684,7 @@ class Ui_MainWindow(object):
         self.expression_color_label = QLabel(self.tab_2)
         self.expression_color_label.setObjectName(u"expression_color_label")
         self.expression_color_label.setMinimumSize(QSize(0, 35))
-        self.expression_color_label.setFont(font1)
+        self.expression_color_label.setFont(font2)
         self.expression_color_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_11.addWidget(self.expression_color_label)
@@ -678,8 +702,8 @@ class Ui_MainWindow(object):
 
         self.expression_color_preview = QLabel(self.tab_2)
         self.expression_color_preview.setObjectName(u"expression_color_preview")
-        sizePolicy4.setHeightForWidth(self.expression_color_preview.sizePolicy().hasHeightForWidth())
-        self.expression_color_preview.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.expression_color_preview.sizePolicy().hasHeightForWidth())
+        self.expression_color_preview.setSizePolicy(sizePolicy5)
         self.expression_color_preview.setMinimumSize(QSize(200, 30))
         self.expression_color_preview.setMaximumSize(QSize(200, 30))
         self.expression_color_preview.setAutoFillBackground(True)
@@ -716,7 +740,7 @@ class Ui_MainWindow(object):
         self.expression_color_type_label = QLabel(self.tab_2)
         self.expression_color_type_label.setObjectName(u"expression_color_type_label")
         self.expression_color_type_label.setMinimumSize(QSize(0, 35))
-        self.expression_color_type_label.setFont(font1)
+        self.expression_color_type_label.setFont(font2)
         self.expression_color_type_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_101.addWidget(self.expression_color_type_label)
@@ -730,8 +754,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_103.setObjectName(u"horizontalLayout_103")
         self.label_left = QLabel(self.tab_2)
         self.label_left.setObjectName(u"label_left")
-        sizePolicy5.setHeightForWidth(self.label_left.sizePolicy().hasHeightForWidth())
-        self.label_left.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.label_left.sizePolicy().hasHeightForWidth())
+        self.label_left.setSizePolicy(sizePolicy6)
         self.label_left.setMinimumSize(QSize(100, 20))
         self.label_left.setMaximumSize(QSize(110, 20))
 
@@ -739,8 +763,8 @@ class Ui_MainWindow(object):
 
         self.expression_color_type_button = QPushButton(self.tab_2)
         self.expression_color_type_button.setObjectName(u"expression_color_type_button")
-        sizePolicy5.setHeightForWidth(self.expression_color_type_button.sizePolicy().hasHeightForWidth())
-        self.expression_color_type_button.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.expression_color_type_button.sizePolicy().hasHeightForWidth())
+        self.expression_color_type_button.setSizePolicy(sizePolicy6)
         self.expression_color_type_button.setMinimumSize(QSize(200, 30))
         self.expression_color_type_button.setMaximumSize(QSize(200, 30))
 
@@ -748,8 +772,8 @@ class Ui_MainWindow(object):
 
         self.label_right = QLabel(self.tab_2)
         self.label_right.setObjectName(u"label_right")
-        sizePolicy5.setHeightForWidth(self.label_right.sizePolicy().hasHeightForWidth())
-        self.label_right.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.label_right.sizePolicy().hasHeightForWidth())
+        self.label_right.setSizePolicy(sizePolicy6)
         self.label_right.setMinimumSize(QSize(100, 20))
         self.label_right.setMaximumSize(QSize(100, 20))
 
@@ -803,10 +827,10 @@ class Ui_MainWindow(object):
 
         self.label_16 = QLabel(self.tab_5)
         self.label_16.setObjectName(u"label_16")
-        sizePolicy3.setHeightForWidth(self.label_16.sizePolicy().hasHeightForWidth())
-        self.label_16.setSizePolicy(sizePolicy3)
+        sizePolicy4.setHeightForWidth(self.label_16.sizePolicy().hasHeightForWidth())
+        self.label_16.setSizePolicy(sizePolicy4)
         self.label_16.setMinimumSize(QSize(0, 0))
-        self.label_16.setFont(font1)
+        self.label_16.setFont(font2)
         self.label_16.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_90.addWidget(self.label_16)
@@ -824,8 +848,8 @@ class Ui_MainWindow(object):
 
         self.include_checkbox_2 = QCheckBox(self.tab_5)
         self.include_checkbox_2.setObjectName(u"include_checkbox_2")
-        sizePolicy4.setHeightForWidth(self.include_checkbox_2.sizePolicy().hasHeightForWidth())
-        self.include_checkbox_2.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.include_checkbox_2.sizePolicy().hasHeightForWidth())
+        self.include_checkbox_2.setSizePolicy(sizePolicy5)
         self.include_checkbox_2.setChecked(False)
 
         self.horizontalLayout_91.addWidget(self.include_checkbox_2)
@@ -865,7 +889,7 @@ class Ui_MainWindow(object):
 
         self.universe_label_2 = QLabel(self.tab_5)
         self.universe_label_2.setObjectName(u"universe_label_2")
-        self.universe_label_2.setFont(font1)
+        self.universe_label_2.setFont(font2)
         self.universe_label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_92.addWidget(self.universe_label_2)
@@ -879,8 +903,8 @@ class Ui_MainWindow(object):
 
         self.all_universes_2 = QPushButton(self.tab_5)
         self.all_universes_2.setObjectName(u"all_universes_2")
-        sizePolicy5.setHeightForWidth(self.all_universes_2.sizePolicy().hasHeightForWidth())
-        self.all_universes_2.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.all_universes_2.sizePolicy().hasHeightForWidth())
+        self.all_universes_2.setSizePolicy(sizePolicy6)
         self.all_universes_2.setMaximumSize(QSize(50, 16777215))
         self.all_universes_2.setIconSize(QSize(24, 24))
 
@@ -897,8 +921,8 @@ class Ui_MainWindow(object):
 
         self.universe_preview_2 = QLabel(self.tab_5)
         self.universe_preview_2.setObjectName(u"universe_preview_2")
-        sizePolicy4.setHeightForWidth(self.universe_preview_2.sizePolicy().hasHeightForWidth())
-        self.universe_preview_2.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.universe_preview_2.sizePolicy().hasHeightForWidth())
+        self.universe_preview_2.setSizePolicy(sizePolicy5)
         self.universe_preview_2.setMinimumSize(QSize(230, 100))
         self.universe_preview_2.setMaximumSize(QSize(230, 100))
         self.universe_preview_2.setAutoFillBackground(True)
@@ -941,7 +965,7 @@ class Ui_MainWindow(object):
 
         self.character_label_2 = QLabel(self.tab_5)
         self.character_label_2.setObjectName(u"character_label_2")
-        self.character_label_2.setFont(font1)
+        self.character_label_2.setFont(font2)
         self.character_label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_94.addWidget(self.character_label_2)
@@ -955,8 +979,8 @@ class Ui_MainWindow(object):
 
         self.all_characters_2 = QPushButton(self.tab_5)
         self.all_characters_2.setObjectName(u"all_characters_2")
-        sizePolicy5.setHeightForWidth(self.all_characters_2.sizePolicy().hasHeightForWidth())
-        self.all_characters_2.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.all_characters_2.sizePolicy().hasHeightForWidth())
+        self.all_characters_2.setSizePolicy(sizePolicy6)
         self.all_characters_2.setMaximumSize(QSize(50, 16777215))
         self.all_characters_2.setIconSize(QSize(24, 24))
 
@@ -973,8 +997,8 @@ class Ui_MainWindow(object):
 
         self.character_preview_2 = QLabel(self.tab_5)
         self.character_preview_2.setObjectName(u"character_preview_2")
-        sizePolicy6.setHeightForWidth(self.character_preview_2.sizePolicy().hasHeightForWidth())
-        self.character_preview_2.setSizePolicy(sizePolicy6)
+        sizePolicy7.setHeightForWidth(self.character_preview_2.sizePolicy().hasHeightForWidth())
+        self.character_preview_2.setSizePolicy(sizePolicy7)
         self.character_preview_2.setMinimumSize(QSize(230, 100))
         self.character_preview_2.setMaximumSize(QSize(100, 100))
         self.character_preview_2.setAutoFillBackground(True)
@@ -1017,7 +1041,7 @@ class Ui_MainWindow(object):
 
         self.expression_label_2 = QLabel(self.tab_5)
         self.expression_label_2.setObjectName(u"expression_label_2")
-        self.expression_label_2.setFont(font1)
+        self.expression_label_2.setFont(font2)
         self.expression_label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_96.addWidget(self.expression_label_2)
@@ -1048,8 +1072,8 @@ class Ui_MainWindow(object):
 
         self.expression_preview_2 = QLabel(self.tab_5)
         self.expression_preview_2.setObjectName(u"expression_preview_2")
-        sizePolicy4.setHeightForWidth(self.expression_preview_2.sizePolicy().hasHeightForWidth())
-        self.expression_preview_2.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.expression_preview_2.sizePolicy().hasHeightForWidth())
+        self.expression_preview_2.setSizePolicy(sizePolicy5)
         self.expression_preview_2.setMinimumSize(QSize(67, 70))
         self.expression_preview_2.setMaximumSize(QSize(67, 70))
         self.expression_preview_2.setSizeIncrement(QSize(69, 70))
@@ -1094,7 +1118,7 @@ class Ui_MainWindow(object):
         self.expression_color_label_2 = QLabel(self.tab_5)
         self.expression_color_label_2.setObjectName(u"expression_color_label_2")
         self.expression_color_label_2.setMinimumSize(QSize(0, 35))
-        self.expression_color_label_2.setFont(font1)
+        self.expression_color_label_2.setFont(font2)
         self.expression_color_label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_98.addWidget(self.expression_color_label_2)
@@ -1112,8 +1136,8 @@ class Ui_MainWindow(object):
 
         self.expression_color_preview_2 = QLabel(self.tab_5)
         self.expression_color_preview_2.setObjectName(u"expression_color_preview_2")
-        sizePolicy4.setHeightForWidth(self.expression_color_preview_2.sizePolicy().hasHeightForWidth())
-        self.expression_color_preview_2.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.expression_color_preview_2.sizePolicy().hasHeightForWidth())
+        self.expression_color_preview_2.setSizePolicy(sizePolicy5)
         self.expression_color_preview_2.setMinimumSize(QSize(200, 30))
         self.expression_color_preview_2.setMaximumSize(QSize(200, 30))
         self.expression_color_preview_2.setAutoFillBackground(True)
@@ -1150,7 +1174,7 @@ class Ui_MainWindow(object):
         self.expression_color_type_label_2 = QLabel(self.tab_5)
         self.expression_color_type_label_2.setObjectName(u"expression_color_type_label_2")
         self.expression_color_type_label_2.setMinimumSize(QSize(0, 35))
-        self.expression_color_type_label_2.setFont(font1)
+        self.expression_color_type_label_2.setFont(font2)
         self.expression_color_type_label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_104.addWidget(self.expression_color_type_label_2)
@@ -1164,8 +1188,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_105.setObjectName(u"horizontalLayout_105")
         self.label_left_2 = QLabel(self.tab_5)
         self.label_left_2.setObjectName(u"label_left_2")
-        sizePolicy5.setHeightForWidth(self.label_left_2.sizePolicy().hasHeightForWidth())
-        self.label_left_2.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.label_left_2.sizePolicy().hasHeightForWidth())
+        self.label_left_2.setSizePolicy(sizePolicy6)
         self.label_left_2.setMinimumSize(QSize(100, 20))
         self.label_left_2.setMaximumSize(QSize(110, 20))
 
@@ -1173,8 +1197,8 @@ class Ui_MainWindow(object):
 
         self.expression_color_type_button_2 = QPushButton(self.tab_5)
         self.expression_color_type_button_2.setObjectName(u"expression_color_type_button_2")
-        sizePolicy5.setHeightForWidth(self.expression_color_type_button_2.sizePolicy().hasHeightForWidth())
-        self.expression_color_type_button_2.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.expression_color_type_button_2.sizePolicy().hasHeightForWidth())
+        self.expression_color_type_button_2.setSizePolicy(sizePolicy6)
         self.expression_color_type_button_2.setMinimumSize(QSize(200, 30))
         self.expression_color_type_button_2.setMaximumSize(QSize(200, 30))
 
@@ -1182,8 +1206,8 @@ class Ui_MainWindow(object):
 
         self.label_right_2 = QLabel(self.tab_5)
         self.label_right_2.setObjectName(u"label_right_2")
-        sizePolicy5.setHeightForWidth(self.label_right_2.sizePolicy().hasHeightForWidth())
-        self.label_right_2.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.label_right_2.sizePolicy().hasHeightForWidth())
+        self.label_right_2.setSizePolicy(sizePolicy6)
         self.label_right_2.setMinimumSize(QSize(100, 20))
         self.label_right_2.setMaximumSize(QSize(100, 20))
 
@@ -1238,7 +1262,7 @@ class Ui_MainWindow(object):
         self.font_label = QLabel(self.tab_3)
         self.font_label.setObjectName(u"font_label")
         self.font_label.setMinimumSize(QSize(300, 0))
-        self.font_label.setFont(font1)
+        self.font_label.setFont(font2)
         self.font_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_16.addWidget(self.font_label)
@@ -1289,7 +1313,7 @@ class Ui_MainWindow(object):
         self.asterisk_label = QLabel(self.tab_3)
         self.asterisk_label.setObjectName(u"asterisk_label")
         self.asterisk_label.setMinimumSize(QSize(300, 0))
-        self.asterisk_label.setFont(font1)
+        self.asterisk_label.setFont(font2)
         self.asterisk_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_17.addWidget(self.asterisk_label)
@@ -1359,7 +1383,7 @@ class Ui_MainWindow(object):
         self.asterisk_color = QLabel(self.asterisk_color_everything)
         self.asterisk_color.setObjectName(u"asterisk_color")
         self.asterisk_color.setMinimumSize(QSize(300, 0))
-        self.asterisk_color.setFont(font1)
+        self.asterisk_color.setFont(font2)
         self.asterisk_color.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_41.addWidget(self.asterisk_color)
@@ -1425,7 +1449,7 @@ class Ui_MainWindow(object):
         self.asterisk_color_values = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_values.setObjectName(u"asterisk_color_values")
         self.asterisk_color_values.setMinimumSize(QSize(300, 0))
-        self.asterisk_color_values.setFont(font1)
+        self.asterisk_color_values.setFont(font2)
         self.asterisk_color_values.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_42.addWidget(self.asterisk_color_values)
@@ -1434,11 +1458,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
         self.asterisk_color_preview_1 = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_preview_1.setObjectName(u"asterisk_color_preview_1")
-        sizePolicy7 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
-        sizePolicy7.setHorizontalStretch(0)
-        sizePolicy7.setVerticalStretch(0)
-        sizePolicy7.setHeightForWidth(self.asterisk_color_preview_1.sizePolicy().hasHeightForWidth())
-        self.asterisk_color_preview_1.setSizePolicy(sizePolicy7)
+        sizePolicy8 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Fixed)
+        sizePolicy8.setHorizontalStretch(0)
+        sizePolicy8.setVerticalStretch(0)
+        sizePolicy8.setHeightForWidth(self.asterisk_color_preview_1.sizePolicy().hasHeightForWidth())
+        self.asterisk_color_preview_1.setSizePolicy(sizePolicy8)
         self.asterisk_color_preview_1.setMinimumSize(QSize(0, 30))
         self.asterisk_color_preview_1.setMaximumSize(QSize(16777215, 30))
         self.asterisk_color_preview_1.setAutoFillBackground(True)
@@ -1448,8 +1472,8 @@ class Ui_MainWindow(object):
 
         self.asterisk_color_preview_2 = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_preview_2.setObjectName(u"asterisk_color_preview_2")
-        sizePolicy7.setHeightForWidth(self.asterisk_color_preview_2.sizePolicy().hasHeightForWidth())
-        self.asterisk_color_preview_2.setSizePolicy(sizePolicy7)
+        sizePolicy8.setHeightForWidth(self.asterisk_color_preview_2.sizePolicy().hasHeightForWidth())
+        self.asterisk_color_preview_2.setSizePolicy(sizePolicy8)
         self.asterisk_color_preview_2.setMinimumSize(QSize(0, 30))
         self.asterisk_color_preview_2.setMaximumSize(QSize(16777215, 30))
         self.asterisk_color_preview_2.setAutoFillBackground(True)
@@ -1459,8 +1483,8 @@ class Ui_MainWindow(object):
 
         self.asterisk_color_preview_3 = QLabel(self.asterisk_color_values_everything)
         self.asterisk_color_preview_3.setObjectName(u"asterisk_color_preview_3")
-        sizePolicy7.setHeightForWidth(self.asterisk_color_preview_3.sizePolicy().hasHeightForWidth())
-        self.asterisk_color_preview_3.setSizePolicy(sizePolicy7)
+        sizePolicy8.setHeightForWidth(self.asterisk_color_preview_3.sizePolicy().hasHeightForWidth())
+        self.asterisk_color_preview_3.setSizePolicy(sizePolicy8)
         self.asterisk_color_preview_3.setMinimumSize(QSize(0, 30))
         self.asterisk_color_preview_3.setMaximumSize(QSize(16777215, 30))
         self.asterisk_color_preview_3.setAutoFillBackground(True)
@@ -1515,7 +1539,7 @@ class Ui_MainWindow(object):
         self.text_style_label = QLabel(self.tab_3)
         self.text_style_label.setObjectName(u"text_style_label")
         self.text_style_label.setMinimumSize(QSize(300, 0))
-        self.text_style_label.setFont(font1)
+        self.text_style_label.setFont(font2)
         self.text_style_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_19.addWidget(self.text_style_label)
@@ -1529,8 +1553,8 @@ class Ui_MainWindow(object):
 
         self.text_style_regular_option = QRadioButton(self.tab_3)
         self.text_style_regular_option.setObjectName(u"text_style_regular_option")
-        sizePolicy7.setHeightForWidth(self.text_style_regular_option.sizePolicy().hasHeightForWidth())
-        self.text_style_regular_option.setSizePolicy(sizePolicy7)
+        sizePolicy8.setHeightForWidth(self.text_style_regular_option.sizePolicy().hasHeightForWidth())
+        self.text_style_regular_option.setSizePolicy(sizePolicy8)
         self.text_style_regular_option.setChecked(True)
 
         self.horizontalLayout_12.addWidget(self.text_style_regular_option)
@@ -1542,8 +1566,8 @@ class Ui_MainWindow(object):
 
         self.text_style_dark_world_option = QRadioButton(self.tab_3)
         self.text_style_dark_world_option.setObjectName(u"text_style_dark_world_option")
-        sizePolicy7.setHeightForWidth(self.text_style_dark_world_option.sizePolicy().hasHeightForWidth())
-        self.text_style_dark_world_option.setSizePolicy(sizePolicy7)
+        sizePolicy8.setHeightForWidth(self.text_style_dark_world_option.sizePolicy().hasHeightForWidth())
+        self.text_style_dark_world_option.setSizePolicy(sizePolicy8)
 
         self.horizontalLayout_12.addWidget(self.text_style_dark_world_option)
 
@@ -1584,7 +1608,7 @@ class Ui_MainWindow(object):
         self.text_transform_label = QLabel(self.tab_3)
         self.text_transform_label.setObjectName(u"text_transform_label")
         self.text_transform_label.setMinimumSize(QSize(300, 0))
-        self.text_transform_label.setFont(font1)
+        self.text_transform_label.setFont(font2)
         self.text_transform_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_21.addWidget(self.text_transform_label)
@@ -1651,7 +1675,7 @@ class Ui_MainWindow(object):
 
         self.format_label = QLabel(self.tab_4)
         self.format_label.setObjectName(u"format_label")
-        self.format_label.setFont(font1)
+        self.format_label.setFont(font2)
         self.format_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_6.addWidget(self.format_label)
@@ -1723,13 +1747,13 @@ class Ui_MainWindow(object):
         self.horizontalLayout_76.setObjectName(u"horizontalLayout_76")
         self.alternating_label = QLabel(self.alternating_everything)
         self.alternating_label.setObjectName(u"alternating_label")
-        sizePolicy8 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
-        sizePolicy8.setHorizontalStretch(0)
-        sizePolicy8.setVerticalStretch(0)
-        sizePolicy8.setHeightForWidth(self.alternating_label.sizePolicy().hasHeightForWidth())
-        self.alternating_label.setSizePolicy(sizePolicy8)
+        sizePolicy9 = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Preferred)
+        sizePolicy9.setHorizontalStretch(0)
+        sizePolicy9.setVerticalStretch(0)
+        sizePolicy9.setHeightForWidth(self.alternating_label.sizePolicy().hasHeightForWidth())
+        self.alternating_label.setSizePolicy(sizePolicy9)
         self.alternating_label.setMinimumSize(QSize(300, 0))
-        self.alternating_label.setFont(font1)
+        self.alternating_label.setFont(font2)
         self.alternating_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_76.addWidget(self.alternating_label)
@@ -1743,8 +1767,8 @@ class Ui_MainWindow(object):
 
         self.all_expressions_alt = QPushButton(self.alternating_everything)
         self.all_expressions_alt.setObjectName(u"all_expressions_alt")
-        sizePolicy5.setHeightForWidth(self.all_expressions_alt.sizePolicy().hasHeightForWidth())
-        self.all_expressions_alt.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.all_expressions_alt.sizePolicy().hasHeightForWidth())
+        self.all_expressions_alt.setSizePolicy(sizePolicy6)
         self.all_expressions_alt.setMaximumSize(QSize(50, 16777215))
         self.all_expressions_alt.setIconSize(QSize(24, 24))
 
@@ -1811,7 +1835,7 @@ class Ui_MainWindow(object):
         self.alternating_right_label = QLabel(self.alternating_everything_right)
         self.alternating_right_label.setObjectName(u"alternating_right_label")
         self.alternating_right_label.setMinimumSize(QSize(300, 0))
-        self.alternating_right_label.setFont(font1)
+        self.alternating_right_label.setFont(font2)
         self.alternating_right_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_79.addWidget(self.alternating_right_label)
@@ -1841,8 +1865,8 @@ class Ui_MainWindow(object):
 
         self.alternating_right_preview = QLabel(self.alternating_everything_right)
         self.alternating_right_preview.setObjectName(u"alternating_right_preview")
-        sizePolicy5.setHeightForWidth(self.alternating_right_preview.sizePolicy().hasHeightForWidth())
-        self.alternating_right_preview.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.alternating_right_preview.sizePolicy().hasHeightForWidth())
+        self.alternating_right_preview.setSizePolicy(sizePolicy6)
         self.alternating_right_preview.setMinimumSize(QSize(69, 70))
         self.alternating_right_preview.setMaximumSize(QSize(69, 70))
         self.alternating_right_preview.setAutoFillBackground(True)
@@ -1888,7 +1912,7 @@ class Ui_MainWindow(object):
 
         self.margin_label = QLabel(self.tab_4)
         self.margin_label.setObjectName(u"margin_label")
-        self.margin_label.setFont(font1)
+        self.margin_label.setFont(font2)
         self.margin_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_9.addWidget(self.margin_label)
@@ -1951,7 +1975,7 @@ class Ui_MainWindow(object):
 
         self.size_label = QLabel(self.tab_4)
         self.size_label.setObjectName(u"size_label")
-        self.size_label.setFont(font1)
+        self.size_label.setFont(font2)
         self.size_label.setToolTipDuration(-1)
         self.size_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -2024,11 +2048,11 @@ class Ui_MainWindow(object):
 
         self.input_preview = QGroupBox(self.scrollAreaWidgetContents_2)
         self.input_preview.setObjectName(u"input_preview")
-        sizePolicy9 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
-        sizePolicy9.setHorizontalStretch(1)
-        sizePolicy9.setVerticalStretch(0)
-        sizePolicy9.setHeightForWidth(self.input_preview.sizePolicy().hasHeightForWidth())
-        self.input_preview.setSizePolicy(sizePolicy9)
+        sizePolicy10 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
+        sizePolicy10.setHorizontalStretch(1)
+        sizePolicy10.setVerticalStretch(0)
+        sizePolicy10.setHeightForWidth(self.input_preview.sizePolicy().hasHeightForWidth())
+        self.input_preview.setSizePolicy(sizePolicy10)
         self.input_preview.setMinimumSize(QSize(400, 830))
         self.verticalLayout_6 = QVBoxLayout(self.input_preview)
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
@@ -2040,7 +2064,7 @@ class Ui_MainWindow(object):
         self.horizontalLayout_72.setObjectName(u"horizontalLayout_72")
         self.label_12 = QLabel(self.input_preview)
         self.label_12.setObjectName(u"label_12")
-        self.label_12.setFont(font1)
+        self.label_12.setFont(font2)
         self.label_12.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.horizontalLayout_72.addWidget(self.label_12)
@@ -2058,8 +2082,8 @@ class Ui_MainWindow(object):
 
         self.default_color_preview = QLabel(self.input_preview)
         self.default_color_preview.setObjectName(u"default_color_preview")
-        sizePolicy5.setHeightForWidth(self.default_color_preview.sizePolicy().hasHeightForWidth())
-        self.default_color_preview.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.default_color_preview.sizePolicy().hasHeightForWidth())
+        self.default_color_preview.setSizePolicy(sizePolicy6)
         self.default_color_preview.setMinimumSize(QSize(200, 30))
         self.default_color_preview.setMaximumSize(QSize(200, 30))
 
@@ -2083,8 +2107,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_45.setObjectName(u"horizontalLayout_45")
         self.input = QTextEdit(self.input_preview)
         self.input.setObjectName(u"input")
-        sizePolicy5.setHeightForWidth(self.input.sizePolicy().hasHeightForWidth())
-        self.input.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.input.sizePolicy().hasHeightForWidth())
+        self.input.setSizePolicy(sizePolicy6)
         self.input.setMinimumSize(QSize(500, 75))
         self.input.setMaximumSize(QSize(400, 75))
         self.input.setStyleSheet(u"border: 2px solid white")
@@ -2102,11 +2126,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_71.setObjectName(u"horizontalLayout_71")
         self.label_11 = QLabel(self.input_preview)
         self.label_11.setObjectName(u"label_11")
-        sizePolicy3.setHeightForWidth(self.label_11.sizePolicy().hasHeightForWidth())
-        self.label_11.setSizePolicy(sizePolicy3)
-        font2 = QFont()
-        font2.setPointSize(9)
-        self.label_11.setFont(font2)
+        sizePolicy4.setHeightForWidth(self.label_11.sizePolicy().hasHeightForWidth())
+        self.label_11.setSizePolicy(sizePolicy4)
+        font3 = QFont()
+        font3.setPointSize(9)
+        self.label_11.setFont(font3)
         self.label_11.setLayoutDirection(Qt.LayoutDirection.LeftToRight)
         self.label_11.setTextFormat(Qt.TextFormat.AutoText)
         self.label_11.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -2131,8 +2155,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_56.setObjectName(u"horizontalLayout_56")
         self.output = QLabel(self.input_preview)
         self.output.setObjectName(u"output")
-        sizePolicy5.setHeightForWidth(self.output.sizePolicy().hasHeightForWidth())
-        self.output.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.output.sizePolicy().hasHeightForWidth())
+        self.output.setSizePolicy(sizePolicy6)
         self.output.setMinimumSize(QSize(950, 200))
         self.output.setMaximumSize(QSize(1000, 400))
         palette = QPalette()
@@ -2141,7 +2165,7 @@ class Ui_MainWindow(object):
         palette.setBrush(QPalette.ColorGroup.Active, QPalette.ColorRole.WindowText, brush)
         palette.setBrush(QPalette.ColorGroup.Inactive, QPalette.ColorRole.WindowText, brush)
         self.output.setPalette(palette)
-        self.output.setFont(font1)
+        self.output.setFont(font2)
         self.output.setAutoFillBackground(True)
         self.output.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.output.setTextInteractionFlags(Qt.TextInteractionFlag.LinksAccessibleByMouse)
@@ -2169,8 +2193,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_81.setObjectName(u"horizontalLayout_81")
         self.copy_to_clipboard = QPushButton(self.input_preview)
         self.copy_to_clipboard.setObjectName(u"copy_to_clipboard")
-        sizePolicy4.setHeightForWidth(self.copy_to_clipboard.sizePolicy().hasHeightForWidth())
-        self.copy_to_clipboard.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.copy_to_clipboard.sizePolicy().hasHeightForWidth())
+        self.copy_to_clipboard.setSizePolicy(sizePolicy5)
         self.copy_to_clipboard.setMinimumSize(QSize(250, 0))
         self.copy_to_clipboard.setMaximumSize(QSize(300, 16777215))
 
@@ -2178,8 +2202,8 @@ class Ui_MainWindow(object):
 
         self.download = QPushButton(self.input_preview)
         self.download.setObjectName(u"download")
-        sizePolicy4.setHeightForWidth(self.download.sizePolicy().hasHeightForWidth())
-        self.download.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.download.sizePolicy().hasHeightForWidth())
+        self.download.setSizePolicy(sizePolicy5)
         self.download.setMinimumSize(QSize(250, 0))
         self.download.setMaximumSize(QSize(300, 16777215))
 
@@ -2187,8 +2211,8 @@ class Ui_MainWindow(object):
 
         self.add_to_stack = QPushButton(self.input_preview)
         self.add_to_stack.setObjectName(u"add_to_stack")
-        sizePolicy4.setHeightForWidth(self.add_to_stack.sizePolicy().hasHeightForWidth())
-        self.add_to_stack.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.add_to_stack.sizePolicy().hasHeightForWidth())
+        self.add_to_stack.setSizePolicy(sizePolicy5)
         self.add_to_stack.setMinimumSize(QSize(250, 0))
         self.add_to_stack.setMaximumSize(QSize(300, 16777215))
 
@@ -2228,8 +2252,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_87.setObjectName(u"horizontalLayout_87")
         self.amount_of_columns_label = QLabel(self.groupBox)
         self.amount_of_columns_label.setObjectName(u"amount_of_columns_label")
-        sizePolicy7.setHeightForWidth(self.amount_of_columns_label.sizePolicy().hasHeightForWidth())
-        self.amount_of_columns_label.setSizePolicy(sizePolicy7)
+        sizePolicy8.setHeightForWidth(self.amount_of_columns_label.sizePolicy().hasHeightForWidth())
+        self.amount_of_columns_label.setSizePolicy(sizePolicy8)
 
         self.horizontalLayout_87.addWidget(self.amount_of_columns_label)
 
@@ -2393,8 +2417,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_53.setObjectName(u"horizontalLayout_53")
         self.create_universe = QGroupBox(self.universes)
         self.create_universe.setObjectName(u"create_universe")
-        sizePolicy5.setHeightForWidth(self.create_universe.sizePolicy().hasHeightForWidth())
-        self.create_universe.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.create_universe.sizePolicy().hasHeightForWidth())
+        self.create_universe.setSizePolicy(sizePolicy6)
         self.create_universe.setMinimumSize(QSize(500, 226))
         self.create_universe.setMaximumSize(QSize(354, 226))
         self.verticalLayout_11 = QVBoxLayout(self.create_universe)
@@ -2468,8 +2492,8 @@ class Ui_MainWindow(object):
 
         self.universe_create_image_preview = QLabel(self.create_universe)
         self.universe_create_image_preview.setObjectName(u"universe_create_image_preview")
-        sizePolicy4.setHeightForWidth(self.universe_create_image_preview.sizePolicy().hasHeightForWidth())
-        self.universe_create_image_preview.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.universe_create_image_preview.sizePolicy().hasHeightForWidth())
+        self.universe_create_image_preview.setSizePolicy(sizePolicy5)
         self.universe_create_image_preview.setMinimumSize(QSize(0, 0))
         self.universe_create_image_preview.setMaximumSize(QSize(100, 100))
         self.universe_create_image_preview.setAutoFillBackground(True)
@@ -2505,8 +2529,8 @@ class Ui_MainWindow(object):
 
         self.edit_universe = QGroupBox(self.universes)
         self.edit_universe.setObjectName(u"edit_universe")
-        sizePolicy5.setHeightForWidth(self.edit_universe.sizePolicy().hasHeightForWidth())
-        self.edit_universe.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.edit_universe.sizePolicy().hasHeightForWidth())
+        self.edit_universe.setSizePolicy(sizePolicy6)
         self.edit_universe.setMinimumSize(QSize(500, 226))
         self.edit_universe.setMaximumSize(QSize(354, 226))
         self.verticalLayout_33 = QVBoxLayout(self.edit_universe)
@@ -2568,8 +2592,8 @@ class Ui_MainWindow(object):
 
         self.universe_edit_image_button = QPushButton(self.edit_universe)
         self.universe_edit_image_button.setObjectName(u"universe_edit_image_button")
-        sizePolicy5.setHeightForWidth(self.universe_edit_image_button.sizePolicy().hasHeightForWidth())
-        self.universe_edit_image_button.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.universe_edit_image_button.sizePolicy().hasHeightForWidth())
+        self.universe_edit_image_button.setSizePolicy(sizePolicy6)
         self.universe_edit_image_button.setMinimumSize(QSize(109, 0))
         self.universe_edit_image_button.setMaximumSize(QSize(109, 16777215))
 
@@ -2582,8 +2606,8 @@ class Ui_MainWindow(object):
 
         self.universe_edit_image_preview = QLabel(self.edit_universe)
         self.universe_edit_image_preview.setObjectName(u"universe_edit_image_preview")
-        sizePolicy4.setHeightForWidth(self.universe_edit_image_preview.sizePolicy().hasHeightForWidth())
-        self.universe_edit_image_preview.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.universe_edit_image_preview.sizePolicy().hasHeightForWidth())
+        self.universe_edit_image_preview.setSizePolicy(sizePolicy5)
         self.universe_edit_image_preview.setMinimumSize(QSize(0, 0))
         self.universe_edit_image_preview.setMaximumSize(QSize(100, 100))
         self.universe_edit_image_preview.setAutoFillBackground(True)
@@ -2628,8 +2652,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_58.setObjectName(u"horizontalLayout_58")
         self.create_character = QGroupBox(self.characters)
         self.create_character.setObjectName(u"create_character")
-        sizePolicy5.setHeightForWidth(self.create_character.sizePolicy().hasHeightForWidth())
-        self.create_character.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.create_character.sizePolicy().hasHeightForWidth())
+        self.create_character.setSizePolicy(sizePolicy6)
         self.create_character.setMinimumSize(QSize(500, 335))
         self.create_character.setMaximumSize(QSize(354, 335))
         self.verticalLayout_16 = QVBoxLayout(self.create_character)
@@ -2671,8 +2695,8 @@ class Ui_MainWindow(object):
 
         self.all_universes_3 = QPushButton(self.create_character)
         self.all_universes_3.setObjectName(u"all_universes_3")
-        sizePolicy5.setHeightForWidth(self.all_universes_3.sizePolicy().hasHeightForWidth())
-        self.all_universes_3.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.all_universes_3.sizePolicy().hasHeightForWidth())
+        self.all_universes_3.setSizePolicy(sizePolicy6)
         self.all_universes_3.setMaximumSize(QSize(50, 16777215))
         self.all_universes_3.setIconSize(QSize(24, 24))
 
@@ -2768,8 +2792,8 @@ class Ui_MainWindow(object):
 
         self.characters_create_image_preview = QLabel(self.create_character)
         self.characters_create_image_preview.setObjectName(u"characters_create_image_preview")
-        sizePolicy4.setHeightForWidth(self.characters_create_image_preview.sizePolicy().hasHeightForWidth())
-        self.characters_create_image_preview.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.characters_create_image_preview.sizePolicy().hasHeightForWidth())
+        self.characters_create_image_preview.setSizePolicy(sizePolicy5)
         self.characters_create_image_preview.setMinimumSize(QSize(0, 0))
         self.characters_create_image_preview.setMaximumSize(QSize(100, 100))
         self.characters_create_image_preview.setAutoFillBackground(True)
@@ -2800,8 +2824,8 @@ class Ui_MainWindow(object):
 
         self.edit_character = QGroupBox(self.characters)
         self.edit_character.setObjectName(u"edit_character")
-        sizePolicy5.setHeightForWidth(self.edit_character.sizePolicy().hasHeightForWidth())
-        self.edit_character.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.edit_character.sizePolicy().hasHeightForWidth())
+        self.edit_character.setSizePolicy(sizePolicy6)
         self.edit_character.setMinimumSize(QSize(500, 335))
         self.edit_character.setMaximumSize(QSize(354, 335))
         self.verticalLayout_34 = QVBoxLayout(self.edit_character)
@@ -2843,8 +2867,8 @@ class Ui_MainWindow(object):
 
         self.all_universes_4 = QPushButton(self.edit_character)
         self.all_universes_4.setObjectName(u"all_universes_4")
-        sizePolicy5.setHeightForWidth(self.all_universes_4.sizePolicy().hasHeightForWidth())
-        self.all_universes_4.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.all_universes_4.sizePolicy().hasHeightForWidth())
+        self.all_universes_4.setSizePolicy(sizePolicy6)
         self.all_universes_4.setMaximumSize(QSize(50, 16777215))
         self.all_universes_4.setIconSize(QSize(24, 24))
 
@@ -2939,8 +2963,8 @@ class Ui_MainWindow(object):
 
         self.characters_edit_image_preview = QLabel(self.edit_character)
         self.characters_edit_image_preview.setObjectName(u"characters_edit_image_preview")
-        sizePolicy4.setHeightForWidth(self.characters_edit_image_preview.sizePolicy().hasHeightForWidth())
-        self.characters_edit_image_preview.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.characters_edit_image_preview.sizePolicy().hasHeightForWidth())
+        self.characters_edit_image_preview.setSizePolicy(sizePolicy5)
         self.characters_edit_image_preview.setMinimumSize(QSize(0, 0))
         self.characters_edit_image_preview.setMaximumSize(QSize(100, 100))
         self.characters_edit_image_preview.setAutoFillBackground(True)
@@ -3040,8 +3064,8 @@ class Ui_MainWindow(object):
         self.horizontalLayout_59.setObjectName(u"horizontalLayout_59")
         self.create_expression = QGroupBox(self.expressions)
         self.create_expression.setObjectName(u"create_expression")
-        sizePolicy5.setHeightForWidth(self.create_expression.sizePolicy().hasHeightForWidth())
-        self.create_expression.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.create_expression.sizePolicy().hasHeightForWidth())
+        self.create_expression.setSizePolicy(sizePolicy6)
         self.create_expression.setMinimumSize(QSize(500, 294))
         self.create_expression.setMaximumSize(QSize(354, 294))
         self.verticalLayout_20 = QVBoxLayout(self.create_expression)
@@ -3083,8 +3107,8 @@ class Ui_MainWindow(object):
 
         self.all_universes_5 = QPushButton(self.create_expression)
         self.all_universes_5.setObjectName(u"all_universes_5")
-        sizePolicy5.setHeightForWidth(self.all_universes_5.sizePolicy().hasHeightForWidth())
-        self.all_universes_5.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.all_universes_5.sizePolicy().hasHeightForWidth())
+        self.all_universes_5.setSizePolicy(sizePolicy6)
         self.all_universes_5.setMaximumSize(QSize(50, 16777215))
         self.all_universes_5.setIconSize(QSize(24, 24))
 
@@ -3149,8 +3173,8 @@ class Ui_MainWindow(object):
 
         self.expressions_create_image_preview = QLabel(self.create_expression)
         self.expressions_create_image_preview.setObjectName(u"expressions_create_image_preview")
-        sizePolicy4.setHeightForWidth(self.expressions_create_image_preview.sizePolicy().hasHeightForWidth())
-        self.expressions_create_image_preview.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.expressions_create_image_preview.sizePolicy().hasHeightForWidth())
+        self.expressions_create_image_preview.setSizePolicy(sizePolicy5)
         self.expressions_create_image_preview.setMinimumSize(QSize(0, 0))
         self.expressions_create_image_preview.setMaximumSize(QSize(100, 100))
         self.expressions_create_image_preview.setAutoFillBackground(True)
@@ -3181,8 +3205,8 @@ class Ui_MainWindow(object):
 
         self.edit_expression = QGroupBox(self.expressions)
         self.edit_expression.setObjectName(u"edit_expression")
-        sizePolicy5.setHeightForWidth(self.edit_expression.sizePolicy().hasHeightForWidth())
-        self.edit_expression.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.edit_expression.sizePolicy().hasHeightForWidth())
+        self.edit_expression.setSizePolicy(sizePolicy6)
         self.edit_expression.setMinimumSize(QSize(500, 294))
         self.edit_expression.setMaximumSize(QSize(354, 294))
         self.verticalLayout_40 = QVBoxLayout(self.edit_expression)
@@ -3251,8 +3275,8 @@ class Ui_MainWindow(object):
 
         self.all_characters_4 = QPushButton(self.edit_expression)
         self.all_characters_4.setObjectName(u"all_characters_4")
-        sizePolicy5.setHeightForWidth(self.all_characters_4.sizePolicy().hasHeightForWidth())
-        self.all_characters_4.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.all_characters_4.sizePolicy().hasHeightForWidth())
+        self.all_characters_4.setSizePolicy(sizePolicy6)
         self.all_characters_4.setMaximumSize(QSize(50, 16777215))
         self.all_characters_4.setIconSize(QSize(24, 24))
 
@@ -3290,8 +3314,8 @@ class Ui_MainWindow(object):
 
         self.expressions_edit_image_preview = QLabel(self.edit_expression)
         self.expressions_edit_image_preview.setObjectName(u"expressions_edit_image_preview")
-        sizePolicy4.setHeightForWidth(self.expressions_edit_image_preview.sizePolicy().hasHeightForWidth())
-        self.expressions_edit_image_preview.setSizePolicy(sizePolicy4)
+        sizePolicy5.setHeightForWidth(self.expressions_edit_image_preview.sizePolicy().hasHeightForWidth())
+        self.expressions_edit_image_preview.setSizePolicy(sizePolicy5)
         self.expressions_edit_image_preview.setMinimumSize(QSize(0, 0))
         self.expressions_edit_image_preview.setMaximumSize(QSize(100, 100))
         self.expressions_edit_image_preview.setAutoFillBackground(True)
@@ -3386,13 +3410,13 @@ class Ui_MainWindow(object):
         self.verticalLayout_9.setObjectName(u"verticalLayout_9")
         self.label_15 = QLabel(self.demi_character_import)
         self.label_15.setObjectName(u"label_15")
-        sizePolicy7.setHeightForWidth(self.label_15.sizePolicy().hasHeightForWidth())
-        self.label_15.setSizePolicy(sizePolicy7)
+        sizePolicy8.setHeightForWidth(self.label_15.sizePolicy().hasHeightForWidth())
+        self.label_15.setSizePolicy(sizePolicy8)
         self.label_15.setMinimumSize(QSize(0, 140))
-        font3 = QFont()
-        font3.setPointSize(23)
-        font3.setBold(True)
-        self.label_15.setFont(font3)
+        font4 = QFont()
+        font4.setPointSize(23)
+        font4.setBold(True)
+        self.label_15.setFont(font4)
         self.label_15.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_15.setOpenExternalLinks(True)
 
@@ -3400,13 +3424,13 @@ class Ui_MainWindow(object):
 
         self.label_18 = QLabel(self.demi_character_import)
         self.label_18.setObjectName(u"label_18")
-        sizePolicy7.setHeightForWidth(self.label_18.sizePolicy().hasHeightForWidth())
-        self.label_18.setSizePolicy(sizePolicy7)
+        sizePolicy8.setHeightForWidth(self.label_18.sizePolicy().hasHeightForWidth())
+        self.label_18.setSizePolicy(sizePolicy8)
         self.label_18.setMinimumSize(QSize(0, 30))
-        font4 = QFont()
-        font4.setPointSize(18)
-        font4.setBold(True)
-        self.label_18.setFont(font4)
+        font5 = QFont()
+        font5.setPointSize(18)
+        font5.setBold(True)
+        self.label_18.setFont(font5)
         self.label_18.setMouseTracking(True)
         self.label_18.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_18.setOpenExternalLinks(True)
@@ -3433,10 +3457,10 @@ class Ui_MainWindow(object):
         self.formLayout.setContentsMargins(0, 0, 0, 0)
         self.universe_import_label = QLabel(self.demi_character_import)
         self.universe_import_label.setObjectName(u"universe_import_label")
-        font5 = QFont()
-        font5.setPointSize(16)
-        font5.setWeight(QFont.DemiBold)
-        self.universe_import_label.setFont(font5)
+        font6 = QFont()
+        font6.setPointSize(16)
+        font6.setWeight(QFont.DemiBold)
+        self.universe_import_label.setFont(font6)
         self.universe_import_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.universe_import_label)
@@ -3445,7 +3469,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_27.setObjectName(u"verticalLayout_27")
         self.character_page_import_label = QLabel(self.demi_character_import)
         self.character_page_import_label.setObjectName(u"character_page_import_label")
-        self.character_page_import_label.setFont(font5)
+        self.character_page_import_label.setFont(font6)
 
         self.verticalLayout_27.addWidget(self.character_page_import_label)
 
@@ -3454,15 +3478,15 @@ class Ui_MainWindow(object):
 
         self.character_page_for_import = QLineEdit(self.demi_character_import)
         self.character_page_for_import.setObjectName(u"character_page_for_import")
-        sizePolicy10 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Fixed)
-        sizePolicy10.setHorizontalStretch(0)
-        sizePolicy10.setVerticalStretch(0)
-        sizePolicy10.setHeightForWidth(self.character_page_for_import.sizePolicy().hasHeightForWidth())
-        self.character_page_for_import.setSizePolicy(sizePolicy10)
+        sizePolicy11 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Fixed)
+        sizePolicy11.setHorizontalStretch(0)
+        sizePolicy11.setVerticalStretch(0)
+        sizePolicy11.setHeightForWidth(self.character_page_for_import.sizePolicy().hasHeightForWidth())
+        self.character_page_for_import.setSizePolicy(sizePolicy11)
         self.character_page_for_import.setMinimumSize(QSize(655, 0))
-        font6 = QFont()
-        font6.setPointSize(13)
-        self.character_page_for_import.setFont(font6)
+        font7 = QFont()
+        font7.setPointSize(13)
+        self.character_page_for_import.setFont(font7)
 
         self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.character_page_for_import)
 
@@ -3470,7 +3494,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_28.setObjectName(u"verticalLayout_28")
         self.token_import_label = QLabel(self.demi_character_import)
         self.token_import_label.setObjectName(u"token_import_label")
-        self.token_import_label.setFont(font5)
+        self.token_import_label.setFont(font6)
 
         self.verticalLayout_28.addWidget(self.token_import_label)
 
@@ -3479,21 +3503,21 @@ class Ui_MainWindow(object):
 
         self.token_for_import = QLineEdit(self.demi_character_import)
         self.token_for_import.setObjectName(u"token_for_import")
-        sizePolicy10.setHeightForWidth(self.token_for_import.sizePolicy().hasHeightForWidth())
-        self.token_for_import.setSizePolicy(sizePolicy10)
+        sizePolicy11.setHeightForWidth(self.token_for_import.sizePolicy().hasHeightForWidth())
+        self.token_for_import.setSizePolicy(sizePolicy11)
         self.token_for_import.setMinimumSize(QSize(655, 0))
 
         self.formLayout.setWidget(8, QFormLayout.ItemRole.FieldRole, self.token_for_import)
 
         self.import_button = QPushButton(self.demi_character_import)
         self.import_button.setObjectName(u"import_button")
-        self.import_button.setFont(font6)
+        self.import_button.setFont(font7)
 
         self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.import_button)
 
         self.import_load = QLabel(self.demi_character_import)
         self.import_load.setObjectName(u"import_load")
-        self.import_load.setFont(font6)
+        self.import_load.setFont(font7)
         self.import_load.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.formLayout.setWidget(7, QFormLayout.ItemRole.FieldRole, self.import_load)
@@ -3506,7 +3530,7 @@ class Ui_MainWindow(object):
 
         self.universe_import_create_label = QLabel(self.demi_character_import)
         self.universe_import_create_label.setObjectName(u"universe_import_create_label")
-        self.universe_import_create_label.setFont(font5)
+        self.universe_import_create_label.setFont(font6)
         self.universe_import_create_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
         self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.universe_import_create_label)
@@ -3529,8 +3553,8 @@ class Ui_MainWindow(object):
 
         self.all_universes_7 = QPushButton(self.demi_character_import)
         self.all_universes_7.setObjectName(u"all_universes_7")
-        sizePolicy5.setHeightForWidth(self.all_universes_7.sizePolicy().hasHeightForWidth())
-        self.all_universes_7.setSizePolicy(sizePolicy5)
+        sizePolicy6.setHeightForWidth(self.all_universes_7.sizePolicy().hasHeightForWidth())
+        self.all_universes_7.setSizePolicy(sizePolicy6)
         self.all_universes_7.setMaximumSize(QSize(50, 16777215))
         self.all_universes_7.setIconSize(QSize(24, 24))
 
@@ -3557,8 +3581,8 @@ class Ui_MainWindow(object):
         self.verticalLayout_24.setObjectName(u"verticalLayout_24")
         self.disclaimer_1 = QLabel(self.demi_character_import)
         self.disclaimer_1.setObjectName(u"disclaimer_1")
-        sizePolicy7.setHeightForWidth(self.disclaimer_1.sizePolicy().hasHeightForWidth())
-        self.disclaimer_1.setSizePolicy(sizePolicy7)
+        sizePolicy8.setHeightForWidth(self.disclaimer_1.sizePolicy().hasHeightForWidth())
+        self.disclaimer_1.setSizePolicy(sizePolicy8)
         self.disclaimer_1.setMinimumSize(QSize(0, 35))
         self.disclaimer_1.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
@@ -3566,8 +3590,8 @@ class Ui_MainWindow(object):
 
         self.disclaimer_2 = QLabel(self.demi_character_import)
         self.disclaimer_2.setObjectName(u"disclaimer_2")
-        sizePolicy7.setHeightForWidth(self.disclaimer_2.sizePolicy().hasHeightForWidth())
-        self.disclaimer_2.setSizePolicy(sizePolicy7)
+        sizePolicy8.setHeightForWidth(self.disclaimer_2.sizePolicy().hasHeightForWidth())
+        self.disclaimer_2.setSizePolicy(sizePolicy8)
         self.disclaimer_2.setMinimumSize(QSize(0, 35))
         self.disclaimer_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
 

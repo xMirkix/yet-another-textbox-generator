@@ -3,9 +3,10 @@ import zipfile
 from pathlib import Path
 from PySide6.QtCore import QTimer
 from PySide6.QtGui import QPixmap
-from PySide6.QtWidgets import QApplication, QMessageBox
+from PySide6.QtWidgets import QApplication, QMessageBox, QListWidgetItem
 from services.change_service import Changes
 from services.database_service import DBDynamicConnection
+from services.last_opened_service import last_opened_manager, reset_ui_list
 from services.selection_manager import left_manager
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QFileDialog
@@ -23,6 +24,11 @@ def connect_welcome(ui: Ui_MainWindow):
     ui.generator_link.clicked.connect(lambda: ui.tabs.setCurrentIndex(1))
     ui.import_link.clicked.connect(lambda: ui.tabs.setCurrentIndex(6))
     ui.universe_link.clicked.connect(lambda: ui.tabs.setCurrentIndex(3))
+
+    ui.last_opened_list.itemClicked.connect(
+        lambda item: on_last_opened_item_clicked(item, ui)
+    )
+    load_last_opened_list(ui)
 
 def _zip_db_to(path: str):
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as zf:
@@ -46,6 +52,8 @@ def save_file(ui: Ui_MainWindow) -> bool:
         if not path.endswith(".yatg"):
             path += ".yatg"
         _zip_db_to(path)
+        last_opened_manager.add_item(path)
+        reset_ui_list(ui)
         Changes.reset()
         name = Path(path).name
         ui.centralwidget.window().setWindowTitle(f"{name} - Saved")
@@ -66,6 +74,7 @@ def save_file_without_ui() -> bool:
         if not path.endswith(".yatg"):
             path += ".yatg"
         _zip_db_to(path)
+        last_opened_manager.add_item(path)
         Changes.reset()
         return True
     return False
@@ -90,16 +99,32 @@ def manage_file(ui: Ui_MainWindow, caption: str, filter_name: str) -> bool:
         filter=filter_name
     )
     if path:
-        Changes.reset()
-        _unzip_db_from(path)
-        DBDynamicConnection.get_instance().reconnect()
-        ui.tabs.setCurrentIndex(0)
-        window_title = Path(path).name
-        ui.centralwidget.window().setWindowTitle(window_title)
-        Changes.set_current_selected_file(path)
-        left_manager.try_to_select_first_universe_character_expression()
+        open_logic(ui, path)
         return True
     return False
 
+def open_logic(ui: Ui_MainWindow, path: str):
+    Changes.reset()
+    _unzip_db_from(path)
+    DBDynamicConnection.get_instance().reconnect()
+    ui.tabs.setCurrentIndex(0)
+    window_title = Path(path).name
+    ui.centralwidget.window().setWindowTitle(window_title)
+    Changes.set_current_selected_file(path)
+    left_manager.try_to_select_first_universe_character_expression()
+    last_opened_manager.add_item(path)
+    reset_ui_list(ui)
+
+
 def quit_app():
     QApplication.quit()
+
+
+def load_last_opened_list(ui: Ui_MainWindow):
+    reset_ui_list(ui)
+
+def on_last_opened_item_clicked(item: QListWidgetItem, ui: Ui_MainWindow):
+    path = item.text()
+    ui.last_opened_list.setEnabled(False)
+    open_logic(ui, path)
+    QTimer.singleShot(1500, lambda: ui.last_opened_list.setEnabled(True))

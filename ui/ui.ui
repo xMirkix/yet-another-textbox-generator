@@ -156,6 +156,54 @@
              </widget>
             </item>
             <item>
+             <widget class="QListWidget" name="last_opened_list">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>100</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+              <property name="horizontalScrollBarPolicy">
+               <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+              </property>
+              <property name="editTriggers">
+               <set>QAbstractItemView::EditTrigger::NoEditTriggers</set>
+              </property>
+              <property name="tabKeyNavigation">
+               <bool>true</bool>
+              </property>
+              <property name="showDropIndicator" stdset="0">
+               <bool>false</bool>
+              </property>
+              <property name="defaultDropAction">
+               <enum>Qt::DropAction::IgnoreAction</enum>
+              </property>
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
+              <property name="keyboardSearchFlags">
+               <set>Qt::MatchFlag::MatchStartsWith</set>
+              </property>
+              <property name="uniformItemSizes">
+               <bool>false</bool>
+              </property>
+              <property name="supportedDragActions">
+               <set>Qt::DropAction::IgnoreAction</set>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QPushButton" name="generator_link">
               <property name="text">
                <string>Generator</string>

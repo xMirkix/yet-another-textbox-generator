@@ -18,20 +18,3 @@ def get_font(font: TextFont, size: int):
         str(FONTS / font.source_value),
         size
     )
-
-#def load_system_font(font_name: str, size: int):
-    #try:
-        #path = font_manager.findfont(
-            #font_manager.FontProperties(family=font_name),
-            #fallback_to_default=False
-        #)
-
-        #if font_name == "Wingdings":
-            #return ImageFont.truetype(path, size, encoding="symb")
-
-        #return ImageFont.truetype(path, size)
-
-    #except Exception:
-        #raise RuntimeError(
-            #f"Font '{font_name}' ist not installed."
-        #)
