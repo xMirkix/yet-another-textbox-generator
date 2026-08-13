@@ -4222,6 +4222,13 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
               </widget>
              </item>
              <item>
+              <widget class="QPushButton" name="copy_to_clipboard_stack">
+               <property name="text">
+                <string>Copy to Clipboard</string>
+               </property>
+              </widget>
+             </item>
+             <item>
               <widget class="Line" name="line_78">
                <property name="orientation">
                 <enum>Qt::Orientation::Horizontal</enum>
@@ -4244,7 +4251,7 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                 <x>0</x>
                 <y>0</y>
                 <width>507</width>
-                <height>631</height>
+                <height>599</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_25">
@@ -6188,12 +6195,25 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
     <property name="title">
      <string>File</string>
     </property>
+    <addaction name="actionNew_File_2"/>
     <addaction name="actionSave"/>
     <addaction name="actionOpen_2"/>
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menuGenerator">
+    <property name="title">
+     <string>Generator</string>
+    </property>
+    <addaction name="actionDownload_current_Textbox"/>
+    <addaction name="actionCopy_current_Textbox_to_Clipboard"/>
+    <addaction name="actionAdd_current_Box_to_Stack"/>
+    <addaction name="separator"/>
+    <addaction name="actionDownload_Textbox_Stack"/>
+    <addaction name="actionCopy_Stack_to_Clipboard"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuGenerator"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionFile">
@@ -6270,6 +6290,75 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionNew_File_2">
+   <property name="text">
+    <string>New File</string>
+   </property>
+   <property name="toolTip">
+    <string>Make a new .yatg File</string>
+   </property>
+   <property name="statusTip">
+    <string>Make a new .yatg File</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionDownload_current_Textbox">
+   <property name="text">
+    <string>Download Textbox</string>
+   </property>
+   <property name="statusTip">
+    <string>Download current Textbox</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionCopy_current_Textbox_to_Clipboard">
+   <property name="text">
+    <string>Copy Textbox to Clipboard</string>
+   </property>
+   <property name="statusTip">
+    <string>Copy current Textbox to Clipboard</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionAdd_current_Box_to_Stack">
+   <property name="text">
+    <string>Add Textbox to Stack</string>
+   </property>
+   <property name="statusTip">
+    <string>Add current Textbox to Stack</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+A</string>
+   </property>
+  </action>
+  <action name="actionDownload_Textbox_Stack">
+   <property name="text">
+    <string>Download Stack</string>
+   </property>
+   <property name="statusTip">
+    <string>Download current Stack</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+D</string>
+   </property>
+  </action>
+  <action name="actionCopy_Stack_to_Clipboard">
+   <property name="text">
+    <string>Copy Stack to Clipboard</string>
+   </property>
+   <property name="statusTip">
+    <string>Copy current Stack to Clipboard</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+C</string>
    </property>
   </action>
  </widget>

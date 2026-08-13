@@ -149,6 +149,11 @@ class InitPopulationService:
         ui.import_progress.hide()
         ui.add_to_stack.hide()
         ui.copy_to_clipboard.hide()
+        ui.actionDownload_current_Textbox.setEnabled(False)
+        ui.actionCopy_current_Textbox_to_Clipboard.setEnabled(False)
+        ui.actionAdd_current_Box_to_Stack.setEnabled(False)
+        ui.actionDownload_Textbox_Stack.setEnabled(False)
+        ui.actionCopy_Stack_to_Clipboard.setEnabled(False)
         hide_initial(ui)
         self.create_temporary_data_tables()
 

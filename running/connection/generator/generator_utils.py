@@ -3,7 +3,8 @@ from io import BytesIO
 from pathlib import Path
 
 from PIL import Image
-from PySide6.QtGui import QPixmap
+from PySide6.QtCore import QTimer
+from PySide6.QtGui import QPixmap, QGuiApplication
 from PySide6.QtWidgets import QLabel, QTextEdit, QFileDialog, QMessageBox
 
 from configs.paths import PREVIEWS_DIR
@@ -121,3 +122,17 @@ def download(ui: Ui_MainWindow):
             return
 
     shutil.copyfile(source, path)
+
+def on_copy(ui: Ui_MainWindow):
+    worked = copy_to_clipboard(ui.output)
+    if not worked:
+        return
+    ui.copy_to_clipboard.setText("Copied!")
+    QTimer.singleShot(1500, lambda: ui.copy_to_clipboard.setText("Copy to Clipboard"))
+
+def copy_to_clipboard(output: QLabel) -> bool:
+    pixmap = output.movie().currentPixmap() if output.movie() else output.pixmap()
+    if pixmap and not pixmap.isNull() and not output.text():
+        QGuiApplication.clipboard().setPixmap(pixmap)
+        return True
+    return False

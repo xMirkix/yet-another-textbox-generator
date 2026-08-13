@@ -126,17 +126,17 @@ def on_import(ui: Ui_MainWindow):
     mira_url = ui.character_page_for_import.text()
 
     if universe is None:
-        on_failure(ui, "No universe selected")
+        on_failure(ui, "No universe selected", new_universe_name)
         return
 
     if mira_url is None or mira_url == "":
-        on_failure(ui, "No link provided")
+        on_failure(ui, "No link provided", new_universe_name)
         return
 
     parsed = parse_import_url(mira_url)
 
     if parsed is None:
-        on_failure(ui, "Invalid URL")
+        on_failure(ui, "Invalid URL", new_universe_name)
         return
 
     username, slug = parsed
@@ -157,7 +157,7 @@ def on_import(ui: Ui_MainWindow):
         on_import_done(ui)
 
         if error_message is not None:
-            on_failure(ui, error_message)
+            on_failure(ui, error_message, new_universe_name)
             return
 
         try_set_selected(new_character)

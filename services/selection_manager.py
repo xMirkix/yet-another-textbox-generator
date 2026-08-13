@@ -1,8 +1,6 @@
 from dataclasses import dataclass
-from io import BytesIO
 from typing import Callable
 
-from PIL import Image
 from PySide6.QtWidgets import QComboBox, QLabel, QCheckBox, QWidget, QPushButton
 
 from models.entities import Universe, Character, Expression
@@ -11,6 +9,8 @@ from services import change_service
 from services.color_service import fit_expression_image
 from services.database_service import DBDynamicConnection
 from generation.generation_request import GenerationRequest
+from ui.generated_ui import Ui_MainWindow
+
 
 class ColorSelectionManager:
     def __init__(self):
@@ -188,6 +188,59 @@ class SideSelectors:
 
 left_manager  = SelectionManager()
 right_manager = SelectionManager()
+
+def make_sides(ui: Ui_MainWindow) -> tuple[SideSelectors, SideSelectors]:
+    left = SideSelectors(
+        universe_selector=ui.universe_selector,
+        universe_preview=ui.universe_preview,
+        character_selector=ui.character_selector,
+        character_preview=ui.character_preview,
+        expression_selector=ui.expression_selector,
+        expression_preview=ui.expression_preview,
+        alternating_selector=ui.alternating_selector,
+        alternating_preview=ui.alternating_preview,
+        include_checkbox=ui.include_checkbox,
+        expression_color_selector=ui.expression_color_selector,
+        expression_color_preview=ui.expression_color_preview,
+        color_type_selector=ui.expression_color_type_selector,
+        color_type_button=ui.expression_color_type_button,
+        color_type_everything= [ui.expression_color_type_selector,
+                                ui.expression_color_type_label,
+                                ui.expression_color_type_button,
+                                ui.line_79,
+                                ui.line_80,
+                                ui.label_left,
+                                ui.label_right
+                                ],
+        alternating_container=ui.alternating_everything,
+        alternating_lines=[ui.line_67, ui.line_68, ui.line_69],
+    )
+    right = SideSelectors(
+        universe_selector=ui.universe_selector_2,
+        universe_preview=ui.universe_preview_2,
+        character_selector=ui.character_selector_2,
+        character_preview=ui.character_preview_2,
+        expression_selector=ui.expression_selector_2,
+        expression_preview=ui.expression_preview_2,
+        alternating_selector=ui.alternating_right_selector,
+        alternating_preview=ui.alternating_right_preview,
+        include_checkbox=ui.include_checkbox_2,
+        expression_color_selector=ui.expression_color_selector_2,
+        expression_color_preview=ui.expression_color_preview_2,
+        color_type_selector=ui.expression_color_type_selector_2,
+        color_type_button=ui.expression_color_type_button_2,
+        color_type_everything=[ui.expression_color_type_selector_2,
+                               ui.expression_color_type_label_2,
+                               ui.expression_color_type_button_2,
+                               ui.line_37,
+                               ui.line_82,
+                               ui.label_left_2,
+                               ui.label_right_2
+                               ],
+        alternating_container=ui.alternating_everything_right,
+        alternating_lines=[ui.line_70, ui.line_71, ui.line_72],
+    )
+    return left, right
 
 
 class StackManager:

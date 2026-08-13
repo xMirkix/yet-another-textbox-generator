@@ -29,6 +29,10 @@ def reset_ui_list(ui: Ui_MainWindow):
         return
 
     for path in last_opened:
+        if not Path(path).exists():
+            last_opened_manager.remove_item(path)
+            continue
+
         item = QListWidgetItem(path)
         item.setToolTip(path)
         ui.last_opened_list.addItem(item)
@@ -64,6 +68,11 @@ class LastOpenedManger:
         self.list.insert(0, item)
         self.list = self.list[: self.MAX_ITEMS]
         self.save()
+
+    def remove_item(self, item: str):
+        if item in self.list:
+            self.list.remove(item)
+            self.save()
 
     def get_list(self) -> list[str]:
         return self.list

@@ -1,6 +1,5 @@
 import shutil
 import zipfile
-from pathlib import Path
 
 from PySide6.QtWidgets import QMainWindow, QApplication
 from PySide6.QtGui import QCloseEvent
@@ -10,7 +9,6 @@ from configs.paths import DYNAMIC_DB
 from running.connection.welcome import save_file_without_ui, open_logic
 from services.change_service import Changes
 from services.database_service import DBDynamicConnection
-from services.selection_manager import left_manager
 
 
 db_path = DYNAMIC_DB

@@ -269,6 +269,8 @@ def reload_ui(ui: Ui_MainWindow):
 
     db = get_db()
 
+    clear_grid(ui.characters_grid)
+
     universe = left_manager.get_selected_universe()
 
     if universe is None:
@@ -286,7 +288,6 @@ def reload_ui(ui: Ui_MainWindow):
     init_entity(db.select_all_universes, ui.characters_create_universe_selector, None, universe)
     init_entity(db.select_all_universes, ui.characters_edit_universe_selector, None, universe)
 
-    clear_grid(ui.characters_grid)
 
     for character in db.select_all_characters_from_universe(universe.universe_id):
         insert_character_tile(ui, character)

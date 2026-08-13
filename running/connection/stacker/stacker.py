@@ -2,16 +2,15 @@ import shutil
 from pathlib import Path
 
 from PySide6.QtCore import QTimer
-from PySide6.QtGui import QPixmap
-from PySide6.QtWidgets import QFileDialog, QMessageBox
+from PySide6.QtGui import QPixmap, QGuiApplication
+from PySide6.QtWidgets import QFileDialog, QMessageBox, QLabel
 
 from models.form_bindings import ExportFormat
 from running.connection.generator.generation_calls import make_request
-from running.connection.generator.generator import make_sides
 from running.connection.stacker import stacker_ui
 from running.connection.stacker.stacker_proxy import stack_cache
 from ui.generated_ui import Ui_MainWindow
-from services.selection_manager import stack_manager
+from services.selection_manager import stack_manager, make_sides
 
 
 def connect_stacker(ui: Ui_MainWindow):
@@ -19,11 +18,17 @@ def connect_stacker(ui: Ui_MainWindow):
 
     def add_current():
         stacker_ui.add_to_stack(ui, ui.add_current_box.property("current_request"))
+        ui.download_stack.show()
+        ui.actionDownload_Textbox_Stack.setEnabled(True)
+        ui.copy_to_clipboard_stack.show()
+        ui.actionCopy_Stack_to_Clipboard.setEnabled(True)
+        ui.add_textboxes.hide()
         try_generate(ui)
 
     ui.add_current_box.clicked.connect(lambda: add_current())
     ui.amount_of_columns.valueChanged.connect(lambda: try_generate(ui))
     ui.download_stack.clicked.connect(lambda: download(ui))
+    ui.copy_to_clipboard_stack.clicked.connect(lambda: copy_to_clipboard(ui))
 
     ui.debounce_timer_stack = QTimer()
     ui.debounce_timer_stack.setSingleShot(True)
@@ -54,6 +59,9 @@ def reload_ui(ui: Ui_MainWindow):
     ui.add_current_box.hide()
     ui.add_textboxes.hide()
     ui.download_stack.hide()
+    ui.actionDownload_Textbox_Stack.setEnabled(False)
+    ui.copy_to_clipboard_stack.hide()
+    ui.actionCopy_Stack_to_Clipboard.setEnabled(False)
     left, right = make_sides(ui)
     check = make_request(ui, left, right)
 
@@ -65,11 +73,20 @@ def reload_ui(ui: Ui_MainWindow):
         ui.add_textboxes.show()
     else:
         ui.download_stack.show()
+        ui.actionDownload_Textbox_Stack.setEnabled(True)
+        ui.copy_to_clipboard_stack.show()
+        ui.actionCopy_Stack_to_Clipboard.setEnabled(True)
 
 
 def hide_initial(ui: Ui_MainWindow):
     ui.add_current_box.hide()
     ui.download_stack.hide()
+    ui.actionDownload_Textbox_Stack.setEnabled(False)
+    ui.copy_to_clipboard_stack.hide()
+    ui.actionCopy_Stack_to_Clipboard.setEnabled(False)
+
+def on_delete_empty(ui: Ui_MainWindow):
+    reload_ui(ui)
 
 
 def download(ui: Ui_MainWindow):
@@ -99,3 +116,17 @@ def download(ui: Ui_MainWindow):
             return
 
     shutil.copyfile(source, path)
+
+def copy_to_clipboard(ui: Ui_MainWindow):
+    worked = copy_to_clipboard_helper(ui.output_stack)
+    if not worked:
+        return
+    ui.copy_to_clipboard_stack.setText("Copied!")
+    QTimer.singleShot(1500, lambda: ui.copy_to_clipboard_stack.setText("Copy to Clipboard"))
+
+def copy_to_clipboard_helper(output: QLabel) -> bool:
+    pixmap = output.pixmap()
+    if pixmap and not pixmap.isNull() and not output.text():
+        QGuiApplication.clipboard().setPixmap(pixmap)
+        return True
+    return False

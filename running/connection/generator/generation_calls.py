@@ -112,8 +112,11 @@ def make_request(ui: Ui_MainWindow,
 
     if message is not None:
         ui.download.hide()
+        ui.actionDownload_current_Textbox.setEnabled(False)
         ui.copy_to_clipboard.hide()
+        ui.actionCopy_current_Textbox_to_Clipboard.setEnabled(False)
         ui.add_to_stack.hide()
+        ui.actionAdd_current_Box_to_Stack.setEnabled(False)
         ui.output.setText(message)
         return None
 
@@ -198,16 +201,20 @@ def on_result(ui: Ui_MainWindow, result_path, output_format):
 
     if output_format == ExportFormat.GIF:
         ui.add_to_stack.hide()
+        ui.actionAdd_current_Box_to_Stack.setEnabled(False)
         ui.movie = QMovie(str(result_path))
         ui.output.setMovie(ui.movie)
         ui.movie.start()
     else:
         ui.add_to_stack.show()
+        ui.actionAdd_current_Box_to_Stack.setEnabled(True)
         ui.output.setPixmap(QPixmap(str(result_path)))
 
     ui.download.setProperty("path", result_path)
     ui.download.show()
+    ui.actionDownload_current_Textbox.setEnabled(True)
     ui.copy_to_clipboard.show()
+    ui.actionCopy_current_Textbox_to_Clipboard.setEnabled(True)
 
 def hide_download(ui: Ui_MainWindow, message: str):
     effect = QGraphicsDropShadowEffect()
@@ -217,5 +224,6 @@ def hide_download(ui: Ui_MainWindow, message: str):
     ui.output.setGraphicsEffect(effect)
 
     ui.download.hide()
+    ui.actionDownload_current_Textbox.setEnabled(False)
     ui.copy_to_clipboard.hide()
     ui.output.setText(message)

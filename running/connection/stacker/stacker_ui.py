@@ -128,6 +128,9 @@ def remove_from_stack(ui: Ui_MainWindow, frame: QFrame):
         if widget is not None:
             widget.setProperty("position", i)
 
+    if len(stack_manager.get_stack()) == 0:
+        stacker.on_delete_empty(ui)
+
     stacker.try_generate(ui)
 
 

@@ -2,15 +2,14 @@ import colorsys
 from typing import Callable
 
 from PySide6.QtCore import QTimer
-from PySide6.QtGui import QGuiApplication
-from PySide6.QtWidgets import QComboBox, QLabel, QPushButton
+from PySide6.QtWidgets import QComboBox, QPushButton
 
 from models.entities import Character, Universe, Expression
 from models.form_bindings import ColorType
 from running.connection.generator.generation_calls import execute_generation, make_request
 from running.connection.generator.generator_utils import set_color, set_border_style, set_stylesheet, set_defaults, \
     set_preview_generator_version, set_border_color, show_alternating, \
-    hide_alternating, hide_or_show, download
+    hide_alternating, hide_or_show, download, on_copy
 from running.connection.stacker import stacker, stacker_ui
 from services.color_service import bytes_to_image, get_primary_color, is_similar
 from services.color_window_service import create_color_window
@@ -18,62 +17,10 @@ from services.database_service import DBDynamicConnection
 from services.new_window_service import connect_universe_create, connect_character_create, \
     connect_expression_create, connect_alt_expression
 from services.selection_manager import SelectionManager, init_entity, SideSelectors, left_manager, right_manager, \
-    select_entity_in_combo
+    select_entity_in_combo, make_sides
 from startup.in_memory.static_classes import Color
 from ui.generated_ui import Ui_MainWindow
 
-def make_sides(ui: Ui_MainWindow) -> tuple[SideSelectors, SideSelectors]:
-    left = SideSelectors(
-        universe_selector=ui.universe_selector,
-        universe_preview=ui.universe_preview,
-        character_selector=ui.character_selector,
-        character_preview=ui.character_preview,
-        expression_selector=ui.expression_selector,
-        expression_preview=ui.expression_preview,
-        alternating_selector=ui.alternating_selector,
-        alternating_preview=ui.alternating_preview,
-        include_checkbox=ui.include_checkbox,
-        expression_color_selector=ui.expression_color_selector,
-        expression_color_preview=ui.expression_color_preview,
-        color_type_selector=ui.expression_color_type_selector,
-        color_type_button=ui.expression_color_type_button,
-        color_type_everything= [ui.expression_color_type_selector,
-                                ui.expression_color_type_label,
-                                ui.expression_color_type_button,
-                                ui.line_79,
-                                ui.line_80,
-                                ui.label_left,
-                                ui.label_right
-                                ],
-        alternating_container=ui.alternating_everything,
-        alternating_lines=[ui.line_67, ui.line_68, ui.line_69],
-    )
-    right = SideSelectors(
-        universe_selector=ui.universe_selector_2,
-        universe_preview=ui.universe_preview_2,
-        character_selector=ui.character_selector_2,
-        character_preview=ui.character_preview_2,
-        expression_selector=ui.expression_selector_2,
-        expression_preview=ui.expression_preview_2,
-        alternating_selector=ui.alternating_right_selector,
-        alternating_preview=ui.alternating_right_preview,
-        include_checkbox=ui.include_checkbox_2,
-        expression_color_selector=ui.expression_color_selector_2,
-        expression_color_preview=ui.expression_color_preview_2,
-        color_type_selector=ui.expression_color_type_selector_2,
-        color_type_button=ui.expression_color_type_button_2,
-        color_type_everything=[ui.expression_color_type_selector_2,
-                               ui.expression_color_type_label_2,
-                               ui.expression_color_type_button_2,
-                               ui.line_37,
-                               ui.line_82,
-                               ui.label_left_2,
-                               ui.label_right_2
-                               ],
-        alternating_container=ui.alternating_everything_right,
-        alternating_lines=[ui.line_70, ui.line_71, ui.line_72],
-    )
-    return left, right
 
 
 
@@ -199,14 +146,7 @@ def connect_generator(ui: Ui_MainWindow):
     ui.size_medium_option.toggled.connect(lambda c: on_radio_changed(ui, c))
     ui.size_big_option.toggled.connect(lambda c: on_radio_changed(ui, c))
 
-    def add_to_stack():
-        req = make_request(ui, left, right)
-        if req is None:
-            return
-        stacker_ui.add_to_stack(ui, req)
-        stacker.generate_stack(ui)
-
-    ui.add_to_stack.clicked.connect(lambda: add_to_stack())
+    ui.add_to_stack.clicked.connect(lambda: add_to_stack(ui))
 
     ui.input.textChanged.connect(lambda: try_generate(ui))
 
@@ -217,6 +157,16 @@ def connect_generator(ui: Ui_MainWindow):
     ui.download.clicked.connect(lambda: download(ui))
 
     ui.copy_to_clipboard.clicked.connect(lambda: on_copy(ui))
+
+def add_to_stack(ui: Ui_MainWindow):
+    left, right = make_sides(ui)
+    req = make_request(ui, left, right)
+    if req is None:
+        return
+    stacker_ui.add_to_stack(ui, req)
+    stacker.generate_stack(ui)
+    ui.actionDownload_Textbox_Stack.setEnabled(True)
+    ui.actionCopy_Stack_to_Clipboard.setEnabled(True)
 
 def try_to_set_simple_colors(side: SideSelectors) -> tuple[list[Color], list[Color]]:
     color_list = []
@@ -275,20 +225,6 @@ def show_type_if_valid(side):
     for item in side.color_type_everything:
         item.show()
     side.expression_color_selector.setEnabled(True)
-
-def on_copy(ui: Ui_MainWindow):
-    worked = copy_to_clipboard(ui.output)
-    if not worked:
-        return
-    ui.copy_to_clipboard.setText("Copied!")
-    QTimer.singleShot(1500, lambda: ui.copy_to_clipboard.setText("Copy to Clipboard"))
-
-def copy_to_clipboard(output: QLabel) -> bool:
-    pixmap = output.movie().currentPixmap() if output.movie() else output.pixmap()
-    if pixmap and not pixmap.isNull() and not output.text():
-        QGuiApplication.clipboard().setPixmap(pixmap)
-        return True
-    return False
 
 def connect_side(ui: Ui_MainWindow, manager: SelectionManager, side: SideSelectors):
     def helper(selector: QComboBox, fn: Callable):
