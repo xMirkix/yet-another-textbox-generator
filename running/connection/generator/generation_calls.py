@@ -1,3 +1,5 @@
+from typing import Callable
+
 from PySide6.QtCore import QThreadPool, QRunnable, QObject, Signal
 from PySide6.QtGui import QMovie, QPixmap, QColor
 from PySide6.QtWidgets import QGraphicsDropShadowEffect
@@ -44,7 +46,8 @@ class _GenerationRunnable(QRunnable):
 
 def execute_generation(ui: Ui_MainWindow,
                        left: SideSelectors,
-                       right: SideSelectors):
+                       right: SideSelectors,
+                       on_complete: Callable = None):
 
     request = make_request(ui, left, right)
 
@@ -61,6 +64,8 @@ def execute_generation(ui: Ui_MainWindow,
         _active_signals.discard(signals)
         if tok == _current_token[0]:
             on_result(ui, path, fmt)
+            if on_complete:
+                on_complete()
 
     signals.done.connect(on_done)
     _pool.start(_GenerationRunnable(signals, request, request.export_settings.export_format, token))

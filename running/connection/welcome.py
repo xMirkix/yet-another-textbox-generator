@@ -1,17 +1,19 @@
 import shutil
 import zipfile
 from pathlib import Path
+from typing import Callable
+
 from PySide6.QtCore import QTimer
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QApplication, QMessageBox, QListWidgetItem
 
-from running.connection.generator.generator import add_to_stack
+from running.connection.generator import generator, generation_calls
 from running.connection.stacker import stacker
-from running.connection.generator.generator_utils import download, on_copy
+from running.connection.generator import generator_utils
 from services.change_service import Changes
 from services.database_service import DBDynamicConnection
 from services.last_opened_service import last_opened_manager, reset_ui_list
-from services.selection_manager import left_manager, right_manager
+from services.selection_manager import left_manager, right_manager, make_sides
 from ui.generated_ui import Ui_MainWindow
 from PySide6.QtWidgets import QFileDialog
 from configs.paths import DYNAMIC_DB
@@ -30,9 +32,9 @@ def connect_welcome(ui: Ui_MainWindow):
     ui.universe_link.clicked.connect(lambda: ui.tabs.setCurrentIndex(3))
     ui.actionNew_File_2.triggered.connect(lambda: new_file(ui=ui))
 
-    ui.actionDownload_current_Textbox.triggered.connect(lambda: download(ui))
-    ui.actionCopy_current_Textbox_to_Clipboard.triggered.connect(lambda: on_copy(ui))
-    ui.actionAdd_current_Box_to_Stack.triggered.connect(lambda: add_to_stack(ui))
+    ui.actionDownload_current_Textbox.triggered.connect(lambda: generator_before_fn(ui, lambda: generator_utils.download(ui)))
+    ui.actionCopy_current_Textbox_to_Clipboard.triggered.connect(lambda: generator_before_fn(ui, lambda: generator_utils.on_copy(ui)))
+    ui.actionAdd_current_Box_to_Stack.triggered.connect(lambda: generator_before_fn(ui, lambda: generator.add_to_stack(ui)))
     ui.actionDownload_Textbox_Stack.triggered.connect(lambda: stacker.download(ui))
     ui.actionCopy_Stack_to_Clipboard.triggered.connect(lambda: stacker.copy_to_clipboard(ui))
 
@@ -40,6 +42,24 @@ def connect_welcome(ui: Ui_MainWindow):
         lambda item: on_last_opened_item_clicked(item, ui)
     )
     load_last_opened_list(ui)
+
+
+def generator_before_fn(ui: Ui_MainWindow, fn: Callable):
+    index = ui.tabs.currentIndex()
+    color_reload = True
+
+    if index == 1:
+        color_reload = False
+
+    left, right = make_sides(ui)
+
+    generator.reload_ui(ui, color_reload, left, right)
+
+    if hasattr(ui, "debounce_timer"):
+        ui.debounce_timer.stop()
+
+    generation_calls.execute_generation(ui, left, right, on_complete=fn)
+
 
 def _zip_db_to(path: str):
     with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as zf:
