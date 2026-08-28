@@ -9,7 +9,8 @@ from models.form_bindings import ColorType
 from running.connection.generator.generation_calls import execute_generation, make_request
 from running.connection.generator.generator_utils import set_color, set_border_style, set_stylesheet, set_defaults, \
     set_preview_generator_version, set_border_color, show_alternating, \
-    hide_alternating, hide_or_show, download, on_copy
+    hide_alternating, hide_or_show, download, on_copy, set_universe_default_border, get_universe_default_border, \
+    set_universe_default_border_2, get_defaults, set_defaults_2
 from running.connection.stacker import stacker, stacker_ui
 from services.color_service import bytes_to_image, get_primary_color, is_similar
 from services.color_window_service import create_color_window
@@ -28,13 +29,32 @@ def connect_generator(ui: Ui_MainWindow):
 
     def post_universe_fn(universe: Universe, man: SelectionManager):
         man.set_selected_universe(universe)
-        reload_ui(ui, True, left, right)
+        QTimer.singleShot(0, lambda: reload_ui(ui, True, left, right))
 
     def post_character_fn(character: Character, man: SelectionManager):
         man.set_selected_character(character)
-        reload_ui(ui, True, left, right)
+        border = get_universe_default_border(ui)
+        def fn():
+            reload_ui(ui, False, left, right)
+            set_universe_default_border_2(ui, border)
+        QTimer.singleShot(0, lambda: fn())
+
 
     def post_expression_fn(expression: Expression, man: SelectionManager):
+        man.set_selected_expression(expression)
+        border = get_universe_default_border(ui)
+        defaults = get_defaults(ui)
+        def fn():
+            reload_ui(ui, False, left, right)
+            set_universe_default_border_2(ui, border)
+            set_defaults_2(ui, defaults)
+        QTimer.singleShot(0, lambda: fn())
+
+    def post_character_fn_2(character: Character, man: SelectionManager):
+        man.set_selected_character(character)
+        reload_ui(ui, True, left, right)
+
+    def post_expression_fn_2(expression: Expression, man: SelectionManager):
         man.set_selected_expression(expression)
         reload_ui(ui, False, left, right)
 
@@ -43,8 +63,8 @@ def connect_generator(ui: Ui_MainWindow):
     connect_expression_create(ui, ui.all_expressions, left_manager, post_expression_fn)
 
     connect_universe_create(ui, ui.all_universes_2, right_manager, post_universe_fn)
-    connect_character_create(ui, ui.all_characters_2, right_manager, post_character_fn)
-    connect_expression_create(ui, ui.all_expressions_2, right_manager, post_expression_fn)
+    connect_character_create(ui, ui.all_characters_2, right_manager, post_character_fn_2)
+    connect_expression_create(ui, ui.all_expressions_2, right_manager, post_expression_fn_2)
 
     left, right = make_sides(ui)
 
@@ -371,11 +391,6 @@ def reset_selectors(ui: Ui_MainWindow, manager: SelectionManager, side: SideSele
         manager.set_selected_expression(None)
     show_type_if_valid(side)
 
-def set_universe_default_border(ui: Ui_MainWindow):
-    universe = ui.universe_selector.currentData()
-    if universe is not None:
-        ui.border_style_selector.setCurrentIndex(universe.default_border_style - 1)
-        set_border_style(ui.border_style_selector.currentData(), ui.border_style_preview)
 
 def get_db():
     return DBDynamicConnection.get_instance()

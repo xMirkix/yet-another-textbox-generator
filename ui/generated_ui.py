@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uisdUPdU.ui'
+## Form generated from reading UI file 'uiLWQcGu.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.1
 ##
@@ -17,19 +17,18 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComboBox,
-    QFormLayout, QFrame, QGridLayout, QGroupBox,
-    QHBoxLayout, QLabel, QLayout, QLineEdit,
-    QListWidget, QListWidgetItem, QMainWindow, QMenu,
-    QMenuBar, QProgressBar, QPushButton, QRadioButton,
-    QScrollArea, QSizePolicy, QSpacerItem, QSpinBox,
-    QStatusBar, QTabWidget, QTextEdit, QVBoxLayout,
-    QWidget)
+    QFrame, QGridLayout, QGroupBox, QHBoxLayout,
+    QLabel, QLayout, QLineEdit, QListWidget,
+    QListWidgetItem, QMainWindow, QMenu, QMenuBar,
+    QProgressBar, QPushButton, QRadioButton, QScrollArea,
+    QSizePolicy, QSpacerItem, QSpinBox, QStatusBar,
+    QTabWidget, QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(1141, 839)
+        MainWindow.resize(1142, 877)
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -208,7 +207,7 @@ class Ui_MainWindow(object):
         self.scrollArea_4.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1057, 1404))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1058, 1404))
         self.scrollAreaWidgetContents_2.setMinimumSize(QSize(0, 0))
         self.gridLayout_7 = QGridLayout(self.scrollAreaWidgetContents_2)
         self.gridLayout_7.setObjectName(u"gridLayout_7")
@@ -2134,8 +2133,8 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_6.addItem(self.verticalSpacer_5)
 
-        self.horizontalLayout_71 = QHBoxLayout()
-        self.horizontalLayout_71.setObjectName(u"horizontalLayout_71")
+        self.verticalLayout_24 = QVBoxLayout()
+        self.verticalLayout_24.setObjectName(u"verticalLayout_24")
         self.label_11 = QLabel(self.input_preview)
         self.label_11.setObjectName(u"label_11")
         sizePolicy4.setHeightForWidth(self.label_11.sizePolicy().hasHeightForWidth())
@@ -2147,10 +2146,10 @@ class Ui_MainWindow(object):
         self.label_11.setTextFormat(Qt.TextFormat.AutoText)
         self.label_11.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.horizontalLayout_71.addWidget(self.label_11)
+        self.verticalLayout_24.addWidget(self.label_11)
 
 
-        self.verticalLayout_6.addLayout(self.horizontalLayout_71)
+        self.verticalLayout_6.addLayout(self.verticalLayout_24)
 
         self.line_8 = QFrame(self.input_preview)
         self.line_8.setObjectName(u"line_8")
@@ -2279,6 +2278,23 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_29.addLayout(self.horizontalLayout_87)
 
+        self.horizontalLayout_80 = QHBoxLayout()
+        self.horizontalLayout_80.setObjectName(u"horizontalLayout_80")
+        self.label_19 = QLabel(self.groupBox)
+        self.label_19.setObjectName(u"label_19")
+
+        self.horizontalLayout_80.addWidget(self.label_19)
+
+        self.stack_scale_factor = QSpinBox(self.groupBox)
+        self.stack_scale_factor.setObjectName(u"stack_scale_factor")
+        self.stack_scale_factor.setMinimum(1)
+        self.stack_scale_factor.setMaximum(10)
+
+        self.horizontalLayout_80.addWidget(self.stack_scale_factor)
+
+
+        self.verticalLayout_29.addLayout(self.horizontalLayout_80)
+
         self.add_current_box = QPushButton(self.groupBox)
         self.add_current_box.setObjectName(u"add_current_box")
 
@@ -2299,7 +2315,7 @@ class Ui_MainWindow(object):
         self.scrollArea_5.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 508, 628))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 508, 631))
         self.verticalLayout_26 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_26.setObjectName(u"verticalLayout_26")
         self.verticalLayout_30 = QVBoxLayout()
@@ -2351,7 +2367,7 @@ class Ui_MainWindow(object):
         self.scrollArea_6.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 507, 599))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 508, 637))
         self.verticalLayout_25 = QVBoxLayout(self.scrollAreaWidgetContents_3)
         self.verticalLayout_25.setObjectName(u"verticalLayout_25")
         self.output_stack = QLabel(self.scrollAreaWidgetContents_3)
@@ -2416,7 +2432,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.universe_grid = QWidget()
         self.universe_grid.setObjectName(u"universe_grid")
-        self.universe_grid.setGeometry(QRect(0, 0, 1045, 427))
+        self.universe_grid.setGeometry(QRect(0, 0, 1046, 465))
         self.gridLayout_2 = QGridLayout(self.universe_grid)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.gridLayout_2.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
@@ -3056,7 +3072,7 @@ class Ui_MainWindow(object):
         self.scrollArea_2.setWidgetResizable(True)
         self.characters_grid = QWidget()
         self.characters_grid.setObjectName(u"characters_grid")
-        self.characters_grid.setGeometry(QRect(0, 0, 1043, 316))
+        self.characters_grid.setGeometry(QRect(0, 0, 1044, 354))
         self.gridLayout = QGridLayout(self.characters_grid)
         self.gridLayout.setObjectName(u"gridLayout")
         self.scrollArea_2.setWidget(self.characters_grid)
@@ -3407,7 +3423,7 @@ class Ui_MainWindow(object):
         self.scrollArea_3.setWidgetResizable(True)
         self.expressions_grid = QWidget()
         self.expressions_grid.setObjectName(u"expressions_grid")
-        self.expressions_grid.setGeometry(QRect(0, 0, 1045, 359))
+        self.expressions_grid.setGeometry(QRect(0, 0, 1046, 397))
         self.gridLayout_5 = QGridLayout(self.expressions_grid)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
         self.scrollArea_3.setWidget(self.expressions_grid)
@@ -3458,21 +3474,25 @@ class Ui_MainWindow(object):
 
         self.verticalLayout_9.addItem(self.verticalSpacer_10)
 
-        self.horizontalLayout_80 = QHBoxLayout()
-        self.horizontalLayout_80.setObjectName(u"horizontalLayout_80")
-        self.horizontalSpacer_48 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+        self.horizontalLayout_100 = QHBoxLayout()
+        self.horizontalLayout_100.setObjectName(u"horizontalLayout_100")
+        self.horizontalSpacer_63 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.horizontalLayout_80.addItem(self.horizontalSpacer_48)
+        self.horizontalLayout_100.addItem(self.horizontalSpacer_63)
 
-        self.formLayout = QFormLayout()
-        self.formLayout.setObjectName(u"formLayout")
-        self.formLayout.setSizeConstraint(QLayout.SizeConstraint.SetDefaultConstraint)
-        self.formLayout.setLabelAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.formLayout.setFormAlignment(Qt.AlignmentFlag.AlignHCenter|Qt.AlignmentFlag.AlignTop)
-        self.formLayout.setHorizontalSpacing(35)
-        self.formLayout.setVerticalSpacing(20)
-        self.formLayout.setContentsMargins(0, 0, 0, 0)
-        self.universe_import_label = QLabel(self.demi_character_import)
+        self.groupBox_3 = QGroupBox(self.demi_character_import)
+        self.groupBox_3.setObjectName(u"groupBox_3")
+        self.gridLayout_4 = QGridLayout(self.groupBox_3)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.horizontalSpacer_48 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_4.addItem(self.horizontalSpacer_48, 1, 0, 1, 1)
+
+        self.horizontalSpacer_59 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_4.addItem(self.horizontalSpacer_59, 1, 5, 1, 1)
+
+        self.universe_import_label = QLabel(self.groupBox_3)
         self.universe_import_label.setObjectName(u"universe_import_label")
         font6 = QFont()
         font6.setPointSize(16)
@@ -3480,20 +3500,92 @@ class Ui_MainWindow(object):
         self.universe_import_label.setFont(font6)
         self.universe_import_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
 
-        self.formLayout.setWidget(1, QFormLayout.ItemRole.LabelRole, self.universe_import_label)
+        self.gridLayout_4.addWidget(self.universe_import_label, 0, 1, 1, 1)
 
-        self.verticalLayout_27 = QVBoxLayout()
-        self.verticalLayout_27.setObjectName(u"verticalLayout_27")
-        self.character_page_import_label = QLabel(self.demi_character_import)
+        self.all_universes_7 = QPushButton(self.groupBox_3)
+        self.all_universes_7.setObjectName(u"all_universes_7")
+        sizePolicy6.setHeightForWidth(self.all_universes_7.sizePolicy().hasHeightForWidth())
+        self.all_universes_7.setSizePolicy(sizePolicy6)
+        self.all_universes_7.setMaximumSize(QSize(50, 16777215))
+        self.all_universes_7.setIconSize(QSize(24, 24))
+
+        self.gridLayout_4.addWidget(self.all_universes_7, 0, 4, 1, 1)
+
+        self.horizontalSpacer_62 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_4.addItem(self.horizontalSpacer_62, 1, 2, 1, 1)
+
+        self.universe_import_create_label = QLabel(self.groupBox_3)
+        self.universe_import_create_label.setObjectName(u"universe_import_create_label")
+        self.universe_import_create_label.setFont(font6)
+        self.universe_import_create_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
+
+        self.gridLayout_4.addWidget(self.universe_import_create_label, 1, 1, 1, 1)
+
+        self.new_universe_for_import = QLineEdit(self.groupBox_3)
+        self.new_universe_for_import.setObjectName(u"new_universe_for_import")
+
+        self.gridLayout_4.addWidget(self.new_universe_for_import, 1, 3, 1, 1)
+
+        self.universe_for_import = QComboBox(self.groupBox_3)
+        self.universe_for_import.setObjectName(u"universe_for_import")
+
+        self.gridLayout_4.addWidget(self.universe_for_import, 0, 3, 1, 1)
+
+
+        self.horizontalLayout_100.addWidget(self.groupBox_3)
+
+        self.horizontalSpacer_64 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_100.addItem(self.horizontalSpacer_64)
+
+
+        self.verticalLayout_9.addLayout(self.horizontalLayout_100)
+
+        self.verticalSpacer_13 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.verticalLayout_9.addItem(self.verticalSpacer_13)
+
+        self.horizontalLayout_124 = QHBoxLayout()
+        self.horizontalLayout_124.setObjectName(u"horizontalLayout_124")
+        self.horizontalSpacer_66 = QSpacerItem(40, 220, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_124.addItem(self.horizontalSpacer_66)
+
+        self.character_tabs = QTabWidget(self.demi_character_import)
+        self.character_tabs.setObjectName(u"character_tabs")
+        sizePolicy4.setHeightForWidth(self.character_tabs.sizePolicy().hasHeightForWidth())
+        self.character_tabs.setSizePolicy(sizePolicy4)
+        self.character_tabs.setMinimumSize(QSize(0, 220))
+        self.character_tabs.setTabShape(QTabWidget.TabShape.Rounded)
+        self.single_import = QWidget()
+        self.single_import.setObjectName(u"single_import")
+        self.single_import.setMinimumSize(QSize(0, 220))
+        self.gridLayout_15 = QGridLayout(self.single_import)
+        self.gridLayout_15.setObjectName(u"gridLayout_15")
+        self.horizontalSpacer_68 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_15.addItem(self.horizontalSpacer_68, 1, 4, 1, 1)
+
+        self.horizontalSpacer_69 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_15.addItem(self.horizontalSpacer_69, 1, 2, 1, 1)
+
+        self.character_page_import_label = QLabel(self.single_import)
         self.character_page_import_label.setObjectName(u"character_page_import_label")
         self.character_page_import_label.setFont(font6)
 
-        self.verticalLayout_27.addWidget(self.character_page_import_label)
+        self.gridLayout_15.addWidget(self.character_page_import_label, 1, 1, 1, 1)
 
+        self.verticalSpacer_15 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.formLayout.setLayout(4, QFormLayout.ItemRole.LabelRole, self.verticalLayout_27)
+        self.gridLayout_15.addItem(self.verticalSpacer_15, 0, 3, 1, 1)
 
-        self.character_page_for_import = QLineEdit(self.demi_character_import)
+        self.horizontalSpacer_67 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_15.addItem(self.horizontalSpacer_67, 1, 0, 1, 1)
+
+        self.character_page_for_import = QLineEdit(self.single_import)
         self.character_page_for_import.setObjectName(u"character_page_for_import")
         sizePolicy11 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Fixed)
         sizePolicy11.setHorizontalStretch(0)
@@ -3505,117 +3597,141 @@ class Ui_MainWindow(object):
         font7.setPointSize(13)
         self.character_page_for_import.setFont(font7)
 
-        self.formLayout.setWidget(4, QFormLayout.ItemRole.FieldRole, self.character_page_for_import)
+        self.gridLayout_15.addWidget(self.character_page_for_import, 1, 3, 1, 1)
 
-        self.verticalLayout_28 = QVBoxLayout()
-        self.verticalLayout_28.setObjectName(u"verticalLayout_28")
-        self.token_import_label = QLabel(self.demi_character_import)
-        self.token_import_label.setObjectName(u"token_import_label")
-        self.token_import_label.setFont(font6)
+        self.verticalSpacer_14 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
 
-        self.verticalLayout_28.addWidget(self.token_import_label)
+        self.gridLayout_15.addItem(self.verticalSpacer_14, 2, 3, 1, 1)
 
+        self.character_tabs.addTab(self.single_import, "")
+        self.multiple_import = QWidget()
+        self.multiple_import.setObjectName(u"multiple_import")
+        sizePolicy4.setHeightForWidth(self.multiple_import.sizePolicy().hasHeightForWidth())
+        self.multiple_import.setSizePolicy(sizePolicy4)
+        self.multiple_import.setMinimumSize(QSize(0, 220))
+        self.gridLayout_16 = QGridLayout(self.multiple_import)
+        self.gridLayout_16.setObjectName(u"gridLayout_16")
+        self.horizontalLayout_126 = QHBoxLayout()
+        self.horizontalLayout_126.setObjectName(u"horizontalLayout_126")
+        self.select_import_file_label = QLabel(self.multiple_import)
+        self.select_import_file_label.setObjectName(u"select_import_file_label")
+        self.select_import_file_label.setFont(font6)
 
-        self.formLayout.setLayout(8, QFormLayout.ItemRole.LabelRole, self.verticalLayout_28)
+        self.horizontalLayout_126.addWidget(self.select_import_file_label)
 
-        self.token_for_import = QLineEdit(self.demi_character_import)
-        self.token_for_import.setObjectName(u"token_for_import")
-        sizePolicy11.setHeightForWidth(self.token_for_import.sizePolicy().hasHeightForWidth())
-        self.token_for_import.setSizePolicy(sizePolicy11)
-        self.token_for_import.setMinimumSize(QSize(655, 0))
+        self.horizontalSpacer_74 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.formLayout.setWidget(8, QFormLayout.ItemRole.FieldRole, self.token_for_import)
+        self.horizontalLayout_126.addItem(self.horizontalSpacer_74)
 
-        self.import_button = QPushButton(self.demi_character_import)
-        self.import_button.setObjectName(u"import_button")
-        self.import_button.setFont(font7)
+        self.select_import_file_button = QPushButton(self.multiple_import)
+        self.select_import_file_button.setObjectName(u"select_import_file_button")
+        sizePolicy6.setHeightForWidth(self.select_import_file_button.sizePolicy().hasHeightForWidth())
+        self.select_import_file_button.setSizePolicy(sizePolicy6)
+        self.select_import_file_button.setMinimumSize(QSize(100, 0))
 
-        self.formLayout.setWidget(5, QFormLayout.ItemRole.FieldRole, self.import_button)
+        self.horizontalLayout_126.addWidget(self.select_import_file_button)
 
-        self.import_load = QLabel(self.demi_character_import)
-        self.import_load.setObjectName(u"import_load")
-        self.import_load.setFont(font7)
-        self.import_load.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.horizontalSpacer_75 = QSpacerItem(30, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.formLayout.setWidget(7, QFormLayout.ItemRole.FieldRole, self.import_load)
+        self.horizontalLayout_126.addItem(self.horizontalSpacer_75)
 
-        self.import_progress = QProgressBar(self.demi_character_import)
-        self.import_progress.setObjectName(u"import_progress")
-        self.import_progress.setValue(0)
+        self.select_import_file_filename = QLabel(self.multiple_import)
+        self.select_import_file_filename.setObjectName(u"select_import_file_filename")
 
-        self.formLayout.setWidget(6, QFormLayout.ItemRole.FieldRole, self.import_progress)
-
-        self.universe_import_create_label = QLabel(self.demi_character_import)
-        self.universe_import_create_label.setObjectName(u"universe_import_create_label")
-        self.universe_import_create_label.setFont(font6)
-        self.universe_import_create_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.LabelRole, self.universe_import_create_label)
-
-        self.new_universe_for_import = QLineEdit(self.demi_character_import)
-        self.new_universe_for_import.setObjectName(u"new_universe_for_import")
-
-        self.formLayout.setWidget(2, QFormLayout.ItemRole.FieldRole, self.new_universe_for_import)
-
-        self.verticalSpacer_11 = QSpacerItem(20, 25, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
-
-        self.formLayout.setItem(3, QFormLayout.ItemRole.FieldRole, self.verticalSpacer_11)
-
-        self.horizontalLayout_122 = QHBoxLayout()
-        self.horizontalLayout_122.setObjectName(u"horizontalLayout_122")
-        self.universe_for_import = QComboBox(self.demi_character_import)
-        self.universe_for_import.setObjectName(u"universe_for_import")
-
-        self.horizontalLayout_122.addWidget(self.universe_for_import)
-
-        self.all_universes_7 = QPushButton(self.demi_character_import)
-        self.all_universes_7.setObjectName(u"all_universes_7")
-        sizePolicy6.setHeightForWidth(self.all_universes_7.sizePolicy().hasHeightForWidth())
-        self.all_universes_7.setSizePolicy(sizePolicy6)
-        self.all_universes_7.setMaximumSize(QSize(50, 16777215))
-        self.all_universes_7.setIconSize(QSize(24, 24))
-
-        self.horizontalLayout_122.addWidget(self.all_universes_7)
+        self.horizontalLayout_126.addWidget(self.select_import_file_filename)
 
 
-        self.formLayout.setLayout(1, QFormLayout.ItemRole.FieldRole, self.horizontalLayout_122)
+        self.gridLayout_16.addLayout(self.horizontalLayout_126, 1, 1, 1, 1)
+
+        self.horizontalSpacer_73 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_16.addItem(self.horizontalSpacer_73, 1, 2, 1, 1)
+
+        self.verticalSpacer_17 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+
+        self.gridLayout_16.addItem(self.verticalSpacer_17, 0, 1, 1, 1)
+
+        self.verticalSpacer_16 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.MinimumExpanding)
+
+        self.gridLayout_16.addItem(self.verticalSpacer_16, 6, 1, 1, 1)
+
+        self.label_21 = QLabel(self.multiple_import)
+        self.label_21.setObjectName(u"label_21")
+        self.label_21.setWordWrap(True)
+
+        self.gridLayout_16.addWidget(self.label_21, 5, 1, 1, 1)
+
+        self.horizontalSpacer_70 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_16.addItem(self.horizontalSpacer_70, 1, 0, 1, 1)
+
+        self.verticalSpacer_18 = QSpacerItem(20, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.gridLayout_16.addItem(self.verticalSpacer_18, 2, 1, 1, 1)
+
+        self.line_98 = QFrame(self.multiple_import)
+        self.line_98.setObjectName(u"line_98")
+        self.line_98.setFrameShape(QFrame.Shape.HLine)
+        self.line_98.setFrameShadow(QFrame.Shadow.Sunken)
+
+        self.gridLayout_16.addWidget(self.line_98, 3, 1, 1, 1)
+
+        self.character_tabs.addTab(self.multiple_import, "")
+
+        self.horizontalLayout_124.addWidget(self.character_tabs)
+
+        self.horizontalSpacer_65 = QSpacerItem(40, 220, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_124.addItem(self.horizontalSpacer_65)
 
 
-        self.horizontalLayout_80.addLayout(self.formLayout)
-
-        self.horizontalSpacer_59 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
-
-        self.horizontalLayout_80.addItem(self.horizontalSpacer_59)
-
-
-        self.verticalLayout_9.addLayout(self.horizontalLayout_80)
+        self.verticalLayout_9.addLayout(self.horizontalLayout_124)
 
         self.verticalSpacer = QSpacerItem(20, 25, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
 
         self.verticalLayout_9.addItem(self.verticalSpacer)
 
-        self.verticalLayout_24 = QVBoxLayout()
-        self.verticalLayout_24.setObjectName(u"verticalLayout_24")
-        self.disclaimer_1 = QLabel(self.demi_character_import)
-        self.disclaimer_1.setObjectName(u"disclaimer_1")
-        sizePolicy8.setHeightForWidth(self.disclaimer_1.sizePolicy().hasHeightForWidth())
-        self.disclaimer_1.setSizePolicy(sizePolicy8)
-        self.disclaimer_1.setMinimumSize(QSize(0, 35))
-        self.disclaimer_1.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.horizontalLayout_125 = QHBoxLayout()
+        self.horizontalLayout_125.setObjectName(u"horizontalLayout_125")
+        self.horizontalSpacer_71 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
 
-        self.verticalLayout_24.addWidget(self.disclaimer_1)
+        self.horizontalLayout_125.addItem(self.horizontalSpacer_71)
 
-        self.disclaimer_2 = QLabel(self.demi_character_import)
-        self.disclaimer_2.setObjectName(u"disclaimer_2")
-        sizePolicy8.setHeightForWidth(self.disclaimer_2.sizePolicy().hasHeightForWidth())
-        self.disclaimer_2.setSizePolicy(sizePolicy8)
-        self.disclaimer_2.setMinimumSize(QSize(0, 35))
-        self.disclaimer_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.import_button = QPushButton(self.demi_character_import)
+        self.import_button.setObjectName(u"import_button")
+        self.import_button.setFont(font7)
 
-        self.verticalLayout_24.addWidget(self.disclaimer_2)
+        self.horizontalLayout_125.addWidget(self.import_button)
+
+        self.horizontalSpacer_72 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_125.addItem(self.horizontalSpacer_72)
 
 
-        self.verticalLayout_9.addLayout(self.verticalLayout_24)
+        self.verticalLayout_9.addLayout(self.horizontalLayout_125)
+
+        self.horizontalLayout_85 = QHBoxLayout()
+        self.horizontalLayout_85.setObjectName(u"horizontalLayout_85")
+        self.horizontalSpacer_60 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_85.addItem(self.horizontalSpacer_60)
+
+        self.import_progress = QProgressBar(self.demi_character_import)
+        self.import_progress.setObjectName(u"import_progress")
+        self.import_progress.setValue(0)
+
+        self.horizontalLayout_85.addWidget(self.import_progress)
+
+        self.horizontalSpacer_61 = QSpacerItem(40, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Minimum)
+
+        self.horizontalLayout_85.addItem(self.horizontalSpacer_61)
+
+
+        self.verticalLayout_9.addLayout(self.horizontalLayout_85)
+
+        self.verticalSpacer_11 = QSpacerItem(20, 50, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Fixed)
+
+        self.verticalLayout_9.addItem(self.verticalSpacer_11)
 
         self.tabs.addTab(self.demi_character_import, "")
 
@@ -3624,7 +3740,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1141, 23))
+        self.menubar.setGeometry(QRect(0, 0, 1142, 23))
         self.menuFile = QMenu(self.menubar)
         self.menuFile.setObjectName(u"menuFile")
         self.menuGenerator = QMenu(self.menubar)
@@ -3653,6 +3769,7 @@ class Ui_MainWindow(object):
         self.tabs.setCurrentIndex(0)
         self.tabWidget.setCurrentIndex(0)
         self.border_style_selector.setCurrentIndex(-1)
+        self.character_tabs.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -3940,7 +4057,9 @@ class Ui_MainWindow(object):
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"Default Text Color", None))
         self.default_color_preview.setText("")
         self.input.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Write your text here.", None))
-        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Hint: Use color=<color-name> in text to color the text to the right of the expression.\n"
+        self.label_11.setText(QCoreApplication.translate("MainWindow", u"Crediting this tool is not required but always appreciated.\n"
+"\n"
+"Hint: Use color=<color-name> in text to color the text to the right of the expression.\n"
 "Use pause=<frameamount> to insert extra frames (GIF only)", None))
         self.output.setText(QCoreApplication.translate("MainWindow", u"Nothing...", None))
         self.label_13.setText("")
@@ -3951,6 +4070,7 @@ class Ui_MainWindow(object):
         self.tabs.setTabText(self.tabs.indexOf(self.generator), QCoreApplication.translate("MainWindow", u"Generator", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Contents", None))
         self.amount_of_columns_label.setText(QCoreApplication.translate("MainWindow", u"Amount of columns", None))
+        self.label_19.setText(QCoreApplication.translate("MainWindow", u"Scale Factor (only applies when saving)", None))
         self.add_current_box.setText(QCoreApplication.translate("MainWindow", u"Add current box", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Stack", None))
         self.add_textboxes.setText(QCoreApplication.translate("MainWindow", u"Create Textboxes (Generator)", None))
@@ -4041,22 +4161,27 @@ class Ui_MainWindow(object):
         self.tabs.setTabText(self.tabs.indexOf(self.expressions), QCoreApplication.translate("MainWindow", u"Expressions", None))
         self.label_15.setText(QCoreApplication.translate("MainWindow", u"<a href='https://www.demirramon.com/user_content/undertale_browse'>Import Characters from Demirramon</a>", None))
         self.label_18.setText(QCoreApplication.translate("MainWindow", u"<a href='https://drive.google.com/drive/folders/1BJ3sQR91SAJNJEusO4O_uckkyL3HIX2b'>Or download characters directly from the UTDR Fan Resource!</a>", None))
-        self.universe_import_label.setText(QCoreApplication.translate("MainWindow", u"Universe (Destination)", None))
-        self.character_page_import_label.setText(QCoreApplication.translate("MainWindow", u"Character Page", None))
-        self.character_page_for_import.setInputMask("")
-        self.character_page_for_import.setText("")
-        self.character_page_for_import.setPlaceholderText(QCoreApplication.translate("MainWindow", u" demirramon.com/user_content/undertale_character/{creator}/{character-id}", None))
-        self.token_import_label.setText(QCoreApplication.translate("MainWindow", u"Login Token", None))
-        self.token_for_import.setPlaceholderText(QCoreApplication.translate("MainWindow", u"I recommend using a browser extension like cookies.txt to export your login token from demirramon.com", None))
-        self.import_button.setText(QCoreApplication.translate("MainWindow", u"Import", None))
-        self.import_load.setText(QCoreApplication.translate("MainWindow", u"Importing... Please wait.", None))
+        self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Destination", None))
+        self.universe_import_label.setText(QCoreApplication.translate("MainWindow", u"Universe", None))
+        self.all_universes_7.setText(QCoreApplication.translate("MainWindow", u"prev", None))
 #if QT_CONFIG(tooltip)
         self.universe_import_create_label.setToolTip(QCoreApplication.translate("MainWindow", u"Creates a new universe with the default border setting", None))
 #endif // QT_CONFIG(tooltip)
         self.universe_import_create_label.setText(QCoreApplication.translate("MainWindow", u"Or insert into new universe:", None))
-        self.all_universes_7.setText(QCoreApplication.translate("MainWindow", u"prev", None))
-        self.disclaimer_1.setText(QCoreApplication.translate("MainWindow", u"Disclaimer: The Login Token is ONLY used to avoid authentication issues with the website. ", None))
-        self.disclaimer_2.setText(QCoreApplication.translate("MainWindow", u"If you don't trust me, you can check the source code or compile the app yourself. (I dunno what I would even do with demi logins, but still)", None))
+        self.character_page_import_label.setText(QCoreApplication.translate("MainWindow", u"Character Page", None))
+        self.character_page_for_import.setInputMask("")
+        self.character_page_for_import.setText("")
+        self.character_page_for_import.setPlaceholderText(QCoreApplication.translate("MainWindow", u" demirramon.com/user_content/undertale_character/{creator}/{character-id}", None))
+        self.character_tabs.setTabText(self.character_tabs.indexOf(self.single_import), QCoreApplication.translate("MainWindow", u"Single Character Import", None))
+#if QT_CONFIG(tooltip)
+        self.select_import_file_label.setToolTip(QCoreApplication.translate("MainWindow", u"A file with character links, seperated by newlines. Supported formats: .TXT, .HTML, .MD", None))
+#endif // QT_CONFIG(tooltip)
+        self.select_import_file_label.setText(QCoreApplication.translate("MainWindow", u"Textfile with character pages", None))
+        self.select_import_file_button.setText(QCoreApplication.translate("MainWindow", u"Select File", None))
+        self.select_import_file_filename.setText(QCoreApplication.translate("MainWindow", u"No file selected", None))
+        self.label_21.setText(QCoreApplication.translate("MainWindow", u"This can be used to import characters from the \"imported characters\" section in demirramon, but always make sure there's no sensitive information contained in the file before uploading.", None))
+        self.character_tabs.setTabText(self.character_tabs.indexOf(self.multiple_import), QCoreApplication.translate("MainWindow", u"Bulk Character Import", None))
+        self.import_button.setText(QCoreApplication.translate("MainWindow", u"Import", None))
         self.tabs.setTabText(self.tabs.indexOf(self.demi_character_import), QCoreApplication.translate("MainWindow", u"Import Characters", None))
         self.menuFile.setTitle(QCoreApplication.translate("MainWindow", u"File", None))
         self.menuGenerator.setTitle(QCoreApplication.translate("MainWindow", u"Generator", None))

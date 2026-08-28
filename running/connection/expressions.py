@@ -11,9 +11,9 @@ from services.change_service import select_image, remove_image
 from services.database_service import DBDynamicConnection
 from services.exporting_service import export_all_expressions, export_selected_expression
 from services.grid_service import clear_grid, restore_selection
-from services.new_window_service import create_preview_window, connect_universe_create, connect_character_create, \
+from services.new_window_service import connect_universe_create, connect_character_create, \
     connect_universe_edit, connect_character_edit
-from services.selection_manager import init_entity, left_manager, select_entity_in_combo, select_chars, SelectionManager
+from services.selection_manager import init_entity, left_manager, SelectionManager
 from ui.generated_ui import Ui_MainWindow
 
 

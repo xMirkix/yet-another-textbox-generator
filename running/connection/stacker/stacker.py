@@ -1,6 +1,6 @@
-import shutil
 from pathlib import Path
 
+from PIL import Image
 from PySide6.QtCore import QTimer
 from PySide6.QtGui import QPixmap, QGuiApplication
 from PySide6.QtWidgets import QFileDialog, QMessageBox, QLabel
@@ -115,7 +115,16 @@ def download(ui: Ui_MainWindow):
         if reply != QMessageBox.StandardButton.Yes:
             return
 
-    shutil.copyfile(source, path)
+    scale_factor = ui.stack_scale_factor.value()
+    image = Image.open(source)
+
+    if scale_factor != 1:
+        image = image.resize(
+            (image.width * scale_factor, image.height * scale_factor),
+            Image.Resampling.NEAREST,
+        )
+
+    image.save(path)
 
 def copy_to_clipboard(ui: Ui_MainWindow):
     worked = copy_to_clipboard_helper(ui.output_stack)

@@ -145,7 +145,6 @@ class InitPopulationService:
         hide_alternating(sides[0])
         hide_alternating(sides[1])
         ui.download.hide()
-        ui.import_load.hide()
         ui.import_progress.hide()
         ui.add_to_stack.hide()
         ui.copy_to_clipboard.hide()

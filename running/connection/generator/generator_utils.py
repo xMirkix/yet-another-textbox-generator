@@ -69,6 +69,32 @@ def set_defaults(character, ui: Ui_MainWindow):
     ui.text_transform_selector.setCurrentIndex(character.default_text_transform - 1)
     ui.font_selector.setCurrentIndex(character.default_font - 1)
 
+def get_defaults(ui: Ui_MainWindow) -> tuple[int, int, int]:
+    text_style = 1 if ui.text_style_regular_option.isChecked() else 2
+    text_transform = ui.text_transform_selector.currentData().transform_id
+    font = ui.font_selector.currentData().font_id
+    return text_style, text_transform, font
+
+def set_defaults_2(ui: Ui_MainWindow, defaults: tuple[int, int, int]):
+    ui.text_style_regular_option.setChecked(defaults[0] == 1)
+    ui.text_style_dark_world_option.setChecked(defaults[0] == 2)
+    ui.text_transform_selector.setCurrentIndex(defaults[1] - 1)
+    ui.font_selector.setCurrentIndex(defaults[2] - 1)
+
+
+def set_universe_default_border(ui: Ui_MainWindow):
+    universe = ui.universe_selector.currentData()
+    if universe is not None:
+        ui.border_style_selector.setCurrentIndex(universe.default_border_style - 1)
+        set_border_style(ui.border_style_selector.currentData(), ui.border_style_preview)
+
+def get_universe_default_border(ui: Ui_MainWindow) -> BorderStyle:
+    return ui.border_style_selector.currentData()
+
+def set_universe_default_border_2(ui: Ui_MainWindow, style: BorderStyle):
+    ui.border_style_selector.setCurrentIndex(style.border_id - 1)
+    set_border_style(style, ui.border_style_preview)
+
 
 def show_alternating(side: SideSelectors):
     side.alternating_container.show()

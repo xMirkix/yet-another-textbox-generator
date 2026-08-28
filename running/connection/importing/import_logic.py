@@ -90,9 +90,9 @@ def resolve_transform_id(raw_phrase: str) -> int:
 
 def extract_expressions(soup: BeautifulSoup, cache: RequestCache, on_progress: ProgressCallback | None = None) -> list[ImportedExpression]:
     containers = []
-    for container in soup.select("div.sprite-container-wrap div.pic"):
+    for container in soup.select("div.sprite-container-wrap.sprite-container-textbox div.pic"):
         img = container.find("img")
-        if img is None or not img.get("src") or img.get("id", "").startswith("overworld_"):
+        if img is None or not img.get("src"):
             continue
         containers.append((container.get("title", "").strip(), img["src"]))
 
