@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from PIL import Image
-from PySide6.QtCore import QTimer
+from PySide6.QtCore import QTimer, Qt
 from PySide6.QtGui import QPixmap, QGuiApplication
 from PySide6.QtWidgets import QFileDialog, QMessageBox, QLabel
 
@@ -127,15 +127,24 @@ def download(ui: Ui_MainWindow):
     image.save(path)
 
 def copy_to_clipboard(ui: Ui_MainWindow):
-    worked = copy_to_clipboard_helper(ui.output_stack)
+    scale_factor = ui.stack_scale_factor.value()
+    worked = copy_to_clipboard_helper(ui.output_stack, scale_factor)
     if not worked:
         return
     ui.copy_to_clipboard_stack.setText("Copied!")
     QTimer.singleShot(1500, lambda: ui.copy_to_clipboard_stack.setText("Copy to Clipboard"))
 
-def copy_to_clipboard_helper(output: QLabel) -> bool:
+
+def copy_to_clipboard_helper(output: QLabel, scale_factor: int = 1) -> bool:
     pixmap = output.pixmap()
     if pixmap and not pixmap.isNull() and not output.text():
+        if scale_factor != 1:
+            pixmap = pixmap.scaled(
+                pixmap.width() * scale_factor,
+                pixmap.height() * scale_factor,
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.FastTransformation,
+            )
         QGuiApplication.clipboard().setPixmap(pixmap)
         return True
     return False

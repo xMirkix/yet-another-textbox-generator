@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiLWQcGu.ui'
+## Form generated from reading UI file 'uiPjafHv.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.1
 ##
@@ -4070,7 +4070,7 @@ class Ui_MainWindow(object):
         self.tabs.setTabText(self.tabs.indexOf(self.generator), QCoreApplication.translate("MainWindow", u"Generator", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Contents", None))
         self.amount_of_columns_label.setText(QCoreApplication.translate("MainWindow", u"Amount of columns", None))
-        self.label_19.setText(QCoreApplication.translate("MainWindow", u"Scale Factor (only applies when saving)", None))
+        self.label_19.setText(QCoreApplication.translate("MainWindow", u"Scale Factor (only for saving/copying)", None))
         self.add_current_box.setText(QCoreApplication.translate("MainWindow", u"Add current box", None))
         self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Stack", None))
         self.add_textboxes.setText(QCoreApplication.translate("MainWindow", u"Create Textboxes (Generator)", None))

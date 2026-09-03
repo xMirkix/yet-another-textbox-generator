@@ -4161,18 +4161,11 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
               </layout>
              </item>
              <item>
-              <widget class="QPushButton" name="add_current_box">
-               <property name="text">
-                <string>Add current box</string>
-               </property>
-              </widget>
-             </item>
-             <item>
               <layout class="QHBoxLayout" name="horizontalLayout_80">
                <item>
                 <widget class="QLabel" name="label_19">
                  <property name="text">
-                  <string>Scale Factor (only applies when saving)</string>
+                  <string>Scale Factor (only for saving/copying)</string>
                  </property>
                 </widget>
                </item>
@@ -4187,6 +4180,13 @@ Use pause=&lt;frameamount&gt; to insert extra frames (GIF only)</string>
                 </widget>
                </item>
               </layout>
+             </item>
+             <item>
+              <widget class="QPushButton" name="add_current_box">
+               <property name="text">
+                <string>Add current box</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </item>
