@@ -1,6 +1,10 @@
+import os
 import sys
 import tempfile
 from pathlib import Path
+
+os.environ["QT_FFMPEG_DECODING_HW_DEVICE_TYPES"] = ","
+os.environ["QT_DISABLE_HW_TEXTURES_CONVERSION"] = "1"
 
 from PySide6.QtCore import QLockFile
 from PySide6.QtGui import QIcon
