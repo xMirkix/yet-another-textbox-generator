@@ -3,14 +3,14 @@ from io import BytesIO
 from pathlib import Path
 
 from PIL import Image
-from PySide6.QtCore import QTimer
+from PySide6.QtCore import QTimer, QUrl, QMimeData
 from PySide6.QtGui import QPixmap, QGuiApplication
 from PySide6.QtWidgets import QLabel, QTextEdit, QFileDialog, QMessageBox
 
 from configs.paths import PREVIEWS_DIR
 from models.entities import Universe, Character, Expression
 from services.color_service import fit_expression_image
-from services.selection_manager import SideSelectors, set_preview
+from services.selection_manager import SideSelectors, set_preview, left_sound_manager, right_sound_manager
 from startup.in_memory.static_classes import Color, BorderStyle
 from ui.generated_ui import Ui_MainWindow
 
@@ -127,9 +127,14 @@ def download(ui: Ui_MainWindow):
         return
 
     suffix = source.suffix
+    ending = "PNG (*.png)"
+    if suffix == ".gif":
+        ending = "GIF (*.gif)"
+    if suffix == ".mp4":
+        ending = "MP4 (*.mp4)"
     path, _ = QFileDialog.getSaveFileName(
         caption="Save",
-        filter="PNG (*.png)" if suffix == ".png" else "GIF (*.gif)",
+        filter=ending,
         options=QFileDialog.Option.DontConfirmOverwrite,
     )
     if not path:
@@ -149,8 +154,18 @@ def download(ui: Ui_MainWindow):
 
     shutil.copyfile(source, path)
 
+def get_amount_of_active_sound_manager() -> int:
+    amount = 0
+    amount += 1 if len(left_sound_manager.get_sounds()) > 0 else 0
+    amount += 1 if len(right_sound_manager.get_sounds()) > 0 else 0
+    return amount
+
 def on_copy(ui: Ui_MainWindow):
-    worked = copy_to_clipboard(ui.output)
+    source = ui.download.property("path")
+    if source and Path(source).suffix.lower() in (".gif", ".mp4"):
+        worked = copy_file_to_clipboard(Path(source))
+    else:
+        worked = copy_to_clipboard(ui.output)
     if not worked:
         return
     ui.copy_to_clipboard.setText("Copied!")
@@ -162,3 +177,14 @@ def copy_to_clipboard(output: QLabel) -> bool:
         QGuiApplication.clipboard().setPixmap(pixmap)
         return True
     return False
+
+def copy_file_to_clipboard(path: Path) -> bool:
+    if not path.is_file():
+        return False
+    url = QUrl.fromLocalFile(str(path.resolve()))
+    mime = QMimeData()
+    mime.setUrls([url])
+    mime.setData("x-special/gnome-copied-files", b"copy\n" + url.toEncoded())
+    QGuiApplication.clipboard().setMimeData(mime)
+    return True
+

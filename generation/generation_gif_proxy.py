@@ -14,10 +14,10 @@ from services.font_service import get_font
 from generation.steps.font_substeps.tokenizer import tokenize
 import copy
 
-def generate_gif(request: GenerationRequest) -> list[Image.Image] | None:
+def generate_gif(request: GenerationRequest) -> tuple[list[Image.Image], list[int]] | tuple[None, list[int]]:
     font_settings = request.font_settings
     if font_settings.font is None:
-        return None
+        return None, []
 
     request.text_input = trim_newlines(request.text_input)
 
@@ -38,6 +38,8 @@ def generate_gif(request: GenerationRequest) -> list[Image.Image] | None:
 
     frame_counter: list[int] = [0] # for alternating expressions
 
+    letter_frames: list[int] = []
+
     result: list[Image.Image] = []
 
     while current_position[0] < len(text): # for each line
@@ -45,13 +47,13 @@ def generate_gif(request: GenerationRequest) -> list[Image.Image] | None:
 
         deactivate_asterisks(text_copy, current_position[0]) # deactivates future asterisks
 
-        for_each_line(text_copy, current_position, result, request, frame_counter)
+        for_each_line(text_copy, current_position, result, request, frame_counter, letter_frames)
 
         current_position[0] += 1
         current_position[1] = 0
         current_position[2] = 0
 
-    return result
+    return result, letter_frames
 
 CACHE_SIZE = 16
 
@@ -65,12 +67,12 @@ class GenerationGifProxy:
 
         frames = generate_gif(request)
 
-        if not frames:
+        if not frames[0]:
             return None
 
         path = TEMP_DATA_DIR / f"output_{self.slot}.gif"
 
-        save_gif(frames, [30] * len(frames), path)
+        save_gif(frames[0], [30] * len(frames[0]), path)
 
         self.slot = (self.slot + 1) % CACHE_SIZE
         self.cache[request] = path

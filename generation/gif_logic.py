@@ -20,7 +20,8 @@ def for_each_line(text: list[TextLine],
                   current_position: list[int],
                   result: list[Image.Image],
                   request: GenerationRequest,
-                  frame_counter: list[int],):
+                  frame_counter: list[int],
+                  letter_frames: list[int],):
     line = text[current_position[0]]
 
     content: list[TextToken] = line.content
@@ -30,7 +31,7 @@ def for_each_line(text: list[TextLine],
 
         deactivate_tokens(text_copy, current_position[0], current_position[1])  # deactivate future tokens
 
-        paused = for_each_character(text_copy, current_position, result, request, frame_counter)
+        paused = for_each_character(text_copy, current_position, result, request, frame_counter, letter_frames)
 
         append_additional_images(text_copy, current_position, result, request, frame_counter, paused)
 
@@ -100,7 +101,8 @@ def for_each_character(text: list[TextLine],
                        current_position: list[int],
                        result: list[Image.Image],
                        request: GenerationRequest,
-                       frame_counter: list[int],) -> bool:
+                       frame_counter: list[int],
+                       letter_frames: list[int],) -> bool:
     line = text[current_position[0]]
 
     token = line.content[current_position[1]]
@@ -123,6 +125,10 @@ def for_each_character(text: list[TextLine],
         result.append(
             generate_single(text_copy, request.default_color, request.border_settings, sprite, sprite_right,
                             request.font_settings, request.export_settings))
+
+        current_char = content[current_position[2]]
+        if current_char.isalpha(): # only letters should cause voice clips
+            letter_frames.append(len(result) - 1)
 
         frame_counter[0] += 1
 

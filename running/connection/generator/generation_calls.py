@@ -1,21 +1,29 @@
+from pathlib import Path
 from typing import Callable
 
 from PySide6.QtCore import QThreadPool, QRunnable, QObject, Signal
 from PySide6.QtGui import QMovie, QPixmap, QColor
-from PySide6.QtWidgets import QGraphicsDropShadowEffect
 
 from generation.generation_gif_proxy import GenerationGifProxy
+from generation.ffmpeg_locator import FfmpegNotFoundError
+from generation.generation_mp4_proxy import show_ffmpeg_missing_dialog
+from generation.gif_save_logic import Mp4EncodingError
+from PySide6.QtWidgets import QGraphicsDropShadowEffect, QMessageBox
+from generation.generation_mp4_proxy import GenerationMp4Proxy
 from generation.generation_png_proxy import GenerationPngProxy, is_valid_configuration_ui
 from generation.generation_request import GenerationRequest
 from models.form_bindings import (
     ExportFormat, ExportSettings, ExportSize,
     BorderSettings, FontSettings, TextStyle, SpriteSettings, ColorType,
 )
-from services.selection_manager import SelectionManager, SideSelectors
+from running.connection.generator.generator_utils import get_amount_of_active_sound_manager
+from services.selection_manager import SelectionManager, SideSelectors, left_sound_manager, right_sound_manager
+from services.video_player import OutputVideoPlayer
 from ui.generated_ui import Ui_MainWindow
 
 png_proxy = GenerationPngProxy()
 gif_proxy = GenerationGifProxy()
+mp4_proxy = GenerationMp4Proxy()
 
 _pool = QThreadPool.globalInstance()
 _pool.setMaxThreadCount(1)
@@ -25,22 +33,34 @@ _active_signals: set = set()
 
 class _WorkerSignals(QObject):
     done = Signal(object, object, int)
+    failed = Signal(object, int)
 
 
 class _GenerationRunnable(QRunnable):
-    def __init__(self, signals: _WorkerSignals, request, fmt, token):
+    def __init__(self, signals: _WorkerSignals, request, fmt, token, advanced_options):
         super().__init__()
         self._signals = signals
         self._request = request
+        self._mp4_advanced_options = advanced_options
         self._fmt = fmt
         self._token = token
         self.setAutoDelete(True)
 
     def run(self):
-        if self._fmt == ExportFormat.GIF:
-            path = gif_proxy.generate(self._request)
-        else:
-            path = png_proxy.generate(self._request)
+        try:
+            if self._fmt == ExportFormat.GIF:
+                sounds_left = left_sound_manager.get_sounds()
+                sounds_right = right_sound_manager.get_sounds()
+                if len(sounds_left) > 0 or len(sounds_right) > 0:
+                    path = mp4_proxy.generate(self._request, self._mp4_advanced_options,
+                                              sounds_left, sounds_right)
+                else:
+                    path = gif_proxy.generate(self._request)
+            else:
+                path = png_proxy.generate(self._request)
+        except (FfmpegNotFoundError, Mp4EncodingError) as e:
+            self._signals.failed.emit(e, self._token)
+            return
         self._signals.done.emit(path, self._fmt, self._token)
 
 
@@ -50,6 +70,10 @@ def execute_generation(ui: Ui_MainWindow,
                        on_complete: Callable = None):
 
     request = make_request(ui, left, right)
+
+    volume = ui.volume_slider.value() / 100
+
+    mp4_options = (ui.mono_audio.isChecked(), ui.overlap_clips.isChecked(), volume)
 
     if request is None:
         return
@@ -68,7 +92,24 @@ def execute_generation(ui: Ui_MainWindow,
                 on_complete()
 
     signals.done.connect(on_done)
-    _pool.start(_GenerationRunnable(signals, request, request.export_settings.export_format, token))
+
+    def on_failed(error, tok):
+        _active_signals.discard(signals)
+        if tok != _current_token[0]:
+            return
+        if isinstance(error, FfmpegNotFoundError):
+            show_ffmpeg_missing_dialog()
+        else:
+            QMessageBox.critical(
+                None, "Video-Creation failed",
+                "The mp4 conversion failed. Please try again or contact the developer, "
+                "if the problem persists and/or is reproducible.\n\n"
+                f"Details: {error}",
+            )
+
+    signals.failed.connect(on_failed)
+
+    _pool.start(_GenerationRunnable(signals, request, request.export_settings.export_format, token, mp4_options))
 
 def make_request(ui: Ui_MainWindow,
                        left: SideSelectors,
@@ -122,7 +163,11 @@ def make_request(ui: Ui_MainWindow,
         ui.actionCopy_current_Textbox_to_Clipboard.setEnabled(False)
         ui.add_to_stack.hide()
         ui.actionAdd_current_Box_to_Stack.setEnabled(False)
+        ui.add_voice_clips.hide()
+        ui.toggle_advanced_options.hide()
+        ui.advanced_options.hide()
         ui.output.setText(message)
+        get_video_player(ui).stop()
         return None
 
     border_settings = BorderSettings(
@@ -199,19 +244,43 @@ def build_sprite_settings(manager: SelectionManager,
     )
 
 
+
+_video_player: OutputVideoPlayer | None = None
+
+def get_video_player(ui: Ui_MainWindow) -> OutputVideoPlayer:
+    global _video_player
+    if _video_player is None:
+        _video_player = OutputVideoPlayer(ui.output)
+    return _video_player
+
+
 def on_result(ui: Ui_MainWindow, result_path, output_format):
     if not result_path:
         hide_download(ui, "ERROR! Textbox could not be generated. \n Please try again, and restart the app if it keeps failing.")
         return
 
+    player = get_video_player(ui)
+    is_video = Path(result_path).suffix.lower() == ".mp4"
+
     if output_format == ExportFormat.GIF:
         ui.add_to_stack.hide()
+        ui.add_voice_clips.show()
         ui.actionAdd_current_Box_to_Stack.setEnabled(False)
-        ui.movie = QMovie(str(result_path))
-        ui.output.setMovie(ui.movie)
-        ui.movie.start()
+        if is_video:
+            if get_amount_of_active_sound_manager() == 2:
+                ui.toggle_advanced_options.show()
+            if getattr(ui, "movie", None):
+                ui.movie.stop()
+            player.play_file(Path(result_path))
+        else:
+            player.stop()
+            ui.movie = QMovie(str(result_path))
+            ui.output.setMovie(ui.movie)
+            ui.movie.start()
     else:
+        player.stop()
         ui.add_to_stack.show()
+        ui.add_voice_clips.hide()
         ui.actionAdd_current_Box_to_Stack.setEnabled(True)
         ui.output.setPixmap(QPixmap(str(result_path)))
 
@@ -223,6 +292,7 @@ def on_result(ui: Ui_MainWindow, result_path, output_format):
 
 def hide_download(ui: Ui_MainWindow, message: str):
     effect = QGraphicsDropShadowEffect()
+    get_video_player(ui).stop()
     effect.setColor(QColor("black"))
     effect.setOffset(0, 0)
     effect.setBlurRadius(4)
@@ -230,5 +300,8 @@ def hide_download(ui: Ui_MainWindow, message: str):
 
     ui.download.hide()
     ui.actionDownload_current_Textbox.setEnabled(False)
+    ui.add_voice_clips.hide()
+    ui.toggle_advanced_options.hide()
+    ui.advanced_options.hide()
     ui.copy_to_clipboard.hide()
     ui.output.setText(message)

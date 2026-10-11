@@ -95,6 +95,16 @@ def new_file(ui: Ui_MainWindow):
     right_color.reset()
     right_manager.include_checkbox_toggled = None
 
+    ui.alternating_everything.hide()
+    ui.line_67.hide()
+    ui.line_68.hide()
+    ui.line_69.hide()
+
+    ui.alternating_everything_right.hide()
+    ui.line_70.hide()
+    ui.line_71.hide()
+    ui.line_72.hide()
+
     ui.tabs.setCurrentIndex(0)
     ui.centralwidget.window().setWindowTitle("Yet Another Textbox Generator")
 

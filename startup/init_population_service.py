@@ -147,6 +147,10 @@ class InitPopulationService:
         ui.download.hide()
         ui.import_progress.hide()
         ui.add_to_stack.hide()
+        ui.add_voice_clips.hide()
+        ui.advanced_options.hide()
+        ui.toggle_advanced_options.hide()
+        ui.label_18.hide() # UTDR Resource link
         ui.copy_to_clipboard.hide()
         ui.actionDownload_current_Textbox.setEnabled(False)
         ui.actionCopy_current_Textbox_to_Clipboard.setEnabled(False)

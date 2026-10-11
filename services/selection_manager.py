@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Callable
 
 from PySide6.QtWidgets import QComboBox, QLabel, QCheckBox, QWidget, QPushButton
@@ -188,6 +189,50 @@ class SideSelectors:
 
 left_manager  = SelectionManager()
 right_manager = SelectionManager()
+
+class LeftSoundManager:
+    def __init__(self):
+        self.sound_files: list[Path] = []
+
+    def remove_sounds(self, ui: Ui_MainWindow | None = None):
+        self.sound_files = []
+
+        if ui is not None:
+            ui.add_voice_clips_left.setText("Add voice clip(s) [LEFT CHAR]")
+
+    def insert_sounds(self, sounds: list[Path], ui: Ui_MainWindow | None = None):
+        self.sound_files.extend(sounds)
+
+        if ui is not None:
+            ui.add_voice_clips_left.setText("Remove voice clip(s)")
+
+    def get_sounds(self) -> list[Path]:
+        return self.sound_files
+
+left_sound_manager = LeftSoundManager()
+
+class RightSoundManager:
+    def __init__(self):
+        self.sound_files: list[Path] = []
+
+    def remove_sounds(self, ui: Ui_MainWindow | None = None):
+        self.sound_files = []
+
+        if ui is not None:
+            ui.add_voice_clips_right.setText("Add voice clip(s) [RIGHT CHAR]")
+
+
+    def insert_sounds(self, sounds: list[Path], ui: Ui_MainWindow | None = None):
+        self.sound_files.extend(sounds)
+
+        if ui is not None:
+            ui.add_voice_clips_right.setText("Remove voice clip(s)")
+
+    def get_sounds(self) -> list[Path]:
+        return self.sound_files
+
+right_sound_manager = RightSoundManager()
+
 
 def make_sides(ui: Ui_MainWindow) -> tuple[SideSelectors, SideSelectors]:
     left = SideSelectors(
