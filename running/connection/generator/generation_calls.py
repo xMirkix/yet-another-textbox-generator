@@ -61,6 +61,10 @@ class _GenerationRunnable(QRunnable):
         except (FfmpegNotFoundError, Mp4EncodingError) as e:
             self._signals.failed.emit(e, self._token)
             return
+        except Exception as e:
+            import traceback
+            self._signals.failed.emit(RuntimeError(traceback.format_exc()), self._token)
+            return
         self._signals.done.emit(path, self._fmt, self._token)
 
 
@@ -167,7 +171,7 @@ def make_request(ui: Ui_MainWindow,
         ui.toggle_advanced_options.hide()
         ui.advanced_options.hide()
         ui.output.setText(message)
-        get_video_player(ui).stop()
+        stop_video_player()
         return None
 
     border_settings = BorderSettings(
@@ -253,13 +257,15 @@ def get_video_player(ui: Ui_MainWindow) -> OutputVideoPlayer:
         _video_player = OutputVideoPlayer(ui.output)
     return _video_player
 
+def stop_video_player():
+    if _video_player is not None:
+        _video_player.stop()
 
 def on_result(ui: Ui_MainWindow, result_path, output_format):
     if not result_path:
         hide_download(ui, "ERROR! Textbox could not be generated. \n Please try again, and restart the app if it keeps failing.")
         return
 
-    player = get_video_player(ui)
     is_video = Path(result_path).suffix.lower() == ".mp4"
 
     if output_format == ExportFormat.GIF:
@@ -271,14 +277,16 @@ def on_result(ui: Ui_MainWindow, result_path, output_format):
                 ui.toggle_advanced_options.show()
             if getattr(ui, "movie", None):
                 ui.movie.stop()
-            player.play_file(Path(result_path))
+            video_result = get_video_player(ui).play_file(Path(result_path))
+            if video_result:
+                ui.output.setText("Video preview not available")
         else:
-            player.stop()
+            stop_video_player()
             ui.movie = QMovie(str(result_path))
             ui.output.setMovie(ui.movie)
             ui.movie.start()
     else:
-        player.stop()
+        stop_video_player()
         ui.add_to_stack.show()
         ui.add_voice_clips.hide()
         ui.actionAdd_current_Box_to_Stack.setEnabled(True)
@@ -292,7 +300,7 @@ def on_result(ui: Ui_MainWindow, result_path, output_format):
 
 def hide_download(ui: Ui_MainWindow, message: str):
     effect = QGraphicsDropShadowEffect()
-    get_video_player(ui).stop()
+    stop_video_player()
     effect.setColor(QColor("black"))
     effect.setOffset(0, 0)
     effect.setBlurRadius(4)

@@ -142,11 +142,13 @@ def save_gif(frames: list[Image.Image], durations: list[int], path: Path):
 class Mp4EncodingError(Exception):
     pass
 
+NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 
 def clip_duration_ms(ffmpeg_path, sound: Path) -> int:
     result = subprocess.run(
         [str(ffmpeg_path), "-hide_banner", "-i", str(sound)],
         capture_output=True, text=True, errors="ignore",
+        stdin=subprocess.DEVNULL, creationflags=NO_WINDOW,
     )
     m = re.search(r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)", result.stderr)
     if not m:
@@ -315,7 +317,8 @@ def _encode_via_pipe(
         "-movflags", "+faststart", str(path),
     ]
 
-    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL,
+                 stderr=subprocess.PIPE, creationflags=NO_WINDOW)
     try:
         for frame in frames:
             proc.stdin.write(frame.convert("RGB").tobytes())

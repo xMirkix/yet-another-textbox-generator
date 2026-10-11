@@ -11,6 +11,9 @@ class OutputVideoPlayer(QObject):
         super().__init__(label)
         self.label = label
         self.player = QMediaPlayer(self)
+        self.available = self.player.isAvailable()
+        if not self.available:
+            return
         self.audio = QAudioOutput(self)
         self.sink = QVideoSink(self)
         self.player.setAudioOutput(self.audio)
@@ -24,10 +27,13 @@ class OutputVideoPlayer(QObject):
             if not image.isNull():
                 self.label.setPixmap(QPixmap.fromImage(image))
 
-    def play_file(self, path: Path):
+    def play_file(self, path: Path) -> bool:
+        if not self.available:
+            return False
         self.player.stop()
         self.player.setSource(QUrl.fromLocalFile(str(path)))
         self.player.play()
+        return True
 
     def stop(self):
         self.player.stop()
