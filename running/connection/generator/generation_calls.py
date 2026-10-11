@@ -123,6 +123,7 @@ def execute_generation(ui: Ui_MainWindow,
     mp4_options = (ui.mono_audio.isChecked(), ui.overlap_clips.isChecked(), volume)
 
     if request is None:
+        stop_video_player()
         return
 
     _ui_ref[0] = ui
