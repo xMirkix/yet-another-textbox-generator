@@ -1,7 +1,7 @@
 from pathlib import Path
 from typing import Callable
 
-from PySide6.QtCore import QThreadPool, QRunnable, QObject, Signal
+from PySide6.QtCore import QThreadPool, QRunnable, QObject, Signal, Qt
 from PySide6.QtGui import QMovie, QPixmap, QColor
 
 from generation.generation_gif_proxy import GenerationGifProxy
@@ -35,6 +35,49 @@ class _WorkerSignals(QObject):
     done = Signal(object, object, int)
     failed = Signal(object, int)
 
+
+_signals = _WorkerSignals()
+_ui_ref: list = [None]
+_on_complete: dict[int, Callable] = {}
+_connected = [False]
+
+def _handle_done(path, fmt, tok):
+    callback = _on_complete.pop(tok, None)
+    if tok != _current_token[0]:
+        return
+    on_result(_ui_ref[0], path, fmt)
+    if callback:
+        callback()
+
+def _handle_failed(error, tok):
+    _on_complete.pop(tok, None)
+    if tok != _current_token[0]:
+        return
+
+    ui = _ui_ref[0]
+
+    if isinstance(error, FfmpegNotFoundError):
+        show_ffmpeg_missing_dialog()
+    else:
+        QMessageBox.critical(
+            None, "Video-Creation failed",
+            "The mp4 conversion failed. Please try again or contact the developer, "
+            "if the problem persists and/or is reproducible.\n\n"
+            f"Details: {error}",
+        )
+
+    if ui is not None:
+        ui.toggle_advanced_options.hide()
+        ui.advanced_options.hide()
+        left_sound_manager.remove_sounds(ui)
+        right_sound_manager.remove_sounds(ui)
+
+def _ensure_connected():
+    if _connected[0]:
+        return
+    _signals.done.connect(_handle_done, Qt.ConnectionType.QueuedConnection)
+    _signals.failed.connect(_handle_failed, Qt.ConnectionType.QueuedConnection)
+    _connected[0] = True
 
 class _GenerationRunnable(QRunnable):
     def __init__(self, signals: _WorkerSignals, request, fmt, token, advanced_options):
@@ -82,38 +125,21 @@ def execute_generation(ui: Ui_MainWindow,
     if request is None:
         return
 
+    _ui_ref[0] = ui
+    _ensure_connected()
+
     _current_token[0] += 1
     token = _current_token[0]
 
-    signals = _WorkerSignals()
-    _active_signals.add(signals)
+    for old in [t for t in _on_complete if t < token]:
+        del _on_complete[old]
+    if on_complete:
+        _on_complete[token] = on_complete
 
-    def on_done(path, fmt, tok):
-        _active_signals.discard(signals)
-        if tok == _current_token[0]:
-            on_result(ui, path, fmt)
-            if on_complete:
-                on_complete()
 
-    signals.done.connect(on_done)
-
-    def on_failed(error, tok):
-        _active_signals.discard(signals)
-        if tok != _current_token[0]:
-            return
-        if isinstance(error, FfmpegNotFoundError):
-            show_ffmpeg_missing_dialog()
-        else:
-            QMessageBox.critical(
-                None, "Video-Creation failed",
-                "The mp4 conversion failed. Please try again or contact the developer, "
-                "if the problem persists and/or is reproducible.\n\n"
-                f"Details: {error}",
-            )
-
-    signals.failed.connect(on_failed)
-
-    _pool.start(_GenerationRunnable(signals, request, request.export_settings.export_format, token, mp4_options))
+    _pool.start(_GenerationRunnable(_signals, request,
+                                    request.export_settings.export_format,
+                                    token, mp4_options))
 
 def make_request(ui: Ui_MainWindow,
                        left: SideSelectors,
@@ -278,7 +304,7 @@ def on_result(ui: Ui_MainWindow, result_path, output_format):
             if getattr(ui, "movie", None):
                 ui.movie.stop()
             video_result = get_video_player(ui).play_file(Path(result_path))
-            if video_result:
+            if not video_result:
                 ui.output.setText("Video preview not available")
         else:
             stop_video_player()
