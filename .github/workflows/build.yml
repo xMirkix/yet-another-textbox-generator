@@ -57,7 +57,7 @@ jobs:
             --include-data-dir=configs=configs `
             --include-data-dir=fonts=fonts `
             --include-data-dir=ui=ui `
-            --include-qt-plugins=sensible, multimedia `
+            --include-qt-plugins=sensible,multimedia `
             --include-package=PIL `
             --product-name=YATG `
             --company-name=xMirkix `
@@ -78,7 +78,7 @@ jobs:
             --include-data-dir=configs=configs \
             --include-data-dir=fonts=fonts \
             --include-data-dir=ui=ui \
-            --include-qt-plugins=sensible, multimedia \
+            --include-qt-plugins=sensible,multimedia \
             --include-package=PIL \
             --product-name=YATG \
             --company-name=xMirkix \
