@@ -1,9 +1,11 @@
+import atexit
+import shutil
 import sys
+import tempfile
+import time
 from pathlib import Path
 
 _BUNDLE = Path(__file__).resolve().parent.parent
-
-_RUNTIME = Path(sys.executable).parent
 
 ASSETS_DIR = _BUNDLE / 'assets'
 BORDERS_DIR = ASSETS_DIR / 'borders'
@@ -34,6 +36,22 @@ LOGO_ICON = ICON_APP_DIR / (
 FONTS = _BUNDLE / 'fonts'
 GEN_CONFIG = _BUNDLE / 'configs' / 'gen-config.toml'
 
-TEMP_DATA_DIR = _RUNTIME / 'data'
-TEMP_DATA_DIR.mkdir(parents=True, exist_ok=True)
+def _make_temp_data_dir() -> Path:
+    root = Path(tempfile.gettempdir())
+    for old in root.glob("yatg_*"):
+        try:
+            if time.time() - old.stat().st_mtime > 86400:
+                shutil.rmtree(old, ignore_errors=True)
+        except OSError:
+            pass
+    d = Path(tempfile.mkdtemp(prefix="yatg_"))
+
+    def _cleanup() -> None:
+        shutil.rmtree(d, ignore_errors=True)
+
+    atexit.register(_cleanup)
+    return d
+
+
+TEMP_DATA_DIR = _make_temp_data_dir()
 DYNAMIC_DB = TEMP_DATA_DIR / 'temp_data.sqlite3'

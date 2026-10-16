@@ -9,9 +9,11 @@ jobs:
           - os: windows-latest
             output: YATG.exe
             asset: YATG-windows.zip
+            sep: ";"
           - os: ubuntu-latest
             output: YATG
             asset: YATG-linux.zip
+            sep: ":"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -19,73 +21,80 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+          cache: pip
 
-      - name: Nuitka Cache
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cache/Nuitka
-            ~/Library/Caches/Nuitka
-            ~\AppData\Local\Nuitka\Nuitka\Cache
-          key: nuitka-${{ runner.os }}-${{ hashFiles('**/*.py') }}
-          restore-keys: nuitka-${{ runner.os }}-
-
-      - name: install dependencies
-        run: pip install -r requirements.txt nuitka
+      - name: Install dependencies
+        run: pip install -r requirements.txt pyinstaller
 
       - name: Get version from git tag
         id: version
         shell: bash
         run: |
           VERSION=${GITHUB_REF_NAME#v}
-      
+
           # remove -alpha / -beta / etc
           VERSION=$(echo "$VERSION" | cut -d'-' -f1)
-      
+
+          # fallback if the ref is not a version (e.g. a branch name)
+          if ! echo "$VERSION" | grep -Eq '^[0-9]+(\.[0-9]+){0,3}$'; then
+            VERSION="0.0.0"
+          fi
+
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Build (Windows)
+      - name: Create Windows version info
         if: runner.os == 'Windows'
+        shell: bash
+        env:
+          APP_VERSION: ${{ steps.version.outputs.version }}
         run: |
-          python -m nuitka --standalone --onefile `
-            --enable-plugin=pyside6 `
-            --windows-console-mode=disable `
-            --assume-yes-for-downloads `
-            --windows-icon-from-ico=ui/icons/app/logo.ico `
-            --include-data-dir=assets=assets `
-            --include-data-dir=startup=startup `
-            --include-data-dir=configs=configs `
-            --include-data-dir=fonts=fonts `
-            --include-data-dir=ui=ui `
-            --include-qt-plugins=sensible,multimedia `
-            --include-package=PIL `
-            --product-name=YATG `
-            --company-name=xMirkix `
-            --file-version=${{ steps.version.outputs.version }} `
-            --product-version=${{ steps.version.outputs.version }} `
-            --output-filename=YATG.exe `
+          python - <<'EOF'
+          import os
+          parts = [int(p) for p in os.environ["APP_VERSION"].split(".")]
+          parts += [0] * (4 - len(parts))
+          tup = tuple(parts)
+          dotted = ".".join(map(str, tup))
+          text = f"""VSVersionInfo(
+            ffi=FixedFileInfo(filevers={tup}, prodvers={tup}, mask=0x3f, flags=0x0,
+                              OS=0x40004, fileType=0x1, subtype=0x0, date=(0, 0)),
+            kids=[
+              StringFileInfo([StringTable('040904B0', [
+                StringStruct('CompanyName', 'xMirkix'),
+                StringStruct('FileDescription', 'YATG'),
+                StringStruct('FileVersion', '{dotted}'),
+                StringStruct('InternalName', 'YATG'),
+                StringStruct('OriginalFilename', 'YATG.exe'),
+                StringStruct('ProductName', 'YATG'),
+                StringStruct('ProductVersion', '{dotted}')])]),
+              VarFileInfo([VarStruct('Translation', [1033, 1200])])
+            ]
+          )
+          """
+          open("version_info.txt", "w", encoding="utf-8").write(text)
+          EOF
+
+      - name: Build
+        shell: bash
+        run: |
+          SEP="${{ matrix.sep }}"
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            EXTRA="--noconsole --icon=ui/icons/app/logo.ico --version-file=version_info.txt"
+          else
+            EXTRA="--strip"
+          fi
+
+          pyinstaller --noconfirm --clean --onefile --name YATG \
+            --optimize 2 \
+            --exclude-module tkinter \
+            --add-data "assets${SEP}assets" \
+            --add-data "startup${SEP}startup" \
+            --add-data "configs${SEP}configs" \
+            --add-data "fonts${SEP}fonts" \
+            --add-data "ui${SEP}ui" \
+            $EXTRA \
             main.py
 
-      - name: Build (Linux)
-        if: runner.os == 'Linux'
-        run: |
-          python -m nuitka --standalone --onefile \
-            --enable-plugin=pyside6 \
-            --assume-yes-for-downloads \
-            --linux-icon=ui/icons/app/logo.png \
-            --include-data-dir=assets=assets \
-            --include-data-dir=startup=startup \
-            --include-data-dir=configs=configs \
-            --include-data-dir=fonts=fonts \
-            --include-data-dir=ui=ui \
-            --include-qt-plugins=sensible,multimedia \
-            --include-package=PIL \
-            --product-name=YATG \
-            --company-name=xMirkix \
-            --file-version=${{ steps.version.outputs.version }} \
-            --product-version=${{ steps.version.outputs.version }} \
-            --output-filename=YATG \
-            main.py
+          mv "dist/${{ matrix.output }}" .
 
       - name: Prepare license_stuff folder
         shell: python

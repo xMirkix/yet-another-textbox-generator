@@ -1,0 +1,118 @@
+name: Build Executables
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            output: YATG.exe
+            asset: YATG-windows.zip
+          - os: ubuntu-latest
+            output: YATG
+            asset: YATG-linux.zip
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Nuitka Cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/Nuitka
+            ~/Library/Caches/Nuitka
+            ~\AppData\Local\Nuitka\Nuitka\Cache
+          key: nuitka-${{ runner.os }}-${{ hashFiles('**/*.py') }}
+          restore-keys: nuitka-${{ runner.os }}-
+
+      - name: install dependencies
+        run: pip install -r requirements.txt nuitka
+
+      - name: Get version from git tag
+        id: version
+        shell: bash
+        run: |
+          VERSION=${GITHUB_REF_NAME#v}
+      
+          # remove -alpha / -beta / etc
+          VERSION=$(echo "$VERSION" | cut -d'-' -f1)
+      
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Build (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          python -m nuitka --standalone --onefile `
+            --enable-plugin=pyside6 `
+            --windows-console-mode=disable `
+            --assume-yes-for-downloads `
+            --windows-icon-from-ico=ui/icons/app/logo.ico `
+            --include-data-dir=assets=assets `
+            --include-data-dir=startup=startup `
+            --include-data-dir=configs=configs `
+            --include-data-dir=fonts=fonts `
+            --include-data-dir=ui=ui `
+            --include-qt-plugins=sensible,multimedia `
+            --include-package=PIL `
+            --product-name=YATG `
+            --company-name=xMirkix `
+            --file-version=${{ steps.version.outputs.version }} `
+            --product-version=${{ steps.version.outputs.version }} `
+            --output-filename=YATG.exe `
+            main.py
+
+      - name: Build (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          python -m nuitka --standalone --onefile \
+            --enable-plugin=pyside6 \
+            --assume-yes-for-downloads \
+            --linux-icon=ui/icons/app/logo.png \
+            --include-data-dir=assets=assets \
+            --include-data-dir=startup=startup \
+            --include-data-dir=configs=configs \
+            --include-data-dir=fonts=fonts \
+            --include-data-dir=ui=ui \
+            --include-qt-plugins=sensible,multimedia \
+            --include-package=PIL \
+            --product-name=YATG \
+            --company-name=xMirkix \
+            --file-version=${{ steps.version.outputs.version }} \
+            --product-version=${{ steps.version.outputs.version }} \
+            --output-filename=YATG \
+            main.py
+
+      - name: Prepare license_stuff folder
+        shell: python
+        run: |
+          import os
+          import shutil
+
+          os.makedirs("license_stuff", exist_ok=True)
+
+          files_to_copy = [
+              "fonts/license.txt",
+              "fonts/readme.txt",
+              "OFL.txt",
+              "LICENSE"
+          ]
+
+          for file in files_to_copy:
+              if os.path.exists(file):
+                  shutil.copy(file, "license_stuff")
+                  print(f"Copied {file} to license_stuff/")
+              else:
+                  print(f"Warning: {file} not found!")
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset }}
+          path: |
+            ${{ matrix.output }}
+            license_stuff
