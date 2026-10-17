@@ -5,6 +5,8 @@ import subprocess
 import re
 from pathlib import Path
 import random
+import os
+import sys
 
 from PIL import Image
 
@@ -144,15 +146,28 @@ class Mp4EncodingError(Exception):
 
 NO_WINDOW = getattr(subprocess, "CREATE_NO_WINDOW", 0)
 
+def _clean_env() -> dict:
+    env = os.environ.copy()
+    if getattr(sys, "frozen", False):
+        orig = env.pop("LD_LIBRARY_PATH_ORIG", None)
+        if orig is not None:
+            env["LD_LIBRARY_PATH"] = orig
+        else:
+            env.pop("LD_LIBRARY_PATH", None)
+    return env
+
 def clip_duration_ms(ffmpeg_path, sound: Path) -> int:
     result = subprocess.run(
         [str(ffmpeg_path), "-hide_banner", "-i", str(sound)],
         capture_output=True, text=True, errors="ignore",
         stdin=subprocess.DEVNULL, creationflags=NO_WINDOW,
+        env=_clean_env(),
     )
     m = re.search(r"Duration:\s*(\d+):(\d+):(\d+(?:\.\d+)?)", result.stderr)
     if not m:
-        raise Mp4EncodingError(f"Could not read duration of {sound}")
+        raise Mp4EncodingError(
+            f"Could not read duration of {sound}\n{result.stderr[-400:]}"
+        )
     h, mnt, s = int(m[1]), int(m[2]), float(m[3])
     return int((h * 3600 + mnt * 60 + s) * 1000)
 
@@ -317,8 +332,12 @@ def _encode_via_pipe(
         "-movflags", "+faststart", str(path),
     ]
 
-    proc = subprocess.Popen(cmd, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL,
-                 stderr=subprocess.PIPE, creationflags=NO_WINDOW)
+    proc = subprocess.Popen(
+        cmd, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL,
+        stderr=subprocess.PIPE, creationflags=NO_WINDOW,
+        env=_clean_env(),
+    )
+
     try:
         for frame in frames:
             proc.stdin.write(frame.convert("RGB").tobytes())
