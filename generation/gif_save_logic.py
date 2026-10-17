@@ -156,6 +156,40 @@ def _clean_env() -> dict:
             env.pop("LD_LIBRARY_PATH", None)
     return env
 
+_VIDEO_ARGS_CACHE: dict[str, list[str]] = {}
+
+_VIDEO_CANDIDATES = [
+    ["-c:v", "libx264"],
+    ["-c:v", "libopenh264", "-b:v", "2000k"],
+    ["-c:v", "mpeg4", "-q:v", "3"],   # not H.264: last resort
+]
+
+
+def _encoder_works(ffmpeg_path, codec_args: list[str]) -> bool:
+    result = subprocess.run(
+        [str(ffmpeg_path), "-hide_banner", "-loglevel", "error",
+         "-f", "lavfi", "-i", "color=c=black:s=128x128:d=0.2:r=10",
+         "-frames:v", "2", *codec_args, "-pix_fmt", "yuv420p", "-f", "null", "-"],
+        capture_output=True, text=True, errors="ignore",
+        stdin=subprocess.DEVNULL, creationflags=NO_WINDOW, env=_clean_env(),
+    )
+    return result.returncode == 0
+
+
+def _video_codec_args(ffmpeg_path) -> list[str]:
+    key = str(ffmpeg_path)
+    if key not in _VIDEO_ARGS_CACHE:
+        for args in _VIDEO_CANDIDATES:
+            if _encoder_works(ffmpeg_path, args):
+                _VIDEO_ARGS_CACHE[key] = args
+                break
+        else:
+            raise Mp4EncodingError(
+                "This ffmpeg build can't encode video (no working libx264, "
+                "libopenh264 or mpeg4 encoder). Install one of these versions of ffmpeg."
+            )
+    return _VIDEO_ARGS_CACHE[key]
+
 def clip_duration_ms(ffmpeg_path, sound: Path) -> int:
     result = subprocess.run(
         [str(ffmpeg_path), "-hide_banner", "-i", str(sound)],
@@ -328,7 +362,8 @@ def _encode_via_pipe(
 
     cmd += [
         "-vf", "crop=trunc(iw/2)*2:trunc(ih/2)*2",
-        "-c:v", "libx264", "-pix_fmt", "yuv420p",
+        *_video_codec_args(ffmpeg_path),
+        "-pix_fmt", "yuv420p",
         "-movflags", "+faststart", str(path),
     ]
 
