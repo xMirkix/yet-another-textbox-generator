@@ -38,13 +38,12 @@ def show_ffmpeg_missing_dialog():
         )
 
 class GenerationMp4Proxy:
-    cache: OrderedDict[tuple[GenerationRequest, tuple[Path], tuple[Path], tuple[bool, bool, float]], Path] = OrderedDict()
+    cache: OrderedDict[GenerationRequest, Path] = OrderedDict()
     slot: int = 0
 
-    def generate(self, request: GenerationRequest, advanced_options: tuple[bool, bool, float], sounds_left, sounds_right) -> Path | None:
-        key = (request, tuple(sounds_left), tuple(sounds_right), advanced_options)
-        if key in self.cache:
-            return self.cache[key]
+    def generate(self, request: GenerationRequest) -> Path | None:
+        if request in self.cache:
+            return self.cache[request]
 
         frames, positions = generate_gif(request)
 
@@ -52,10 +51,12 @@ class GenerationMp4Proxy:
             return None
 
         path = TEMP_DATA_DIR / f"output_{self.slot}.mp4"
+        sounds_left = request.export_settings.audio_settings.left_sound_files
+        sounds_right = request.export_settings.audio_settings.right_sound_files
         save_mp4(frames, 1000 / 30, positions, sounds_left, sounds_right, advanced_options, path)
 
         self.slot = (self.slot + 1) % CACHE_SIZE
-        self.cache[key] = path
+        self.cache[request] = path
         if len(self.cache) > CACHE_SIZE:
             self.cache.popitem(last=False)
 

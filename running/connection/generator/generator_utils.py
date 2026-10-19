@@ -10,7 +10,7 @@ from PySide6.QtWidgets import QLabel, QTextEdit, QFileDialog, QMessageBox
 from configs.paths import PREVIEWS_DIR
 from models.entities import Universe, Character, Expression
 from services.color_service import fit_expression_image
-from services.selection_manager import SideSelectors, set_preview, left_sound_manager, right_sound_manager
+from services.selection_manager import SideSelectors, set_preview
 from startup.in_memory.static_classes import Color, BorderStyle
 from ui.generated_ui import Ui_MainWindow
 
@@ -153,12 +153,6 @@ def download(ui: Ui_MainWindow):
             return
 
     shutil.copyfile(source, path)
-
-def get_amount_of_active_sound_manager() -> int:
-    amount = 0
-    amount += 1 if len(left_sound_manager.get_sounds()) > 0 else 0
-    amount += 1 if len(right_sound_manager.get_sounds()) > 0 else 0
-    return amount
 
 def on_copy(ui: Ui_MainWindow):
     source = ui.download.property("path")

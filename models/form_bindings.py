@@ -1,4 +1,6 @@
 from enum import Enum
+from operator import and_
+from pathlib import Path
 
 from models.entities import Universe, Character, Expression
 from startup.in_memory.static_classes import BorderStyle, Color, TextFont, TextTransform
@@ -91,6 +93,7 @@ class TextStyle(Enum):
 class ExportFormat(Enum):
     PNG = 'png'
     GIF = 'gif'
+    MP4 = 'mp4'
 
     def __eq__(self, other) -> bool:
         if isinstance(other, ExportFormat):
@@ -135,18 +138,58 @@ class FontSettings:
 
 class ExportSettings:
     export_format: ExportFormat
+    audio_settings: AudioSettings
     margin: bool
     size: ExportSize
 
-    def __init__(self, export_format: ExportFormat, margin: bool, size: ExportSize):
+    def __init__(self, export_format: ExportFormat, margin: bool, size: ExportSize, audio_settings: AudioSettings):
         self.export_format = export_format
         self.margin = margin
         self.size = size
+        self.audio_settings = audio_settings
 
     def __eq__(self, other) -> bool:
         if isinstance(other, ExportSettings):
-            return self.export_format == other.export_format and self.margin == other.margin and self.size == other.size
+            return self.export_format == other.export_format and self.margin == other.margin and self.size == other.size and self.audio_settings == other.audio_settings
         return False
 
     def __hash__(self) -> int:
-        return hash((self.export_format, self.margin, self.size))
+        return hash((self.export_format, self.margin, self.size, self.audio_settings))
+
+
+class AudioSettings:
+    mono: bool
+    master_volume: float
+    left_sound_files: list[Path]
+    right_sound_files: list[Path]
+    left_overlap: bool
+    right_overlap: bool
+    left_volume: float
+    right_volume: float
+
+
+    def __init__(self, mono: bool, master_volume: float, left_sound_files: list[Path], right_sound_files: list[Path],
+                 left_overlap: bool, right_overlap: bool,
+                 left_volume: float, right_volume: float):
+        self.mono = mono
+        self.master_volume = master_volume
+        self.left_sound_files = left_sound_files
+        self.right_sound_files = right_sound_files
+        self.left_overlap = left_overlap
+        self.right_overlap = right_overlap
+        self.left_volume = left_volume
+        self.right_volume = right_volume
+
+    def __eq__(self, other) -> bool:
+        if isinstance(other, AudioSettings):
+            return (((self.mono == other.mono) and (self.master_volume == other.master_volume) and
+                    (self.left_sound_files == other.left_sound_files) and (self.right_sound_files == other.right_sound_files)) and
+                    ((self.left_overlap == other.left_overlap) and self.right_overlap == other.right_overlap) and
+                    ((self.left_volume == other.left_volume) and (self.right_volume == other.right_volume)))
+        return False
+
+
+    def __hash__(self) -> int:
+        return hash((self.mono, self.master_volume, tuple(self.left_sound_files), tuple(self.right_sound_files),
+                     self.left_overlap, self.right_overlap, self.left_volume, self.right_volume))
+

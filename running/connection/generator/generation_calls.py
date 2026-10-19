@@ -14,10 +14,10 @@ from generation.generation_png_proxy import GenerationPngProxy, is_valid_configu
 from generation.generation_request import GenerationRequest
 from models.form_bindings import (
     ExportFormat, ExportSettings, ExportSize,
-    BorderSettings, FontSettings, TextStyle, SpriteSettings, ColorType,
+    BorderSettings, FontSettings, TextStyle, SpriteSettings, ColorType, AudioSettings,
 )
-from running.connection.generator.generator_utils import get_amount_of_active_sound_manager
-from services.selection_manager import SelectionManager, SideSelectors, left_sound_manager, right_sound_manager
+from services.selection_manager import SelectionManager, SideSelectors, \
+    sound_manager
 from services.video_player import OutputVideoPlayer
 from ui.generated_ui import Ui_MainWindow
 
@@ -54,8 +54,6 @@ def _handle_failed(error, tok):
     if tok != _current_token[0]:
         return
 
-    ui = _ui_ref[0]
-
     if isinstance(error, FfmpegNotFoundError):
         show_ffmpeg_missing_dialog()
     else:
@@ -66,11 +64,6 @@ def _handle_failed(error, tok):
             f"Details: {error}",
         )
 
-    if ui is not None:
-        ui.toggle_advanced_options.hide()
-        ui.advanced_options.hide()
-        left_sound_manager.remove_sounds(ui)
-        right_sound_manager.remove_sounds(ui)
 
 def _ensure_connected():
     if _connected[0]:
@@ -80,26 +73,22 @@ def _ensure_connected():
     _connected[0] = True
 
 class _GenerationRunnable(QRunnable):
-    def __init__(self, signals: _WorkerSignals, request, fmt, token, advanced_options):
+    def __init__(self, signals: _WorkerSignals, request, fmt, token):
         super().__init__()
         self._signals = signals
         self._request = request
-        self._mp4_advanced_options = advanced_options
         self._fmt = fmt
         self._token = token
         self.setAutoDelete(True)
 
     def run(self):
         try:
+            path = ""
+            if self._fmt == ExportFormat.MP4:
+                path = mp4_proxy.generate(self._request)
             if self._fmt == ExportFormat.GIF:
-                sounds_left = left_sound_manager.get_sounds()
-                sounds_right = right_sound_manager.get_sounds()
-                if len(sounds_left) > 0 or len(sounds_right) > 0:
-                    path = mp4_proxy.generate(self._request, self._mp4_advanced_options,
-                                              sounds_left, sounds_right)
-                else:
-                    path = gif_proxy.generate(self._request)
-            else:
+                path = gif_proxy.generate(self._request)
+            if self._fmt == ExportFormat.PNG:
                 path = png_proxy.generate(self._request)
         except (FfmpegNotFoundError, Mp4EncodingError) as e:
             self._signals.failed.emit(e, self._token)
@@ -117,10 +106,6 @@ def execute_generation(ui: Ui_MainWindow,
                        on_complete: Callable = None):
 
     request = make_request(ui, left, right)
-
-    volume = ui.volume_slider.value() / 100
-
-    mp4_options = (ui.mono_audio.isChecked(), ui.overlap_clips.isChecked(), volume)
 
     if request is None:
         stop_video_player()
@@ -140,7 +125,7 @@ def execute_generation(ui: Ui_MainWindow,
 
     _pool.start(_GenerationRunnable(_signals, request,
                                     request.export_settings.export_format,
-                                    token, mp4_options))
+                                    token))
 
 def make_request(ui: Ui_MainWindow,
                        left: SideSelectors,
@@ -149,7 +134,12 @@ def make_request(ui: Ui_MainWindow,
 
     text_input   = ui.input.toPlainText()
     default_color = ui.default_color_selector.currentData()
-    output_format = ExportFormat.GIF if ui.format_gif_option.isChecked() else ExportFormat.PNG
+
+    output_format = ExportFormat.PNG
+    if ui.format_gif_option.isChecked():
+        output_format = ExportFormat.GIF
+    if ui.format_mp4_option.isChecked():
+        output_format = ExportFormat.MP4
 
     sprite_left  = build_sprite_settings(left_manager,  left,  output_format)
 
@@ -194,9 +184,6 @@ def make_request(ui: Ui_MainWindow,
         ui.actionCopy_current_Textbox_to_Clipboard.setEnabled(False)
         ui.add_to_stack.hide()
         ui.actionAdd_current_Box_to_Stack.setEnabled(False)
-        ui.add_voice_clips.hide()
-        ui.toggle_advanced_options.hide()
-        ui.advanced_options.hide()
         ui.output.setText(message)
         stop_video_player()
         return None
@@ -214,6 +201,10 @@ def make_request(ui: Ui_MainWindow,
         export_format=output_format,
         margin=ui.margin_checkbox.isChecked(),
         size=output_size,
+        audio_settings=AudioSettings(sound_manager.get_mono(), sound_manager.get_master_volume(),
+                                     sound_manager.get_left_sound_files(), sound_manager.get_right_sound_files(),
+                                     sound_manager.get_left_overlap(), sound_manager.get_right_overlap(),
+                                     sound_manager.get_left_volume(), sound_manager.get_right_volume(),)
     )
 
     generation_request = GenerationRequest(
@@ -293,29 +284,26 @@ def on_result(ui: Ui_MainWindow, result_path, output_format):
         hide_download(ui, "ERROR! Textbox could not be generated. \n Please try again, and restart the app if it keeps failing.")
         return
 
-    is_video = Path(result_path).suffix.lower() == ".mp4"
+    if output_format == ExportFormat.MP4:
+        ui.add_to_stack.hide()
+        ui.actionAdd_current_Box_to_Stack.setEnabled(False)
+        if getattr(ui, "movie", None):
+            ui.movie.stop()
+        video_result = get_video_player(ui).play_file(Path(result_path))
+        if not video_result:
+            ui.output.setText("Video preview not available")
 
     if output_format == ExportFormat.GIF:
         ui.add_to_stack.hide()
-        ui.add_voice_clips.show()
         ui.actionAdd_current_Box_to_Stack.setEnabled(False)
-        if is_video:
-            if get_amount_of_active_sound_manager() > 0:
-                ui.toggle_advanced_options.show()
-            if getattr(ui, "movie", None):
-                ui.movie.stop()
-            video_result = get_video_player(ui).play_file(Path(result_path))
-            if not video_result:
-                ui.output.setText("Video preview not available")
-        else:
-            stop_video_player()
-            ui.movie = QMovie(str(result_path))
-            ui.output.setMovie(ui.movie)
-            ui.movie.start()
-    else:
+        stop_video_player()
+        ui.movie = QMovie(str(result_path))
+        ui.output.setMovie(ui.movie)
+        ui.movie.start()
+
+    if output_format == ExportFormat.PNG:
         stop_video_player()
         ui.add_to_stack.show()
-        ui.add_voice_clips.hide()
         ui.actionAdd_current_Box_to_Stack.setEnabled(True)
         ui.output.setPixmap(QPixmap(str(result_path)))
 
@@ -335,8 +323,5 @@ def hide_download(ui: Ui_MainWindow, message: str):
 
     ui.download.hide()
     ui.actionDownload_current_Textbox.setEnabled(False)
-    ui.add_voice_clips.hide()
-    ui.toggle_advanced_options.hide()
-    ui.advanced_options.hide()
     ui.copy_to_clipboard.hide()
     ui.output.setText(message)

@@ -190,48 +190,87 @@ class SideSelectors:
 left_manager  = SelectionManager()
 right_manager = SelectionManager()
 
-class LeftSoundManager:
+class SoundManager:
     def __init__(self):
-        self.sound_files: list[Path] = []
+        self.mono: bool = True
+        self.master_volume: float = 100
+        self.left_sound_files: list[Path] = []
+        self.right_sound_files: list[Path] = []
+        self.left_overlap: bool = False
+        self.right_overlap: bool = False
+        self.left_volume: float = 100
+        self.right_volume: float = 100
 
-    def remove_sounds(self, ui: Ui_MainWindow | None = None):
-        self.sound_files = []
+    def reset(self):
+        self.mono: bool = True
+        self.master_volume: int = 100
+        self.left_sound_files: list[Path] = []
+        self.right_sound_files: list[Path] = []
+        self.left_overlap: bool = False
+        self.right_overlap: bool = False
+        self.left_volume: float = 100
+        self.right_volume: float = 100
 
-        if ui is not None:
-            ui.add_voice_clips_left.setText("Add voice clip(s) [LEFT CHAR]")
+    def set_values(self, mono: bool, master_volume: float, left_sound_files: list[Path], right_sound_files: list[Path],
+                   left_overlap: bool, right_overlap: bool, left_volume: float, right_volume: float):
+        self.mono = mono
+        self.master_volume = master_volume
+        self.left_sound_files = left_sound_files
+        self.right_sound_files = right_sound_files
+        self.left_overlap = left_overlap
+        self.right_overlap = right_overlap
+        self.left_volume = left_volume
+        self.right_volume = right_volume
 
-    def insert_sounds(self, sounds: list[Path], ui: Ui_MainWindow | None = None):
-        self.sound_files.extend(sounds)
+    def set_mono(self, mono: bool):
+        self.mono = mono
 
-        if ui is not None:
-            ui.add_voice_clips_left.setText("Remove voice clip(s)")
+    def set_master_volume(self, master_volume: float):
+        self.master_volume = master_volume
 
-    def get_sounds(self) -> list[Path]:
-        return self.sound_files
+    def set_left_sound_files(self, left_sound_files: list[Path]):
+        self.left_sound_files = left_sound_files
 
-left_sound_manager = LeftSoundManager()
+    def set_right_sound_files(self, right_sound_files: list[Path]):
+        self.right_sound_files = right_sound_files
 
-class RightSoundManager:
-    def __init__(self):
-        self.sound_files: list[Path] = []
+    def set_left_overlap(self, left_overlap: bool):
+        self.left_overlap = left_overlap
 
-    def remove_sounds(self, ui: Ui_MainWindow | None = None):
-        self.sound_files = []
+    def set_right_overlap(self, right_overlap: bool):
+        self.right_overlap = right_overlap
 
-        if ui is not None:
-            ui.add_voice_clips_right.setText("Add voice clip(s) [RIGHT CHAR]")
+    def set_left_volume(self, left_volume: float):
+        self.left_volume = left_volume
 
+    def set_right_volume(self, right_volume: float):
+        self.right_volume = right_volume
 
-    def insert_sounds(self, sounds: list[Path], ui: Ui_MainWindow | None = None):
-        self.sound_files.extend(sounds)
+    def get_mono(self) -> bool:
+        return self.mono
 
-        if ui is not None:
-            ui.add_voice_clips_right.setText("Remove voice clip(s)")
+    def get_master_volume(self) -> float:
+        return self.master_volume
 
-    def get_sounds(self) -> list[Path]:
-        return self.sound_files
+    def get_left_sound_files(self) -> list[Path]:
+        return self.left_sound_files
 
-right_sound_manager = RightSoundManager()
+    def get_right_sound_files(self) -> list[Path]:
+        return self.right_sound_files
+
+    def get_left_overlap(self) -> bool:
+        return self.left_overlap
+
+    def get_right_overlap(self) -> bool:
+        return self.right_overlap
+
+    def get_left_volume(self) -> float:
+        return self.left_volume
+
+    def get_right_volume(self) -> float:
+        return self.right_volume
+
+sound_manager = SoundManager()
 
 
 def make_sides(ui: Ui_MainWindow) -> tuple[SideSelectors, SideSelectors]:

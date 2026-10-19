@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'uiajzifU.ui'
+## Form generated from reading UI file 'uiiuweVg.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.1
 ##
@@ -21,9 +21,8 @@ from PySide6.QtWidgets import (QAbstractItemView, QApplication, QCheckBox, QComb
     QLabel, QLayout, QLineEdit, QListWidget,
     QListWidgetItem, QMainWindow, QMenu, QMenuBar,
     QProgressBar, QPushButton, QRadioButton, QScrollArea,
-    QSizePolicy, QSlider, QSpacerItem, QSpinBox,
-    QStatusBar, QTabWidget, QTextEdit, QVBoxLayout,
-    QWidget)
+    QSizePolicy, QSpacerItem, QSpinBox, QStatusBar,
+    QTabWidget, QTextEdit, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -1704,15 +1703,15 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout_39.addWidget(self.format_png_option)
 
-        self.label_6 = QLabel(self.widget_4)
-        self.label_6.setObjectName(u"label_6")
-
-        self.horizontalLayout_39.addWidget(self.label_6)
-
         self.format_gif_option = QRadioButton(self.widget_4)
         self.format_gif_option.setObjectName(u"format_gif_option")
 
         self.horizontalLayout_39.addWidget(self.format_gif_option)
+
+        self.format_mp4_option = QRadioButton(self.widget_4)
+        self.format_mp4_option.setObjectName(u"format_mp4_option")
+
+        self.horizontalLayout_39.addWidget(self.format_mp4_option)
 
 
         self.horizontalLayout_30.addWidget(self.widget_4)
@@ -1724,6 +1723,11 @@ class Ui_MainWindow(object):
         self.widget.setObjectName(u"widget")
         self.horizontalLayout_22 = QHBoxLayout(self.widget)
         self.horizontalLayout_22.setObjectName(u"horizontalLayout_22")
+        self.audio_settings = QPushButton(self.widget)
+        self.audio_settings.setObjectName(u"audio_settings")
+
+        self.horizontalLayout_22.addWidget(self.audio_settings)
+
 
         self.horizontalLayout_6.addWidget(self.widget)
 
@@ -2240,131 +2244,6 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout_6.addLayout(self.horizontalLayout_51)
-
-        self.horizontalLayout_56 = QHBoxLayout()
-        self.horizontalLayout_56.setObjectName(u"horizontalLayout_56")
-        self.add_voice_clips = QWidget(self.input_preview)
-        self.add_voice_clips.setObjectName(u"add_voice_clips")
-        self.horizontalLayout_71 = QHBoxLayout(self.add_voice_clips)
-        self.horizontalLayout_71.setObjectName(u"horizontalLayout_71")
-        self.label_20 = QLabel(self.add_voice_clips)
-        self.label_20.setObjectName(u"label_20")
-
-        self.horizontalLayout_71.addWidget(self.label_20)
-
-        self.horizontalLayout_119 = QHBoxLayout()
-        self.horizontalLayout_119.setObjectName(u"horizontalLayout_119")
-        self.add_voice_clips_left = QPushButton(self.add_voice_clips)
-        self.add_voice_clips_left.setObjectName(u"add_voice_clips_left")
-        sizePolicy5.setHeightForWidth(self.add_voice_clips_left.sizePolicy().hasHeightForWidth())
-        self.add_voice_clips_left.setSizePolicy(sizePolicy5)
-        self.add_voice_clips_left.setMinimumSize(QSize(250, 0))
-        self.add_voice_clips_left.setMaximumSize(QSize(300, 16777215))
-
-        self.horizontalLayout_119.addWidget(self.add_voice_clips_left)
-
-        self.add_voice_clips_right = QPushButton(self.add_voice_clips)
-        self.add_voice_clips_right.setObjectName(u"add_voice_clips_right")
-        sizePolicy5.setHeightForWidth(self.add_voice_clips_right.sizePolicy().hasHeightForWidth())
-        self.add_voice_clips_right.setSizePolicy(sizePolicy5)
-        self.add_voice_clips_right.setMinimumSize(QSize(250, 0))
-        self.add_voice_clips_right.setMaximumSize(QSize(300, 16777215))
-
-        self.horizontalLayout_119.addWidget(self.add_voice_clips_right)
-
-
-        self.horizontalLayout_71.addLayout(self.horizontalLayout_119)
-
-        self.label_22 = QLabel(self.add_voice_clips)
-        self.label_22.setObjectName(u"label_22")
-
-        self.horizontalLayout_71.addWidget(self.label_22)
-
-
-        self.horizontalLayout_56.addWidget(self.add_voice_clips)
-
-
-        self.verticalLayout_6.addLayout(self.horizontalLayout_56)
-
-        self.gridLayout_13 = QGridLayout()
-        self.gridLayout_13.setObjectName(u"gridLayout_13")
-        self.toggle_advanced_options = QPushButton(self.input_preview)
-        self.toggle_advanced_options.setObjectName(u"toggle_advanced_options")
-        sizePolicy11 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
-        sizePolicy11.setHorizontalStretch(0)
-        sizePolicy11.setVerticalStretch(0)
-        sizePolicy11.setHeightForWidth(self.toggle_advanced_options.sizePolicy().hasHeightForWidth())
-        self.toggle_advanced_options.setSizePolicy(sizePolicy11)
-        self.toggle_advanced_options.setMinimumSize(QSize(250, 0))
-        self.toggle_advanced_options.setMaximumSize(QSize(300, 16777215))
-
-        self.gridLayout_13.addWidget(self.toggle_advanced_options, 0, 0, 1, 1)
-
-
-        self.verticalLayout_6.addLayout(self.gridLayout_13)
-
-        self.horizontalLayout_120 = QHBoxLayout()
-        self.horizontalLayout_120.setObjectName(u"horizontalLayout_120")
-        self.advanced_options = QFrame(self.input_preview)
-        self.advanced_options.setObjectName(u"advanced_options")
-        sizePolicy12 = QSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Preferred)
-        sizePolicy12.setHorizontalStretch(0)
-        sizePolicy12.setVerticalStretch(0)
-        sizePolicy12.setHeightForWidth(self.advanced_options.sizePolicy().hasHeightForWidth())
-        self.advanced_options.setSizePolicy(sizePolicy12)
-        self.advanced_options.setMinimumSize(QSize(600, 0))
-        self.advanced_options.setFrameShape(QFrame.Shape.StyledPanel)
-        self.advanced_options.setFrameShadow(QFrame.Shadow.Raised)
-        self.horizontalLayout_121 = QHBoxLayout(self.advanced_options)
-        self.horizontalLayout_121.setObjectName(u"horizontalLayout_121")
-        self.mono_audio = QCheckBox(self.advanced_options)
-        self.mono_audio.setObjectName(u"mono_audio")
-        sizePolicy11.setHeightForWidth(self.mono_audio.sizePolicy().hasHeightForWidth())
-        self.mono_audio.setSizePolicy(sizePolicy11)
-        self.mono_audio.setChecked(True)
-
-        self.horizontalLayout_121.addWidget(self.mono_audio)
-
-        self.overlap_clips = QCheckBox(self.advanced_options)
-        self.overlap_clips.setObjectName(u"overlap_clips")
-        sizePolicy11.setHeightForWidth(self.overlap_clips.sizePolicy().hasHeightForWidth())
-        self.overlap_clips.setSizePolicy(sizePolicy11)
-
-        self.horizontalLayout_121.addWidget(self.overlap_clips)
-
-        self.line_99 = QFrame(self.advanced_options)
-        self.line_99.setObjectName(u"line_99")
-        self.line_99.setFrameShape(QFrame.Shape.VLine)
-        self.line_99.setFrameShadow(QFrame.Shadow.Sunken)
-
-        self.horizontalLayout_121.addWidget(self.line_99)
-
-        self.label_23 = QLabel(self.advanced_options)
-        self.label_23.setObjectName(u"label_23")
-        sizePolicy12.setHeightForWidth(self.label_23.sizePolicy().hasHeightForWidth())
-        self.label_23.setSizePolicy(sizePolicy12)
-        self.label_23.setAlignment(Qt.AlignmentFlag.AlignCenter)
-
-        self.horizontalLayout_121.addWidget(self.label_23)
-
-        self.volume_slider = QSlider(self.advanced_options)
-        self.volume_slider.setObjectName(u"volume_slider")
-        sizePolicy11.setHeightForWidth(self.volume_slider.sizePolicy().hasHeightForWidth())
-        self.volume_slider.setSizePolicy(sizePolicy11)
-        self.volume_slider.setMinimumSize(QSize(150, 0))
-        self.volume_slider.setMaximum(100)
-        self.volume_slider.setValue(100)
-        self.volume_slider.setOrientation(Qt.Orientation.Horizontal)
-        self.volume_slider.setTickPosition(QSlider.TickPosition.TicksAbove)
-        self.volume_slider.setTickInterval(10)
-
-        self.horizontalLayout_121.addWidget(self.volume_slider)
-
-
-        self.horizontalLayout_120.addWidget(self.advanced_options)
-
-
-        self.verticalLayout_6.addLayout(self.horizontalLayout_120)
 
 
         self.gridLayout_7.addWidget(self.input_preview, 1, 0, 1, 1)
@@ -3713,11 +3592,11 @@ class Ui_MainWindow(object):
 
         self.character_page_for_import = QLineEdit(self.single_import)
         self.character_page_for_import.setObjectName(u"character_page_for_import")
-        sizePolicy13 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Fixed)
-        sizePolicy13.setHorizontalStretch(0)
-        sizePolicy13.setVerticalStretch(0)
-        sizePolicy13.setHeightForWidth(self.character_page_for_import.sizePolicy().hasHeightForWidth())
-        self.character_page_for_import.setSizePolicy(sizePolicy13)
+        sizePolicy11 = QSizePolicy(QSizePolicy.Policy.MinimumExpanding, QSizePolicy.Policy.Fixed)
+        sizePolicy11.setHorizontalStretch(0)
+        sizePolicy11.setVerticalStretch(0)
+        sizePolicy11.setHeightForWidth(self.character_page_for_import.sizePolicy().hasHeightForWidth())
+        self.character_page_for_import.setSizePolicy(sizePolicy11)
         self.character_page_for_import.setMinimumSize(QSize(655, 0))
         font7 = QFont()
         font7.setPointSize(13)
@@ -4132,8 +4011,9 @@ class Ui_MainWindow(object):
 #endif // QT_CONFIG(tooltip)
         self.format_label.setText(QCoreApplication.translate("MainWindow", u"Format", None))
         self.format_png_option.setText(QCoreApplication.translate("MainWindow", u"PNG", None))
-        self.label_6.setText("")
         self.format_gif_option.setText(QCoreApplication.translate("MainWindow", u"GIF", None))
+        self.format_mp4_option.setText(QCoreApplication.translate("MainWindow", u"MP4", None))
+        self.audio_settings.setText(QCoreApplication.translate("MainWindow", u"Audio Settings", None))
 #if QT_CONFIG(tooltip)
         self.alternating_label.setToolTip(QCoreApplication.translate("MainWindow", u"Replaces the left expression every 5 frames", None))
 #endif // QT_CONFIG(tooltip)
@@ -4193,20 +4073,6 @@ class Ui_MainWindow(object):
         self.download.setText(QCoreApplication.translate("MainWindow", u"Download Textbox", None))
         self.add_to_stack.setText(QCoreApplication.translate("MainWindow", u"Add to Stack", None))
         self.label_14.setText("")
-        self.label_20.setText("")
-        self.add_voice_clips_left.setText(QCoreApplication.translate("MainWindow", u"Add voice clip(s) [LEFT CHAR]", None))
-        self.add_voice_clips_right.setText(QCoreApplication.translate("MainWindow", u"Add voice clip(s) [RIGHT CHAR]", None))
-        self.label_22.setText("")
-        self.toggle_advanced_options.setText(QCoreApplication.translate("MainWindow", u"Advanced options", None))
-#if QT_CONFIG(tooltip)
-        self.mono_audio.setToolTip(QCoreApplication.translate("MainWindow", u"Sets whether the characters speak out of their side of the headphones or both", None))
-#endif // QT_CONFIG(tooltip)
-        self.mono_audio.setText(QCoreApplication.translate("MainWindow", u"Mono", None))
-#if QT_CONFIG(tooltip)
-        self.overlap_clips.setToolTip(QCoreApplication.translate("MainWindow", u"Sets whether the clips should be cut off at a new word or overlap", None))
-#endif // QT_CONFIG(tooltip)
-        self.overlap_clips.setText(QCoreApplication.translate("MainWindow", u"Overlap sound effects", None))
-        self.label_23.setText(QCoreApplication.translate("MainWindow", u"Volume", None))
         self.tabs.setTabText(self.tabs.indexOf(self.generator), QCoreApplication.translate("MainWindow", u"Generator", None))
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Contents", None))
         self.amount_of_columns_label.setText(QCoreApplication.translate("MainWindow", u"Amount of columns", None))

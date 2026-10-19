@@ -11,15 +11,16 @@ from running.connection.generator.generation_calls import execute_generation, ma
 from running.connection.generator.generator_utils import set_color, set_border_style, set_stylesheet, set_defaults, \
     set_preview_generator_version, set_border_color, show_alternating, \
     hide_alternating, hide_or_show, download, on_copy, set_universe_default_border, get_universe_default_border, \
-    set_universe_default_border_2, get_defaults, set_defaults_2, get_amount_of_active_sound_manager
+    set_universe_default_border_2, get_defaults, set_defaults_2
 from running.connection.stacker import stacker, stacker_ui
+from services.audio_window_service import create_audio_settings_window
 from services.color_service import bytes_to_image, get_primary_color, is_similar
 from services.color_window_service import create_color_window
 from services.database_service import DBDynamicConnection
 from services.new_window_service import connect_universe_create, connect_character_create, \
     connect_expression_create, connect_alt_expression
 from services.selection_manager import SelectionManager, init_entity, SideSelectors, left_manager, right_manager, \
-    select_entity_in_combo, make_sides, left_sound_manager, right_sound_manager
+    select_entity_in_combo, make_sides, sound_manager
 from startup.in_memory.static_classes import Color
 from ui.generated_ui import Ui_MainWindow
 
@@ -162,6 +163,8 @@ def connect_generator(ui: Ui_MainWindow):
     ui.text_transform_selector.activated.connect(lambda: try_generate(ui))
     ui.format_png_option.toggled.connect(lambda c: png_checked(ui, c, left, right))
     ui.format_gif_option.toggled.connect(lambda c: gif_checked(ui, c, left, right))
+    ui.format_mp4_option.toggled.connect(lambda c: mp4_checked(ui, c, left, right))
+    ui.audio_settings.clicked.connect(lambda: handle_audio(ui))
     ui.margin_checkbox.clicked.connect(lambda: try_generate(ui))
     ui.size_small_option.toggled.connect(lambda c: on_radio_changed(ui, c))
     ui.size_medium_option.toggled.connect(lambda c: on_radio_changed(ui, c))
@@ -178,45 +181,11 @@ def connect_generator(ui: Ui_MainWindow):
     ui.download.clicked.connect(lambda: download(ui))
 
     ui.copy_to_clipboard.clicked.connect(lambda: on_copy(ui))
-    ui.add_voice_clips_left.clicked.connect(lambda: add_voice_clips(ui, left_sound_manager))
-    ui.add_voice_clips_right.clicked.connect(lambda: add_voice_clips(ui, right_sound_manager))
-    ui.toggle_advanced_options.clicked.connect(lambda: show_hide_advanced(ui))
-    ui.mono_audio.clicked.connect(lambda: mono_overlap_audio(ui))
-    ui.overlap_clips.clicked.connect(lambda: mono_overlap_audio(ui))
-    ui.volume_slider.valueChanged.connect(lambda: mono_overlap_audio(ui))
 
-def mono_overlap_audio(ui: Ui_MainWindow):
-    if ui.format_png_option.isChecked():
-        return
-    try_generate(ui)
-
-
-def show_hide_advanced(ui):
-    if ui.advanced_options.isHidden():
-        ui.advanced_options.show()
-    else:
-        ui.advanced_options.hide()
-
-def add_voice_clips(ui: Ui_MainWindow, manager):
-    if manager.get_sounds():
-        manager.remove_sounds(ui)
+def handle_audio(ui: Ui_MainWindow):
+    result = create_audio_settings_window(ui)
+    if result:
         try_generate(ui)
-        if get_amount_of_active_sound_manager() == 0:
-            ui.toggle_advanced_options.hide()
-            ui.advanced_options.hide()
-        try_generate(ui)
-        return
-
-    files, _ = QFileDialog.getOpenFileNames(
-        ui.add_voice_clips_left, "Select voice clip(s)", "",  "Audio files (*.wav *.mp3 *.ogg *.flac *.m4a *.aac *.opus);;All files (*)"
-    )
-    if not files:  # dialog canceled, so there's nothing to regenerate
-        return
-
-    manager.insert_sounds([Path(f) for f in files], ui)
-    ui.toggle_advanced_options.show()
-    try_generate(ui)
-
 
 def add_to_stack(ui: Ui_MainWindow):
     left, right = make_sides(ui)
@@ -299,13 +268,8 @@ def png_checked(ui: Ui_MainWindow, change: bool,
                  left: SideSelectors, right: SideSelectors):
     hide_alternating(left)
     hide_alternating(right)
-    left_sound_manager.remove_sounds(ui)
-    right_sound_manager.remove_sounds(ui)
-    ui.toggle_advanced_options.hide()
-    ui.advanced_options.hide()
-    ui.mono_audio.setChecked(True)
-    ui.overlap_clips.setChecked(False)
-    ui.volume_slider.setValue(100)
+    ui.audio_settings.hide()
+    sound_manager.reset()
     on_radio_changed(ui, change)
 
 
@@ -314,13 +278,21 @@ def gif_checked(ui: Ui_MainWindow, change: bool,
     for side in (left, right):
         if side.include_checkbox.isChecked():
             show_alternating(side)
-    left_sound_manager.remove_sounds(ui)
-    right_sound_manager.remove_sounds(ui)
+    ui.audio_settings.hide()
+    sound_manager.reset()
+    on_radio_changed(ui, change)
+
+
+def mp4_checked(ui: Ui_MainWindow, change: bool, left: SideSelectors, right: SideSelectors):
+    for side in (left, right):
+        if side.include_checkbox.isChecked():
+            show_alternating(side)
+    ui.audio_settings.show()
     on_radio_changed(ui, change)
 
 
 def check_for_alternating(ui: Ui_MainWindow, side: SideSelectors):
-    if ui.format_gif_option.isChecked() and side.include_checkbox.isChecked():
+    if (not ui.format_png_option.isChecked()) and side.include_checkbox.isChecked():
         show_alternating(side)
     else:
         hide_alternating(side)
@@ -377,7 +349,7 @@ Universes, characters and expressions are added dynamically
 def reload_ui(ui: Ui_MainWindow, reset_color_things: bool, left: SideSelectors, right: SideSelectors):
     reset_selectors(ui, left_manager,  left, reset_color_things)
     reset_selectors(ui, right_manager, right, reset_color_things)
-    if ui.format_gif_option.isChecked():
+    if not ui.format_png_option.isChecked():
         left_alt, right_alt = ui.include_checkbox.isChecked(), ui.include_checkbox_2.isChecked()
         if left_alt and left_manager.get_alternating_expression():
             show_alternating(left)
