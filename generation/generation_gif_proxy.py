@@ -53,6 +53,8 @@ def generate_gif(request: GenerationRequest) -> tuple[list[Image.Image], list[in
         current_position[1] = 0
         current_position[2] = 0
 
+    # TODO add extra images when ending on () or similar here, as they are ignored on .,; checks and can end on alternating expressions
+
     return result, letter_frames
 
 CACHE_SIZE = 16

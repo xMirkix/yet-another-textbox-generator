@@ -300,7 +300,7 @@ def on_result(ui: Ui_MainWindow, result_path, output_format):
         ui.add_voice_clips.show()
         ui.actionAdd_current_Box_to_Stack.setEnabled(False)
         if is_video:
-            if get_amount_of_active_sound_manager() == 2:
+            if get_amount_of_active_sound_manager() > 0:
                 ui.toggle_advanced_options.show()
             if getattr(ui, "movie", None):
                 ui.movie.stop()
