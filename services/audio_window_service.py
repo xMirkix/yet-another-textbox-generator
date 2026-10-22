@@ -16,8 +16,6 @@ class AudioSettingsDialog(QDialog):
 
         self.ui.mono_option.setChecked(sound_manager.get_mono()) # IF ONE SIDE IS NOT ENOUGH, SET STEREO OPTION TOO!!
         self.ui.stereo_option.setChecked(not sound_manager.get_mono())
-        for w in (self.ui.volume_left_frame, self.ui.volume_right_frame):
-            w.setVisible(not self.ui.mono_option.isChecked())
 
         self.ui.overlap_clips_left.setChecked(sound_manager.get_left_overlap())
         self.ui.overlap_clips_right.setChecked(sound_manager.get_right_overlap())
@@ -40,16 +38,6 @@ class AudioSettingsDialog(QDialog):
         self.ui.ok_button.clicked.connect(lambda: self.accept())
         self.ui.cancel_button.clicked.connect(lambda: self.reject())
 
-        self.ui.mono_option.toggled.connect(self._on_mono_toggled)
-        self._on_mono_toggled(self.ui.mono_option.isChecked())
-
-    def _on_mono_toggled(self, mono: bool):
-        if mono:
-            self.ui.volume_slider_left.setValue(100)
-            self.ui.volume_slider_right.setValue(100)
-        for w in (self.ui.volume_left_frame, self.ui.volume_right_frame):
-            w.setVisible(not mono)
-
 
 
 
@@ -67,8 +55,8 @@ def create_audio_settings_window(ui: Ui_MainWindow) -> bool:
         right_sound_files=list(dialog.right),
         left_overlap=d.overlap_clips_left.isChecked(),
         right_overlap=d.overlap_clips_right.isChecked(),
-        left_volume=100 if mono else d.volume_slider_left.value(),
-        right_volume=100 if mono else d.volume_slider_right.value(),
+        left_volume=d.volume_slider_left.value(),
+        right_volume=d.volume_slider_right.value(),
     )
     return True
 

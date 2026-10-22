@@ -11,6 +11,7 @@ import sys
 from PIL import Image
 
 from generation.ffmpeg_locator import FfmpegNotFoundError, get_ffmpeg_path
+from models.form_bindings import AudioSettings
 
 TRANSPARENT_IDX = 255
 
@@ -219,32 +220,33 @@ def _picker(rng: random.Random, indices: list[int]):
 
 
 def build_events(letter_frames, n_left, n_right, mono, rng):
-    speakers = []  # (picker, pan)
+    speakers = []  # (side, picker, pan)
     if n_left:
-        speakers.append((_picker(rng, list(range(n_left))), -1))
+        speakers.append((0, _picker(rng, list(range(n_left))), -1))
     if n_right:
-        speakers.append((_picker(rng, list(range(n_left, n_left + n_right))), 1))
+        speakers.append((1, _picker(rng, list(range(n_left, n_left + n_right))), 1))
 
     events = []
     for frame in letter_frames:
-        for ch, (pick, side) in enumerate(speakers):  # one channel per speaker
-            events.append((frame, pick(), ch, 0 if mono else side))
+        for side, pick, pan in speakers:
+            events.append((frame, pick(), side, 0 if mono else pan))
     return events
 
 
-def plan_events(events, durations, frame_ms, overlap_clips: bool):
+def plan_events(events, durations, frame_ms,
+                overlap: tuple[bool, bool], volumes: tuple[float, float]):
     planned = []
-    for n, (frame, inp, ch, pan) in enumerate(events):
+    for n, (frame, inp, side, pan) in enumerate(events):
         start = frame * frame_ms
         play, cut = durations[inp], False
-        if not overlap_clips:
+        if not overlap[side]:
             for later in events[n + 1:]:
-                if later[2] == ch:
+                if later[2] == side:
                     gap = later[0] * frame_ms - start
                     if gap < play:
                         play, cut = gap, True
                     break
-        planned.append((start, inp, play, cut, pan))
+        planned.append((start, inp, play, cut, pan, volumes[side]))
     return planned
 
 
@@ -266,10 +268,12 @@ def audio_filter(planned, total_ms: float, volume: float = 1.0) -> str:
         outs = [f"[s{inp}_{j}]" for j in range(n)]
         head = f"[{inp + 1}:a]aformat=sample_rates=44100:channel_layouts=mono"
         parts.append(head + (f",asplit={n}{''.join(outs)}" if n > 1 else outs[0]))
-        for j, (start, _, play, cut, pan) in enumerate(evs):
+        for j, (start, _, play, cut, pan, vol) in enumerate(evs):
             chain = [f"atrim=end={play / 1000:.4f}", "asetpts=PTS-STARTPTS"]
             if cut:
                 chain.append(f"afade=t=out:st={max(0, play - 5) / 1000:.4f}:d=0.005")
+            if vol != 1.0:
+                chain.append(f"volume={vol:.3f}")
             chain += [_PAN[pan], f"adelay={int(start)}:all=1"]
             parts.append(f"{outs[j]}{','.join(chain)}[d{inp}_{j}]")
             labels.append(f"[d{inp}_{j}]")
@@ -287,9 +291,7 @@ def save_mp4(
     frames: list[Image.Image],
     frame_duration_ms: float,
     letter_frames: list[int],
-    sounds_left: list[Path],
-    sounds_right: list[Path],
-    advanced_options: tuple[bool, bool, float],
+    audio_settings: AudioSettings,
     path: Path,
     min_tail_seconds: float = 1.75,
 ) -> None:
@@ -298,7 +300,9 @@ def save_mp4(
 
     try:
         ffmpeg_path = get_ffmpeg_path()
-        sounds = list(sounds_left) + list(sounds_right)
+        left = list(audio_settings.left_sound_files)
+        right = list(audio_settings.right_sound_files)
+        sounds = left + right
         has_audio = bool(sounds and letter_frames)
 
         tail_ms = int(min_tail_seconds * 1000)
@@ -306,13 +310,16 @@ def save_mp4(
         audio_filter_str = None
 
         if has_audio:
-            mono = advanced_options[0]
             rng = random.Random(hash(tuple(letter_frames)))
-            events = build_events(letter_frames, len(sounds_left), len(sounds_right),
-                                  mono, rng)
+            events = build_events(letter_frames, len(left), len(right),
+                                  audio_settings.mono, rng)
             durations = {i: clip_duration_ms(ffmpeg_path, s) for i, s in enumerate(sounds)}
-            planned = plan_events(events, durations, frame_duration_ms, advanced_options[1])
-            audio_end = max(start + play for start, _, play, _, _ in planned)
+            planned = plan_events(
+                events, durations, frame_duration_ms,
+                (audio_settings.left_overlap, audio_settings.right_overlap),
+                (audio_settings.left_volume / 100, audio_settings.right_volume / 100),
+            )
+            audio_end = max(start + play for start, _, play, *_ in planned)
             tail_ms = max(tail_ms, int(max(0, audio_end - base_ms)) + 250)
 
         extra_tail_frames = math.ceil(tail_ms / frame_duration_ms)
@@ -320,7 +327,8 @@ def save_mp4(
         total_ms = len(full_frames) * frame_duration_ms
 
         if has_audio:
-            audio_filter_str = audio_filter(planned, total_ms, advanced_options[2])
+            audio_filter_str = audio_filter(planned, total_ms,
+                                            audio_settings.master_volume / 100)
 
         _encode_via_pipe(
             full_frames, 1000.0 / frame_duration_ms, path, ffmpeg_path,

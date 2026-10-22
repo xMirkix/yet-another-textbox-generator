@@ -51,9 +51,8 @@ class GenerationMp4Proxy:
             return None
 
         path = TEMP_DATA_DIR / f"output_{self.slot}.mp4"
-        sounds_left = request.export_settings.audio_settings.left_sound_files
-        sounds_right = request.export_settings.audio_settings.right_sound_files
-        save_mp4(frames, 1000 / 30, positions, sounds_left, sounds_right, advanced_options, path)
+        audio_settings = request.export_settings.audio_settings
+        save_mp4(frames, 1000 / 30, positions, audio_settings, path)
 
         self.slot = (self.slot + 1) % CACHE_SIZE
         self.cache[request] = path
